@@ -1,18 +1,32 @@
-use zmqRemoteApi::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
+use zmqRemoteApi::{RemoteAPIObjects, RemoteApiClientParams};
 
+/*
+    Example based on Example.cpp
+*/
 
-fn main()  {
+fn main() -> Result<(), zmq::Error> {
+    env_logger::init();
+
     let client = zmqRemoteApi::RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
-    })
-    .unwrap();
+    })?;
 
-    // let sim = RemoteAPIObjects::new(client);
+    let sim = RemoteAPIObjects::new(&client);
 
-    let result = client.get_object("sim".to_string()).unwrap();
+    client.set_stepping(true)?;
 
-    println!("{}", result);
+    sim.start_simulation()?;
 
-   
+    let mut time = sim.get_simulation_time()?;
+
+    while time < 3.0 {
+        println!("Simulation time: {:.3} [s]", time);
+        client.step(true)?;
+        time = sim.get_simulation_time()?;
+    }
+
+    sim.stop_simulation()?;
+
+    Ok(())
 }
