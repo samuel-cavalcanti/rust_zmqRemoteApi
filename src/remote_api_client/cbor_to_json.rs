@@ -1,4 +1,4 @@
-use ciborium::value::{Integer as CborInt, Value as CborValue};
+use ciborium::value::{ Value as CborValue};
 use serde_json::{value::Number as JsonNumber, Value as JsonValue};
 
 fn cbor_into_string(cbor: CborValue) -> Option<String> {

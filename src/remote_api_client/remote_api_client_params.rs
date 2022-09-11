@@ -9,7 +9,7 @@ impl Default for RemoteApiClientParams {
         Self {
             host: "localhost".to_string(),
             rpc_port: 23000,
-            cnt_port: 0,
+            cnt_port: 23001,
         }
     }
 }
