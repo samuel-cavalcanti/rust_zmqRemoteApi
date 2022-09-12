@@ -1,4 +1,4 @@
-use ciborium::{value::Value as CborValue};
+use ciborium::value::Value as CborValue;
 use serde_json::Value as JsonValue;
 use uuid::Uuid;
 use zmq::Error;
@@ -10,7 +10,6 @@ use crate::{log_utils, RemoteApiClientParams};
 const ZMQ_RECV_FLAG_NONE: i32 = 0;
 
 pub struct RemoteApiClient {
-    context: zmq::Context,
     rpc_socket: zmq::Socket,
     cnt_socket: zmq::Socket,
     id: Uuid,
@@ -47,7 +46,6 @@ impl RemoteApiClient {
         cnt_socket.connect(&cnt_address)?;
 
         Ok(RemoteApiClient {
-            context,
             id: Uuid::new_v4(),
             rpc_socket,
             cnt_socket,
