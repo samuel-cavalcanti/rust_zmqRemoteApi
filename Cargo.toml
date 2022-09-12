@@ -1,5 +1,5 @@
 [package]
-name = "zmqRemoteApi"
+name = "zmq_remote_api"
 version = "0.1.0"
 edition = "2021"
 

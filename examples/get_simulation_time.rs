@@ -1,4 +1,4 @@
-use zmqRemoteApi::{RemoteAPIObjects, RemoteApiClientParams};
+use zmq_remote_api::{RemoteAPIObjects, RemoteApiClientParams};
 
 /*
     Example based on Example.cpp
@@ -7,7 +7,7 @@ use zmqRemoteApi::{RemoteAPIObjects, RemoteApiClientParams};
 fn main() -> Result<(), zmq::Error> {
     env_logger::init();
 
-    let client = zmqRemoteApi::RemoteApiClient::new(RemoteApiClientParams {
+    let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
