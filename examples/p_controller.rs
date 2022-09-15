@@ -1,0 +1,126 @@
+use std::f64::consts::PI;
+
+use zmq_remote_api::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
+
+/*
+
+based on pController.py
+
+# Make sure to have CoppeliaSim running, with followig scene loaded:
+#
+# scenes/messaging/pControllerViaRemoteApi.ttt
+#
+# Do not launch simulation, but run this script
+
+*/
+
+const MAX_FORCE: f64 = 100.0;
+
+fn main() -> Result<(), zmq::Error> {
+    // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
+    env_logger::init();
+
+    let client = RemoteApiClient::new(RemoteApiClientParams {
+        host: "localhost".to_string(),
+        ..RemoteApiClientParams::default()
+    })?;
+
+    let sim = RemoteAPIObjects::new(&client);
+
+    let joint_handle = sim.get_object("/Cuboid[0]/joint".to_string(), None)?;
+    let mut join_angle = sim.get_joint_position(joint_handle)?;
+    sim.set_joint_target_velocity(joint_handle, 360.0 * PI, None, None)?;
+    /*
+       enable the stepping mode on the client, that means
+       the simulation waits the trigger: client.step()
+
+       triggers next simulation step
+    */
+    client.set_stepping(true)?;
+
+    sim.start_simulation()?;
+
+    move_to_angle(
+        45.0 * PI / 180.0,
+        &mut join_angle,
+        &sim,
+        &client,
+        &joint_handle,
+    )?;
+
+    move_to_angle(
+        90.0 * PI / 180.0,
+        &mut join_angle,
+        &sim,
+        &client,
+        &joint_handle,
+    )?;
+
+    move_to_angle(
+        -89.0 * PI / 180.0,
+        &mut join_angle,
+        &sim,
+        &client,
+        &joint_handle,
+    )?;
+
+    move_to_angle(
+        0.0 * PI / 180.0,
+        &mut join_angle,
+        &sim,
+        &client,
+        &joint_handle,
+    )?;
+
+    sim.stop_simulation()?;
+
+    Ok(())
+}
+
+fn move_to_angle(
+    target_angle: f64,
+    join_angle: &mut f64,
+    sim: &RemoteAPIObjects,
+    client: &RemoteApiClient,
+    joint_handle: &i64,
+) -> Result<(), zmq::Error> {
+    while (target_angle - *join_angle).abs() > 0.1 * PI / 180.0 {
+        let velocity = compute_target_velocity(target_angle, *join_angle);
+        sim.set_joint_target_velocity(joint_handle.clone(), velocity, None, None)?;
+        sim.set_joint_max_force(joint_handle.clone(), MAX_FORCE.clone())?;
+        client.step(true)?;
+        *join_angle = sim.get_joint_position(joint_handle.clone())?;
+    }
+
+    Ok(())
+}
+
+const PID_P: f64 = 0.1;
+const DYN_STEP_SIZE: f64 = 0.005;
+const VEL_UPPER_LIMIT: f64 = 360.0 * PI / 180.0;
+
+fn compute_target_velocity(target_angle: f64, join_angle: f64) -> f64 {
+    let error_value = target_angle - join_angle;
+    let sin = error_value.sin();
+    let cos = error_value.cos();
+    let error_value = sin.atan2(cos);
+
+    let ctrl = error_value * PID_P;
+
+    /*
+         Calculate the velocity needed to reach the position
+         in one dynamic time step:
+    */
+
+    let velocity = ctrl / DYN_STEP_SIZE;
+
+    if velocity > VEL_UPPER_LIMIT {
+        return VEL_UPPER_LIMIT;
+    }
+
+    if velocity < -VEL_UPPER_LIMIT {
+        return -VEL_UPPER_LIMIT;
+    }
+
+    velocity
+}
