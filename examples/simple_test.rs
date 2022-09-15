@@ -2,9 +2,17 @@ use zmq_remote_api::{remote_api_objects_const, RemoteAPIObjects, RemoteApiClient
 
 /*
     Example based on SimpleTest.py
+
+# Make sure to have the add-on "ZMQ remote API"
+# running in CoppeliaSim
+#
+# All CoppeliaSim commands will run in blocking mode (block
+# until a reply from CoppeliaSim is received).
+
 */
 
 fn main() -> Result<(), zmq::Error> {
+    // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
     println!("Program started");
