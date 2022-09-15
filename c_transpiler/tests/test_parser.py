@@ -1,10 +1,8 @@
-from dataclasses import dataclass
 from typing import Optional
 import unittest
-
-from scanner.scanner import Scanner, ScannerProtocol
-from parser import parser, Arg, TypeNode, FunctionAssign
-from stream import Stream, StringStream
+from ir_transpiler import Arg, TypeNode, FunctionAssign
+from scanner.scanner import ScannerProtocol
+from parser import parser
 from cpp_token import TokenType, Token
 
 
@@ -140,6 +138,73 @@ class ParserTestCase(unittest.TestCase):
 
                 Arg(arg_type=TypeNode(TokenType.OPTION, [
                     TypeNode(TokenType.BOOL, [])]), arg_name='simulationTime'),
+            ])
+
+        self.assertEqual(functions[0], expected)
+
+    def test_get_vision_sensor_depth_buffer(self):
+        """ Parser: std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepthBuffer(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {},std::optional<std::vector<int64_t>> size = {});
+        """
+        vec_u8 = [Token(TokenType.VEC, 'std::vector'),
+                  Token(TokenType.LESS, '<'),
+                  Token(TokenType.U8, 'uint8_t'),
+                  Token(TokenType.BIGGER, '>'),
+                  ]
+
+        vec_i64 = [Token(TokenType.VEC, 'std::vector'),
+                   Token(TokenType.LESS, '<'),
+                   Token(TokenType.I64, 'int64_t'),
+                   Token(TokenType.BIGGER, '>'),
+                   ]
+
+        sensor_handle = [
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'sensorHandle'),
+        ]
+
+        option_vec_i64 = [
+            Token(TokenType.OPTION, 'std::optional'),
+            Token(TokenType.LESS, '<'),
+            *vec_i64,
+            Token(TokenType.BIGGER, '>'),
+
+        ]
+
+        tokens = [
+            Token(TokenType.TUPLE, 'std::tuple'),
+            Token(TokenType.LESS, '<'),
+            *vec_u8,
+            Token(TokenType.COMMA, ','),
+            *vec_i64,
+            Token(TokenType.BIGGER, '>'),
+            Token(TokenType.ID, 'getVisionSensorDepthBuffer'),
+
+            Token(TokenType.OPEN_PARENTHESES, '('),
+            *sensor_handle,
+            Token(TokenType.COMMA, ','),
+            *option_vec_i64,
+            Token(TokenType.ID, 'pos'),
+            Token(TokenType.COMMA, ','),
+            *option_vec_i64,
+            Token(TokenType.ID, 'size'),
+            Token(TokenType.CLOSE_PARENTHESES, ')'),
+            Token(TokenType.SEMICOLON, ';'),
+        ]
+        scanner = mockScanner(tokens)
+        stream = mockStream(number_lines=1)
+        functions = parser(scanner, stream)
+
+        vec_u8_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.U8, [])])
+        vec_i64_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.I64, [])])
+        
+        expected = FunctionAssign(
+            return_type=TypeNode(TokenType.TUPLE, [vec_u8_ir,vec_i64_ir],),
+            function_name='getVisionSensorDepthBuffer',
+            function_args=[
+                Arg(arg_type=TypeNode(TokenType.I64, []), arg_name='sensorHandle'),
+
+                Arg(arg_type=TypeNode(TokenType.OPTION, [vec_i64_ir]), arg_name='pos'),
+                Arg(arg_type=TypeNode(TokenType.OPTION, [vec_i64_ir]), arg_name='size'),
             ])
 
         self.assertEqual(functions[0], expected)
