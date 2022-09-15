@@ -13,7 +13,7 @@ based on pController.py
 # Do not launch simulation, but run this script
 
 */
-use zmq_remote_api::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
+
 
 fn main() -> Result<(), zmq::Error> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
