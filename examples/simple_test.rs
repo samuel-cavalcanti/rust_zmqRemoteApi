@@ -12,7 +12,9 @@ fn main() -> Result<(), zmq::Error> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let _sim = RemoteAPIObjects::new(&client);
+    let sim = RemoteAPIObjects::new(&client);
+
+    let default_idle_fps = sim.get_int32_param(26)?;
 
     Ok(())
 }
