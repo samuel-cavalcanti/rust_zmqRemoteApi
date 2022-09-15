@@ -4,6 +4,9 @@ pub struct RemoteAPIObjects<'a> {
     client: &'a RemoteApiClient,
 }
 
+
+
+
 macro_rules! requests {
 
 
@@ -15,6 +18,7 @@ macro_rules! requests {
 
                 let mut _brk = false;
                 let mut args = vec![$($(ciborium::cbor!($arg_id).unwrap(),)*)*];
+
 
 
 
@@ -42,6 +46,8 @@ macro_rules! requests {
                     args: args,
                 };
 
+               
+
 
                 let result = self.client.send_request(request)?;
 
@@ -51,9 +57,50 @@ macro_rules! requests {
 
 
 
-                let value = result["ret"].as_array().unwrap().to_owned().remove(0);
+                let mut ret  =result["ret"].to_owned();
+               $(
+               
+                if let Some(vec) = ret.as_array_mut() {
+                    if vec.len() == 1{
+                        
+                        log::trace!("vec: {:?} return type: {}", vec,stringify!($return_type));
+                        let value:Result<$return_type, serde_json::Error> = serde_json::from_value(vec.remove(0));
+                        
+                        match value {
+                            Ok(value) => {
+                                  // return a single value
+                                    return Ok(value);
+                            },          
+                            Err(_) => {
+                                // Expected return ()
+                                return Ok(Default::default());
+                            },
+                        }
+                        
+                       
+                    }
 
-                Ok(serde_json::from_value(value).unwrap())
+                }
+
+                let value:Result<$return_type, serde_json::Error> = serde_json::from_value(ret);
+
+                match value {
+                    Ok(value) => {
+                          // Expected return tuple
+                            Ok(value)
+                    },           // Expected return ()
+                    Err(_) => Ok(Default::default()),
+                }
+                
+              
+               )+
+             
+
+
+                // let value = result["ret"].as_array().unwrap().to_owned().remove(0);
+                // Ok(serde_json::from_value(value).unwrap())
+              
+               
 
             }
         )*
@@ -422,7 +469,7 @@ impl<'a> RemoteAPIObjects<'a> {
     (write_custom_data_block,"writeCustomDataBlock",(object_handle:i64,tag_name:String,data:Vec<u8>)->()),
     (write_custom_table_data,"writeCustomTableData",(object_handle:i64,tag_name:String,data:Vec<serde_json::Value>)->()),
     (write_texture,"writeTexture",(texture_id:i64,options:i64,texture_data:Vec<u8>),opt(pos_x:i64,pos_y:i64,size_x:i64,size_y:i64,interpol:f64)->()),
-    (yaw_pitch_roll_to_alpha_beta_gamma,"yawPitchRollToAlphaBetaGamma",(yaw_angle:f64,pitch_angle:f64,roll_angle:f64)->(f64,f64,f64)),
+    (yaw_pitch_roll_to_alpha_beta_gamma,"yawPitchRollToAlphaBetaGamma",(yaw_angle:f64,pitch_angle:f64,roll_angle:f64)->(f64,f64,f64))
     }
 
     fn is_success(json: &Value) -> Result<(), String> {

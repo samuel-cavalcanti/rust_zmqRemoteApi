@@ -5,6 +5,7 @@ pub trait RawRequest {
     fn to_raw_request(&self) -> Vec<u8>;
 }
 
+#[derive(Debug)]
 pub struct ZmqRequest {
     pub function_name: String,
     pub args: Vec<Value>,

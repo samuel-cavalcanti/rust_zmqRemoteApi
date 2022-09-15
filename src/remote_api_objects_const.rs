@@ -1,2133 +1,2133 @@
-pub const addonscriptcall_cleanup: i64 = 1;
+pub const ADDONSCRIPTCALL_CLEANUP: i64 = 1;
 
-pub const addonscriptcall_initialization: i64 = 2;
+pub const ADDONSCRIPTCALL_INITIALIZATION: i64 = 2;
 
-pub const addonscriptcall_restarting: i64 = 17;
+pub const ADDONSCRIPTCALL_RESTARTING: i64 = 17;
 
-pub const addonscriptcall_run: i64 = 15;
+pub const ADDONSCRIPTCALL_RUN: i64 = 15;
 
-pub const addonscriptcall_suspend: i64 = 16;
+pub const ADDONSCRIPTCALL_SUSPEND: i64 = 16;
 
-pub const api_error_output: i64 = 2;
+pub const API_ERROR_OUTPUT: i64 = 2;
 
-pub const api_error_report: i64 = 1;
+pub const API_ERROR_REPORT: i64 = 1;
 
-pub const api_warning_output: i64 = 4;
+pub const API_WARNING_OUTPUT: i64 = 4;
 
-pub const appobj_2delement_type: i64 = 116;
+pub const APPOBJ_2DELEMENT_TYPE: i64 = 116;
 
-pub const appobj_collection_type: i64 = 115;
+pub const APPOBJ_COLLECTION_TYPE: i64 = 115;
 
-pub const appobj_collision_type: i64 = 110;
+pub const APPOBJ_COLLISION_TYPE: i64 = 110;
 
-pub const appobj_distance_type: i64 = 111;
+pub const APPOBJ_DISTANCE_TYPE: i64 = 111;
 
-pub const appobj_ik_type: i64 = 113;
+pub const APPOBJ_IK_TYPE: i64 = 113;
 
-pub const appobj_object_type: i64 = 109;
+pub const APPOBJ_OBJECT_TYPE: i64 = 109;
 
-pub const appobj_pathplanning_type: i64 = 118;
+pub const APPOBJ_PATHPLANNING_TYPE: i64 = 118;
 
-pub const appobj_script_type: i64 = 117;
+pub const APPOBJ_SCRIPT_TYPE: i64 = 117;
 
-pub const appobj_simulation_type: i64 = 112;
+pub const APPOBJ_SIMULATION_TYPE: i64 = 112;
 
-pub const appobj_texture_type: i64 = 120;
+pub const APPOBJ_TEXTURE_TYPE: i64 = 120;
 
-pub const appobj_ui_type: i64 = 116;
+pub const APPOBJ_UI_TYPE: i64 = 116;
 
-pub const arrayparam_ambient_light: i64 = 5;
+pub const ARRAYPARAM_AMBIENT_LIGHT: i64 = 5;
 
-pub const arrayparam_background_color1: i64 = 3;
+pub const ARRAYPARAM_BACKGROUND_COLOR1: i64 = 3;
 
-pub const arrayparam_background_color2: i64 = 4;
+pub const ARRAYPARAM_BACKGROUND_COLOR2: i64 = 4;
 
-pub const arrayparam_fog: i64 = 1;
+pub const ARRAYPARAM_FOG: i64 = 1;
 
-pub const arrayparam_fog_color: i64 = 2;
+pub const ARRAYPARAM_FOG_COLOR: i64 = 2;
 
-pub const arrayparam_gravity: i64 = 0;
+pub const ARRAYPARAM_GRAVITY: i64 = 0;
 
-pub const arrayparam_random_euler: i64 = 6;
+pub const ARRAYPARAM_RANDOM_EULER: i64 = 6;
 
-pub const arrayparam_raydirection: i64 = 8;
+pub const ARRAYPARAM_RAYDIRECTION: i64 = 8;
 
-pub const arrayparam_rayorigin: i64 = 7;
+pub const ARRAYPARAM_RAYORIGIN: i64 = 7;
 
-pub const banner_backfaceculling: i64 = 512;
+pub const BANNER_BACKFACECULLING: i64 = 512;
 
-pub const banner_bitmapfont: i64 = 2048;
+pub const BANNER_BITMAPFONT: i64 = 2048;
 
-pub const banner_clickselectsparent: i64 = 32;
+pub const BANNER_CLICKSELECTSPARENT: i64 = 32;
 
-pub const banner_clicktriggersevent: i64 = 64;
+pub const BANNER_CLICKTRIGGERSEVENT: i64 = 64;
 
-pub const banner_facingcamera: i64 = 128;
+pub const BANNER_FACINGCAMERA: i64 = 128;
 
-pub const banner_followparentvisibility: i64 = 16;
+pub const BANNER_FOLLOWPARENTVISIBILITY: i64 = 16;
 
-pub const banner_fullyfacingcamera: i64 = 256;
+pub const BANNER_FULLYFACINGCAMERA: i64 = 256;
 
-pub const banner_keepsamesize: i64 = 1024;
+pub const BANNER_KEEPSAMESIZE: i64 = 1024;
 
-pub const banner_left: i64 = 1;
+pub const BANNER_LEFT: i64 = 1;
 
-pub const banner_nobackground: i64 = 4;
+pub const BANNER_NOBACKGROUND: i64 = 4;
 
-pub const banner_overlay: i64 = 8;
+pub const BANNER_OVERLAY: i64 = 8;
 
-pub const banner_right: i64 = 2;
+pub const BANNER_RIGHT: i64 = 2;
 
-pub const boolparam_aux_clip_planes_enabled: i64 = 23;
+pub const BOOLPARAM_AUX_CLIP_PLANES_ENABLED: i64 = 23;
 
-pub const boolparam_browser_toolbarbutton_enabled: i64 = 36;
+pub const BOOLPARAM_BROWSER_TOOLBARBUTTON_ENABLED: i64 = 36;
 
-pub const boolparam_browser_visible: i64 = 12;
+pub const BOOLPARAM_BROWSER_VISIBLE: i64 = 12;
 
-pub const boolparam_calcmodules_toolbarbutton_enabled: i64 = 47;
+pub const BOOLPARAM_CALCMODULES_TOOLBARBUTTON_ENABLED: i64 = 47;
 
-pub const boolparam_collision_handling_enabled: i64 = 2;
+pub const BOOLPARAM_COLLISION_HANDLING_ENABLED: i64 = 2;
 
-pub const boolparam_console_visible: i64 = 1;
+pub const BOOLPARAM_CONSOLE_VISIBLE: i64 = 1;
 
-pub const boolparam_display_enabled: i64 = 16;
+pub const BOOLPARAM_DISPLAY_ENABLED: i64 = 16;
 
-pub const boolparam_distance_handling_enabled: i64 = 3;
+pub const BOOLPARAM_DISTANCE_HANDLING_ENABLED: i64 = 3;
 
-pub const boolparam_dynamics_handling_enabled: i64 = 6;
+pub const BOOLPARAM_DYNAMICS_HANDLING_ENABLED: i64 = 6;
 
-pub const boolparam_exit_request: i64 = 41;
+pub const BOOLPARAM_EXIT_REQUEST: i64 = 41;
 
-pub const boolparam_fog_enabled: i64 = 19;
+pub const BOOLPARAM_FOG_ENABLED: i64 = 19;
 
-pub const boolparam_force_calcstruct_all: i64 = 40;
+pub const BOOLPARAM_FORCE_CALCSTRUCT_ALL: i64 = 40;
 
-pub const boolparam_force_calcstruct_all_visible: i64 = 39;
+pub const BOOLPARAM_FORCE_CALCSTRUCT_ALL_VISIBLE: i64 = 39;
 
-pub const boolparam_force_show_wireless_emission: i64 = 27;
+pub const BOOLPARAM_FORCE_SHOW_WIRELESS_EMISSION: i64 = 27;
 
-pub const boolparam_force_show_wireless_reception: i64 = 28;
+pub const BOOLPARAM_FORCE_SHOW_WIRELESS_RECEPTION: i64 = 28;
 
-pub const boolparam_full_model_copy_from_api: i64 = 24;
+pub const BOOLPARAM_FULL_MODEL_COPY_FROM_API: i64 = 24;
 
-pub const boolparam_fullscreen: i64 = 33;
+pub const BOOLPARAM_FULLSCREEN: i64 = 33;
 
-pub const boolparam_gcs_handling_enabled: i64 = 5;
+pub const BOOLPARAM_GCS_HANDLING_ENABLED: i64 = 5;
 
-pub const boolparam_headless: i64 = 34;
+pub const BOOLPARAM_HEADLESS: i64 = 34;
 
-pub const boolparam_hierarchy_toolbarbutton_enabled: i64 = 35;
+pub const BOOLPARAM_HIERARCHY_TOOLBARBUTTON_ENABLED: i64 = 35;
 
-pub const boolparam_hierarchy_visible: i64 = 0;
+pub const BOOLPARAM_HIERARCHY_VISIBLE: i64 = 0;
 
-pub const boolparam_ik_handling_enabled: i64 = 4;
+pub const BOOLPARAM_IK_HANDLING_ENABLED: i64 = 4;
 
-pub const boolparam_infotext_visible: i64 = 17;
+pub const BOOLPARAM_INFOTEXT_VISIBLE: i64 = 17;
 
-pub const boolparam_mill_handling_enabled: i64 = 11;
+pub const BOOLPARAM_MILL_HANDLING_ENABLED: i64 = 11;
 
-pub const boolparam_mirrors_enabled: i64 = 22;
+pub const BOOLPARAM_MIRRORS_ENABLED: i64 = 22;
 
-pub const boolparam_objectrotate_toolbarbutton_enabled: i64 = 38;
+pub const BOOLPARAM_OBJECTROTATE_TOOLBARBUTTON_ENABLED: i64 = 38;
 
-pub const boolparam_objectshift_toolbarbutton_enabled: i64 = 37;
+pub const BOOLPARAM_OBJECTSHIFT_TOOLBARBUTTON_ENABLED: i64 = 37;
 
-pub const boolparam_objproperties_toolbarbutton_enabled: i64 = 46;
+pub const BOOLPARAM_OBJPROPERTIES_TOOLBARBUTTON_ENABLED: i64 = 46;
 
-pub const boolparam_pause_toolbarbutton_enabled: i64 = 43;
+pub const BOOLPARAM_PAUSE_TOOLBARBUTTON_ENABLED: i64 = 43;
 
-pub const boolparam_play_toolbarbutton_enabled: i64 = 42;
+pub const BOOLPARAM_PLAY_TOOLBARBUTTON_ENABLED: i64 = 42;
 
-pub const boolparam_proximity_sensor_handling_enabled: i64 = 9;
+pub const BOOLPARAM_PROXIMITY_SENSOR_HANDLING_ENABLED: i64 = 9;
 
-pub const boolparam_rayvalid: i64 = 56;
+pub const BOOLPARAM_RAYVALID: i64 = 56;
 
-pub const boolparam_realtime_simulation: i64 = 25;
+pub const BOOLPARAM_REALTIME_SIMULATION: i64 = 25;
 
-pub const boolparam_rendering_sensor_handling_enabled: i64 = 10;
+pub const BOOLPARAM_RENDERING_SENSOR_HANDLING_ENABLED: i64 = 10;
 
-pub const boolparam_rml2_available: i64 = 20;
+pub const BOOLPARAM_RML2_AVAILABLE: i64 = 20;
 
-pub const boolparam_rml4_available: i64 = 21;
+pub const BOOLPARAM_RML4_AVAILABLE: i64 = 21;
 
-pub const boolparam_rosinterface_donotrunmainscript: i64 = 48;
+pub const BOOLPARAM_ROSINTERFACE_DONOTRUNMAINSCRIPT: i64 = 48;
 
-pub const boolparam_scene_and_model_load_messages: i64 = 13;
+pub const BOOLPARAM_SCENE_AND_MODEL_LOAD_MESSAGES: i64 = 13;
 
-pub const boolparam_scene_closing: i64 = 52;
+pub const BOOLPARAM_SCENE_CLOSING: i64 = 52;
 
-pub const boolparam_shape_textures_are_visible: i64 = 15;
+pub const BOOLPARAM_SHAPE_TEXTURES_ARE_VISIBLE: i64 = 15;
 
-pub const boolparam_show_w_emitters: i64 = 53;
+pub const BOOLPARAM_SHOW_W_EMITTERS: i64 = 53;
 
-pub const boolparam_show_w_receivers: i64 = 54;
+pub const BOOLPARAM_SHOW_W_RECEIVERS: i64 = 54;
 
-pub const boolparam_statustext_open: i64 = 18;
+pub const BOOLPARAM_STATUSTEXT_OPEN: i64 = 18;
 
-pub const boolparam_stop_toolbarbutton_enabled: i64 = 44;
+pub const BOOLPARAM_STOP_TOOLBARBUTTON_ENABLED: i64 = 44;
 
-pub const boolparam_use_glfinish_cmd: i64 = 26;
+pub const BOOLPARAM_USE_GLFINISH_CMD: i64 = 26;
 
-pub const boolparam_video_recording_triggered: i64 = 29;
+pub const BOOLPARAM_VIDEO_RECORDING_TRIGGERED: i64 = 29;
 
-pub const boolparam_vision_sensor_handling_enabled: i64 = 10;
+pub const BOOLPARAM_VISION_SENSOR_HANDLING_ENABLED: i64 = 10;
 
-pub const boolparam_waiting_for_trigger: i64 = 45;
+pub const BOOLPARAM_WAITING_FOR_TRIGGER: i64 = 45;
 
-pub const buffer_base64: i64 = 12;
+pub const BUFFER_BASE64: i64 = 12;
 
-pub const buffer_clamp: i64 = 256;
+pub const BUFFER_CLAMP: i64 = 256;
 
-pub const buffer_double: i64 = 7;
+pub const BUFFER_DOUBLE: i64 = 7;
 
-pub const buffer_float: i64 = 6;
+pub const BUFFER_FLOAT: i64 = 6;
 
-pub const buffer_int16: i64 = 3;
+pub const BUFFER_INT16: i64 = 3;
 
-pub const buffer_int32: i64 = 5;
+pub const BUFFER_INT32: i64 = 5;
 
-pub const buffer_int8: i64 = 1;
+pub const BUFFER_INT8: i64 = 1;
 
-pub const buffer_split: i64 = 13;
+pub const BUFFER_SPLIT: i64 = 13;
 
-pub const buffer_uint16: i64 = 2;
+pub const BUFFER_UINT16: i64 = 2;
 
-pub const buffer_uint32: i64 = 4;
+pub const BUFFER_UINT32: i64 = 4;
 
-pub const buffer_uint8: i64 = 0;
+pub const BUFFER_UINT8: i64 = 0;
 
-pub const buffer_uint8argb: i64 = 11;
+pub const BUFFER_UINT8ARGB: i64 = 11;
 
-pub const buffer_uint8bgr: i64 = 9;
+pub const BUFFER_UINT8BGR: i64 = 9;
 
-pub const buffer_uint8rgb: i64 = 8;
+pub const BUFFER_UINT8RGB: i64 = 8;
 
-pub const buffer_uint8rgba: i64 = 10;
+pub const BUFFER_UINT8RGBA: i64 = 10;
 
-pub const bullet_body_angulardamping: i64 = 6005;
+pub const BULLET_BODY_ANGULARDAMPING: i64 = 6005;
 
-pub const bullet_body_autoshrinkconvex: i64 = 8004;
+pub const BULLET_BODY_AUTOSHRINKCONVEX: i64 = 8004;
 
-pub const bullet_body_bitcoded: i64 = 7001;
+pub const BULLET_BODY_BITCODED: i64 = 7001;
 
-pub const bullet_body_friction: i64 = 6003;
+pub const BULLET_BODY_FRICTION: i64 = 6003;
 
-pub const bullet_body_lineardamping: i64 = 6004;
+pub const BULLET_BODY_LINEARDAMPING: i64 = 6004;
 
-pub const bullet_body_nondefaultcollisionmargingfactor: i64 = 6006;
+pub const BULLET_BODY_NONDEFAULTCOLLISIONMARGINGFACTOR: i64 = 6006;
 
-pub const bullet_body_nondefaultcollisionmargingfactorconvex: i64 = 6007;
+pub const BULLET_BODY_NONDEFAULTCOLLISIONMARGINGFACTORCONVEX: i64 = 6007;
 
-pub const bullet_body_oldfriction: i64 = 6002;
+pub const BULLET_BODY_OLDFRICTION: i64 = 6002;
 
-pub const bullet_body_restitution: i64 = 6001;
+pub const BULLET_BODY_RESTITUTION: i64 = 6001;
 
-pub const bullet_body_sticky: i64 = 8001;
+pub const BULLET_BODY_STICKY: i64 = 8001;
 
-pub const bullet_body_usenondefaultcollisionmargin: i64 = 8002;
+pub const BULLET_BODY_USENONDEFAULTCOLLISIONMARGIN: i64 = 8002;
 
-pub const bullet_body_usenondefaultcollisionmarginconvex: i64 = 8003;
+pub const BULLET_BODY_USENONDEFAULTCOLLISIONMARGINCONVEX: i64 = 8003;
 
-pub const bullet_constraintsolvertype_dantzig: i64 = 2;
+pub const BULLET_CONSTRAINTSOLVERTYPE_DANTZIG: i64 = 2;
 
-pub const bullet_constraintsolvertype_nncg: i64 = 1;
+pub const BULLET_CONSTRAINTSOLVERTYPE_NNCG: i64 = 1;
 
-pub const bullet_constraintsolvertype_projectedgaussseidel: i64 = 3;
+pub const BULLET_CONSTRAINTSOLVERTYPE_PROJECTEDGAUSSSEIDEL: i64 = 3;
 
-pub const bullet_constraintsolvertype_sequentialimpulse: i64 = 0;
+pub const BULLET_CONSTRAINTSOLVERTYPE_SEQUENTIALIMPULSE: i64 = 0;
 
-pub const bullet_global_bitcoded: i64 = 1002;
+pub const BULLET_GLOBAL_BITCODED: i64 = 1002;
 
-pub const bullet_global_collisionmarginfactor: i64 = 3;
+pub const BULLET_GLOBAL_COLLISIONMARGINFACTOR: i64 = 3;
 
-pub const bullet_global_constraintsolvertype: i64 = 1003;
+pub const BULLET_GLOBAL_CONSTRAINTSOLVERTYPE: i64 = 1003;
 
-pub const bullet_global_constraintsolvingiterations: i64 = 1001;
+pub const BULLET_GLOBAL_CONSTRAINTSOLVINGITERATIONS: i64 = 1001;
 
-pub const bullet_global_fullinternalscaling: i64 = 2001;
+pub const BULLET_GLOBAL_FULLINTERNALSCALING: i64 = 2001;
 
-pub const bullet_global_internalscalingfactor: i64 = 2;
+pub const BULLET_GLOBAL_INTERNALSCALINGFACTOR: i64 = 2;
 
-pub const bullet_global_stepsize: i64 = 1;
+pub const BULLET_GLOBAL_STEPSIZE: i64 = 1;
 
-pub const bullet_joint_normalcfm: i64 = 3003;
+pub const BULLET_JOINT_NORMALCFM: i64 = 3003;
 
-pub const bullet_joint_stopcfm: i64 = 3002;
+pub const BULLET_JOINT_STOPCFM: i64 = 3002;
 
-pub const bullet_joint_stoperp: i64 = 3001;
+pub const BULLET_JOINT_STOPERP: i64 = 3001;
 
-pub const buttonproperty_borderless: i64 = 32;
+pub const BUTTONPROPERTY_BORDERLESS: i64 = 32;
 
-pub const buttonproperty_button: i64 = 0;
+pub const BUTTONPROPERTY_BUTTON: i64 = 0;
 
-pub const buttonproperty_closeaction: i64 = 4096;
+pub const BUTTONPROPERTY_CLOSEACTION: i64 = 4096;
 
-pub const buttonproperty_downupevent: i64 = 16384;
+pub const BUTTONPROPERTY_DOWNUPEVENT: i64 = 16384;
 
-pub const buttonproperty_editbox: i64 = 3;
+pub const BUTTONPROPERTY_EDITBOX: i64 = 3;
 
-pub const buttonproperty_enabled: i64 = 16;
+pub const BUTTONPROPERTY_ENABLED: i64 = 16;
 
-pub const buttonproperty_horizontallycentered: i64 = 64;
+pub const BUTTONPROPERTY_HORIZONTALLYCENTERED: i64 = 64;
 
-pub const buttonproperty_ignoremouse: i64 = 128;
+pub const BUTTONPROPERTY_IGNOREMOUSE: i64 = 128;
 
-pub const buttonproperty_isdown: i64 = 256;
+pub const BUTTONPROPERTY_ISDOWN: i64 = 256;
 
-pub const buttonproperty_label: i64 = 1;
+pub const BUTTONPROPERTY_LABEL: i64 = 1;
 
-pub const buttonproperty_nobackgroundcolor: i64 = 1024;
+pub const BUTTONPROPERTY_NOBACKGROUNDCOLOR: i64 = 1024;
 
-pub const buttonproperty_rollupaction: i64 = 2048;
+pub const BUTTONPROPERTY_ROLLUPACTION: i64 = 2048;
 
-pub const buttonproperty_slider: i64 = 2;
+pub const BUTTONPROPERTY_SLIDER: i64 = 2;
 
-pub const buttonproperty_staydown: i64 = 8;
+pub const BUTTONPROPERTY_STAYDOWN: i64 = 8;
 
-pub const buttonproperty_transparent: i64 = 512;
+pub const BUTTONPROPERTY_TRANSPARENT: i64 = 512;
 
-pub const buttonproperty_verticallycentered: i64 = 8192;
+pub const BUTTONPROPERTY_VERTICALLYCENTERED: i64 = 8192;
 
-pub const callbackid_dynstep: i64 = 2;
+pub const CALLBACKID_DYNSTEP: i64 = 2;
 
-pub const callbackid_rossubscriber: i64 = 1;
+pub const CALLBACKID_ROSSUBSCRIBER: i64 = 1;
 
-pub const callbackid_userdefined: i64 = 1000;
+pub const CALLBACKID_USERDEFINED: i64 = 1000;
 
-pub const camerafloatparam_far_clipping: i64 = 9009;
+pub const CAMERAFLOATPARAM_FAR_CLIPPING: i64 = 9009;
 
-pub const camerafloatparam_near_clipping: i64 = 9008;
+pub const CAMERAFLOATPARAM_NEAR_CLIPPING: i64 = 9008;
 
-pub const camerafloatparam_ortho_size: i64 = 9002;
+pub const CAMERAFLOATPARAM_ORTHO_SIZE: i64 = 9002;
 
-pub const camerafloatparam_perspective_angle: i64 = 9001;
+pub const CAMERAFLOATPARAM_PERSPECTIVE_ANGLE: i64 = 9001;
 
-pub const camerafloatparam_pov_aperture: i64 = 9006;
+pub const CAMERAFLOATPARAM_POV_APERTURE: i64 = 9006;
 
-pub const camerafloatparam_pov_blur_distance: i64 = 9005;
+pub const CAMERAFLOATPARAM_POV_BLUR_DISTANCE: i64 = 9005;
 
-pub const cameraintparam_disabled_light_components: i64 = 9000;
+pub const CAMERAINTPARAM_DISABLED_LIGHT_COMPONENTS: i64 = 9000;
 
-pub const cameraintparam_perspective_operation: i64 = 9010;
+pub const CAMERAINTPARAM_PERSPECTIVE_OPERATION: i64 = 9010;
 
-pub const cameraintparam_pov_blur_samples: i64 = 9007;
+pub const CAMERAINTPARAM_POV_BLUR_SAMPLES: i64 = 9007;
 
-pub const cameraintparam_pov_focal_blur: i64 = 9004;
+pub const CAMERAINTPARAM_POV_FOCAL_BLUR: i64 = 9004;
 
-pub const cameraintparam_remotecameramode: i64 = 9012;
+pub const CAMERAINTPARAM_REMOTECAMERAMODE: i64 = 9012;
 
-pub const cameraintparam_rendering_attributes: i64 = 9003;
+pub const CAMERAINTPARAM_RENDERING_ATTRIBUTES: i64 = 9003;
 
-pub const cameraintparam_trackedobject: i64 = 9011;
+pub const CAMERAINTPARAM_TRACKEDOBJECT: i64 = 9011;
 
-pub const childscriptattribute_automaticcascadingcalls: i64 = 3;
+pub const CHILDSCRIPTATTRIBUTE_AUTOMATICCASCADINGCALLS: i64 = 3;
 
-pub const childscriptattribute_enabled: i64 = 4;
+pub const CHILDSCRIPTATTRIBUTE_ENABLED: i64 = 4;
 
-pub const childscriptcall_actuation: i64 = 6;
+pub const CHILDSCRIPTCALL_ACTUATION: i64 = 6;
 
-pub const childscriptcall_cleanup: i64 = 1;
+pub const CHILDSCRIPTCALL_CLEANUP: i64 = 1;
 
-pub const childscriptcall_initialization: i64 = 2;
+pub const CHILDSCRIPTCALL_INITIALIZATION: i64 = 2;
 
-pub const childscriptcall_sensing: i64 = 7;
+pub const CHILDSCRIPTCALL_SENSING: i64 = 7;
 
-pub const colorcomponent_ambient: i64 = 0;
+pub const COLORCOMPONENT_AMBIENT: i64 = 0;
 
-pub const colorcomponent_ambient_diffuse: i64 = 0;
+pub const COLORCOMPONENT_AMBIENT_DIFFUSE: i64 = 0;
 
-pub const colorcomponent_auxiliary: i64 = 5;
+pub const COLORCOMPONENT_AUXILIARY: i64 = 5;
 
-pub const colorcomponent_diffuse: i64 = 1;
+pub const COLORCOMPONENT_DIFFUSE: i64 = 1;
 
-pub const colorcomponent_emission: i64 = 3;
+pub const COLORCOMPONENT_EMISSION: i64 = 3;
 
-pub const colorcomponent_specular: i64 = 2;
+pub const COLORCOMPONENT_SPECULAR: i64 = 2;
 
-pub const colorcomponent_transparency: i64 = 4;
+pub const COLORCOMPONENT_TRANSPARENCY: i64 = 4;
 
-pub const customizationscriptattribute_activeduringsimulation: i64 = 0;
+pub const CUSTOMIZATIONSCRIPTATTRIBUTE_ACTIVEDURINGSIMULATION: i64 = 0;
 
-pub const customizationscriptattribute_cleanupbeforesave: i64 = 5;
+pub const CUSTOMIZATIONSCRIPTATTRIBUTE_CLEANUPBEFORESAVE: i64 = 5;
 
-pub const customizationscriptcall_aftercopy: i64 = 14;
+pub const CUSTOMIZATIONSCRIPTCALL_AFTERCOPY: i64 = 14;
 
-pub const customizationscriptcall_beforecopy: i64 = 13;
+pub const CUSTOMIZATIONSCRIPTCALL_BEFORECOPY: i64 = 13;
 
-pub const customizationscriptcall_cleanup: i64 = 1;
+pub const CUSTOMIZATIONSCRIPTCALL_CLEANUP: i64 = 1;
 
-pub const customizationscriptcall_firstafterinstanceswitch: i64 = 12;
+pub const CUSTOMIZATIONSCRIPTCALL_FIRSTAFTERINSTANCESWITCH: i64 = 12;
 
-pub const customizationscriptcall_firstaftersimulation: i64 = 5;
+pub const CUSTOMIZATIONSCRIPTCALL_FIRSTAFTERSIMULATION: i64 = 5;
 
-pub const customizationscriptcall_initialization: i64 = 2;
+pub const CUSTOMIZATIONSCRIPTCALL_INITIALIZATION: i64 = 2;
 
-pub const customizationscriptcall_lastbeforeinstanceswitch: i64 = 11;
+pub const CUSTOMIZATIONSCRIPTCALL_LASTBEFOREINSTANCESWITCH: i64 = 11;
 
-pub const customizationscriptcall_lastbeforesimulation: i64 = 4;
+pub const CUSTOMIZATIONSCRIPTCALL_LASTBEFORESIMULATION: i64 = 4;
 
-pub const customizationscriptcall_nonsimulation: i64 = 3;
+pub const CUSTOMIZATIONSCRIPTCALL_NONSIMULATION: i64 = 3;
 
-pub const customizationscriptcall_simulationactuation: i64 = 6;
+pub const CUSTOMIZATIONSCRIPTCALL_SIMULATIONACTUATION: i64 = 6;
 
-pub const customizationscriptcall_simulationpause: i64 = 8;
+pub const CUSTOMIZATIONSCRIPTCALL_SIMULATIONPAUSE: i64 = 8;
 
-pub const customizationscriptcall_simulationpausefirst: i64 = 9;
+pub const CUSTOMIZATIONSCRIPTCALL_SIMULATIONPAUSEFIRST: i64 = 9;
 
-pub const customizationscriptcall_simulationpauselast: i64 = 10;
+pub const CUSTOMIZATIONSCRIPTCALL_SIMULATIONPAUSELAST: i64 = 10;
 
-pub const customizationscriptcall_simulationsensing: i64 = 7;
+pub const CUSTOMIZATIONSCRIPTCALL_SIMULATIONSENSING: i64 = 7;
 
-pub const displayattribute_colorcoded: i64 = 8192;
+pub const DISPLAYATTRIBUTE_COLORCODED: i64 = 8192;
 
-pub const displayattribute_colorcodedpickpass: i64 = 4096;
+pub const DISPLAYATTRIBUTE_COLORCODEDPICKPASS: i64 = 4096;
 
-pub const displayattribute_colorcodedtriangles: i64 = 134217728;
+pub const DISPLAYATTRIBUTE_COLORCODEDTRIANGLES: i64 = 134217728;
 
-pub const displayattribute_depthpass: i64 = 2;
+pub const DISPLAYATTRIBUTE_DEPTHPASS: i64 = 2;
 
-pub const displayattribute_dynamiccontentonly: i64 = 131072;
+pub const DISPLAYATTRIBUTE_DYNAMICCONTENTONLY: i64 = 131072;
 
-pub const displayattribute_forbidedges: i64 = 256;
+pub const DISPLAYATTRIBUTE_FORBIDEDGES: i64 = 256;
 
-pub const displayattribute_forbidwireframe: i64 = 128;
+pub const DISPLAYATTRIBUTE_FORBIDWIREFRAME: i64 = 128;
 
-pub const displayattribute_forcewireframe: i64 = 64;
+pub const DISPLAYATTRIBUTE_FORCEWIREFRAME: i64 = 64;
 
-pub const displayattribute_forvisionsensor: i64 = 2048;
+pub const DISPLAYATTRIBUTE_FORVISIONSENSOR: i64 = 2048;
 
-pub const displayattribute_ignorelayer: i64 = 1024;
+pub const DISPLAYATTRIBUTE_IGNORELAYER: i64 = 1024;
 
-pub const displayattribute_ignorerenderableflag: i64 = 1048576;
+pub const DISPLAYATTRIBUTE_IGNORERENDERABLEFLAG: i64 = 1048576;
 
-pub const displayattribute_mainselection: i64 = 32;
+pub const DISPLAYATTRIBUTE_MAINSELECTION: i64 = 32;
 
-pub const displayattribute_mirror: i64 = 262144;
+pub const DISPLAYATTRIBUTE_MIRROR: i64 = 262144;
 
-pub const displayattribute_nodrawingobjects: i64 = 33554432;
+pub const DISPLAYATTRIBUTE_NODRAWINGOBJECTS: i64 = 33554432;
 
-pub const displayattribute_noghosts: i64 = 8388608;
+pub const DISPLAYATTRIBUTE_NOGHOSTS: i64 = 8388608;
 
-pub const displayattribute_noopenglcallbacks: i64 = 2097152;
+pub const DISPLAYATTRIBUTE_NOOPENGLCALLBACKS: i64 = 2097152;
 
-pub const displayattribute_noparticles: i64 = 67108864;
+pub const DISPLAYATTRIBUTE_NOPARTICLES: i64 = 67108864;
 
-pub const displayattribute_nopointclouds: i64 = 16777216;
+pub const DISPLAYATTRIBUTE_NOPOINTCLOUDS: i64 = 16777216;
 
-pub const displayattribute_originalcolors: i64 = 512;
+pub const DISPLAYATTRIBUTE_ORIGINALCOLORS: i64 = 512;
 
-pub const displayattribute_pickpass: i64 = 4;
+pub const DISPLAYATTRIBUTE_PICKPASS: i64 = 4;
 
-pub const displayattribute_renderpass: i64 = 1;
+pub const DISPLAYATTRIBUTE_RENDERPASS: i64 = 1;
 
-pub const displayattribute_selected: i64 = 8;
+pub const DISPLAYATTRIBUTE_SELECTED: i64 = 8;
 
-pub const displayattribute_thickEdges: i64 = 65536;
+pub const DISPLAYATTRIBUTE_THICKEDGES: i64 = 65536;
 
-pub const displayattribute_trianglewireframe: i64 = 16384;
+pub const DISPLAYATTRIBUTE_TRIANGLEWIREFRAME: i64 = 16384;
 
-pub const displayattribute_useauxcomponent: i64 = 524288;
+pub const DISPLAYATTRIBUTE_USEAUXCOMPONENT: i64 = 524288;
 
-pub const distcalcmethod_dac: i64 = 1;
+pub const DISTCALCMETHOD_DAC: i64 = 1;
 
-pub const distcalcmethod_dac_if_nonzero: i64 = 6;
+pub const DISTCALCMETHOD_DAC_IF_NONZERO: i64 = 6;
 
-pub const distcalcmethod_dl: i64 = 0;
+pub const DISTCALCMETHOD_DL: i64 = 0;
 
-pub const distcalcmethod_dl_and_dac: i64 = 3;
+pub const DISTCALCMETHOD_DL_AND_DAC: i64 = 3;
 
-pub const distcalcmethod_dl_if_nonzero: i64 = 5;
+pub const DISTCALCMETHOD_DL_IF_NONZERO: i64 = 5;
 
-pub const distcalcmethod_max_dl_dac: i64 = 2;
+pub const DISTCALCMETHOD_MAX_DL_DAC: i64 = 2;
 
-pub const distcalcmethod_sqrt_dl2_and_dac2: i64 = 4;
+pub const DISTCALCMETHOD_SQRT_DL2_AND_DAC2: i64 = 4;
 
-pub const dlgret_cancel: i64 = 2;
+pub const DLGRET_CANCEL: i64 = 2;
 
-pub const dlgret_no: i64 = 4;
+pub const DLGRET_NO: i64 = 4;
 
-pub const dlgret_ok: i64 = 1;
+pub const DLGRET_OK: i64 = 1;
 
-pub const dlgret_still_open: i64 = 0;
+pub const DLGRET_STILL_OPEN: i64 = 0;
 
-pub const dlgret_yes: i64 = 3;
+pub const DLGRET_YES: i64 = 3;
 
-pub const dlgstyle_dont_center: i64 = 32;
+pub const DLGSTYLE_DONT_CENTER: i64 = 32;
 
-pub const dlgstyle_input: i64 = 1;
+pub const DLGSTYLE_INPUT: i64 = 1;
 
-pub const dlgstyle_message: i64 = 0;
+pub const DLGSTYLE_MESSAGE: i64 = 0;
 
-pub const dlgstyle_ok: i64 = 2;
+pub const DLGSTYLE_OK: i64 = 2;
 
-pub const dlgstyle_ok_cancel: i64 = 3;
+pub const DLGSTYLE_OK_CANCEL: i64 = 3;
 
-pub const dlgstyle_yes_no: i64 = 4;
+pub const DLGSTYLE_YES_NO: i64 = 4;
 
-pub const drawing_12percenttransparency: i64 = 32768;
+pub const DRAWING_12PERCENTTRANSPARENCY: i64 = 32768;
 
-pub const drawing_25percenttransparency: i64 = 16384;
+pub const DRAWING_25PERCENTTRANSPARENCY: i64 = 16384;
 
-pub const drawing_50percenttransparency: i64 = 8192;
+pub const DRAWING_50PERCENTTRANSPARENCY: i64 = 8192;
 
-pub const drawing_auxchannelcolor1: i64 = 2097152;
+pub const DRAWING_AUXCHANNELCOLOR1: i64 = 2097152;
 
-pub const drawing_auxchannelcolor2: i64 = 4194304;
+pub const DRAWING_AUXCHANNELCOLOR2: i64 = 4194304;
 
-pub const drawing_backfaceculling: i64 = 256;
+pub const DRAWING_BACKFACECULLING: i64 = 256;
 
-pub const drawing_cubepoints: i64 = 6;
+pub const DRAWING_CUBEPOINTS: i64 = 6;
 
-pub const drawing_cubepts: i64 = 12;
+pub const DRAWING_CUBEPTS: i64 = 12;
 
-pub const drawing_cyclic: i64 = 4096;
+pub const DRAWING_CYCLIC: i64 = 4096;
 
-pub const drawing_discpoints: i64 = 5;
+pub const DRAWING_DISCPOINTS: i64 = 5;
 
-pub const drawing_discpts: i64 = 11;
+pub const DRAWING_DISCPTS: i64 = 11;
 
-pub const drawing_emissioncolor: i64 = 65536;
+pub const DRAWING_EMISSIONCOLOR: i64 = 65536;
 
-pub const drawing_facingcamera: i64 = 131072;
+pub const DRAWING_FACINGCAMERA: i64 = 131072;
 
-pub const drawing_followparentvisibility: i64 = 2048;
+pub const DRAWING_FOLLOWPARENTVISIBILITY: i64 = 2048;
 
-pub const drawing_itemcolors: i64 = 32;
+pub const DRAWING_ITEMCOLORS: i64 = 32;
 
-pub const drawing_itemsizes: i64 = 128;
+pub const DRAWING_ITEMSIZES: i64 = 128;
 
-pub const drawing_itemtransparency: i64 = 524288;
+pub const DRAWING_ITEMTRANSPARENCY: i64 = 524288;
 
-pub const drawing_lines: i64 = 1;
+pub const DRAWING_LINES: i64 = 1;
 
-pub const drawing_linestrip: i64 = 8;
+pub const DRAWING_LINESTRIP: i64 = 8;
 
-pub const drawing_overlay: i64 = 262144;
+pub const DRAWING_OVERLAY: i64 = 262144;
 
-pub const drawing_painttag: i64 = 1024;
+pub const DRAWING_PAINTTAG: i64 = 1024;
 
-pub const drawing_persistent: i64 = 1048576;
+pub const DRAWING_PERSISTENT: i64 = 1048576;
 
-pub const drawing_points: i64 = 0;
+pub const DRAWING_POINTS: i64 = 0;
 
-pub const drawing_quadpoints: i64 = 4;
+pub const DRAWING_QUADPOINTS: i64 = 4;
 
-pub const drawing_quadpts: i64 = 10;
+pub const DRAWING_QUADPTS: i64 = 10;
 
-pub const drawing_spherepoints: i64 = 7;
+pub const DRAWING_SPHEREPOINTS: i64 = 7;
 
-pub const drawing_spherepts: i64 = 7;
+pub const DRAWING_SPHEREPTS: i64 = 7;
 
-pub const drawing_trianglepoints: i64 = 3;
+pub const DRAWING_TRIANGLEPOINTS: i64 = 3;
 
-pub const drawing_trianglepts: i64 = 9;
+pub const DRAWING_TRIANGLEPTS: i64 = 9;
 
-pub const drawing_triangles: i64 = 2;
+pub const DRAWING_TRIANGLES: i64 = 2;
 
-pub const drawing_vertexcolors: i64 = 64;
+pub const DRAWING_VERTEXCOLORS: i64 = 64;
 
-pub const drawing_wireframe: i64 = 512;
+pub const DRAWING_WIREFRAME: i64 = 512;
 
-pub const dummy_linktype_dynamics_force_constraint: i64 = 1;
+pub const DUMMY_LINKTYPE_DYNAMICS_FORCE_CONSTRAINT: i64 = 1;
 
-pub const dummy_linktype_dynamics_loop_closure: i64 = 0;
+pub const DUMMY_LINKTYPE_DYNAMICS_LOOP_CLOSURE: i64 = 0;
 
-pub const dummy_linktype_gcs_loop_closure: i64 = 2;
+pub const DUMMY_LINKTYPE_GCS_LOOP_CLOSURE: i64 = 2;
 
-pub const dummy_linktype_gcs_target: i64 = 4;
+pub const DUMMY_LINKTYPE_GCS_TARGET: i64 = 4;
 
-pub const dummy_linktype_gcs_tip: i64 = 3;
+pub const DUMMY_LINKTYPE_GCS_TIP: i64 = 3;
 
-pub const dummy_linktype_ik_tip_target: i64 = 5;
+pub const DUMMY_LINKTYPE_IK_TIP_TARGET: i64 = 5;
 
-pub const dummyfloatparam_follow_path_offset: i64 = 10002;
+pub const DUMMYFLOATPARAM_FOLLOW_PATH_OFFSET: i64 = 10002;
 
-pub const dummyfloatparam_size: i64 = 10003;
+pub const DUMMYFLOATPARAM_SIZE: i64 = 10003;
 
-pub const dummyintparam_follow_path: i64 = 10001;
+pub const DUMMYINTPARAM_FOLLOW_PATH: i64 = 10001;
 
-pub const dummyintparam_link_type: i64 = 10000;
+pub const DUMMYINTPARAM_LINK_TYPE: i64 = 10000;
 
-pub const dynmat_default: i64 = 2310013;
+pub const DYNMAT_DEFAULT: i64 = 2310013;
 
-pub const dynmat_floor: i64 = 2310021;
+pub const DYNMAT_FLOOR: i64 = 2310021;
 
-pub const dynmat_foot: i64 = 2310018;
+pub const DYNMAT_FOOT: i64 = 2310018;
 
-pub const dynmat_gripper: i64 = 2310020;
+pub const DYNMAT_GRIPPER: i64 = 2310020;
 
-pub const dynmat_highfriction: i64 = 2310014;
+pub const DYNMAT_HIGHFRICTION: i64 = 2310014;
 
-pub const dynmat_lowfriction: i64 = 2310015;
+pub const DYNMAT_LOWFRICTION: i64 = 2310015;
 
-pub const dynmat_nofriction: i64 = 2310016;
+pub const DYNMAT_NOFRICTION: i64 = 2310016;
 
-pub const dynmat_reststackgrasp: i64 = 2310017;
+pub const DYNMAT_RESTSTACKGRASP: i64 = 2310017;
 
-pub const dynmat_wheel: i64 = 2310019;
+pub const DYNMAT_WHEEL: i64 = 2310019;
 
-pub const filedlg_type_folder: i64 = 3;
+pub const FILEDLG_TYPE_FOLDER: i64 = 3;
 
-pub const filedlg_type_load: i64 = 0;
+pub const FILEDLG_TYPE_LOAD: i64 = 0;
 
-pub const filedlg_type_load_multiple: i64 = 2;
+pub const FILEDLG_TYPE_LOAD_MULTIPLE: i64 = 2;
 
-pub const filedlg_type_save: i64 = 1;
+pub const FILEDLG_TYPE_SAVE: i64 = 1;
 
-pub const filtercomponent_3x3filter: i64 = 18;
+pub const FILTERCOMPONENT_3X3FILTER: i64 = 18;
 
-pub const filtercomponent_5x5filter: i64 = 19;
+pub const FILTERCOMPONENT_5X5FILTER: i64 = 19;
 
-pub const filtercomponent_addbuffer1: i64 = 10;
+pub const FILTERCOMPONENT_ADDBUFFER1: i64 = 10;
 
-pub const filtercomponent_addtobuffer1: i64 = 30;
+pub const FILTERCOMPONENT_ADDTOBUFFER1: i64 = 30;
 
-pub const filtercomponent_binary: i64 = 28;
+pub const FILTERCOMPONENT_BINARY: i64 = 28;
 
-pub const filtercomponent_blobextraction: i64 = 34;
+pub const FILTERCOMPONENT_BLOBEXTRACTION: i64 = 34;
 
-pub const filtercomponent_circularcut: i64 = 23;
+pub const FILTERCOMPONENT_CIRCULARCUT: i64 = 23;
 
-pub const filtercomponent_colorsegmentation: i64 = 33;
+pub const FILTERCOMPONENT_COLORSEGMENTATION: i64 = 33;
 
-pub const filtercomponent_correlationwithbuffer1: i64 = 32;
+pub const FILTERCOMPONENT_CORRELATIONWITHBUFFER1: i64 = 32;
 
-pub const filtercomponent_customized: i64 = 1000;
+pub const FILTERCOMPONENT_CUSTOMIZED: i64 = 1000;
 
-pub const filtercomponent_edge: i64 = 21;
+pub const FILTERCOMPONENT_EDGE: i64 = 21;
 
-pub const filtercomponent_frombuffer1: i64 = 7;
+pub const FILTERCOMPONENT_FROMBUFFER1: i64 = 7;
 
-pub const filtercomponent_frombuffer2: i64 = 8;
+pub const FILTERCOMPONENT_FROMBUFFER2: i64 = 8;
 
-pub const filtercomponent_horizontalflip: i64 = 13;
+pub const FILTERCOMPONENT_HORIZONTALFLIP: i64 = 13;
 
-pub const filtercomponent_imagetocoord: i64 = 35;
+pub const FILTERCOMPONENT_IMAGETOCOORD: i64 = 35;
 
-pub const filtercomponent_intensityscale: i64 = 25;
+pub const FILTERCOMPONENT_INTENSITYSCALE: i64 = 25;
 
-pub const filtercomponent_keeporremovecolors: i64 = 26;
+pub const FILTERCOMPONENT_KEEPORREMOVECOLORS: i64 = 26;
 
-pub const filtercomponent_multiplywithbuffer1: i64 = 12;
+pub const FILTERCOMPONENT_MULTIPLYWITHBUFFER1: i64 = 12;
 
-pub const filtercomponent_normalize: i64 = 24;
+pub const FILTERCOMPONENT_NORMALIZE: i64 = 24;
 
-pub const filtercomponent_originaldepth: i64 = 2;
+pub const FILTERCOMPONENT_ORIGINALDEPTH: i64 = 2;
 
-pub const filtercomponent_originalimage: i64 = 1;
+pub const FILTERCOMPONENT_ORIGINALIMAGE: i64 = 1;
 
-pub const filtercomponent_pixelchange: i64 = 36;
+pub const FILTERCOMPONENT_PIXELCHANGE: i64 = 36;
 
-pub const filtercomponent_rectangularcut: i64 = 22;
+pub const FILTERCOMPONENT_RECTANGULARCUT: i64 = 22;
 
-pub const filtercomponent_resize: i64 = 17;
+pub const FILTERCOMPONENT_RESIZE: i64 = 17;
 
-pub const filtercomponent_rotate: i64 = 15;
+pub const FILTERCOMPONENT_ROTATE: i64 = 15;
 
-pub const filtercomponent_scaleandoffsetcolors: i64 = 27;
+pub const FILTERCOMPONENT_SCALEANDOFFSETCOLORS: i64 = 27;
 
-pub const filtercomponent_sharpen: i64 = 20;
+pub const FILTERCOMPONENT_SHARPEN: i64 = 20;
 
-pub const filtercomponent_shift: i64 = 16;
+pub const FILTERCOMPONENT_SHIFT: i64 = 16;
 
-pub const filtercomponent_subtractbuffer1: i64 = 11;
+pub const FILTERCOMPONENT_SUBTRACTBUFFER1: i64 = 11;
 
-pub const filtercomponent_subtractfrombuffer1: i64 = 31;
+pub const FILTERCOMPONENT_SUBTRACTFROMBUFFER1: i64 = 31;
 
-pub const filtercomponent_swapbuffers: i64 = 9;
+pub const FILTERCOMPONENT_SWAPBUFFERS: i64 = 9;
 
-pub const filtercomponent_swapwithbuffer1: i64 = 29;
+pub const FILTERCOMPONENT_SWAPWITHBUFFER1: i64 = 29;
 
-pub const filtercomponent_tobuffer1: i64 = 5;
+pub const FILTERCOMPONENT_TOBUFFER1: i64 = 5;
 
-pub const filtercomponent_tobuffer2: i64 = 6;
+pub const FILTERCOMPONENT_TOBUFFER2: i64 = 6;
 
-pub const filtercomponent_todepthoutput: i64 = 38;
+pub const FILTERCOMPONENT_TODEPTHOUTPUT: i64 = 38;
 
-pub const filtercomponent_tooutput: i64 = 4;
+pub const FILTERCOMPONENT_TOOUTPUT: i64 = 4;
 
-pub const filtercomponent_uniformimage: i64 = 3;
+pub const FILTERCOMPONENT_UNIFORMIMAGE: i64 = 3;
 
-pub const filtercomponent_velodyne: i64 = 37;
+pub const FILTERCOMPONENT_VELODYNE: i64 = 37;
 
-pub const filtercomponent_verticalflip: i64 = 14;
+pub const FILTERCOMPONENT_VERTICALFLIP: i64 = 14;
 
-pub const floatparam_dynamic_step_size: i64 = 3;
+pub const FLOATPARAM_DYNAMIC_STEP_SIZE: i64 = 3;
 
-pub const floatparam_mouse_wheel_zoom_factor: i64 = 4;
+pub const FLOATPARAM_MOUSE_WHEEL_ZOOM_FACTOR: i64 = 4;
 
-pub const floatparam_rand: i64 = 0;
+pub const FLOATPARAM_RAND: i64 = 0;
 
-pub const floatparam_simulation_time_step: i64 = 1;
+pub const FLOATPARAM_SIMULATION_TIME_STEP: i64 = 1;
 
-pub const floatparam_stereo_distance: i64 = 2;
+pub const FLOATPARAM_STEREO_DISTANCE: i64 = 2;
 
-pub const forcefloatparam_error_a: i64 = 5003;
+pub const FORCEFLOATPARAM_ERROR_A: i64 = 5003;
 
-pub const forcefloatparam_error_angle: i64 = 5007;
+pub const FORCEFLOATPARAM_ERROR_ANGLE: i64 = 5007;
 
-pub const forcefloatparam_error_b: i64 = 5004;
+pub const FORCEFLOATPARAM_ERROR_B: i64 = 5004;
 
-pub const forcefloatparam_error_g: i64 = 5005;
+pub const FORCEFLOATPARAM_ERROR_G: i64 = 5005;
 
-pub const forcefloatparam_error_pos: i64 = 5006;
+pub const FORCEFLOATPARAM_ERROR_POS: i64 = 5006;
 
-pub const forcefloatparam_error_x: i64 = 5000;
+pub const FORCEFLOATPARAM_ERROR_X: i64 = 5000;
 
-pub const forcefloatparam_error_y: i64 = 5001;
+pub const FORCEFLOATPARAM_ERROR_Y: i64 = 5001;
 
-pub const forcefloatparam_error_z: i64 = 5002;
+pub const FORCEFLOATPARAM_ERROR_Z: i64 = 5002;
 
-pub const graphintparam_needs_refresh: i64 = 10500;
+pub const GRAPHINTPARAM_NEEDS_REFRESH: i64 = 10500;
 
-pub const handle_all: i64 = -2;
+pub const HANDLE_ALL: i64 = -2;
 
-pub const handle_all_except_explicit: i64 = -3;
+pub const HANDLE_ALL_EXCEPT_EXPLICIT: i64 = -3;
 
-pub const handle_all_except_self: i64 = -10;
+pub const HANDLE_ALL_EXCEPT_SELF: i64 = -10;
 
-pub const handle_app: i64 = -13;
+pub const HANDLE_APP: i64 = -13;
 
-pub const handle_chain: i64 = -7;
+pub const HANDLE_CHAIN: i64 = -7;
 
-pub const handle_default: i64 = -9;
+pub const HANDLE_DEFAULT: i64 = -9;
 
-pub const handle_inverse: i64 = -14;
+pub const HANDLE_INVERSE: i64 = -14;
 
-pub const handle_main_script: i64 = -5;
+pub const HANDLE_MAIN_SCRIPT: i64 = -5;
 
-pub const handle_parent: i64 = -11;
+pub const HANDLE_PARENT: i64 = -11;
 
-pub const handle_scene: i64 = -12;
+pub const HANDLE_SCENE: i64 = -12;
 
-pub const handle_self: i64 = -4;
+pub const HANDLE_SELF: i64 = -4;
 
-pub const handle_single: i64 = -8;
+pub const HANDLE_SINGLE: i64 = -8;
 
-pub const handle_tree: i64 = -6;
+pub const HANDLE_TREE: i64 = -6;
 
-pub const handle_world: i64 = -1;
+pub const HANDLE_WORLD: i64 = -1;
 
-pub const handleflag_abscoords: i64 = 8388608;
+pub const HANDLEFLAG_ABSCOORDS: i64 = 8388608;
 
-pub const handleflag_altname: i64 = 4194304;
+pub const HANDLEFLAG_ALTNAME: i64 = 4194304;
 
-pub const handleflag_assembly: i64 = 4194304;
+pub const HANDLEFLAG_ASSEMBLY: i64 = 4194304;
 
-pub const handleflag_axis: i64 = 4194304;
+pub const HANDLEFLAG_AXIS: i64 = 4194304;
 
-pub const handleflag_camera: i64 = 4194304;
+pub const HANDLEFLAG_CAMERA: i64 = 4194304;
 
-pub const handleflag_codedstring: i64 = 4194304;
+pub const HANDLEFLAG_CODEDSTRING: i64 = 4194304;
 
-pub const handleflag_depthbuffer: i64 = 8388608;
+pub const HANDLEFLAG_DEPTHBUFFER: i64 = 8388608;
 
-pub const handleflag_depthbuffermeters: i64 = 8388608;
+pub const HANDLEFLAG_DEPTHBUFFERMETERS: i64 = 8388608;
 
-pub const handleflag_extended: i64 = 4194304;
+pub const HANDLEFLAG_EXTENDED: i64 = 4194304;
 
-pub const handleflag_greyscale: i64 = 4194304;
+pub const HANDLEFLAG_GREYSCALE: i64 = 4194304;
 
-pub const handleflag_keeporiginal: i64 = 4194304;
+pub const HANDLEFLAG_KEEPORIGINAL: i64 = 4194304;
 
-pub const handleflag_model: i64 = 8388608;
+pub const HANDLEFLAG_MODEL: i64 = 8388608;
 
-pub const handleflag_rawvalue: i64 = 16777216;
+pub const HANDLEFLAG_RAWVALUE: i64 = 16777216;
 
-pub const handleflag_reljointbaseframe: i64 = 4194304;
+pub const HANDLEFLAG_RELJOINTBASEFRAME: i64 = 4194304;
 
-pub const handleflag_resetforce: i64 = 4194304;
+pub const HANDLEFLAG_RESETFORCE: i64 = 4194304;
 
-pub const handleflag_resetforcetorque: i64 = 12582912;
+pub const HANDLEFLAG_RESETFORCETORQUE: i64 = 12582912;
 
-pub const handleflag_resettorque: i64 = 8388608;
+pub const HANDLEFLAG_RESETTORQUE: i64 = 8388608;
 
-pub const handleflag_setmultiple: i64 = 4194304;
+pub const HANDLEFLAG_SETMULTIPLE: i64 = 4194304;
 
-pub const handleflag_silenterror: i64 = 33554432;
+pub const HANDLEFLAG_SILENTERROR: i64 = 33554432;
 
-pub const handleflag_togglevisibility: i64 = 4194304;
+pub const HANDLEFLAG_TOGGLEVISIBILITY: i64 = 4194304;
 
-pub const handleflag_wxyzquaternion: i64 = 4194304;
+pub const HANDLEFLAG_WXYZQUATERNION: i64 = 4194304;
 
-pub const ik_alpha_beta_constraint: i64 = 8;
+pub const IK_ALPHA_BETA_CONSTRAINT: i64 = 8;
 
-pub const ik_damped_least_squares_method: i64 = 1;
+pub const IK_DAMPED_LEAST_SQUARES_METHOD: i64 = 1;
 
-pub const ik_gamma_constraint: i64 = 16;
+pub const IK_GAMMA_CONSTRAINT: i64 = 16;
 
-pub const ik_jacobian_transpose_method: i64 = 2;
+pub const IK_JACOBIAN_TRANSPOSE_METHOD: i64 = 2;
 
-pub const ik_pseudo_inverse_method: i64 = 0;
+pub const IK_PSEUDO_INVERSE_METHOD: i64 = 0;
 
-pub const ik_undamped_pseudo_inverse_method: i64 = 3;
+pub const IK_UNDAMPED_PSEUDO_INVERSE_METHOD: i64 = 3;
 
-pub const ik_x_constraint: i64 = 1;
+pub const IK_X_CONSTRAINT: i64 = 1;
 
-pub const ik_y_constraint: i64 = 2;
+pub const IK_Y_CONSTRAINT: i64 = 2;
 
-pub const ik_z_constraint: i64 = 4;
+pub const IK_Z_CONSTRAINT: i64 = 4;
 
-pub const ikresult_fail: i64 = 2;
+pub const IKRESULT_FAIL: i64 = 2;
 
-pub const ikresult_not_performed: i64 = 0;
+pub const IKRESULT_NOT_PERFORMED: i64 = 0;
 
-pub const ikresult_success: i64 = 1;
+pub const IKRESULT_SUCCESS: i64 = 1;
 
-pub const imgcomb_horizontal: i64 = 1;
+pub const IMGCOMB_HORIZONTAL: i64 = 1;
 
-pub const imgcomb_vertical: i64 = 0;
+pub const IMGCOMB_VERTICAL: i64 = 0;
 
-pub const intparam_compilation_version: i64 = 4;
+pub const INTPARAM_COMPILATION_VERSION: i64 = 4;
 
-pub const intparam_core_count: i64 = 24;
+pub const INTPARAM_CORE_COUNT: i64 = 24;
 
-pub const intparam_current_page: i64 = 5;
+pub const INTPARAM_CURRENT_PAGE: i64 = 5;
 
-pub const intparam_dlgverbosity: i64 = 42;
+pub const INTPARAM_DLGVERBOSITY: i64 = 42;
 
-pub const intparam_dynamic_engine: i64 = 8;
+pub const INTPARAM_DYNAMIC_ENGINE: i64 = 8;
 
-pub const intparam_dynamic_iteration_count: i64 = 37;
+pub const INTPARAM_DYNAMIC_ITERATION_COUNT: i64 = 37;
 
-pub const intparam_dynamic_step_divider: i64 = 7;
+pub const INTPARAM_DYNAMIC_STEP_DIVIDER: i64 = 7;
 
-pub const intparam_dynamic_warning_disabled_mask: i64 = 32;
+pub const INTPARAM_DYNAMIC_WARNING_DISABLED_MASK: i64 = 32;
 
-pub const intparam_edit_mode_type: i64 = 14;
+pub const INTPARAM_EDIT_MODE_TYPE: i64 = 14;
 
-pub const intparam_error_report_mode: i64 = 0;
+pub const INTPARAM_ERROR_REPORT_MODE: i64 = 0;
 
-pub const intparam_exitcode: i64 = 44;
+pub const INTPARAM_EXITCODE: i64 = 44;
 
-pub const intparam_flymode_camera_handle: i64 = 6;
+pub const INTPARAM_FLYMODE_CAMERA_HANDLE: i64 = 6;
 
-pub const intparam_idle_fps: i64 = 26;
+pub const INTPARAM_IDLE_FPS: i64 = 26;
 
-pub const intparam_infotext_style: i64 = 12;
+pub const INTPARAM_INFOTEXT_STYLE: i64 = 12;
 
-pub const intparam_motionplanning_seed: i64 = 35;
+pub const INTPARAM_MOTIONPLANNING_SEED: i64 = 35;
 
-pub const intparam_mouse_buttons: i64 = 31;
+pub const INTPARAM_MOUSE_BUTTONS: i64 = 31;
 
-pub const intparam_mouse_x: i64 = 22;
+pub const INTPARAM_MOUSE_X: i64 = 22;
 
-pub const intparam_mouse_y: i64 = 23;
+pub const INTPARAM_MOUSE_Y: i64 = 23;
 
-pub const intparam_mouseclickcounterdown: i64 = 46;
+pub const INTPARAM_MOUSECLICKCOUNTERDOWN: i64 = 46;
 
-pub const intparam_mouseclickcounterup: i64 = 47;
+pub const INTPARAM_MOUSECLICKCOUNTERUP: i64 = 47;
 
-pub const intparam_platform: i64 = 19;
+pub const INTPARAM_PLATFORM: i64 = 19;
 
-pub const intparam_program_full_version: i64 = 39;
+pub const INTPARAM_PROGRAM_FULL_VERSION: i64 = 39;
 
-pub const intparam_program_revision: i64 = 30;
+pub const INTPARAM_PROGRAM_REVISION: i64 = 30;
 
-pub const intparam_program_version: i64 = 1;
+pub const INTPARAM_PROGRAM_VERSION: i64 = 1;
 
-pub const intparam_prox_sensor_select_down: i64 = 27;
+pub const INTPARAM_PROX_SENSOR_SELECT_DOWN: i64 = 27;
 
-pub const intparam_prox_sensor_select_up: i64 = 28;
+pub const INTPARAM_PROX_SENSOR_SELECT_UP: i64 = 28;
 
-pub const intparam_qt_version: i64 = 16;
+pub const INTPARAM_QT_VERSION: i64 = 16;
 
-pub const intparam_scene_index: i64 = 34;
+pub const INTPARAM_SCENE_INDEX: i64 = 34;
 
-pub const intparam_scene_unique_id: i64 = 20;
+pub const INTPARAM_SCENE_UNIQUE_ID: i64 = 20;
 
-pub const intparam_server_port_next: i64 = 15;
+pub const INTPARAM_SERVER_PORT_NEXT: i64 = 15;
 
-pub const intparam_server_port_range: i64 = 10;
+pub const INTPARAM_SERVER_PORT_RANGE: i64 = 10;
 
-pub const intparam_server_port_start: i64 = 9;
+pub const INTPARAM_SERVER_PORT_START: i64 = 9;
 
-pub const intparam_settings: i64 = 13;
+pub const INTPARAM_SETTINGS: i64 = 13;
 
-pub const intparam_simulation_warning_disabled_mask: i64 = 33;
+pub const INTPARAM_SIMULATION_WARNING_DISABLED_MASK: i64 = 33;
 
-pub const intparam_speedmodifier: i64 = 36;
+pub const INTPARAM_SPEEDMODIFIER: i64 = 36;
 
-pub const intparam_statusbarverbosity: i64 = 41;
+pub const INTPARAM_STATUSBARVERBOSITY: i64 = 41;
 
-pub const intparam_stop_request_counter: i64 = 29;
+pub const INTPARAM_STOP_REQUEST_COUNTER: i64 = 29;
 
-pub const intparam_verbosity: i64 = 40;
+pub const INTPARAM_VERBOSITY: i64 = 40;
 
-pub const intparam_videoencoderindex: i64 = 43;
+pub const INTPARAM_VIDEOENCODERINDEX: i64 = 43;
 
-pub const intparam_visible_layers: i64 = 11;
+pub const INTPARAM_VISIBLE_LAYERS: i64 = 11;
 
-pub const intparam_work_thread_calc_time_ms: i64 = 25;
+pub const INTPARAM_WORK_THREAD_CALC_TIME_MS: i64 = 25;
 
-pub const intparam_work_thread_count: i64 = 21;
+pub const INTPARAM_WORK_THREAD_COUNT: i64 = 21;
 
-pub const joint_prismatic_subtype: i64 = 11;
+pub const JOINT_PRISMATIC_SUBTYPE: i64 = 11;
 
-pub const joint_revolute_subtype: i64 = 10;
+pub const JOINT_REVOLUTE_SUBTYPE: i64 = 10;
 
-pub const joint_spherical_subtype: i64 = 12;
+pub const JOINT_SPHERICAL_SUBTYPE: i64 = 12;
 
-pub const jointdynctrl_callback: i64 = 16;
+pub const JOINTDYNCTRL_CALLBACK: i64 = 16;
 
-pub const jointdynctrl_force: i64 = 1;
+pub const JOINTDYNCTRL_FORCE: i64 = 1;
 
-pub const jointdynctrl_free: i64 = 0;
+pub const JOINTDYNCTRL_FREE: i64 = 0;
 
-pub const jointdynctrl_position: i64 = 8;
+pub const JOINTDYNCTRL_POSITION: i64 = 8;
 
-pub const jointdynctrl_spring: i64 = 12;
+pub const JOINTDYNCTRL_SPRING: i64 = 12;
 
-pub const jointdynctrl_velocity: i64 = 4;
+pub const JOINTDYNCTRL_VELOCITY: i64 = 4;
 
-pub const jointfloatparam_error_a: i64 = 2025;
+pub const JOINTFLOATPARAM_ERROR_A: i64 = 2025;
 
-pub const jointfloatparam_error_angle: i64 = 2029;
+pub const JOINTFLOATPARAM_ERROR_ANGLE: i64 = 2029;
 
-pub const jointfloatparam_error_b: i64 = 2026;
+pub const JOINTFLOATPARAM_ERROR_B: i64 = 2026;
 
-pub const jointfloatparam_error_g: i64 = 2027;
+pub const JOINTFLOATPARAM_ERROR_G: i64 = 2027;
 
-pub const jointfloatparam_error_pos: i64 = 2028;
+pub const JOINTFLOATPARAM_ERROR_POS: i64 = 2028;
 
-pub const jointfloatparam_error_x: i64 = 2022;
+pub const JOINTFLOATPARAM_ERROR_X: i64 = 2022;
 
-pub const jointfloatparam_error_y: i64 = 2023;
+pub const JOINTFLOATPARAM_ERROR_Y: i64 = 2023;
 
-pub const jointfloatparam_error_z: i64 = 2024;
+pub const JOINTFLOATPARAM_ERROR_Z: i64 = 2024;
 
-pub const jointfloatparam_ik_weight: i64 = 2021;
+pub const JOINTFLOATPARAM_IK_WEIGHT: i64 = 2021;
 
-pub const jointfloatparam_intrinsic_qw: i64 = 2011;
+pub const JOINTFLOATPARAM_INTRINSIC_QW: i64 = 2011;
 
-pub const jointfloatparam_intrinsic_qx: i64 = 2008;
+pub const JOINTFLOATPARAM_INTRINSIC_QX: i64 = 2008;
 
-pub const jointfloatparam_intrinsic_qy: i64 = 2009;
+pub const JOINTFLOATPARAM_INTRINSIC_QY: i64 = 2009;
 
-pub const jointfloatparam_intrinsic_qz: i64 = 2010;
+pub const JOINTFLOATPARAM_INTRINSIC_QZ: i64 = 2010;
 
-pub const jointfloatparam_intrinsic_x: i64 = 2005;
+pub const JOINTFLOATPARAM_INTRINSIC_X: i64 = 2005;
 
-pub const jointfloatparam_intrinsic_y: i64 = 2006;
+pub const JOINTFLOATPARAM_INTRINSIC_Y: i64 = 2006;
 
-pub const jointfloatparam_intrinsic_z: i64 = 2007;
+pub const JOINTFLOATPARAM_INTRINSIC_Z: i64 = 2007;
 
-pub const jointfloatparam_kc_c: i64 = 2019;
+pub const JOINTFLOATPARAM_KC_C: i64 = 2019;
 
-pub const jointfloatparam_kc_k: i64 = 2018;
+pub const JOINTFLOATPARAM_KC_K: i64 = 2018;
 
-pub const jointfloatparam_maxaccel: i64 = 2037;
+pub const JOINTFLOATPARAM_MAXACCEL: i64 = 2037;
 
-pub const jointfloatparam_maxjerk: i64 = 2038;
+pub const JOINTFLOATPARAM_MAXJERK: i64 = 2038;
 
-pub const jointfloatparam_maxvel: i64 = 2036;
+pub const JOINTFLOATPARAM_MAXVEL: i64 = 2036;
 
-pub const jointfloatparam_pid_d: i64 = 2004;
+pub const JOINTFLOATPARAM_PID_D: i64 = 2004;
 
-pub const jointfloatparam_pid_i: i64 = 2003;
+pub const JOINTFLOATPARAM_PID_I: i64 = 2003;
 
-pub const jointfloatparam_pid_p: i64 = 2002;
+pub const JOINTFLOATPARAM_PID_P: i64 = 2002;
 
-pub const jointfloatparam_screw_pitch: i64 = 2034;
+pub const JOINTFLOATPARAM_SCREW_PITCH: i64 = 2034;
 
-pub const jointfloatparam_spherical_qw: i64 = 2016;
+pub const JOINTFLOATPARAM_SPHERICAL_QW: i64 = 2016;
 
-pub const jointfloatparam_spherical_qx: i64 = 2013;
+pub const JOINTFLOATPARAM_SPHERICAL_QX: i64 = 2013;
 
-pub const jointfloatparam_spherical_qy: i64 = 2014;
+pub const JOINTFLOATPARAM_SPHERICAL_QY: i64 = 2014;
 
-pub const jointfloatparam_spherical_qz: i64 = 2015;
+pub const JOINTFLOATPARAM_SPHERICAL_QZ: i64 = 2015;
 
-pub const jointfloatparam_step_size: i64 = 2035;
+pub const JOINTFLOATPARAM_STEP_SIZE: i64 = 2035;
 
-pub const jointfloatparam_upper_limit: i64 = 2017;
+pub const JOINTFLOATPARAM_UPPER_LIMIT: i64 = 2017;
 
-pub const jointfloatparam_velocity: i64 = 2012;
+pub const JOINTFLOATPARAM_VELOCITY: i64 = 2012;
 
-pub const jointfloatparam_vortex_dep_multiplication: i64 = 2032;
+pub const JOINTFLOATPARAM_VORTEX_DEP_MULTIPLICATION: i64 = 2032;
 
-pub const jointfloatparam_vortex_dep_offset: i64 = 2033;
+pub const JOINTFLOATPARAM_VORTEX_DEP_OFFSET: i64 = 2033;
 
-pub const jointintparam_ctrl_enabled: i64 = 2001;
+pub const JOINTINTPARAM_CTRL_ENABLED: i64 = 2001;
 
-pub const jointintparam_dynctrlmode: i64 = 2039;
+pub const JOINTINTPARAM_DYNCTRLMODE: i64 = 2039;
 
-pub const jointintparam_motor_enabled: i64 = 2000;
+pub const JOINTINTPARAM_MOTOR_ENABLED: i64 = 2000;
 
-pub const jointintparam_velocity_lock: i64 = 2030;
+pub const JOINTINTPARAM_VELOCITY_LOCK: i64 = 2030;
 
-pub const jointintparam_vortex_dep_handle: i64 = 2031;
+pub const JOINTINTPARAM_VORTEX_DEP_HANDLE: i64 = 2031;
 
-pub const jointmode_dependent: i64 = 4;
+pub const JOINTMODE_DEPENDENT: i64 = 4;
 
-pub const jointmode_dynamic: i64 = 5;
+pub const JOINTMODE_DYNAMIC: i64 = 5;
 
-pub const jointmode_force: i64 = 5;
+pub const JOINTMODE_FORCE: i64 = 5;
 
-pub const jointmode_ik: i64 = 2;
+pub const JOINTMODE_IK: i64 = 2;
 
-pub const jointmode_ikdependent: i64 = 3;
+pub const JOINTMODE_IKDEPENDENT: i64 = 3;
 
-pub const jointmode_kinematic: i64 = 0;
+pub const JOINTMODE_KINEMATIC: i64 = 0;
 
-pub const jointmode_passive: i64 = 0;
+pub const JOINTMODE_PASSIVE: i64 = 0;
 
-pub const light_directional_subtype: i64 = 3;
+pub const LIGHT_DIRECTIONAL_SUBTYPE: i64 = 3;
 
-pub const light_omnidirectional_subtype: i64 = 1;
+pub const LIGHT_OMNIDIRECTIONAL_SUBTYPE: i64 = 1;
 
-pub const light_spot_subtype: i64 = 2;
+pub const LIGHT_SPOT_SUBTYPE: i64 = 2;
 
-pub const lightfloatparam_const_attenuation: i64 = 8003;
+pub const LIGHTFLOATPARAM_CONST_ATTENUATION: i64 = 8003;
 
-pub const lightfloatparam_lin_attenuation: i64 = 8004;
+pub const LIGHTFLOATPARAM_LIN_ATTENUATION: i64 = 8004;
 
-pub const lightfloatparam_quad_attenuation: i64 = 8005;
+pub const LIGHTFLOATPARAM_QUAD_ATTENUATION: i64 = 8005;
 
-pub const lightfloatparam_spot_cutoff: i64 = 8002;
+pub const LIGHTFLOATPARAM_SPOT_CUTOFF: i64 = 8002;
 
-pub const lightfloatparam_spot_exponent: i64 = 8001;
+pub const LIGHTFLOATPARAM_SPOT_EXPONENT: i64 = 8001;
 
-pub const lightintparam_pov_casts_shadows: i64 = 8000;
+pub const LIGHTINTPARAM_POV_CASTS_SHADOWS: i64 = 8000;
 
-pub const mainscriptcall_cleanup: i64 = 1;
+pub const MAINSCRIPTCALL_CLEANUP: i64 = 1;
 
-pub const mainscriptcall_initialization: i64 = 2;
+pub const MAINSCRIPTCALL_INITIALIZATION: i64 = 2;
 
-pub const mainscriptcall_regular: i64 = 6;
+pub const MAINSCRIPTCALL_REGULAR: i64 = 6;
 
-pub const message_bannerclicked: i64 = 7;
+pub const MESSAGE_BANNERCLICKED: i64 = 7;
 
-pub const message_keypress: i64 = 6;
+pub const MESSAGE_KEYPRESS: i64 = 6;
 
-pub const message_model_loaded: i64 = 4;
+pub const MESSAGE_MODEL_LOADED: i64 = 4;
 
-pub const message_object_selection_changed: i64 = 2;
+pub const MESSAGE_OBJECT_SELECTION_CHANGED: i64 = 2;
 
-pub const message_pick_select_down: i64 = 11;
+pub const MESSAGE_PICK_SELECT_DOWN: i64 = 11;
 
-pub const message_prox_sensor_select_down: i64 = 9;
+pub const MESSAGE_PROX_SENSOR_SELECT_DOWN: i64 = 9;
 
-pub const message_prox_sensor_select_up: i64 = 10;
+pub const MESSAGE_PROX_SENSOR_SELECT_UP: i64 = 10;
 
-pub const message_scene_loaded: i64 = 8;
+pub const MESSAGE_SCENE_LOADED: i64 = 8;
 
-pub const message_ui_button_state_change: i64 = 0;
+pub const MESSAGE_UI_BUTTON_STATE_CHANGE: i64 = 0;
 
-pub const mill_cone_subtype: i64 = 43;
+pub const MILL_CONE_SUBTYPE: i64 = 43;
 
-pub const mill_cylinder_subtype: i64 = 41;
+pub const MILL_CYLINDER_SUBTYPE: i64 = 41;
 
-pub const mill_disc_subtype: i64 = 42;
+pub const MILL_DISC_SUBTYPE: i64 = 42;
 
-pub const mill_pyramid_subtype: i64 = 40;
+pub const MILL_PYRAMID_SUBTYPE: i64 = 40;
 
-pub const millintparam_volume_type: i64 = 11000;
+pub const MILLINTPARAM_VOLUME_TYPE: i64 = 11000;
 
-pub const mirrorfloatparam_height: i64 = 12001;
+pub const MIRRORFLOATPARAM_HEIGHT: i64 = 12001;
 
-pub const mirrorfloatparam_reflectance: i64 = 12002;
+pub const MIRRORFLOATPARAM_REFLECTANCE: i64 = 12002;
 
-pub const mirrorfloatparam_width: i64 = 12000;
+pub const MIRRORFLOATPARAM_WIDTH: i64 = 12000;
 
-pub const mirrorintparam_enable: i64 = 12003;
+pub const MIRRORINTPARAM_ENABLE: i64 = 12003;
 
-pub const modelproperty_not_collidable: i64 = 1;
+pub const MODELPROPERTY_NOT_COLLIDABLE: i64 = 1;
 
-pub const modelproperty_not_detectable: i64 = 8;
+pub const MODELPROPERTY_NOT_DETECTABLE: i64 = 8;
 
-pub const modelproperty_not_dynamic: i64 = 32;
+pub const MODELPROPERTY_NOT_DYNAMIC: i64 = 32;
 
-pub const modelproperty_not_measurable: i64 = 2;
+pub const MODELPROPERTY_NOT_MEASURABLE: i64 = 2;
 
-pub const modelproperty_not_model: i64 = 61440;
+pub const MODELPROPERTY_NOT_MODEL: i64 = 61440;
 
-pub const modelproperty_not_renderable: i64 = 4;
+pub const MODELPROPERTY_NOT_RENDERABLE: i64 = 4;
 
-pub const modelproperty_not_reset: i64 = 128;
+pub const MODELPROPERTY_NOT_RESET: i64 = 128;
 
-pub const modelproperty_not_respondable: i64 = 64;
+pub const MODELPROPERTY_NOT_RESPONDABLE: i64 = 64;
 
-pub const modelproperty_not_showasinsidemodel: i64 = 1024;
+pub const MODELPROPERTY_NOT_SHOWASINSIDEMODEL: i64 = 1024;
 
-pub const modelproperty_not_visible: i64 = 256;
+pub const MODELPROPERTY_NOT_VISIBLE: i64 = 256;
 
-pub const modelproperty_scripts_inactive: i64 = 512;
+pub const MODELPROPERTY_SCRIPTS_INACTIVE: i64 = 512;
 
-pub const moduleinfo_builddatestr: i64 = 1;
+pub const MODULEINFO_BUILDDATESTR: i64 = 1;
 
-pub const moduleinfo_extversionint: i64 = 2;
+pub const MODULEINFO_EXTVERSIONINT: i64 = 2;
 
-pub const moduleinfo_extversionstr: i64 = 0;
+pub const MODULEINFO_EXTVERSIONSTR: i64 = 0;
 
-pub const moduleinfo_statusbarverbosity: i64 = 4;
+pub const MODULEINFO_STATUSBARVERBOSITY: i64 = 4;
 
-pub const moduleinfo_verbosity: i64 = 3;
+pub const MODULEINFO_VERBOSITY: i64 = 3;
 
-pub const msgbox_buttons_ok: i64 = 0;
+pub const MSGBOX_BUTTONS_OK: i64 = 0;
 
-pub const msgbox_buttons_okcancel: i64 = 3;
+pub const MSGBOX_BUTTONS_OKCANCEL: i64 = 3;
 
-pub const msgbox_buttons_yesno: i64 = 1;
+pub const MSGBOX_BUTTONS_YESNO: i64 = 1;
 
-pub const msgbox_buttons_yesnocancel: i64 = 2;
+pub const MSGBOX_BUTTONS_YESNOCANCEL: i64 = 2;
 
-pub const msgbox_return_cancel: i64 = 0;
+pub const MSGBOX_RETURN_CANCEL: i64 = 0;
 
-pub const msgbox_return_error: i64 = 4;
+pub const MSGBOX_RETURN_ERROR: i64 = 4;
 
-pub const msgbox_return_no: i64 = 1;
+pub const MSGBOX_RETURN_NO: i64 = 1;
 
-pub const msgbox_return_ok: i64 = 3;
+pub const MSGBOX_RETURN_OK: i64 = 3;
 
-pub const msgbox_return_yes: i64 = 2;
+pub const MSGBOX_RETURN_YES: i64 = 2;
 
-pub const msgbox_type_critical: i64 = 3;
+pub const MSGBOX_TYPE_CRITICAL: i64 = 3;
 
-pub const msgbox_type_info: i64 = 0;
+pub const MSGBOX_TYPE_INFO: i64 = 0;
 
-pub const msgbox_type_question: i64 = 1;
+pub const MSGBOX_TYPE_QUESTION: i64 = 1;
 
-pub const msgbox_type_warning: i64 = 2;
+pub const MSGBOX_TYPE_WARNING: i64 = 2;
 
-pub const navigation_cameraangle: i64 = 5;
+pub const NAVIGATION_CAMERAANGLE: i64 = 5;
 
-pub const navigation_camerafly: i64 = 6;
+pub const NAVIGATION_CAMERAFLY: i64 = 6;
 
-pub const navigation_camerarotate: i64 = 2;
+pub const NAVIGATION_CAMERAROTATE: i64 = 2;
 
-pub const navigation_camerarotatemiddlebutton: i64 = 8192;
+pub const NAVIGATION_CAMERAROTATEMIDDLEBUTTON: i64 = 8192;
 
-pub const navigation_camerarotaterightbutton: i64 = 8192;
+pub const NAVIGATION_CAMERAROTATERIGHTBUTTON: i64 = 8192;
 
-pub const navigation_camerashift: i64 = 1;
+pub const NAVIGATION_CAMERASHIFT: i64 = 1;
 
-pub const navigation_cameratilt: i64 = 4;
+pub const NAVIGATION_CAMERATILT: i64 = 4;
 
-pub const navigation_camerazoom: i64 = 3;
+pub const NAVIGATION_CAMERAZOOM: i64 = 3;
 
-pub const navigation_camerazoomwheel: i64 = 4096;
+pub const NAVIGATION_CAMERAZOOMWHEEL: i64 = 4096;
 
-pub const navigation_clickselection: i64 = 512;
+pub const NAVIGATION_CLICKSELECTION: i64 = 512;
 
-pub const navigation_createpathpoint: i64 = 256;
+pub const NAVIGATION_CREATEPATHPOINT: i64 = 256;
 
-pub const navigation_ctrlselection: i64 = 1024;
+pub const NAVIGATION_CTRLSELECTION: i64 = 1024;
 
-pub const navigation_objectrotate: i64 = 8;
+pub const NAVIGATION_OBJECTROTATE: i64 = 8;
 
-pub const navigation_objectshift: i64 = 7;
+pub const NAVIGATION_OBJECTSHIFT: i64 = 7;
 
-pub const navigation_passive: i64 = 0;
+pub const NAVIGATION_PASSIVE: i64 = 0;
 
-pub const navigation_shiftselection: i64 = 2048;
+pub const NAVIGATION_SHIFTSELECTION: i64 = 2048;
 
-pub const newton_body_angulardrag: i64 = 33005;
+pub const NEWTON_BODY_ANGULARDRAG: i64 = 33005;
 
-pub const newton_body_bitcoded: i64 = 34001;
+pub const NEWTON_BODY_BITCODED: i64 = 34001;
 
-pub const newton_body_fastmoving: i64 = 35001;
+pub const NEWTON_BODY_FASTMOVING: i64 = 35001;
 
-pub const newton_body_kineticfriction: i64 = 33002;
+pub const NEWTON_BODY_KINETICFRICTION: i64 = 33002;
 
-pub const newton_body_lineardrag: i64 = 33004;
+pub const NEWTON_BODY_LINEARDRAG: i64 = 33004;
 
-pub const newton_body_restitution: i64 = 33003;
+pub const NEWTON_BODY_RESTITUTION: i64 = 33003;
 
-pub const newton_body_staticfriction: i64 = 33001;
+pub const NEWTON_BODY_STATICFRICTION: i64 = 33001;
 
-pub const newton_global_bitcoded: i64 = 28002;
+pub const NEWTON_GLOBAL_BITCODED: i64 = 28002;
 
-pub const newton_global_constraintsolvingiterations: i64 = 28001;
+pub const NEWTON_GLOBAL_CONSTRAINTSOLVINGITERATIONS: i64 = 28001;
 
-pub const newton_global_contactmergetolerance: i64 = 27002;
+pub const NEWTON_GLOBAL_CONTACTMERGETOLERANCE: i64 = 27002;
 
-pub const newton_global_exactsolver: i64 = 29002;
+pub const NEWTON_GLOBAL_EXACTSOLVER: i64 = 29002;
 
-pub const newton_global_highjointaccuracy: i64 = 29003;
+pub const NEWTON_GLOBAL_HIGHJOINTACCURACY: i64 = 29003;
 
-pub const newton_global_multithreading: i64 = 29001;
+pub const NEWTON_GLOBAL_MULTITHREADING: i64 = 29001;
 
-pub const newton_global_stepsize: i64 = 27001;
+pub const NEWTON_GLOBAL_STEPSIZE: i64 = 27001;
 
-pub const newton_joint_dependencyfactor: i64 = 30001;
+pub const NEWTON_JOINT_DEPENDENCYFACTOR: i64 = 30001;
 
-pub const newton_joint_dependencyoffset: i64 = 30002;
+pub const NEWTON_JOINT_DEPENDENCYOFFSET: i64 = 30002;
 
-pub const newton_joint_dependentobjectid: i64 = 31002;
+pub const NEWTON_JOINT_DEPENDENTOBJECTID: i64 = 31002;
 
-pub const newton_joint_objectid: i64 = 31001;
+pub const NEWTON_JOINT_OBJECTID: i64 = 31001;
 
-pub const object_camera_type: i64 = 3;
+pub const OBJECT_CAMERA_TYPE: i64 = 3;
 
-pub const object_dummy_type: i64 = 4;
+pub const OBJECT_DUMMY_TYPE: i64 = 4;
 
-pub const object_forcesensor_type: i64 = 12;
+pub const OBJECT_FORCESENSOR_TYPE: i64 = 12;
 
-pub const object_graph_type: i64 = 2;
+pub const OBJECT_GRAPH_TYPE: i64 = 2;
 
-pub const object_joint_type: i64 = 1;
+pub const OBJECT_JOINT_TYPE: i64 = 1;
 
-pub const object_light_type: i64 = 13;
+pub const OBJECT_LIGHT_TYPE: i64 = 13;
 
-pub const object_mill_type: i64 = 11;
+pub const OBJECT_MILL_TYPE: i64 = 11;
 
-pub const object_mirror_type: i64 = 14;
+pub const OBJECT_MIRROR_TYPE: i64 = 14;
 
-pub const object_no_subtype: i64 = 200;
+pub const OBJECT_NO_SUBTYPE: i64 = 200;
 
-pub const object_octree_type: i64 = 15;
+pub const OBJECT_OCTREE_TYPE: i64 = 15;
 
-pub const object_path_type: i64 = 8;
+pub const OBJECT_PATH_TYPE: i64 = 8;
 
-pub const object_pointcloud_type: i64 = 16;
+pub const OBJECT_POINTCLOUD_TYPE: i64 = 16;
 
-pub const object_proximitysensor_type: i64 = 5;
+pub const OBJECT_PROXIMITYSENSOR_TYPE: i64 = 5;
 
-pub const object_renderingsensor_type: i64 = 9;
+pub const OBJECT_RENDERINGSENSOR_TYPE: i64 = 9;
 
-pub const object_shape_type: i64 = 0;
+pub const OBJECT_SHAPE_TYPE: i64 = 0;
 
-pub const object_visionsensor_type: i64 = 9;
+pub const OBJECT_VISIONSENSOR_TYPE: i64 = 9;
 
-pub const objectproperty_cannotdelete: i64 = 8192;
+pub const OBJECTPROPERTY_CANNOTDELETE: i64 = 8192;
 
-pub const objectproperty_cannotdeleteduringsim: i64 = 16384;
+pub const OBJECTPROPERTY_CANNOTDELETEDURINGSIM: i64 = 16384;
 
-pub const objectproperty_canupdatedna: i64 = 1024;
+pub const OBJECTPROPERTY_CANUPDATEDNA: i64 = 1024;
 
-pub const objectproperty_collapsed: i64 = 16;
+pub const OBJECTPROPERTY_COLLAPSED: i64 = 16;
 
-pub const objectproperty_depthinvisible: i64 = 4096;
+pub const OBJECTPROPERTY_DEPTHINVISIBLE: i64 = 4096;
 
-pub const objectproperty_dontshowasinsidemodel: i64 = 256;
+pub const OBJECTPROPERTY_DONTSHOWASINSIDEMODEL: i64 = 256;
 
-pub const objectproperty_hierarchyhiddenmodelchild: i64 = 32768;
+pub const OBJECTPROPERTY_HIERARCHYHIDDENMODELCHILD: i64 = 32768;
 
-pub const objectproperty_ignoreviewfitting: i64 = 1;
+pub const OBJECTPROPERTY_IGNOREVIEWFITTING: i64 = 1;
 
-pub const objectproperty_selectable: i64 = 32;
+pub const OBJECTPROPERTY_SELECTABLE: i64 = 32;
 
-pub const objectproperty_selectinvisible: i64 = 2048;
+pub const OBJECTPROPERTY_SELECTINVISIBLE: i64 = 2048;
 
-pub const objectproperty_selectmodelbaseinstead: i64 = 128;
+pub const OBJECTPROPERTY_SELECTMODELBASEINSTEAD: i64 = 128;
 
-pub const objectspecialproperty_collidable: i64 = 1;
+pub const OBJECTSPECIALPROPERTY_COLLIDABLE: i64 = 1;
 
-pub const objectspecialproperty_detectable: i64 = 496;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE: i64 = 496;
 
-pub const objectspecialproperty_detectable_all: i64 = 496;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE_ALL: i64 = 496;
 
-pub const objectspecialproperty_detectable_capacitive: i64 = 256;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE_CAPACITIVE: i64 = 256;
 
-pub const objectspecialproperty_detectable_inductive: i64 = 128;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE_INDUCTIVE: i64 = 128;
 
-pub const objectspecialproperty_detectable_infrared: i64 = 32;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE_INFRARED: i64 = 32;
 
-pub const objectspecialproperty_detectable_laser: i64 = 64;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE_LASER: i64 = 64;
 
-pub const objectspecialproperty_detectable_ultrasonic: i64 = 16;
+pub const OBJECTSPECIALPROPERTY_DETECTABLE_ULTRASONIC: i64 = 16;
 
-pub const objectspecialproperty_measurable: i64 = 2;
+pub const OBJECTSPECIALPROPERTY_MEASURABLE: i64 = 2;
 
-pub const objectspecialproperty_pathplanning_ignored: i64 = 2048;
+pub const OBJECTSPECIALPROPERTY_PATHPLANNING_IGNORED: i64 = 2048;
 
-pub const objectspecialproperty_renderable: i64 = 512;
+pub const OBJECTSPECIALPROPERTY_RENDERABLE: i64 = 512;
 
-pub const objfloatparam_abs_rot_velocity: i64 = 14;
+pub const OBJFLOATPARAM_ABS_ROT_VELOCITY: i64 = 14;
 
-pub const objfloatparam_abs_x_velocity: i64 = 11;
+pub const OBJFLOATPARAM_ABS_X_VELOCITY: i64 = 11;
 
-pub const objfloatparam_abs_y_velocity: i64 = 12;
+pub const OBJFLOATPARAM_ABS_Y_VELOCITY: i64 = 12;
 
-pub const objfloatparam_abs_z_velocity: i64 = 13;
+pub const OBJFLOATPARAM_ABS_Z_VELOCITY: i64 = 13;
 
-pub const objfloatparam_modelbbox_max_x: i64 = 24;
+pub const OBJFLOATPARAM_MODELBBOX_MAX_X: i64 = 24;
 
-pub const objfloatparam_modelbbox_max_y: i64 = 25;
+pub const OBJFLOATPARAM_MODELBBOX_MAX_Y: i64 = 25;
 
-pub const objfloatparam_modelbbox_max_z: i64 = 26;
+pub const OBJFLOATPARAM_MODELBBOX_MAX_Z: i64 = 26;
 
-pub const objfloatparam_modelbbox_min_x: i64 = 21;
+pub const OBJFLOATPARAM_MODELBBOX_MIN_X: i64 = 21;
 
-pub const objfloatparam_modelbbox_min_y: i64 = 22;
+pub const OBJFLOATPARAM_MODELBBOX_MIN_Y: i64 = 22;
 
-pub const objfloatparam_modelbbox_min_z: i64 = 23;
+pub const OBJFLOATPARAM_MODELBBOX_MIN_Z: i64 = 23;
 
-pub const objfloatparam_objbbox_max_x: i64 = 18;
+pub const OBJFLOATPARAM_OBJBBOX_MAX_X: i64 = 18;
 
-pub const objfloatparam_objbbox_max_y: i64 = 19;
+pub const OBJFLOATPARAM_OBJBBOX_MAX_Y: i64 = 19;
 
-pub const objfloatparam_objbbox_max_z: i64 = 20;
+pub const OBJFLOATPARAM_OBJBBOX_MAX_Z: i64 = 20;
 
-pub const objfloatparam_objbbox_min_x: i64 = 15;
+pub const OBJFLOATPARAM_OBJBBOX_MIN_X: i64 = 15;
 
-pub const objfloatparam_objbbox_min_y: i64 = 16;
+pub const OBJFLOATPARAM_OBJBBOX_MIN_Y: i64 = 16;
 
-pub const objfloatparam_objbbox_min_z: i64 = 17;
+pub const OBJFLOATPARAM_OBJBBOX_MIN_Z: i64 = 17;
 
-pub const objfloatparam_size_factor: i64 = 34;
+pub const OBJFLOATPARAM_SIZE_FACTOR: i64 = 34;
 
-pub const objfloatparam_transparency_offset: i64 = 28;
+pub const OBJFLOATPARAM_TRANSPARENCY_OFFSET: i64 = 28;
 
-pub const objintparam_child_role: i64 = 29;
+pub const OBJINTPARAM_CHILD_ROLE: i64 = 29;
 
-pub const objintparam_collection_self_collision_indicator: i64 = 27;
+pub const OBJINTPARAM_COLLECTION_SELF_COLLISION_INDICATOR: i64 = 27;
 
-pub const objintparam_illumination_handle: i64 = 32;
+pub const OBJINTPARAM_ILLUMINATION_HANDLE: i64 = 32;
 
-pub const objintparam_manipulation_permissions: i64 = 31;
+pub const OBJINTPARAM_MANIPULATION_PERMISSIONS: i64 = 31;
 
-pub const objintparam_parent_role: i64 = 30;
+pub const OBJINTPARAM_PARENT_ROLE: i64 = 30;
 
-pub const objintparam_unique_id: i64 = 37;
+pub const OBJINTPARAM_UNIQUE_ID: i64 = 37;
 
-pub const objintparam_visibility_layer: i64 = 10;
+pub const OBJINTPARAM_VISIBILITY_LAYER: i64 = 10;
 
-pub const objintparam_visible: i64 = 36;
+pub const OBJINTPARAM_VISIBLE: i64 = 36;
 
-pub const objstringparam_dna: i64 = 33;
+pub const OBJSTRINGPARAM_DNA: i64 = 33;
 
-pub const objstringparam_unique_id: i64 = 35;
+pub const OBJSTRINGPARAM_UNIQUE_ID: i64 = 35;
 
-pub const ode_body_angulardamping: i64 = 15005;
+pub const ODE_BODY_ANGULARDAMPING: i64 = 15005;
 
-pub const ode_body_friction: i64 = 15001;
+pub const ODE_BODY_FRICTION: i64 = 15001;
 
-pub const ode_body_lineardamping: i64 = 15004;
+pub const ODE_BODY_LINEARDAMPING: i64 = 15004;
 
-pub const ode_body_maxcontacts: i64 = 16001;
+pub const ODE_BODY_MAXCONTACTS: i64 = 16001;
 
-pub const ode_body_softcfm: i64 = 15003;
+pub const ODE_BODY_SOFTCFM: i64 = 15003;
 
-pub const ode_body_softerp: i64 = 15002;
+pub const ODE_BODY_SOFTERP: i64 = 15002;
 
-pub const ode_global_bitcoded: i64 = 10002;
+pub const ODE_GLOBAL_BITCODED: i64 = 10002;
 
-pub const ode_global_cfm: i64 = 9003;
+pub const ODE_GLOBAL_CFM: i64 = 9003;
 
-pub const ode_global_constraintsolvingiterations: i64 = 10001;
+pub const ODE_GLOBAL_CONSTRAINTSOLVINGITERATIONS: i64 = 10001;
 
-pub const ode_global_erp: i64 = 9004;
+pub const ODE_GLOBAL_ERP: i64 = 9004;
 
-pub const ode_global_fullinternalscaling: i64 = 11001;
+pub const ODE_GLOBAL_FULLINTERNALSCALING: i64 = 11001;
 
-pub const ode_global_internalscalingfactor: i64 = 9002;
+pub const ODE_GLOBAL_INTERNALSCALINGFACTOR: i64 = 9002;
 
-pub const ode_global_quickstep: i64 = 11002;
+pub const ODE_GLOBAL_QUICKSTEP: i64 = 11002;
 
-pub const ode_global_randomseed: i64 = 10003;
+pub const ODE_GLOBAL_RANDOMSEED: i64 = 10003;
 
-pub const ode_global_stepsize: i64 = 9001;
+pub const ODE_GLOBAL_STEPSIZE: i64 = 9001;
 
-pub const ode_joint_bounce: i64 = 12003;
+pub const ODE_JOINT_BOUNCE: i64 = 12003;
 
-pub const ode_joint_fudgefactor: i64 = 12004;
+pub const ODE_JOINT_FUDGEFACTOR: i64 = 12004;
 
-pub const ode_joint_normalcfm: i64 = 12005;
+pub const ODE_JOINT_NORMALCFM: i64 = 12005;
 
-pub const ode_joint_stopcfm: i64 = 12002;
+pub const ODE_JOINT_STOPCFM: i64 = 12002;
 
-pub const ode_joint_stoperp: i64 = 12001;
+pub const ODE_JOINT_STOPERP: i64 = 12001;
 
-pub const particle_cyclic: i64 = 8192;
+pub const PARTICLE_CYCLIC: i64 = 8192;
 
-pub const particle_emissioncolor: i64 = 16384;
+pub const PARTICLE_EMISSIONCOLOR: i64 = 16384;
 
-pub const particle_ignoresgravity: i64 = 256;
+pub const PARTICLE_IGNORESGRAVITY: i64 = 256;
 
-pub const particle_invisible: i64 = 512;
+pub const PARTICLE_INVISIBLE: i64 = 512;
 
-pub const particle_itemcolors: i64 = 4096;
+pub const PARTICLE_ITEMCOLORS: i64 = 4096;
 
-pub const particle_itemdensities: i64 = 2048;
+pub const PARTICLE_ITEMDENSITIES: i64 = 2048;
 
-pub const particle_itemsizes: i64 = 1024;
+pub const PARTICLE_ITEMSIZES: i64 = 1024;
 
-pub const particle_painttag: i64 = 65536;
+pub const PARTICLE_PAINTTAG: i64 = 65536;
 
-pub const particle_particlerespondable: i64 = 128;
+pub const PARTICLE_PARTICLERESPONDABLE: i64 = 128;
 
-pub const particle_points1: i64 = 0;
+pub const PARTICLE_POINTS1: i64 = 0;
 
-pub const particle_points2: i64 = 1;
+pub const PARTICLE_POINTS2: i64 = 1;
 
-pub const particle_points4: i64 = 2;
+pub const PARTICLE_POINTS4: i64 = 2;
 
-pub const particle_respondable1to4: i64 = 32;
+pub const PARTICLE_RESPONDABLE1TO4: i64 = 32;
 
-pub const particle_respondable5to8: i64 = 64;
+pub const PARTICLE_RESPONDABLE5TO8: i64 = 64;
 
-pub const particle_roughspheres: i64 = 3;
+pub const PARTICLE_ROUGHSPHERES: i64 = 3;
 
-pub const particle_spheres: i64 = 4;
+pub const PARTICLE_SPHERES: i64 = 4;
 
-pub const particle_water: i64 = 32768;
+pub const PARTICLE_WATER: i64 = 32768;
 
-pub const pathproperty_automatic_orientation: i64 = 8;
+pub const PATHPROPERTY_AUTOMATIC_ORIENTATION: i64 = 8;
 
-pub const pathproperty_closed_path: i64 = 4;
+pub const PATHPROPERTY_CLOSED_PATH: i64 = 4;
 
-pub const pathproperty_flat_path: i64 = 64;
+pub const PATHPROPERTY_FLAT_PATH: i64 = 64;
 
-pub const pathproperty_keep_x_up: i64 = 2048;
+pub const PATHPROPERTY_KEEP_X_UP: i64 = 2048;
 
-pub const pathproperty_show_line: i64 = 1;
+pub const PATHPROPERTY_SHOW_LINE: i64 = 1;
 
-pub const pathproperty_show_orientation: i64 = 2;
+pub const PATHPROPERTY_SHOW_ORIENTATION: i64 = 2;
 
-pub const pathproperty_show_position: i64 = 128;
+pub const PATHPROPERTY_SHOW_POSITION: i64 = 128;
 
-pub const physics_bullet: i64 = 0;
+pub const PHYSICS_BULLET: i64 = 0;
 
-pub const physics_mujoco: i64 = 4;
+pub const PHYSICS_MUJOCO: i64 = 4;
 
-pub const physics_newton: i64 = 3;
+pub const PHYSICS_NEWTON: i64 = 3;
 
-pub const physics_ode: i64 = 1;
+pub const PHYSICS_ODE: i64 = 1;
 
-pub const physics_vortex: i64 = 2;
+pub const PHYSICS_VORTEX: i64 = 2;
 
-pub const primitiveshape_capsule: i64 = 8;
+pub const PRIMITIVESHAPE_CAPSULE: i64 = 8;
 
-pub const primitiveshape_cone: i64 = 6;
+pub const PRIMITIVESHAPE_CONE: i64 = 6;
 
-pub const primitiveshape_cuboid: i64 = 3;
+pub const PRIMITIVESHAPE_CUBOID: i64 = 3;
 
-pub const primitiveshape_cylinder: i64 = 5;
+pub const PRIMITIVESHAPE_CYLINDER: i64 = 5;
 
-pub const primitiveshape_disc: i64 = 2;
+pub const PRIMITIVESHAPE_DISC: i64 = 2;
 
-pub const primitiveshape_heightfield: i64 = 7;
+pub const PRIMITIVESHAPE_HEIGHTFIELD: i64 = 7;
 
-pub const primitiveshape_none: i64 = 0;
+pub const PRIMITIVESHAPE_NONE: i64 = 0;
 
-pub const primitiveshape_plane: i64 = 1;
+pub const PRIMITIVESHAPE_PLANE: i64 = 1;
 
-pub const primitiveshape_spheroid: i64 = 4;
+pub const PRIMITIVESHAPE_SPHEROID: i64 = 4;
 
-pub const proximitysensor_cone_subtype: i64 = 33;
+pub const PROXIMITYSENSOR_CONE_SUBTYPE: i64 = 33;
 
-pub const proximitysensor_cylinder_subtype: i64 = 31;
+pub const PROXIMITYSENSOR_CYLINDER_SUBTYPE: i64 = 31;
 
-pub const proximitysensor_disc_subtype: i64 = 32;
+pub const PROXIMITYSENSOR_DISC_SUBTYPE: i64 = 32;
 
-pub const proximitysensor_pyramid_subtype: i64 = 30;
+pub const PROXIMITYSENSOR_PYRAMID_SUBTYPE: i64 = 30;
 
-pub const proximitysensor_ray_subtype: i64 = 34;
+pub const PROXIMITYSENSOR_RAY_SUBTYPE: i64 = 34;
 
-pub const proxintparam_entity_to_detect: i64 = 4002;
+pub const PROXINTPARAM_ENTITY_TO_DETECT: i64 = 4002;
 
-pub const proxintparam_ray_invisibility: i64 = 4000;
+pub const PROXINTPARAM_RAY_INVISIBILITY: i64 = 4000;
 
-pub const proxintparam_volume_type: i64 = 4001;
+pub const PROXINTPARAM_VOLUME_TYPE: i64 = 4001;
 
-pub const pure_primitive_cone: i64 = 6;
+pub const PURE_PRIMITIVE_CONE: i64 = 6;
 
-pub const pure_primitive_cuboid: i64 = 3;
+pub const PURE_PRIMITIVE_CUBOID: i64 = 3;
 
-pub const pure_primitive_cylinder: i64 = 5;
+pub const PURE_PRIMITIVE_CYLINDER: i64 = 5;
 
-pub const pure_primitive_disc: i64 = 2;
+pub const PURE_PRIMITIVE_DISC: i64 = 2;
 
-pub const pure_primitive_heightfield: i64 = 7;
+pub const PURE_PRIMITIVE_HEIGHTFIELD: i64 = 7;
 
-pub const pure_primitive_none: i64 = 0;
+pub const PURE_PRIMITIVE_NONE: i64 = 0;
 
-pub const pure_primitive_plane: i64 = 1;
+pub const PURE_PRIMITIVE_PLANE: i64 = 1;
 
-pub const pure_primitive_spheroid: i64 = 4;
+pub const PURE_PRIMITIVE_SPHEROID: i64 = 4;
 
-pub const rml_disable_extremum_motion_states_calc: i64 = 8;
+pub const RML_DISABLE_EXTREMUM_MOTION_STATES_CALC: i64 = 8;
 
-pub const rml_keep_current_vel_if_fallback_strategy: i64 = 16;
+pub const RML_KEEP_CURRENT_VEL_IF_FALLBACK_STRATEGY: i64 = 16;
 
-pub const rml_keep_target_vel: i64 = 0;
+pub const RML_KEEP_TARGET_VEL: i64 = 0;
 
-pub const rml_no_sync: i64 = 3;
+pub const RML_NO_SYNC: i64 = 3;
 
-pub const rml_only_phase_sync: i64 = 2;
+pub const RML_ONLY_PHASE_SYNC: i64 = 2;
 
-pub const rml_only_time_sync: i64 = 1;
+pub const RML_ONLY_TIME_SYNC: i64 = 1;
 
-pub const rml_phase_sync_if_possible: i64 = 0;
+pub const RML_PHASE_SYNC_IF_POSSIBLE: i64 = 0;
 
-pub const rml_recompute_trajectory: i64 = 4;
+pub const RML_RECOMPUTE_TRAJECTORY: i64 = 4;
 
-pub const ruckig_minaccel: i64 = 512;
+pub const RUCKIG_MINACCEL: i64 = 512;
 
-pub const ruckig_minvel: i64 = 256;
+pub const RUCKIG_MINVEL: i64 = 256;
 
-pub const ruckig_nosync: i64 = 3;
+pub const RUCKIG_NOSYNC: i64 = 3;
 
-pub const ruckig_phasesync: i64 = 0;
+pub const RUCKIG_PHASESYNC: i64 = 0;
 
-pub const ruckig_timesync: i64 = 1;
+pub const RUCKIG_TIMESYNC: i64 = 1;
 
-pub const script_call_error: i64 = 16;
+pub const SCRIPT_CALL_ERROR: i64 = 16;
 
-pub const script_lua_error: i64 = 8;
+pub const SCRIPT_LUA_ERROR: i64 = 8;
 
-pub const script_main_not_called: i64 = 2;
+pub const SCRIPT_MAIN_NOT_CALLED: i64 = 2;
 
-pub const script_main_script_nonexistent: i64 = 1;
+pub const SCRIPT_MAIN_SCRIPT_NONEXISTENT: i64 = 1;
 
-pub const script_no_error: i64 = 0;
+pub const SCRIPT_NO_ERROR: i64 = 0;
 
-pub const script_reentrance_error: i64 = 4;
+pub const SCRIPT_REENTRANCE_ERROR: i64 = 4;
 
-pub const scriptattribute_debuglevel: i64 = 6;
+pub const SCRIPTATTRIBUTE_DEBUGLEVEL: i64 = 6;
 
-pub const scriptattribute_enabled: i64 = 4;
+pub const SCRIPTATTRIBUTE_ENABLED: i64 = 4;
 
-pub const scriptattribute_executioncount: i64 = 2;
+pub const SCRIPTATTRIBUTE_EXECUTIONCOUNT: i64 = 2;
 
-pub const scriptattribute_executionorder: i64 = 1;
+pub const SCRIPTATTRIBUTE_EXECUTIONORDER: i64 = 1;
 
-pub const scriptattribute_scripthandle: i64 = 8;
+pub const SCRIPTATTRIBUTE_SCRIPTHANDLE: i64 = 8;
 
-pub const scriptattribute_scripttype: i64 = 7;
+pub const SCRIPTATTRIBUTE_SCRIPTTYPE: i64 = 7;
 
-pub const scriptdebug_allcalls: i64 = 3;
+pub const SCRIPTDEBUG_ALLCALLS: i64 = 3;
 
-pub const scriptdebug_callsandvars: i64 = 5;
+pub const SCRIPTDEBUG_CALLSANDVARS: i64 = 5;
 
-pub const scriptdebug_none: i64 = 0;
+pub const SCRIPTDEBUG_NONE: i64 = 0;
 
-pub const scriptdebug_syscalls: i64 = 1;
+pub const SCRIPTDEBUG_SYSCALLS: i64 = 1;
 
-pub const scriptdebug_vars: i64 = 4;
+pub const SCRIPTDEBUG_VARS: i64 = 4;
 
-pub const scriptdebug_vars_interval: i64 = 2;
+pub const SCRIPTDEBUG_VARS_INTERVAL: i64 = 2;
 
-pub const scriptexecorder_first: i64 = 0;
+pub const SCRIPTEXECORDER_FIRST: i64 = 0;
 
-pub const scriptexecorder_last: i64 = 2;
+pub const SCRIPTEXECORDER_LAST: i64 = 2;
 
-pub const scriptexecorder_normal: i64 = 1;
+pub const SCRIPTEXECORDER_NORMAL: i64 = 1;
 
-pub const scriptintparam_enabled: i64 = 4;
+pub const SCRIPTINTPARAM_ENABLED: i64 = 4;
 
-pub const scriptintparam_execcount: i64 = 1;
+pub const SCRIPTINTPARAM_EXECCOUNT: i64 = 1;
 
-pub const scriptintparam_execorder: i64 = 0;
+pub const SCRIPTINTPARAM_EXECORDER: i64 = 0;
 
-pub const scriptintparam_handle: i64 = 3;
+pub const SCRIPTINTPARAM_HANDLE: i64 = 3;
 
-pub const scriptintparam_objecthandle: i64 = 5;
+pub const SCRIPTINTPARAM_OBJECTHANDLE: i64 = 5;
 
-pub const scriptintparam_type: i64 = 2;
+pub const SCRIPTINTPARAM_TYPE: i64 = 2;
 
-pub const scriptstringparam_description: i64 = 0;
+pub const SCRIPTSTRINGPARAM_DESCRIPTION: i64 = 0;
 
-pub const scriptstringparam_name: i64 = 1;
+pub const SCRIPTSTRINGPARAM_NAME: i64 = 1;
 
-pub const scriptstringparam_text: i64 = 2;
+pub const SCRIPTSTRINGPARAM_TEXT: i64 = 2;
 
-pub const scriptthreadresume_actuation_first: i64 = 1;
+pub const SCRIPTTHREADRESUME_ACTUATION_FIRST: i64 = 1;
 
-pub const scriptthreadresume_actuation_last: i64 = 2;
+pub const SCRIPTTHREADRESUME_ACTUATION_LAST: i64 = 2;
 
-pub const scriptthreadresume_allnotyetresumed: i64 = -1;
+pub const SCRIPTTHREADRESUME_ALLNOTYETRESUMED: i64 = -1;
 
-pub const scriptthreadresume_custom: i64 = 5;
+pub const SCRIPTTHREADRESUME_CUSTOM: i64 = 5;
 
-pub const scriptthreadresume_default: i64 = 0;
+pub const SCRIPTTHREADRESUME_DEFAULT: i64 = 0;
 
-pub const scriptthreadresume_sensing_first: i64 = 3;
+pub const SCRIPTTHREADRESUME_SENSING_FIRST: i64 = 3;
 
-pub const scriptthreadresume_sensing_last: i64 = 4;
+pub const SCRIPTTHREADRESUME_SENSING_LAST: i64 = 4;
 
-pub const scripttype_addonfunction: i64 = 3;
+pub const SCRIPTTYPE_ADDONFUNCTION: i64 = 3;
 
-pub const scripttype_addonscript: i64 = 2;
+pub const SCRIPTTYPE_ADDONSCRIPT: i64 = 2;
 
-pub const scripttype_childscript: i64 = 1;
+pub const SCRIPTTYPE_CHILDSCRIPT: i64 = 1;
 
-pub const scripttype_customizationscript: i64 = 6;
+pub const SCRIPTTYPE_CUSTOMIZATIONSCRIPT: i64 = 6;
 
-pub const scripttype_mainscript: i64 = 0;
+pub const SCRIPTTYPE_MAINSCRIPT: i64 = 0;
 
-pub const scripttype_sandboxscript: i64 = 8;
+pub const SCRIPTTYPE_SANDBOXSCRIPT: i64 = 8;
 
-pub const scripttype_threaded: i64 = 240;
+pub const SCRIPTTYPE_THREADED: i64 = 240;
 
-pub const shape_multishape_subtype: i64 = 21;
+pub const SHAPE_MULTISHAPE_SUBTYPE: i64 = 21;
 
-pub const shape_simpleshape_subtype: i64 = 20;
+pub const SHAPE_SIMPLESHAPE_SUBTYPE: i64 = 20;
 
-pub const shapefloatparam_edge_angle: i64 = 3026;
+pub const SHAPEFLOATPARAM_EDGE_ANGLE: i64 = 3026;
 
-pub const shapefloatparam_init_ang_velocity_x: i64 = 3020;
+pub const SHAPEFLOATPARAM_INIT_ANG_VELOCITY_X: i64 = 3020;
 
-pub const shapefloatparam_init_ang_velocity_y: i64 = 3021;
+pub const SHAPEFLOATPARAM_INIT_ANG_VELOCITY_Y: i64 = 3021;
 
-pub const shapefloatparam_init_ang_velocity_z: i64 = 3022;
+pub const SHAPEFLOATPARAM_INIT_ANG_VELOCITY_Z: i64 = 3022;
 
-pub const shapefloatparam_init_velocity_a: i64 = 3020;
+pub const SHAPEFLOATPARAM_INIT_VELOCITY_A: i64 = 3020;
 
-pub const shapefloatparam_init_velocity_b: i64 = 3021;
+pub const SHAPEFLOATPARAM_INIT_VELOCITY_B: i64 = 3021;
 
-pub const shapefloatparam_init_velocity_g: i64 = 3022;
+pub const SHAPEFLOATPARAM_INIT_VELOCITY_G: i64 = 3022;
 
-pub const shapefloatparam_init_velocity_x: i64 = 3000;
+pub const SHAPEFLOATPARAM_INIT_VELOCITY_X: i64 = 3000;
 
-pub const shapefloatparam_init_velocity_y: i64 = 3001;
+pub const SHAPEFLOATPARAM_INIT_VELOCITY_Y: i64 = 3001;
 
-pub const shapefloatparam_init_velocity_z: i64 = 3002;
+pub const SHAPEFLOATPARAM_INIT_VELOCITY_Z: i64 = 3002;
 
-pub const shapefloatparam_mass: i64 = 3005;
+pub const SHAPEFLOATPARAM_MASS: i64 = 3005;
 
-pub const shapefloatparam_shading_angle: i64 = 3025;
+pub const SHAPEFLOATPARAM_SHADING_ANGLE: i64 = 3025;
 
-pub const shapefloatparam_texture_a: i64 = 3009;
+pub const SHAPEFLOATPARAM_TEXTURE_A: i64 = 3009;
 
-pub const shapefloatparam_texture_b: i64 = 3010;
+pub const SHAPEFLOATPARAM_TEXTURE_B: i64 = 3010;
 
-pub const shapefloatparam_texture_g: i64 = 3011;
+pub const SHAPEFLOATPARAM_TEXTURE_G: i64 = 3011;
 
-pub const shapefloatparam_texture_scaling_x: i64 = 3012;
+pub const SHAPEFLOATPARAM_TEXTURE_SCALING_X: i64 = 3012;
 
-pub const shapefloatparam_texture_scaling_y: i64 = 3013;
+pub const SHAPEFLOATPARAM_TEXTURE_SCALING_Y: i64 = 3013;
 
-pub const shapefloatparam_texture_x: i64 = 3006;
+pub const SHAPEFLOATPARAM_TEXTURE_X: i64 = 3006;
 
-pub const shapefloatparam_texture_y: i64 = 3007;
+pub const SHAPEFLOATPARAM_TEXTURE_Y: i64 = 3007;
 
-pub const shapefloatparam_texture_z: i64 = 3008;
+pub const SHAPEFLOATPARAM_TEXTURE_Z: i64 = 3008;
 
-pub const shapeintparam_component_cnt: i64 = 3028;
+pub const SHAPEINTPARAM_COMPONENT_CNT: i64 = 3028;
 
-pub const shapeintparam_compound: i64 = 3016;
+pub const SHAPEINTPARAM_COMPOUND: i64 = 3016;
 
-pub const shapeintparam_convex: i64 = 3017;
+pub const SHAPEINTPARAM_CONVEX: i64 = 3017;
 
-pub const shapeintparam_convex_check: i64 = 3018;
+pub const SHAPEINTPARAM_CONVEX_CHECK: i64 = 3018;
 
-pub const shapeintparam_culling: i64 = 3014;
+pub const SHAPEINTPARAM_CULLING: i64 = 3014;
 
-pub const shapeintparam_edge_borders_hidden: i64 = 3027;
+pub const SHAPEINTPARAM_EDGE_BORDERS_HIDDEN: i64 = 3027;
 
-pub const shapeintparam_edge_visibility: i64 = 3024;
+pub const SHAPEINTPARAM_EDGE_VISIBILITY: i64 = 3024;
 
-pub const shapeintparam_respondable: i64 = 3004;
+pub const SHAPEINTPARAM_RESPONDABLE: i64 = 3004;
 
-pub const shapeintparam_respondable_mask: i64 = 3019;
+pub const SHAPEINTPARAM_RESPONDABLE_MASK: i64 = 3019;
 
-pub const shapeintparam_sleepmodestart: i64 = 3029;
+pub const SHAPEINTPARAM_SLEEPMODESTART: i64 = 3029;
 
-pub const shapeintparam_static: i64 = 3003;
+pub const SHAPEINTPARAM_STATIC: i64 = 3003;
 
-pub const shapeintparam_wireframe: i64 = 3015;
+pub const SHAPEINTPARAM_WIREFRAME: i64 = 3015;
 
-pub const shapestringparam_color_name: i64 = 3023;
+pub const SHAPESTRINGPARAM_COLOR_NAME: i64 = 3023;
 
-pub const simulation_advancing: i64 = 16;
+pub const SIMULATION_ADVANCING: i64 = 16;
 
-pub const simulation_advancing_abouttostop: i64 = 21;
+pub const SIMULATION_ADVANCING_ABOUTTOSTOP: i64 = 21;
 
-pub const simulation_advancing_firstafterpause: i64 = 20;
+pub const SIMULATION_ADVANCING_FIRSTAFTERPAUSE: i64 = 20;
 
-pub const simulation_advancing_firstafterstop: i64 = 16;
+pub const SIMULATION_ADVANCING_FIRSTAFTERSTOP: i64 = 16;
 
-pub const simulation_advancing_lastbeforepause: i64 = 19;
+pub const SIMULATION_ADVANCING_LASTBEFOREPAUSE: i64 = 19;
 
-pub const simulation_advancing_lastbeforestop: i64 = 22;
+pub const SIMULATION_ADVANCING_LASTBEFORESTOP: i64 = 22;
 
-pub const simulation_advancing_running: i64 = 17;
+pub const SIMULATION_ADVANCING_RUNNING: i64 = 17;
 
-pub const simulation_paused: i64 = 8;
+pub const SIMULATION_PAUSED: i64 = 8;
 
-pub const simulation_stopped: i64 = 0;
+pub const SIMULATION_STOPPED: i64 = 0;
 
-pub const stream_transf_cumulative: i64 = 3;
+pub const STREAM_TRANSF_CUMULATIVE: i64 = 3;
 
-pub const stream_transf_derivative: i64 = 1;
+pub const STREAM_TRANSF_DERIVATIVE: i64 = 1;
 
-pub const stream_transf_integral: i64 = 2;
+pub const STREAM_TRANSF_INTEGRAL: i64 = 2;
 
-pub const stream_transf_raw: i64 = 0;
+pub const STREAM_TRANSF_RAW: i64 = 0;
 
-pub const stringparam_additionalpythonpath: i64 = 135;
+pub const STRINGPARAM_ADDITIONALPYTHONPATH: i64 = 135;
 
-pub const stringparam_addonpath: i64 = 131;
+pub const STRINGPARAM_ADDONPATH: i64 = 131;
 
-pub const stringparam_app_arg1: i64 = 2;
+pub const STRINGPARAM_APP_ARG1: i64 = 2;
 
-pub const stringparam_app_arg2: i64 = 3;
+pub const STRINGPARAM_APP_ARG2: i64 = 3;
 
-pub const stringparam_app_arg3: i64 = 4;
+pub const STRINGPARAM_APP_ARG3: i64 = 4;
 
-pub const stringparam_app_arg4: i64 = 5;
+pub const STRINGPARAM_APP_ARG4: i64 = 5;
 
-pub const stringparam_app_arg5: i64 = 6;
+pub const STRINGPARAM_APP_ARG5: i64 = 6;
 
-pub const stringparam_app_arg6: i64 = 7;
+pub const STRINGPARAM_APP_ARG6: i64 = 7;
 
-pub const stringparam_app_arg7: i64 = 8;
+pub const STRINGPARAM_APP_ARG7: i64 = 8;
 
-pub const stringparam_app_arg8: i64 = 9;
+pub const STRINGPARAM_APP_ARG8: i64 = 9;
 
-pub const stringparam_app_arg9: i64 = 10;
+pub const STRINGPARAM_APP_ARG9: i64 = 10;
 
-pub const stringparam_application_path: i64 = 0;
+pub const STRINGPARAM_APPLICATION_PATH: i64 = 0;
 
-pub const stringparam_datadir: i64 = 129;
+pub const STRINGPARAM_DATADIR: i64 = 129;
 
-pub const stringparam_defaultpython: i64 = 134;
+pub const STRINGPARAM_DEFAULTPYTHON: i64 = 134;
 
-pub const stringparam_dlgverbosity: i64 = 123;
+pub const STRINGPARAM_DLGVERBOSITY: i64 = 123;
 
-pub const stringparam_importexportdir: i64 = 130;
+pub const STRINGPARAM_IMPORTEXPORTDIR: i64 = 130;
 
-pub const stringparam_logfilter: i64 = 124;
+pub const STRINGPARAM_LOGFILTER: i64 = 124;
 
-pub const stringparam_luadir: i64 = 136;
+pub const STRINGPARAM_LUADIR: i64 = 136;
 
-pub const stringparam_machine_id: i64 = 119;
+pub const STRINGPARAM_MACHINE_ID: i64 = 119;
 
-pub const stringparam_machine_id_legacy: i64 = 120;
+pub const STRINGPARAM_MACHINE_ID_LEGACY: i64 = 120;
 
-pub const stringparam_modeldefaultdir: i64 = 133;
+pub const STRINGPARAM_MODELDEFAULTDIR: i64 = 133;
 
-pub const stringparam_pythondir: i64 = 137;
+pub const STRINGPARAM_PYTHONDIR: i64 = 137;
 
-pub const stringparam_remoteapi_temp_file_dir: i64 = 16;
+pub const STRINGPARAM_REMOTEAPI_TEMP_FILE_DIR: i64 = 16;
 
-pub const stringparam_scene_name: i64 = 15;
+pub const STRINGPARAM_SCENE_NAME: i64 = 15;
 
-pub const stringparam_scene_path: i64 = 14;
+pub const STRINGPARAM_SCENE_PATH: i64 = 14;
 
-pub const stringparam_scene_path_and_name: i64 = 13;
+pub const STRINGPARAM_SCENE_PATH_AND_NAME: i64 = 13;
 
-pub const stringparam_scene_unique_id: i64 = 118;
+pub const STRINGPARAM_SCENE_UNIQUE_ID: i64 = 118;
 
-pub const stringparam_scenedefaultdir: i64 = 132;
+pub const STRINGPARAM_SCENEDEFAULTDIR: i64 = 132;
 
-pub const stringparam_statusbarverbosity: i64 = 122;
+pub const STRINGPARAM_STATUSBARVERBOSITY: i64 = 122;
 
-pub const stringparam_tempdir: i64 = 127;
+pub const STRINGPARAM_TEMPDIR: i64 = 127;
 
-pub const stringparam_tempscenedir: i64 = 128;
+pub const STRINGPARAM_TEMPSCENEDIR: i64 = 128;
 
-pub const stringparam_uniqueid: i64 = 126;
+pub const STRINGPARAM_UNIQUEID: i64 = 126;
 
-pub const stringparam_verbosity: i64 = 121;
+pub const STRINGPARAM_VERBOSITY: i64 = 121;
 
-pub const stringparam_video_filename: i64 = 1;
+pub const STRINGPARAM_VIDEO_FILENAME: i64 = 1;
 
-pub const syscb_actuation: i64 = 6;
+pub const SYSCB_ACTUATION: i64 = 6;
 
-pub const syscb_aftercopy: i64 = 14;
+pub const SYSCB_AFTERCOPY: i64 = 14;
 
-pub const syscb_aftercreate: i64 = 26;
+pub const SYSCB_AFTERCREATE: i64 = 26;
 
-pub const syscb_afterdelete: i64 = 25;
+pub const SYSCB_AFTERDELETE: i64 = 25;
 
-pub const syscb_afterinstanceswitch: i64 = 12;
+pub const SYSCB_AFTERINSTANCESWITCH: i64 = 12;
 
-pub const syscb_aftersimulation: i64 = 5;
+pub const SYSCB_AFTERSIMULATION: i64 = 5;
 
-pub const syscb_aos_resume: i64 = 17;
+pub const SYSCB_AOS_RESUME: i64 = 17;
 
-pub const syscb_aos_run: i64 = 15;
+pub const SYSCB_AOS_RUN: i64 = 15;
 
-pub const syscb_aos_suspend: i64 = 16;
+pub const SYSCB_AOS_SUSPEND: i64 = 16;
 
-pub const syscb_beforecopy: i64 = 13;
+pub const SYSCB_BEFORECOPY: i64 = 13;
 
-pub const syscb_beforedelete: i64 = 24;
+pub const SYSCB_BEFOREDELETE: i64 = 24;
 
-pub const syscb_beforeinstanceswitch: i64 = 11;
+pub const SYSCB_BEFOREINSTANCESWITCH: i64 = 11;
 
-pub const syscb_beforemainscript: i64 = 29;
+pub const SYSCB_BEFOREMAINSCRIPT: i64 = 29;
 
-pub const syscb_beforesimulation: i64 = 4;
+pub const SYSCB_BEFORESIMULATION: i64 = 4;
 
-pub const syscb_cleanup: i64 = 1;
+pub const SYSCB_CLEANUP: i64 = 1;
 
-pub const syscb_contactcallback: i64 = 19;
+pub const SYSCB_CONTACTCALLBACK: i64 = 19;
 
-pub const syscb_customcallback1: i64 = 20;
+pub const SYSCB_CUSTOMCALLBACK1: i64 = 20;
 
-pub const syscb_customcallback2: i64 = 21;
+pub const SYSCB_CUSTOMCALLBACK2: i64 = 21;
 
-pub const syscb_customcallback3: i64 = 22;
+pub const SYSCB_CUSTOMCALLBACK3: i64 = 22;
 
-pub const syscb_customcallback4: i64 = 23;
+pub const SYSCB_CUSTOMCALLBACK4: i64 = 23;
 
-pub const syscb_dyncallback: i64 = 28;
+pub const SYSCB_DYNCALLBACK: i64 = 28;
 
-pub const syscb_init: i64 = 2;
+pub const SYSCB_INIT: i64 = 2;
 
-pub const syscb_jointcallback: i64 = 18;
+pub const SYSCB_JOINTCALLBACK: i64 = 18;
 
-pub const syscb_moduleentry: i64 = 33;
+pub const SYSCB_MODULEENTRY: i64 = 33;
 
-pub const syscb_nonsimulation: i64 = 3;
+pub const SYSCB_NONSIMULATION: i64 = 3;
 
-pub const syscb_regular: i64 = 6;
+pub const SYSCB_REGULAR: i64 = 6;
 
-pub const syscb_resume: i64 = 10;
+pub const SYSCB_RESUME: i64 = 10;
 
-pub const syscb_sensing: i64 = 7;
+pub const SYSCB_SENSING: i64 = 7;
 
-pub const syscb_suspend: i64 = 9;
+pub const SYSCB_SUSPEND: i64 = 9;
 
-pub const syscb_suspended: i64 = 8;
+pub const SYSCB_SUSPENDED: i64 = 8;
 
-pub const syscb_trigger: i64 = 31;
+pub const SYSCB_TRIGGER: i64 = 31;
 
-pub const syscb_userconfig: i64 = 32;
+pub const SYSCB_USERCONFIG: i64 = 32;
 
-pub const syscb_vision: i64 = 30;
+pub const SYSCB_VISION: i64 = 30;
 
-pub const texturemap_cube: i64 = 3;
+pub const TEXTUREMAP_CUBE: i64 = 3;
 
-pub const texturemap_cylinder: i64 = 1;
+pub const TEXTUREMAP_CYLINDER: i64 = 1;
 
-pub const texturemap_plane: i64 = 0;
+pub const TEXTUREMAP_PLANE: i64 = 0;
 
-pub const texturemap_sphere: i64 = 2;
+pub const TEXTUREMAP_SPHERE: i64 = 2;
 
-pub const verbosity_debug: i64 = 600;
+pub const VERBOSITY_DEBUG: i64 = 600;
 
-pub const verbosity_default: i64 = 400;
+pub const VERBOSITY_DEFAULT: i64 = 400;
 
-pub const verbosity_errors: i64 = 200;
+pub const VERBOSITY_ERRORS: i64 = 200;
 
-pub const verbosity_infos: i64 = 500;
+pub const VERBOSITY_INFOS: i64 = 500;
 
-pub const verbosity_loadinfos: i64 = 400;
+pub const VERBOSITY_LOADINFOS: i64 = 400;
 
-pub const verbosity_msgs: i64 = 450;
+pub const VERBOSITY_MSGS: i64 = 450;
 
-pub const verbosity_none: i64 = 100;
+pub const VERBOSITY_NONE: i64 = 100;
 
-pub const verbosity_questions: i64 = 410;
+pub const VERBOSITY_QUESTIONS: i64 = 410;
 
-pub const verbosity_scripterrors: i64 = 420;
+pub const VERBOSITY_SCRIPTERRORS: i64 = 420;
 
-pub const verbosity_scriptinfos: i64 = 450;
+pub const VERBOSITY_SCRIPTINFOS: i64 = 450;
 
-pub const verbosity_scriptwarnings: i64 = 430;
+pub const VERBOSITY_SCRIPTWARNINGS: i64 = 430;
 
-pub const verbosity_trace: i64 = 700;
+pub const VERBOSITY_TRACE: i64 = 700;
 
-pub const verbosity_traceall: i64 = 900;
+pub const VERBOSITY_TRACEALL: i64 = 900;
 
-pub const verbosity_tracelua: i64 = 800;
+pub const VERBOSITY_TRACELUA: i64 = 800;
 
-pub const verbosity_undecorated: i64 = 61440;
+pub const VERBOSITY_UNDECORATED: i64 = 61440;
 
-pub const verbosity_useglobal: i64 = -1;
+pub const VERBOSITY_USEGLOBAL: i64 = -1;
 
-pub const verbosity_warnings: i64 = 300;
+pub const VERBOSITY_WARNINGS: i64 = 300;
 
-pub const visionfloatparam_far_clipping: i64 = 1001;
+pub const VISIONFLOATPARAM_FAR_CLIPPING: i64 = 1001;
 
-pub const visionfloatparam_near_clipping: i64 = 1000;
+pub const VISIONFLOATPARAM_NEAR_CLIPPING: i64 = 1000;
 
-pub const visionfloatparam_ortho_size: i64 = 1005;
+pub const VISIONFLOATPARAM_ORTHO_SIZE: i64 = 1005;
 
-pub const visionfloatparam_perspective_angle: i64 = 1004;
+pub const VISIONFLOATPARAM_PERSPECTIVE_ANGLE: i64 = 1004;
 
-pub const visionfloatparam_pov_aperture: i64 = 1015;
+pub const VISIONFLOATPARAM_POV_APERTURE: i64 = 1015;
 
-pub const visionfloatparam_pov_blur_distance: i64 = 1014;
+pub const VISIONFLOATPARAM_POV_BLUR_DISTANCE: i64 = 1014;
 
-pub const visionintparam_disabled_light_components: i64 = 1006;
+pub const VISIONINTPARAM_DISABLED_LIGHT_COMPONENTS: i64 = 1006;
 
-pub const visionintparam_entity_to_render: i64 = 1008;
+pub const VISIONINTPARAM_ENTITY_TO_RENDER: i64 = 1008;
 
-pub const visionintparam_perspective_operation: i64 = 1018;
+pub const VISIONINTPARAM_PERSPECTIVE_OPERATION: i64 = 1018;
 
-pub const visionintparam_pov_blur_sampled: i64 = 1016;
+pub const VISIONINTPARAM_POV_BLUR_SAMPLED: i64 = 1016;
 
-pub const visionintparam_pov_focal_blur: i64 = 1013;
+pub const VISIONINTPARAM_POV_FOCAL_BLUR: i64 = 1013;
 
-pub const visionintparam_render_mode: i64 = 1017;
+pub const VISIONINTPARAM_RENDER_MODE: i64 = 1017;
 
-pub const visionintparam_rendering_attributes: i64 = 1007;
+pub const VISIONINTPARAM_RENDERING_ATTRIBUTES: i64 = 1007;
 
-pub const visionintparam_resolution_x: i64 = 1002;
+pub const VISIONINTPARAM_RESOLUTION_X: i64 = 1002;
 
-pub const visionintparam_resolution_y: i64 = 1003;
+pub const VISIONINTPARAM_RESOLUTION_Y: i64 = 1003;
 
-pub const visionintparam_windowed_pos_x: i64 = 1011;
+pub const VISIONINTPARAM_WINDOWED_POS_X: i64 = 1011;
 
-pub const visionintparam_windowed_pos_y: i64 = 1012;
+pub const VISIONINTPARAM_WINDOWED_POS_Y: i64 = 1012;
 
-pub const visionintparam_windowed_size_x: i64 = 1009;
+pub const VISIONINTPARAM_WINDOWED_SIZE_X: i64 = 1009;
 
-pub const visionintparam_windowed_size_y: i64 = 1010;
+pub const VISIONINTPARAM_WINDOWED_SIZE_Y: i64 = 1010;
 
-pub const volume_cone: i64 = 3;
+pub const VOLUME_CONE: i64 = 3;
 
-pub const volume_cylinder: i64 = 1;
+pub const VOLUME_CYLINDER: i64 = 1;
 
-pub const volume_disc: i64 = 2;
+pub const VOLUME_DISC: i64 = 2;
 
-pub const volume_pyramid: i64 = 0;
+pub const VOLUME_PYRAMID: i64 = 0;
 
-pub const volume_randomizedray: i64 = 5;
+pub const VOLUME_RANDOMIZEDRAY: i64 = 5;
 
-pub const volume_ray: i64 = 4;
+pub const VOLUME_RAY: i64 = 4;
 
-pub const vortex_body_adhesiveforce: i64 = 24015;
+pub const VORTEX_BODY_ADHESIVEFORCE: i64 = 24015;
 
-pub const vortex_body_angularvelocitydamping: i64 = 24017;
+pub const VORTEX_BODY_ANGULARVELOCITYDAMPING: i64 = 24017;
 
-pub const vortex_body_autoangulardamping: i64 = 26009;
+pub const VORTEX_BODY_AUTOANGULARDAMPING: i64 = 26009;
 
-pub const vortex_body_autoangulardampingtensionratio: i64 = 24033;
+pub const VORTEX_BODY_AUTOANGULARDAMPINGTENSIONRATIO: i64 = 24033;
 
-pub const vortex_body_autosleepangularaccelthreshold: i64 = 24031;
+pub const VORTEX_BODY_AUTOSLEEPANGULARACCELTHRESHOLD: i64 = 24031;
 
-pub const vortex_body_autosleepangularspeedthreshold: i64 = 24030;
+pub const VORTEX_BODY_AUTOSLEEPANGULARSPEEDTHRESHOLD: i64 = 24030;
 
-pub const vortex_body_autosleeplinearaccelthreshold: i64 = 24029;
+pub const VORTEX_BODY_AUTOSLEEPLINEARACCELTHRESHOLD: i64 = 24029;
 
-pub const vortex_body_autosleeplinearspeedthreshold: i64 = 24028;
+pub const VORTEX_BODY_AUTOSLEEPLINEARSPEEDTHRESHOLD: i64 = 24028;
 
-pub const vortex_body_autosleepsteplivethreshold: i64 = 25007;
+pub const VORTEX_BODY_AUTOSLEEPSTEPLIVETHRESHOLD: i64 = 25007;
 
-pub const vortex_body_autoslip: i64 = 26005;
+pub const VORTEX_BODY_AUTOSLIP: i64 = 26005;
 
-pub const vortex_body_bitcoded: i64 = 25006;
+pub const VORTEX_BODY_BITCODED: i64 = 25006;
 
-pub const vortex_body_compliance: i64 = 24011;
+pub const VORTEX_BODY_COMPLIANCE: i64 = 24011;
 
-pub const vortex_body_convexshapesasrandom: i64 = 26002;
+pub const VORTEX_BODY_CONVEXSHAPESASRANDOM: i64 = 26002;
 
-pub const vortex_body_damping: i64 = 24012;
+pub const VORTEX_BODY_DAMPING: i64 = 24012;
 
-pub const vortex_body_fastmoving: i64 = 26004;
+pub const VORTEX_BODY_FASTMOVING: i64 = 26004;
 
-pub const vortex_body_linearvelocitydamping: i64 = 24016;
+pub const VORTEX_BODY_LINEARVELOCITYDAMPING: i64 = 24016;
 
-pub const vortex_body_materialuniqueid: i64 = 25008;
+pub const VORTEX_BODY_MATERIALUNIQUEID: i64 = 25008;
 
-pub const vortex_body_normalangularaxisfriction: i64 = 24005;
+pub const VORTEX_BODY_NORMALANGULARAXISFRICTION: i64 = 24005;
 
-pub const vortex_body_normalangularaxisslide: i64 = 24022;
+pub const VORTEX_BODY_NORMALANGULARAXISSLIDE: i64 = 24022;
 
-pub const vortex_body_normalangularaxisslip: i64 = 24027;
+pub const VORTEX_BODY_NORMALANGULARAXISSLIP: i64 = 24027;
 
-pub const vortex_body_normalangularaxisstaticfrictionscale: i64 = 24010;
+pub const VORTEX_BODY_NORMALANGULARAXISSTATICFRICTIONSCALE: i64 = 24010;
 
-pub const vortex_body_normalmangulararaxisfrictionmodel: i64 = 25005;
+pub const VORTEX_BODY_NORMALMANGULARARAXISFRICTIONMODEL: i64 = 25005;
 
-pub const vortex_body_normangaxissameasprimangaxis: i64 = 26008;
+pub const VORTEX_BODY_NORMANGAXISSAMEASPRIMANGAXIS: i64 = 26008;
 
-pub const vortex_body_primangulararaxisfrictionmodel: i64 = 25003;
+pub const VORTEX_BODY_PRIMANGULARARAXISFRICTIONMODEL: i64 = 25003;
 
-pub const vortex_body_primangularaxisfriction: i64 = 24003;
+pub const VORTEX_BODY_PRIMANGULARAXISFRICTION: i64 = 24003;
 
-pub const vortex_body_primangularaxisslide: i64 = 24020;
+pub const VORTEX_BODY_PRIMANGULARAXISSLIDE: i64 = 24020;
 
-pub const vortex_body_primangularaxisslip: i64 = 24025;
+pub const VORTEX_BODY_PRIMANGULARAXISSLIP: i64 = 24025;
 
-pub const vortex_body_primangularaxisstaticfrictionscale: i64 = 24008;
+pub const VORTEX_BODY_PRIMANGULARAXISSTATICFRICTIONSCALE: i64 = 24008;
 
-pub const vortex_body_primaxisvectorx: i64 = 24034;
+pub const VORTEX_BODY_PRIMAXISVECTORX: i64 = 24034;
 
-pub const vortex_body_primaxisvectory: i64 = 24035;
+pub const VORTEX_BODY_PRIMAXISVECTORY: i64 = 24035;
 
-pub const vortex_body_primaxisvectorz: i64 = 24036;
+pub const VORTEX_BODY_PRIMAXISVECTORZ: i64 = 24036;
 
-pub const vortex_body_primlinearaxisfriction: i64 = 24001;
+pub const VORTEX_BODY_PRIMLINEARAXISFRICTION: i64 = 24001;
 
-pub const vortex_body_primlinearaxisfrictionmodel: i64 = 25001;
+pub const VORTEX_BODY_PRIMLINEARAXISFRICTIONMODEL: i64 = 25001;
 
-pub const vortex_body_primlinearaxisslide: i64 = 24018;
+pub const VORTEX_BODY_PRIMLINEARAXISSLIDE: i64 = 24018;
 
-pub const vortex_body_primlinearaxisslip: i64 = 24023;
+pub const VORTEX_BODY_PRIMLINEARAXISSLIP: i64 = 24023;
 
-pub const vortex_body_primlinearaxisstaticfrictionscale: i64 = 24006;
+pub const VORTEX_BODY_PRIMLINEARAXISSTATICFRICTIONSCALE: i64 = 24006;
 
-pub const vortex_body_pureshapesasconvex: i64 = 26001;
+pub const VORTEX_BODY_PURESHAPESASCONVEX: i64 = 26001;
 
-pub const vortex_body_randomshapesasterrain: i64 = 26003;
+pub const VORTEX_BODY_RANDOMSHAPESASTERRAIN: i64 = 26003;
 
-pub const vortex_body_restitution: i64 = 24013;
+pub const VORTEX_BODY_RESTITUTION: i64 = 24013;
 
-pub const vortex_body_restitutionthreshold: i64 = 24014;
+pub const VORTEX_BODY_RESTITUTIONTHRESHOLD: i64 = 24014;
 
-pub const vortex_body_secangaxissameasprimangaxis: i64 = 26007;
+pub const VORTEX_BODY_SECANGAXISSAMEASPRIMANGAXIS: i64 = 26007;
 
-pub const vortex_body_secangularaxisfriction: i64 = 24004;
+pub const VORTEX_BODY_SECANGULARAXISFRICTION: i64 = 24004;
 
-pub const vortex_body_secangularaxisslide: i64 = 24021;
+pub const VORTEX_BODY_SECANGULARAXISSLIDE: i64 = 24021;
 
-pub const vortex_body_secangularaxisslip: i64 = 24026;
+pub const VORTEX_BODY_SECANGULARAXISSLIP: i64 = 24026;
 
-pub const vortex_body_secangularaxisstaticfrictionscale: i64 = 24009;
+pub const VORTEX_BODY_SECANGULARAXISSTATICFRICTIONSCALE: i64 = 24009;
 
-pub const vortex_body_seclinaxissameasprimlinaxis: i64 = 26006;
+pub const VORTEX_BODY_SECLINAXISSAMEASPRIMLINAXIS: i64 = 26006;
 
-pub const vortex_body_seclinearaxisfriction: i64 = 24002;
+pub const VORTEX_BODY_SECLINEARAXISFRICTION: i64 = 24002;
 
-pub const vortex_body_seclinearaxisfrictionmodel: i64 = 25002;
+pub const VORTEX_BODY_SECLINEARAXISFRICTIONMODEL: i64 = 25002;
 
-pub const vortex_body_seclinearaxisslide: i64 = 24019;
+pub const VORTEX_BODY_SECLINEARAXISSLIDE: i64 = 24019;
 
-pub const vortex_body_seclinearaxisslip: i64 = 24024;
+pub const VORTEX_BODY_SECLINEARAXISSLIP: i64 = 24024;
 
-pub const vortex_body_seclinearaxisstaticfrictionscale: i64 = 24007;
+pub const VORTEX_BODY_SECLINEARAXISSTATICFRICTIONSCALE: i64 = 24007;
 
-pub const vortex_body_secmangulararaxisfrictionmodel: i64 = 25004;
+pub const VORTEX_BODY_SECMANGULARARAXISFRICTIONMODEL: i64 = 25004;
 
-pub const vortex_body_skinthickness: i64 = 24032;
+pub const VORTEX_BODY_SKINTHICKNESS: i64 = 24032;
 
-pub const vortex_bodyfrictionmodel_box: i64 = 0;
+pub const VORTEX_BODYFRICTIONMODEL_BOX: i64 = 0;
 
-pub const vortex_bodyfrictionmodel_neutral: i64 = 5;
+pub const VORTEX_BODYFRICTIONMODEL_NEUTRAL: i64 = 5;
 
-pub const vortex_bodyfrictionmodel_none: i64 = 6;
+pub const VORTEX_BODYFRICTIONMODEL_NONE: i64 = 6;
 
-pub const vortex_bodyfrictionmodel_prophigh: i64 = 3;
+pub const VORTEX_BODYFRICTIONMODEL_PROPHIGH: i64 = 3;
 
-pub const vortex_bodyfrictionmodel_proplow: i64 = 2;
+pub const VORTEX_BODYFRICTIONMODEL_PROPLOW: i64 = 2;
 
-pub const vortex_bodyfrictionmodel_scaledbox: i64 = 1;
+pub const VORTEX_BODYFRICTIONMODEL_SCALEDBOX: i64 = 1;
 
-pub const vortex_bodyfrictionmodel_scaledboxfast: i64 = 4;
+pub const VORTEX_BODYFRICTIONMODEL_SCALEDBOXFAST: i64 = 4;
 
-pub const vortex_global_autosleep: i64 = 20001;
+pub const VORTEX_GLOBAL_AUTOSLEEP: i64 = 20001;
 
-pub const vortex_global_bitcoded: i64 = 19001;
+pub const VORTEX_GLOBAL_BITCODED: i64 = 19001;
 
-pub const vortex_global_constraintangularcompliance: i64 = 18007;
+pub const VORTEX_GLOBAL_CONSTRAINTANGULARCOMPLIANCE: i64 = 18007;
 
-pub const vortex_global_constraintangulardamping: i64 = 18008;
+pub const VORTEX_GLOBAL_CONSTRAINTANGULARDAMPING: i64 = 18008;
 
-pub const vortex_global_constraintangularkineticloss: i64 = 18009;
+pub const VORTEX_GLOBAL_CONSTRAINTANGULARKINETICLOSS: i64 = 18009;
 
-pub const vortex_global_constraintlinearcompliance: i64 = 18004;
+pub const VORTEX_GLOBAL_CONSTRAINTLINEARCOMPLIANCE: i64 = 18004;
 
-pub const vortex_global_constraintlineardamping: i64 = 18005;
+pub const VORTEX_GLOBAL_CONSTRAINTLINEARDAMPING: i64 = 18005;
 
-pub const vortex_global_constraintlinearkineticloss: i64 = 18006;
+pub const VORTEX_GLOBAL_CONSTRAINTLINEARKINETICLOSS: i64 = 18006;
 
-pub const vortex_global_contacttolerance: i64 = 18003;
+pub const VORTEX_GLOBAL_CONTACTTOLERANCE: i64 = 18003;
 
-pub const vortex_global_internalscalingfactor: i64 = 18002;
+pub const VORTEX_GLOBAL_INTERNALSCALINGFACTOR: i64 = 18002;
 
-pub const vortex_global_multithreading: i64 = 20002;
+pub const VORTEX_GLOBAL_MULTITHREADING: i64 = 20002;
 
-pub const vortex_global_stepsize: i64 = 18001;
+pub const VORTEX_GLOBAL_STEPSIZE: i64 = 18001;
 
-pub const vortex_joint_a0damping: i64 = 21032;
+pub const VORTEX_JOINT_A0DAMPING: i64 = 21032;
 
-pub const vortex_joint_a0frictioncoeff: i64 = 21033;
+pub const VORTEX_JOINT_A0FRICTIONCOEFF: i64 = 21033;
 
-pub const vortex_joint_a0frictionloss: i64 = 21035;
+pub const VORTEX_JOINT_A0FRICTIONLOSS: i64 = 21035;
 
-pub const vortex_joint_a0frictionmaxforce: i64 = 21034;
+pub const VORTEX_JOINT_A0FRICTIONMAXFORCE: i64 = 21034;
 
-pub const vortex_joint_a0loss: i64 = 21030;
+pub const VORTEX_JOINT_A0LOSS: i64 = 21030;
 
-pub const vortex_joint_a0stiffness: i64 = 21031;
+pub const VORTEX_JOINT_A0STIFFNESS: i64 = 21031;
 
-pub const vortex_joint_a1damping: i64 = 21038;
+pub const VORTEX_JOINT_A1DAMPING: i64 = 21038;
 
-pub const vortex_joint_a1frictioncoeff: i64 = 21039;
+pub const VORTEX_JOINT_A1FRICTIONCOEFF: i64 = 21039;
 
-pub const vortex_joint_a1frictionloss: i64 = 21041;
+pub const VORTEX_JOINT_A1FRICTIONLOSS: i64 = 21041;
 
-pub const vortex_joint_a1frictionmaxforce: i64 = 21040;
+pub const VORTEX_JOINT_A1FRICTIONMAXFORCE: i64 = 21040;
 
-pub const vortex_joint_a1loss: i64 = 21036;
+pub const VORTEX_JOINT_A1LOSS: i64 = 21036;
 
-pub const vortex_joint_a1stiffness: i64 = 21037;
+pub const VORTEX_JOINT_A1STIFFNESS: i64 = 21037;
 
-pub const vortex_joint_a2damping: i64 = 21044;
+pub const VORTEX_JOINT_A2DAMPING: i64 = 21044;
 
-pub const vortex_joint_a2frictioncoeff: i64 = 21045;
+pub const VORTEX_JOINT_A2FRICTIONCOEFF: i64 = 21045;
 
-pub const vortex_joint_a2frictionloss: i64 = 21047;
+pub const VORTEX_JOINT_A2FRICTIONLOSS: i64 = 21047;
 
-pub const vortex_joint_a2frictionmaxforce: i64 = 21046;
+pub const VORTEX_JOINT_A2FRICTIONMAXFORCE: i64 = 21046;
 
-pub const vortex_joint_a2loss: i64 = 21042;
+pub const VORTEX_JOINT_A2LOSS: i64 = 21042;
 
-pub const vortex_joint_a2stiffness: i64 = 21043;
+pub const VORTEX_JOINT_A2STIFFNESS: i64 = 21043;
 
-pub const vortex_joint_bitcoded: i64 = 22001;
+pub const VORTEX_JOINT_BITCODED: i64 = 22001;
 
-pub const vortex_joint_dependencyfactor: i64 = 21048;
+pub const VORTEX_JOINT_DEPENDENCYFACTOR: i64 = 21048;
 
-pub const vortex_joint_dependencyoffset: i64 = 21049;
+pub const VORTEX_JOINT_DEPENDENCYOFFSET: i64 = 21049;
 
-pub const vortex_joint_dependentobjectid: i64 = 22006;
+pub const VORTEX_JOINT_DEPENDENTOBJECTID: i64 = 22006;
 
-pub const vortex_joint_frictionenabledbc: i64 = 22003;
+pub const VORTEX_JOINT_FRICTIONENABLEDBC: i64 = 22003;
 
-pub const vortex_joint_frictionproportionalbc: i64 = 22004;
+pub const VORTEX_JOINT_FRICTIONPROPORTIONALBC: i64 = 22004;
 
-pub const vortex_joint_lowerlimitdamping: i64 = 21001;
+pub const VORTEX_JOINT_LOWERLIMITDAMPING: i64 = 21001;
 
-pub const vortex_joint_lowerlimitmaxforce: i64 = 21007;
+pub const VORTEX_JOINT_LOWERLIMITMAXFORCE: i64 = 21007;
 
-pub const vortex_joint_lowerlimitrestitution: i64 = 21005;
+pub const VORTEX_JOINT_LOWERLIMITRESTITUTION: i64 = 21005;
 
-pub const vortex_joint_lowerlimitstiffness: i64 = 21003;
+pub const VORTEX_JOINT_LOWERLIMITSTIFFNESS: i64 = 21003;
 
-pub const vortex_joint_motorconstraintfrictioncoeff: i64 = 21009;
+pub const VORTEX_JOINT_MOTORCONSTRAINTFRICTIONCOEFF: i64 = 21009;
 
-pub const vortex_joint_motorconstraintfrictionloss: i64 = 21011;
+pub const VORTEX_JOINT_MOTORCONSTRAINTFRICTIONLOSS: i64 = 21011;
 
-pub const vortex_joint_motorconstraintfrictionmaxforce: i64 = 21010;
+pub const VORTEX_JOINT_MOTORCONSTRAINTFRICTIONMAXFORCE: i64 = 21010;
 
-pub const vortex_joint_motorfrictionenabled: i64 = 23001;
+pub const VORTEX_JOINT_MOTORFRICTIONENABLED: i64 = 23001;
 
-pub const vortex_joint_objectid: i64 = 22005;
+pub const VORTEX_JOINT_OBJECTID: i64 = 22005;
 
-pub const vortex_joint_p0damping: i64 = 21014;
+pub const VORTEX_JOINT_P0DAMPING: i64 = 21014;
 
-pub const vortex_joint_p0frictioncoeff: i64 = 21015;
+pub const VORTEX_JOINT_P0FRICTIONCOEFF: i64 = 21015;
 
-pub const vortex_joint_p0frictionloss: i64 = 21017;
+pub const VORTEX_JOINT_P0FRICTIONLOSS: i64 = 21017;
 
-pub const vortex_joint_p0frictionmaxforce: i64 = 21016;
+pub const VORTEX_JOINT_P0FRICTIONMAXFORCE: i64 = 21016;
 
-pub const vortex_joint_p0loss: i64 = 21012;
+pub const VORTEX_JOINT_P0LOSS: i64 = 21012;
 
-pub const vortex_joint_p0stiffness: i64 = 21013;
+pub const VORTEX_JOINT_P0STIFFNESS: i64 = 21013;
 
-pub const vortex_joint_p1damping: i64 = 21020;
+pub const VORTEX_JOINT_P1DAMPING: i64 = 21020;
 
-pub const vortex_joint_p1frictioncoeff: i64 = 21021;
+pub const VORTEX_JOINT_P1FRICTIONCOEFF: i64 = 21021;
 
-pub const vortex_joint_p1frictionloss: i64 = 21023;
+pub const VORTEX_JOINT_P1FRICTIONLOSS: i64 = 21023;
 
-pub const vortex_joint_p1frictionmaxforce: i64 = 21022;
+pub const VORTEX_JOINT_P1FRICTIONMAXFORCE: i64 = 21022;
 
-pub const vortex_joint_p1loss: i64 = 21018;
+pub const VORTEX_JOINT_P1LOSS: i64 = 21018;
 
-pub const vortex_joint_p1stiffness: i64 = 21019;
+pub const VORTEX_JOINT_P1STIFFNESS: i64 = 21019;
 
-pub const vortex_joint_p2damping: i64 = 21026;
+pub const VORTEX_JOINT_P2DAMPING: i64 = 21026;
 
-pub const vortex_joint_p2frictioncoeff: i64 = 21027;
+pub const VORTEX_JOINT_P2FRICTIONCOEFF: i64 = 21027;
 
-pub const vortex_joint_p2frictionloss: i64 = 21029;
+pub const VORTEX_JOINT_P2FRICTIONLOSS: i64 = 21029;
 
-pub const vortex_joint_p2frictionmaxforce: i64 = 21028;
+pub const VORTEX_JOINT_P2FRICTIONMAXFORCE: i64 = 21028;
 
-pub const vortex_joint_p2loss: i64 = 21024;
+pub const VORTEX_JOINT_P2LOSS: i64 = 21024;
 
-pub const vortex_joint_p2stiffness: i64 = 21025;
+pub const VORTEX_JOINT_P2STIFFNESS: i64 = 21025;
 
-pub const vortex_joint_proportionalmotorfriction: i64 = 23002;
+pub const VORTEX_JOINT_PROPORTIONALMOTORFRICTION: i64 = 23002;
 
-pub const vortex_joint_relaxationenabledbc: i64 = 22002;
+pub const VORTEX_JOINT_RELAXATIONENABLEDBC: i64 = 22002;
 
-pub const vortex_joint_upperlimitdamping: i64 = 21002;
+pub const VORTEX_JOINT_UPPERLIMITDAMPING: i64 = 21002;
 
-pub const vortex_joint_upperlimitmaxforce: i64 = 21008;
+pub const VORTEX_JOINT_UPPERLIMITMAXFORCE: i64 = 21008;
 
-pub const vortex_joint_upperlimitrestitution: i64 = 21006;
+pub const VORTEX_JOINT_UPPERLIMITRESTITUTION: i64 = 21006;
 
-pub const vortex_joint_upperlimitstiffness: i64 = 21004;
+pub const VORTEX_JOINT_UPPERLIMITSTIFFNESS: i64 = 21004;
