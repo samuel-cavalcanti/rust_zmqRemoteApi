@@ -13,8 +13,7 @@ based on pController.py
 # Do not launch simulation, but run this script
 
 */
-
-const MAX_FORCE: f64 = 100.0;
+use zmq_remote_api::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
 
 fn main() -> Result<(), zmq::Error> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
@@ -76,6 +75,10 @@ fn main() -> Result<(), zmq::Error> {
 
     Ok(())
 }
+
+
+
+const MAX_FORCE: f64 = 100.0;
 
 fn move_to_angle(
     target_angle: f64,
