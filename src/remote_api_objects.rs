@@ -110,6 +110,7 @@ impl<'a> RemoteAPIObjects<'a> {
         RemoteAPIObjects { client }
     }
     requests! {
+    // DEPRECATED START
     (get_joint_max_force,"getJointMaxForce",(joint_handle:i64)->f64),
     (set_joint_max_force,"setJointMaxForce",(object_handle:i64,force_or_torque:f64)->()),
     (create_pure_shape,"createPureShape",(primitive_type:i64,options:i64,sizes:Vec<f64>,mass:f64),opt(precision:Vec<i64>)->i64),
@@ -117,6 +118,7 @@ impl<'a> RemoteAPIObjects<'a> {
     (get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>)),
     (get_vision_sensor_char_image,"getVisionSensorCharImage",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>)),
     (set_vision_sensor_char_image,"setVisionSensorCharImage",(sensor_handle:i64,image:Vec<u8>)->()),
+     // DEPRECATED END
     (add_drawing_object,"addDrawingObject",(object_type:i64,size:f64,duplicate_tolerance:f64,parent_object_handle:i64,max_item_count:i64),opt(ambient_diffuse:Vec<f64>,reserved:Vec<f64>,specular:Vec<f64>,emission:Vec<f64>)->i64),
     (add_drawing_object_item,"addDrawingObjectItem",(drawing_object_handle:i64,item_data:Vec<f64>)->i64),
     (add_force,"addForce",(shape_handle:i64,position:Vec<f64>,force:Vec<f64>)->()),
