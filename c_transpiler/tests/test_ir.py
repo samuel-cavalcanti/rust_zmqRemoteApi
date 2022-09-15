@@ -175,7 +175,7 @@ class IrTestCase(unittest.TestCase):
                   wait_ir, get_vision_sensor_depth_buffer_if]
 
         expected_strings = [
-            '(switch_thread,"switchThread")',
+            '(switch_thread,"switchThread"->())',
             '(unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
             '(wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
             '(get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'

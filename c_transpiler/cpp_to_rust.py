@@ -26,19 +26,6 @@ def main():
     
     output.write_text(content)
 
-    
-
-   
-
-    # irs = [ir_to_string(assign) for assign in assigns]
-
-    # cpp = [ir_to_cpp(assign) for assign in assigns]
-
-    # output_content = "\n".join(cpp)
-
-    # assert output_content == expected_h.read_text()
-
-    # print(output_content,end='')
 
 
 if __name__ == '__main__':

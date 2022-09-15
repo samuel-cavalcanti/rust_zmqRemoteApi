@@ -47,7 +47,7 @@ def type_node_to_rust(node: TypeNode) -> str:
         TokenType.I64: "i64",
         TokenType.F64: "f64",
         TokenType.BOOL: "bool",
-        TokenType.VOID:  "",
+        TokenType.VOID:  "()",
         TokenType.TUPLE: "",
         TokenType.VEC: "Vec",
         TokenType.OPTION: "Option",
