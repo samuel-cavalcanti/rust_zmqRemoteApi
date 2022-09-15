@@ -28,10 +28,17 @@ fn test_set_stepping() {
 #[test]
 fn test_requests_macros() {
     let requests = vec![
-        ZmqRequest::start_simulation(),
-        ZmqRequest::stop_simulation(),
+        ZmqRequest {
+            function_name: format!("sim.startSimulation"),
+            args:vec![],
+        },
+        ZmqRequest {
+            function_name: format!("sim.stopSimulation"),
+            args:vec![],
+        },
+       
     ];
-
+    
     let expected_bytes = vec![
         b"\xa2dfuncssim.startSimulationdargs\x80".to_vec(),
         b"\xa2dfuncrsim.stopSimulationdargs\x80".to_vec(),
