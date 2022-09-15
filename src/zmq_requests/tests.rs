@@ -1,3 +1,4 @@
+#[cfg(test)]
 use crate::zmq_requests::{RawRequest, ZmqRequest};
 
 #[test]
