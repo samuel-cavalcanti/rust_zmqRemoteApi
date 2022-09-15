@@ -4,9 +4,6 @@ pub struct RemoteAPIObjects<'a> {
     client: &'a RemoteApiClient,
 }
 
-
-
-
 macro_rules! requests {
 
 
@@ -46,7 +43,7 @@ macro_rules! requests {
                     args: args,
                 };
 
-               
+
 
 
                 let result = self.client.send_request(request)?;
@@ -59,25 +56,25 @@ macro_rules! requests {
 
                 let mut ret  =result["ret"].to_owned();
                $(
-               
+
                 if let Some(vec) = ret.as_array_mut() {
                     if vec.len() == 1{
-                        
+
                         log::trace!("vec: {:?} return type: {}", vec,stringify!($return_type));
                         let value:Result<$return_type, serde_json::Error> = serde_json::from_value(vec.remove(0));
-                        
+
                         match value {
                             Ok(value) => {
                                   // return a single value
                                     return Ok(value);
-                            },          
+                            },
                             Err(_) => {
                                 // Expected return ()
                                 return Ok(Default::default());
                             },
                         }
-                        
-                       
+
+
                     }
 
                 }
@@ -91,16 +88,16 @@ macro_rules! requests {
                     },           // Expected return ()
                     Err(_) => Ok(Default::default()),
                 }
-                
-              
+
+
                )+
-             
+
 
 
                 // let value = result["ret"].as_array().unwrap().to_owned().remove(0);
                 // Ok(serde_json::from_value(value).unwrap())
-              
-               
+
+
 
             }
         )*
