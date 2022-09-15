@@ -1,8 +1,13 @@
+from pathlib import Path
 import unittest
+
 
 from ir_transpiler import FunctionAssign, Arg, TypeNode
 from ir_transpiler import ir_to_cpp, ir_to_string, ir_to_macro_request_rust
 from cpp_token import TokenType
+from scanner import Scanner
+from stream import StringStream
+from parser import parser
 
 
 class IrTestCase(unittest.TestCase):
@@ -59,8 +64,22 @@ class IrTestCase(unittest.TestCase):
         ]
 
         result = [ir_to_cpp(ir) for ir in inputs]
-        self.assertEqualStrings(result,expected_strings)
-        
+        self.assertEqualStrings(result, expected_strings)
+
+    def test_ir_parser_remote_api_header(self):
+        assets = Path('assets')
+        header = assets / Path('remote_api_header.h')
+        expected_h = assets / Path('expected.h')
+
+        content = header.read_text()
+        stream = StringStream(content)
+        scanner = Scanner(stream)
+
+        assigns = parser(scanner, stream)
+        ir = [ir_to_cpp(assign) for assign in assigns]
+        result_content = "\n".join(ir)
+
+        self.assertEqual(result_content, expected_h.read_text())
 
     def test_ir_to_string(self):
         vec_u8_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.U8, [])])
@@ -112,9 +131,7 @@ class IrTestCase(unittest.TestCase):
 
         result = [ir_to_string(ir) for ir in inputs]
 
-        self.assertEqualStrings(result,expected_strings)
-      
-
+        self.assertEqualStrings(result, expected_strings)
 
     def test_ir_to_macro_request_rust(self):
         vec_u8_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.U8, [])])
@@ -164,7 +181,7 @@ class IrTestCase(unittest.TestCase):
             '(get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'
         ]
         result = [ir_to_macro_request_rust(ir) for ir in inputs]
-        self.assertEqualStrings(result,expected_strings)
+        self.assertEqualStrings(result, expected_strings)
 
     def assertEqualStrings(self, result: list[str], expected: list[str]):
         self.assertEqual(len(result), len(expected))

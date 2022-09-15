@@ -1,40 +1,9 @@
-from __future__ import annotations
-from dataclasses import dataclass
 
 from typing import Optional
-from cpp_token import Token, TokenType
+from cpp_token import Token, TokenType, STD_CPP_PRIMITIVE_TYPES
 from scanner import ScannerProtocol
 from stream import Stream
-
-
-STD_CPP_PRIMITIVE_TYPES = {
-    TokenType.U8,
-    TokenType.I64,
-    TokenType.F64,
-    TokenType.BOOL,
-    TokenType.VOID,
-    TokenType.JSON,
-    TokenType.STRING,
-}
-
-
-@dataclass
-class TypeNode:
-    cpp_type: TokenType
-    sub_type: list[TypeNode]
-
-
-@dataclass
-class Arg:
-    arg_type: TypeNode
-    arg_name: str
-
-
-@dataclass
-class FunctionAssign:
-    return_type: Optional[TypeNode]
-    function_name: str
-    function_args: list[Arg]
+from ir_transpiler import Arg, TypeNode, FunctionAssign
 
 
 def digest(scanner: ScannerProtocol, stream: Stream, token_type: TokenType) -> Token:
@@ -155,7 +124,7 @@ def expression_type(scanner: ScannerProtocol, stream: Stream) -> TypeNode:
     is_primitive = token.token_type in STD_CPP_PRIMITIVE_TYPES
 
     if is_primitive:
-        digest(scanner, stream, token.token_type) 
+        digest(scanner, stream, token.token_type)
         return TypeNode(token.token_type, [])
 
     if token.token_type == TokenType.VEC:
@@ -181,7 +150,7 @@ def vec_type(scanner: ScannerProtocol, stream: Stream) -> TypeNode:
     digest(scanner, stream, TokenType.LESS)  # <
     primitive_type = unwrap_token(scanner, stream)
 
-    digest(scanner, stream, primitive_type.token_type)    
+    digest(scanner, stream, primitive_type.token_type)
     digest(scanner, stream, TokenType.BIGGER)  # >
 
     sub_type = TypeNode(primitive_type.token_type, [])
@@ -198,17 +167,16 @@ def tuple_type(scanner: ScannerProtocol, stream: Stream):
     digest(scanner, stream, TokenType.LESS)  # <
 
     type_node = expression_type(scanner, stream)
-    scanner.update()
 
     sub_types: list[TypeNode] = [type_node]
 
     token = unwrap_token(scanner, stream)
 
     while token.token_type == TokenType.COMMA:
+        digest(scanner, stream, TokenType.COMMA)
         node = expression_type(scanner, stream)
         sub_types.append(node)
 
-        scanner.update()
         token = unwrap_token(scanner, stream)
 
     digest(scanner, stream, TokenType.BIGGER)

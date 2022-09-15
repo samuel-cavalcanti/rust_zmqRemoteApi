@@ -1,8 +1,9 @@
 from pathlib import Path
-from parser import parser
+
 from scanner import Scanner
 from stream import StringStream
-
+from cpp_token import Token, TokenType, STD_CPP_PRIMITIVE_TYPES
+from parser import parser, FunctionAssign, Arg, TypeNode
 STRING_TEST = """   double getJointMaxForce(int64_t jointHandle);
         void setJointMaxForce(int64_t objectHandle, double forceOrTorque);
         int64_t createPureShape(int64_t primitiveType, int64_t options, std::vector<double> sizes, double mass, std::optional<std::vector<int64_t>> precision = {});
@@ -13,8 +14,14 @@ STRING_TEST = """   double getJointMaxForce(int64_t jointHandle);
         """
 
 
+
+
+
+
 def main():
-    header = Path('assets') / Path('remote_api_header.h')
+    assets =Path('assets') 
+    header = assets / Path('remote_api_header.h')
+    expected_h = assets / Path('expected.h')
 
     content = header.read_text()
     stream = StringStream(content)
@@ -22,9 +29,19 @@ def main():
 
     assigns = parser(scanner, stream)
 
-    print(assigns)
-
     
+
+   
+
+    # irs = [ir_to_string(assign) for assign in assigns]
+
+    # cpp = [ir_to_cpp(assign) for assign in assigns]
+
+    # output_content = "\n".join(cpp)
+
+    # assert output_content == expected_h.read_text()
+
+    # print(output_content,end='')
 
 
 if __name__ == '__main__':
