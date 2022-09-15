@@ -18,12 +18,8 @@ def ir_to_macro_request_rust(assign: FunctionAssign) -> str:
         else:
             required_args.append(string_arg)
 
-   
     required_args_string = f',({",".join(required_args)})'if len(
         required_args) != 0 else ""
-
-    print(required_args)
-    print(option_args)
 
     opt_string = f',opt({",".join(option_args)})' if len(
         option_args) != 0 else ""
@@ -39,7 +35,6 @@ def arg_to_rust(arg: Arg) -> str:
         type_string = type_node_to_rust(sub_type)
     else:
         type_string = type_node_to_rust(arg.arg_type)
-
 
     snake_case = inflection.underscore(arg.arg_name)
 

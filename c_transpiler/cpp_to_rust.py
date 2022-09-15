@@ -2,32 +2,29 @@ from pathlib import Path
 
 from scanner import Scanner
 from stream import StringStream
-from cpp_token import Token, TokenType, STD_CPP_PRIMITIVE_TYPES
-from parser import parser, FunctionAssign, Arg, TypeNode
-STRING_TEST = """   double getJointMaxForce(int64_t jointHandle);
-        void setJointMaxForce(int64_t objectHandle, double forceOrTorque);
-        int64_t createPureShape(int64_t primitiveType, int64_t options, std::vector<double> sizes, double mass, std::optional<std::vector<int64_t>> precision = {});
-        void removeObject(int64_t objectHandle);
-        std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepthBuffer(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});
-        std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorCharImage(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});
-        void setVisionSensorCharImage(int64_t sensorHandle, std::vector<uint8_t> image);
-        """
-
-
-
-
+from cpp_token import Token, TokenType
+from parser import parser
+from ir_transpiler import ir_to_macro_request_rust
 
 
 def main():
     assets =Path('assets') 
     header = assets / Path('remote_api_header.h')
-    expected_h = assets / Path('expected.h')
+    output = assets / Path('output.rs')
 
     content = header.read_text()
     stream = StringStream(content)
     scanner = Scanner(stream)
 
     assigns = parser(scanner, stream)
+    
+    rust_assigns = [ir_to_macro_request_rust(assign) for assign in assigns]
+    rust_string = ",\n".join(rust_assigns)
+
+    content = f'requests!{{\n{rust_string}\n}}'
+    
+    
+    output.write_text(content)
 
     
 
