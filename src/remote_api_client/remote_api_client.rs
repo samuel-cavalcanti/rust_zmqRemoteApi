@@ -3,7 +3,6 @@ use serde_json::Value as JsonValue;
 use uuid::Uuid;
 use zmq::Error;
 
-
 use crate::zmq_requests::{RawRequest, ZmqRequest};
 use crate::{log_utils, RemoteApiClientParams};
 
@@ -81,7 +80,7 @@ impl RemoteApiClient {
 
         let decoded: CborValue = ciborium::de::from_reader(result.as_slice()).unwrap();
 
-        let json = serde_json::json!(decoded); 
+        let json = serde_json::json!(decoded);
         log::trace!("Json response: {}", json);
 
         Ok(json)

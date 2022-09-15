@@ -10,12 +10,7 @@ pub struct ZmqRequest {
     pub args: Vec<Value>,
 }
 
-
-
-
 impl ZmqRequest {
-
-    
     pub fn remote_api_info(object: String) -> ZmqRequest {
         ZmqRequest {
             function_name: String::from("zmqRemoteApi.info"),

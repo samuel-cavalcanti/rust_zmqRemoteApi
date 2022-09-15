@@ -4,7 +4,7 @@ fn main() {
     println!("FLAG DONTWAIT: {}", zmq::DONTWAIT);
 
     let id = Uuid::new_v4();
-    println!("id: {}", id.to_string());
+    println!("id: {}", id);
 
     let data = b"hello";
     // lower case

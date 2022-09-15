@@ -1,4 +1,4 @@
-use zmq_remote_api::{RemoteAPIObjects, RemoteApiClientParams,remote_api_objects_const};
+use zmq_remote_api::{remote_api_objects_const, RemoteAPIObjects, RemoteApiClientParams};
 
 /*
     Example based on SimpleTest.py

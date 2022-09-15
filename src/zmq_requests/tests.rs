@@ -31,15 +31,14 @@ fn test_requests_macros() {
     let requests = vec![
         ZmqRequest {
             function_name: format!("sim.startSimulation"),
-            args:vec![],
+            args: vec![],
         },
         ZmqRequest {
             function_name: format!("sim.stopSimulation"),
-            args:vec![],
+            args: vec![],
         },
-       
     ];
-    
+
     let expected_bytes = vec![
         b"\xa2dfuncssim.startSimulationdargs\x80".to_vec(),
         b"\xa2dfuncrsim.stopSimulationdargs\x80".to_vec(),
