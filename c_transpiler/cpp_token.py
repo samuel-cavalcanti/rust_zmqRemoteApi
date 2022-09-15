@@ -23,6 +23,18 @@ class TokenType(Enum):
     CLOSE_PARENTHESES = auto()
     SEMICOLON = auto()
 
+    
+
+
+STD_CPP_PRIMITIVE_TYPES = {
+    TokenType.U8,
+    TokenType.I64,
+    TokenType.F64,
+    TokenType.BOOL,
+    TokenType.VOID,
+    TokenType.JSON,
+    TokenType.STRING,
+}
 
 @dataclass
 class Token:
