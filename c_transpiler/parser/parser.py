@@ -1,7 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-import re
-from turtle import update
+
 from typing import Optional
 from cpp_token import Token, TokenType
 from scanner import ScannerProtocol

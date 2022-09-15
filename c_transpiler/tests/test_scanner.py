@@ -200,13 +200,13 @@ class ScannerTestCase(unittest.TestCase):
         self.assert_scanner(scanner, stream, expected_tokens)
 
 
-    def test_get_vision_sensor_depth_buffer(self):
-       stream = StringStream( "std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepthBuffer(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});")
-       scanner = Scanner(stream)
-       while scanner.current_token():
-        token = scanner.current_token()
-        scanner.update()
-        print(f'token :{token}')
+    # def test_get_vision_sensor_depth_buffer(self):
+    #    stream = StringStream( "std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepthBuffer(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});")
+    #    scanner = Scanner(stream)
+    #    while scanner.current_token():
+    #     token = scanner.current_token()
+    #     scanner.update()
+        # print(f'token :{token}')
 
     def assert_scanner(self, scanner: Scanner, stream: Stream, expected_tokens: list[Token]):
         for expected_token in expected_tokens:
