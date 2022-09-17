@@ -3,6 +3,7 @@ use serde_json::Value as JsonValue;
 use uuid::Uuid;
 use zmq::Error;
 
+use crate::remote_api_client::RemoteApiClientInterface;
 use crate::zmq_requests::{RawRequest, ZmqRequest};
 use crate::{log_utils, RemoteApiClientParams};
 
@@ -52,9 +53,9 @@ impl RemoteApiClient {
     }
 
     fn call(&self, payload: Vec<u8>) -> Result<Vec<u8>, Error> {
-        log::debug!(
+        log::trace!(
             "Raw request: {:?}",
-            log_utils::bytes_to_hex_format(&payload)
+            log_utils::to_byte_array_string(&payload)
         );
 
         self.rpc_socket.send(payload, zmq::DONTWAIT)?;
@@ -65,37 +66,37 @@ impl RemoteApiClient {
 
         let message = (*message).to_vec();
 
-        log::debug!(
+        log::trace!(
             "Raw response: {:?}",
-            log_utils::bytes_to_hex_format(&message)
+            log_utils::to_byte_array_string(&message)
         );
 
         Ok(message)
     }
 
-    pub fn send_request<R: RawRequest>(&self, request: R) -> Result<JsonValue, Error> {
-        let payload = request.to_raw_request();
-
-        let result = self.call(payload)?;
-
-        let decoded: CborValue = ciborium::de::from_reader(result.as_slice()).unwrap();
-
-        let json = serde_json::json!(decoded);
-        log::trace!("Json response: {}", json);
-
-        Ok(json)
-    }
+    // pub fn send_request<R: RawRequest>(&self, request: R) -> Result<JsonValue, Error> {
+    //     let payload = request.to_raw_request();
+    //
+    //     let result = self.call(payload)?;
+    //
+    //     let decoded: CborValue = ciborium::de::from_reader(result.as_slice()).unwrap();
+    //
+    //     let json = serde_json::json!(decoded);
+    //     log::trace!("Json response: {}", json);
+    //
+    //     Ok(json)
+    // }
 
     pub fn get_object(&self, name: String) -> Result<JsonValue, Error> {
         let request = ZmqRequest::remote_api_info(name);
 
-        self.send_request(request)
+        self.send_raw_request(request.to_raw_request())
     }
 
     pub fn set_stepping(&self, enable: bool) -> Result<(), Error> {
         let request = ZmqRequest::set_stepping(enable, self.id.to_string());
 
-        self.send_request(request)?;
+        self.send_raw_request(request.to_raw_request())?;
 
         Ok(())
     }
@@ -106,11 +107,11 @@ impl RemoteApiClient {
         match wait {
             true => {
                 self.get_step_count(false)?;
-                self.send_request(request)?;
+                self.send_raw_request(request.to_raw_request())?;
                 self.get_step_count(true)?;
             }
             false => {
-                self.send_request(request)?;
+                self.send_raw_request(request.to_raw_request())?;
             }
         }
 
@@ -147,5 +148,24 @@ impl RemoteApiClient {
                 message.len()
             );
         }
+    }
+}
+
+impl RemoteApiClientInterface for RemoteApiClient {
+    fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, Error> {
+        let result = self.call(request)?;
+
+        let decoded: CborValue = ciborium::de::from_reader(result.as_slice()).unwrap();
+
+        let json = serde_json::json!(decoded);
+        log::trace!("Json response: {}", json);
+
+        Ok(json)
+    }
+}
+
+impl RemoteApiClientInterface for &RemoteApiClient {
+    fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, Error> {
+        self.send_raw_request(request)
     }
 }

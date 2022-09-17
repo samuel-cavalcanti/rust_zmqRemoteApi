@@ -1,4 +1,5 @@
-use zmq_remote_api::{remote_api_objects_const, RemoteAPIObjects, RemoteApiClientParams};
+use zmq_remote_api::remote_api_objects::remote_api_objects_const;
+use zmq_remote_api::{RemoteAPIObjects, RemoteApiClientParams};
 
 /*
     Example based on SimpleTest.py
@@ -32,11 +33,14 @@ fn main() -> Result<(), zmq::Error> {
     sim.set_int32_param(remote_api_objects_const::INTPARAM_IDLE_FPS, 0)?;
 
     // Create a few dummies and set their positions:
-    let handles = [0..50].map(|_| sim.create_dummy(0.01).unwrap());
+    let handles: Vec<i64> = (0..50)
+        .into_iter()
+        .map(|_| sim.create_dummy(0.01).unwrap())
+        .collect();
 
     for (i, h) in handles.iter().enumerate() {
         let i = i as f64;
-        sim.set_object_position(h.clone(), -1, vec![0.01 * i, 0.01 * i, 0.01 * i])?;
+        sim.set_object_position(*h, -1, vec![0.01 * i, 0.01 * i, 0.01 * i])?;
     }
 
     sim.start_simulation()?;
@@ -45,7 +49,7 @@ fn main() -> Result<(), zmq::Error> {
     while time < 3.0 {
         time = sim.get_simulation_time()?;
 
-        println!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. non-stepped)",time=time);
+        println!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. non-stepped)", time = time);
     }
 
     sim.stop_simulation()?;
@@ -62,7 +66,7 @@ fn main() -> Result<(), zmq::Error> {
     while time < 3.0 {
         time = sim.get_simulation_time()?;
 
-        let message = format!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. stepped)",time=time);
+        let message = format!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. stepped)", time = time);
         println!("{}", message);
         sim.add_log(remote_api_objects_const::VERBOSITY_SCRIPTINFOS, message)?;
         client.step(true)?; //triggers next simulation step

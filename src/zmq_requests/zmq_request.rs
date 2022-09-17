@@ -1,5 +1,6 @@
 use ciborium::cbor;
 use ciborium::value::Value;
+use std::env::args;
 
 pub trait RawRequest {
     fn to_raw_request(&self) -> Vec<u8>;
@@ -34,9 +35,10 @@ impl ZmqRequest {
     }
 }
 
+use crate::log_utils;
 impl RawRequest for ZmqRequest {
     fn to_raw_request(&self) -> Vec<u8> {
-        let enconded = cbor!({"func"=> self.function_name, "args"=> self.args}).unwrap();
+        let enconded = cbor!({"func"=> self.function_name, "args"=>self.args}).unwrap();
 
         log::trace!("sending: {:?}", enconded);
 

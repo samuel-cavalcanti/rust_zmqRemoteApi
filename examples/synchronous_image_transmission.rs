@@ -1,8 +1,7 @@
 use zmq_remote_api::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
 
-
 /* Based on synchronousImageTransmission.cpp example
- * 
+ *
  * Make sure to have the add-on "ZMQ remote API" running in
  * CoppeliaSim and have following scene loaded:
  *
@@ -26,9 +25,6 @@ fn main() -> Result<(), zmq::Error> {
 
     let passive_vision_sensor_handle = sim.get_object("/PassiveVisionSensor".to_string(), None)?;
 
-
-    
-
     client.set_stepping(true)?;
 
     sim.start_simulation()?;
@@ -38,7 +34,7 @@ fn main() -> Result<(), zmq::Error> {
     while sim.get_simulation_time()? - start_time < 5.0 {
         let (img, _res) = sim.get_vision_sensor_img(vison_sensor_handle, None, None, None, None)?;
 
-        println!("size: {}",img.len());
+        println!("size: {}", img.len());
         sim.set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
         client.step(true)?;
     }

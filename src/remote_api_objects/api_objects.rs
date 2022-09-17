@@ -1,7 +1,11 @@
+use crate::remote_api_client::RemoteApiClientInterface;
+
+use super::supported_types::CborArgConvert;
+use crate::zmq_requests::RawRequest;
 use crate::{zmq_requests, RemoteApiClient};
 use serde_json::Value;
-pub struct RemoteAPIObjects<'a> {
-    client: &'a RemoteApiClient,
+pub struct RemoteAPIObjects<'a, R: RemoteApiClientInterface> {
+    client: &'a R,
 }
 
 macro_rules! requests {
@@ -14,9 +18,12 @@ macro_rules! requests {
             pub fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, zmq::Error>  {//
 
                 let mut _brk = false;
-                let mut args = vec![$($(ciborium::cbor!($arg_id).unwrap(),)*)*];
-
-
+                /*
+                    CborArgConvert::from($arg_id).to_cbor()
+                    converting the arg type properly.
+                    ciborium::cbor!(value) is transforming Vec<u8> in an array of integers,
+                 */
+                let mut args = vec![$($(CborArgConvert::from($arg_id).to_cbor()),*)* ]; //
 
 
                 $(
@@ -35,24 +42,16 @@ macro_rules! requests {
                     )*
                 )*
 
-
-
-
                 let request = zmq_requests::ZmqRequest {
                     function_name: format!("sim.{}",$function_name),
                     args: args,
                 };
 
-
-
-
-                let result = self.client.send_request(request)?;
+                let result = self.client.send_raw_request(request.to_raw_request())?;
 
                 if let Err(error) = Self::is_success(&result) {
                     panic!("error: {}", error)
                 }
-
-
 
                 let mut ret  =result["ret"].to_owned();
                $(
@@ -72,7 +71,7 @@ macro_rules! requests {
                                 // Expected return ()
                                 return Ok(Default::default());
                             },
-                        }
+                        }use serde_json::Value as JsonValue;
 
 
                     }
@@ -89,15 +88,7 @@ macro_rules! requests {
                     Err(_) => Ok(Default::default()),
                 }
 
-
                )+
-
-
-
-                // let value = result["ret"].as_array().unwrap().to_owned().remove(0);
-                // Ok(serde_json::from_value(value).unwrap())
-
-
 
             }
         )*
@@ -105,8 +96,8 @@ macro_rules! requests {
 
 }
 
-impl<'a> RemoteAPIObjects<'a> {
-    pub fn new(client: &RemoteApiClient) -> RemoteAPIObjects {
+impl<'a, R: RemoteApiClientInterface + 'a> RemoteAPIObjects<'a, R> {
+    pub fn new(client: &'a R) -> RemoteAPIObjects<'a, R> {
         RemoteAPIObjects { client }
     }
     requests! {
