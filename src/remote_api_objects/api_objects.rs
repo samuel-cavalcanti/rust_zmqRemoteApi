@@ -1,8 +1,8 @@
 use crate::remote_api_client::RemoteApiClientInterface;
 
 use super::supported_types::CborArgConvert;
+use crate::zmq_requests;
 use crate::zmq_requests::RawRequest;
-use crate::{zmq_requests};
 use serde_json::Value;
 pub struct RemoteAPIObjects<'a, R: RemoteApiClientInterface> {
     client: &'a R,

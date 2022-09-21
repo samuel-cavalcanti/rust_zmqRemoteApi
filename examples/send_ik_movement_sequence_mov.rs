@@ -134,7 +134,6 @@ fn main() -> Result<(), zmq::Error> {
 
     sim.stop_simulation()?;
 
-
     println!("Program ended");
     Ok(())
 }
