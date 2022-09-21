@@ -1,4 +1,4 @@
-use zmq_remote_api::{RemoteAPIObjects, RemoteApiClientParams};
+use zmq_remote_api::{sim::Sim, RemoteApiClientParams};
 
 /*
     Example based on Example.cpp
@@ -13,7 +13,7 @@ fn main() -> Result<(), zmq::Error> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     client.set_stepping(true)?;
 

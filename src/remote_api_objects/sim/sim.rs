@@ -1,10 +1,10 @@
 use crate::remote_api_client::RemoteApiClientInterface;
 
-use super::supported_types::CborArgConvert;
+use crate::remote_api_objects::cbor_arg_convert::CborArgConvert;
 use crate::zmq_requests;
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
-pub struct RemoteAPIObjects<'a, R: RemoteApiClientInterface> {
+pub struct Sim<'a, R: RemoteApiClientInterface> {
     client: &'a R,
 }
 
@@ -99,9 +99,9 @@ macro_rules! requests {
 
 }
 
-impl<'a, R: RemoteApiClientInterface + 'a> RemoteAPIObjects<'a, R> {
-    pub fn new(client: &'a R) -> RemoteAPIObjects<'a, R> {
-        RemoteAPIObjects { client }
+impl<'a, R: RemoteApiClientInterface + 'a> Sim<'a, R> {
+    pub fn new(client: &'a R) -> Sim<'a, R> {
+        Sim { client }
     }
     requests! {
     // DEPRECATED START

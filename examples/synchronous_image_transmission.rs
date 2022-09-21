@@ -1,4 +1,4 @@
-use zmq_remote_api::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
+use zmq_remote_api::{sim::Sim, RemoteApiClient, RemoteApiClientParams};
 
 /* Based on synchronousImageTransmission.cpp example
  *
@@ -19,7 +19,7 @@ fn main() -> Result<(), zmq::Error> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     let vison_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
 

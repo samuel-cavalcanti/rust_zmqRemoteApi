@@ -1,5 +1,5 @@
-use super::remote_api_objects_const;
-use super::RemoteAPIObjects;
+use super::*;
+use super::Sim;
 use crate::log_utils;
 use crate::remote_api_client::RemoteApiClientInterface;
 use serde_json::{json, Value as JsonValue};
@@ -40,7 +40,7 @@ fn test_get_simulation_time_functions() -> Result<(), zmq::Error> {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     sim.start_simulation()?;
     assert_payload! {client,b"\xa2dfuncssim.startSimulationdargs\x80"};
@@ -65,7 +65,7 @@ fn test_simple_test_functions() -> Result<(), zmq::Error> {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     sim.get_int32_param(26)?;
     assert_payload!(client, b"\xa2dfuncqsim.getInt32Paramdargs\x81\x18\x1a");
@@ -84,7 +84,7 @@ fn test_simple_test_functions() -> Result<(), zmq::Error> {
     assert_payload!(client, b"\xa2dfuncvsim.getSimulationStatedargs\x80");
 
     sim.add_log(
-        remote_api_objects_const::VERBOSITY_SCRIPTINFOS,
+        VERBOSITY_SCRIPTINFOS,
         String::from(
             "Simulation time: 0.00 [s] (simulation running synchronously to client, i.e. stepped)",
         ),
@@ -103,7 +103,7 @@ fn test_p_controller_functions() -> Result<(), zmq::Error> {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     let id = sim.get_object("/Cuboid[0]/joint".to_string(), None)?;
     assert_eq!(id, 1);
@@ -129,17 +129,17 @@ fn test_p_controller_functions() -> Result<(), zmq::Error> {
 
 #[test]
 fn test_synchronous_image_transmission_functions() -> Result<(), zmq::Error> {
-    let image = include_bytes!("../../assets/image.bin").to_vec();
+    let image = include_bytes!("../../../assets/image.bin").to_vec();
     assert_eq!(image.len(), 196608);
 
-    let expected_payload = include_bytes!("../../assets/cbor_image.bin").to_vec();
+    let expected_payload = include_bytes!("../../../assets/cbor_image.bin").to_vec();
     assert_eq!(expected_payload.len(), 196649);
 
     let client = MockRemoteAPIClient {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     sim.set_vision_sensor_img(22, image, None, None, None)?;
     assert_payload(&client, expected_payload);
@@ -156,7 +156,7 @@ fn test_send_ik_movement_sequence_mov_functions() -> Result<(), zmq::Error> {
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
 
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     let handle_id = sim.get_object(String::from("/LBR4p"), None)?;
     assert_eq!(handle_id, 1);

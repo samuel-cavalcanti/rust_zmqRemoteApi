@@ -1,6 +1,6 @@
 use serde_json::json;
 use zmq_remote_api::{
-    remote_api_objects::remote_api_objects_const, RemoteAPIObjects, RemoteApiClient,
+    sim,sim::Sim, RemoteApiClient,
     RemoteApiClientParams,
 };
 
@@ -23,7 +23,7 @@ fn main() -> Result<(), zmq::Error> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     println!("Program started");
 
@@ -33,7 +33,7 @@ fn main() -> Result<(), zmq::Error> {
 
     let arm_handle = sim.get_object(target_arm, None)?;
     let script_handle = sim.get_script(
-        remote_api_objects_const::SCRIPTTYPE_CHILDSCRIPT,
+        sim::SCRIPTTYPE_CHILDSCRIPT,
         Some(arm_handle),
         None,
     )?;
@@ -467,7 +467,7 @@ fn main() -> Result<(), zmq::Error> {
 
 fn wait_for_movement_executed(
     id: String,
-    sim: &RemoteAPIObjects<RemoteApiClient>,
+    sim: &Sim<RemoteApiClient>,
     signal_name: String,
 ) -> Result<(), zmq::Error> {
     let mut string = sim.get_string_signal(signal_name.clone())?;

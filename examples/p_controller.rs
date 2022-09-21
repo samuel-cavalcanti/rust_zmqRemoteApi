@@ -1,6 +1,6 @@
 use std::f64::consts::PI;
 
-use zmq_remote_api::{RemoteAPIObjects, RemoteApiClient, RemoteApiClientParams};
+use zmq_remote_api::{sim::Sim, RemoteApiClient, RemoteApiClientParams};
 
 /*
 
@@ -25,7 +25,7 @@ fn main() -> Result<(), zmq::Error> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = RemoteAPIObjects::new(&client);
+    let sim = Sim::new(&client);
 
     let joint_handle = sim.get_object("/Cuboid[0]/joint".to_string(), None)?;
     let mut join_angle = sim.get_joint_position(joint_handle)?;
@@ -83,7 +83,7 @@ const MAX_FORCE: f64 = 100.0;
 fn move_to_angle(
     target_angle: f64,
     join_angle: &mut f64,
-    sim: &RemoteAPIObjects<RemoteApiClient>,
+    sim: &Sim<RemoteApiClient>,
     client: &RemoteApiClient,
     joint_handle: &i64,
 ) -> Result<(), zmq::Error> {
