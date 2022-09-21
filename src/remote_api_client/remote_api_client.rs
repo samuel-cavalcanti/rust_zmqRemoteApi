@@ -53,10 +53,7 @@ impl RemoteApiClient {
     }
 
     fn call(&self, payload: Vec<u8>) -> Result<Vec<u8>, Error> {
-        log::trace!(
-            "Raw request: {:?}",
-            log_utils::to_byte_array_string(&payload)
-        );
+        log::trace!("Raw request: {}", log_utils::to_byte_array_string(&payload));
 
         self.rpc_socket.send(payload, zmq::DONTWAIT)?;
 
@@ -166,6 +163,13 @@ impl RemoteApiClientInterface for RemoteApiClient {
 
 impl RemoteApiClientInterface for &RemoteApiClient {
     fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, Error> {
-        self.send_raw_request(request)
+        let result = self.call(request)?;
+
+        let decoded: CborValue = ciborium::de::from_reader(result.as_slice()).unwrap();
+
+        let json = serde_json::json!(decoded);
+        log::trace!("Json response: {}", json);
+
+        Ok(json)
     }
 }

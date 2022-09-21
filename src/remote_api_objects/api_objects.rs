@@ -2,7 +2,7 @@ use crate::remote_api_client::RemoteApiClientInterface;
 
 use super::supported_types::CborArgConvert;
 use crate::zmq_requests::RawRequest;
-use crate::{zmq_requests, RemoteApiClient};
+use crate::{zmq_requests};
 use serde_json::Value;
 pub struct RemoteAPIObjects<'a, R: RemoteApiClientInterface> {
     client: &'a R,
@@ -23,7 +23,7 @@ macro_rules! requests {
                     converting the arg type properly.
                     ciborium::cbor!(value) is transforming Vec<u8> in an array of integers,
                  */
-                let mut args = vec![$($(CborArgConvert::from($arg_id).to_cbor()),*)* ]; //
+                let mut _args = vec![$($(CborArgConvert::from($arg_id).to_cbor()),*)* ]; //
 
 
                 $(
@@ -33,7 +33,7 @@ macro_rules! requests {
                             if _brk{
                                 panic!("no gaps allowed");
                             }
-                            args.push(option);
+                            _args.push(option);
 
                         }
                         else{
@@ -44,7 +44,7 @@ macro_rules! requests {
 
                 let request = zmq_requests::ZmqRequest {
                     function_name: format!("sim.{}",$function_name),
-                    args: args,
+                    args: _args,
                 };
 
                 let result = self.client.send_raw_request(request.to_raw_request())?;
@@ -60,18 +60,21 @@ macro_rules! requests {
                     if vec.len() == 1{
 
                         log::trace!("vec: {:?} return type: {}", vec,stringify!($return_type));
-                        let value:Result<$return_type, serde_json::Error> = serde_json::from_value(vec.remove(0));
+                        let json_item = vec.remove(0);
+                        let value:Result<$return_type, serde_json::Error> = serde_json::from_value(json_item);
 
                         match value {
                             Ok(value) => {
                                   // return a single value
                                     return Ok(value);
                             },
-                            Err(_) => {
+                            Err(e) => {
+                                log::trace!("Err {}",e);
+
                                 // Expected return ()
                                 return Ok(Default::default());
                             },
-                        }use serde_json::Value as JsonValue;
+                        }
 
 
                     }
@@ -277,7 +280,7 @@ impl<'a, R: RemoteApiClientInterface + 'a> RemoteAPIObjects<'a, R> {
     (get_simulator_message,"getSimulatorMessage"->(i64,Vec<i64>,Vec<i64>)),
     (get_stack_traceback,"getStackTraceback",opt(script_handle:i64)->String),
     (get_string_param,"getStringParam",(parameter:i64)->String),
-    (get_string_signal,"getStringSignal",(signal_name:String)->Vec<u8>),
+    (get_string_signal,"getStringSignal",(signal_name:String)->String),// changed
     (get_system_time,"getSystemTime"->f64),
     (get_texture_id,"getTextureId",(texture_name:String)->(i64,Vec<i64>)),
     (get_thread_automatic_switch,"getThreadAutomaticSwitch"->bool),

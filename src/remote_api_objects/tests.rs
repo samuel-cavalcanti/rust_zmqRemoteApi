@@ -1,5 +1,6 @@
 use super::remote_api_objects_const;
 use super::RemoteAPIObjects;
+use crate::log_utils;
 use crate::remote_api_client::RemoteApiClientInterface;
 use serde_json::{json, Value as JsonValue};
 use std::cell::RefCell;
@@ -142,6 +143,71 @@ fn test_synchronous_image_transmission_functions() -> Result<(), zmq::Error> {
 
     sim.set_vision_sensor_img(22, image, None, None, None)?;
     assert_payload(&client, expected_payload);
+
+    Ok(())
+}
+
+#[test]
+fn test_send_ik_movement_sequence_mov_functions() -> Result<(), zmq::Error> {
+    env_logger::init();
+
+    let client = MockRemoteAPIClient {
+        payload: RefCell::new(vec![]),
+        result: RefCell::new(json!({"ret":[1],"success":true})),
+    };
+
+    let sim = RemoteAPIObjects::new(&client);
+
+    let handle_id = sim.get_object(String::from("/LBR4p"), None)?;
+    assert_eq!(handle_id, 1);
+
+    assert_payload!(client, b"\xa2dfuncmsim.getObjectdargs\x81f/LBR4p");
+
+    let script_handle = sim.get_script(1, Some(13), None)?;
+    assert_eq!(script_handle, 1);
+    assert_payload!(client, b"\xa2dfuncmsim.getScriptdargs\x82\x01\r");
+
+    *client.result.borrow_mut() = serde_json::json!(json!({"ret":{},"success":true}));
+    let signal = sim.get_string_signal(String::from("/LBR4p_executedMovId"))?;
+    assert_payload!(
+        client,
+        b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
+    );
+    assert_eq!(signal.is_empty(), true);
+
+    *client.result.borrow_mut() = json!({"ret":["ready"],"success":true});
+    let signal = sim.get_string_signal(String::from("/LBR4p_executedMovId"))?;
+    assert_payload!(
+        client,
+        b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
+    );
+    assert_eq!(signal, "ready");
+
+    *client.result.borrow_mut() = json!({"success": true,"ret": [[0.0051022060215473175, -7.424468640238047e-05, 1.072655200958252, 3.102603295701556e-05, 3.6248049582354724e-05, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]});
+    let json =
+        sim.call_script_function(String::from("remoteApi_getPoseAndConfig"), 2050006, None)?;
+    assert_payload!(client,b"\xa2dfuncvsim.callScriptFunctiondargs\x82x\x1aremoteApi_getPoseAndConfig\x1a\x00\x1fG\xd6");
+    assert_eq!(
+        json,
+        json! {[[0.0051022060215473175, -7.424468640238047e-05, 1.072655200958252, 3.102603295701556e-05, 3.6248049582354724e-05, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]}
+    );
+
+    *client.result.borrow_mut() = json! {{"ret":[{}],"success":true}};
+    let json_arg = json!( {"id": "movSeq1", "type": "mov", "targetPose": [0, 0, 0.85, 0, 0, 0, 1], "maxVel": 0.1, "maxAccel": 0.01});
+    let json_out = sim.call_script_function(
+        String::from("remoteApi_movementDataFunction"),
+        2050006,
+        Some(json_arg),
+    )?;
+    let payload = client.get_payload();
+    let decoded: ciborium::value::Value = ciborium::de::from_reader(payload.as_slice()).unwrap();
+
+    let json = serde_json::json!(decoded);
+    println!("Json response: {}", json);
+    println!("{}", log_utils::to_byte_array_string(&payload));
+
+    assert_payload!(client,b"\xa2dfuncvsim.callScriptFunctiondargs\x83x\x1eremoteApi_movementDataFunction\x1a\x00\x1fG\xd6\xa5bidgmovSeq1hmaxAccel\xfb?\x84z\xe1G\xae\x14{fmaxVel\xfb?\xb9\x99\x99\x99\x99\x99\x9ajtargetPose\x87\x00\x00\xfb?\xeb333333\x00\x00\x00\x01dtypecmov");
+    assert_eq!(json_out, json!({}));
 
     Ok(())
 }

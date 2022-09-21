@@ -11,13 +11,13 @@
 //         })
 // }
 
-pub fn to_byte_array_string(bytes: &Vec<u8>) -> Result<String, std::string::FromUtf8Error> {
-    let ascii_format = bytes
+pub fn to_byte_array_string(bytes: &Vec<u8>) -> String {
+    let ascii_format: String = bytes
         .iter()
-        .map(|b| std::ascii::escape_default(*b))
-        .flatten()
+        .map(|b| std::ascii::escape_default(*b).to_string())
         .collect();
-    let string = String::from_utf8(ascii_format)?;
 
-    Ok(format!("b'{}'", string))
+    // let string = String::from_utf8(ascii_format)?;
+
+    format!("b\"{}\"", ascii_format)
 }
