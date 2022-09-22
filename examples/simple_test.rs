@@ -1,4 +1,4 @@
-use zmq_remote_api::{sim, sim::Sim, RemoteApiClientParams, RemoteAPIError};
+use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
 
 /*
     Example based on SimpleTest.py

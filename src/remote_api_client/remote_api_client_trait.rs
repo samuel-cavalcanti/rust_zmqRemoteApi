@@ -1,6 +1,5 @@
 use serde_json::Value as JsonValue;
 
-
 use crate::RemoteAPIError;
 
 pub trait RemoteApiClientInterface {

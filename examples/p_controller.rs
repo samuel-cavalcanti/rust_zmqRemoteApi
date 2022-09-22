@@ -1,6 +1,6 @@
 use std::f64::consts::PI;
 
-use zmq_remote_api::{sim::Sim, RemoteApiClient, RemoteApiClientParams, RemoteAPIError};
+use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 
 /*
 
@@ -86,7 +86,7 @@ fn move_to_angle(
     sim: &Sim<RemoteApiClient>,
     client: &RemoteApiClient,
     joint_handle: &i64,
-) -> Result<(),RemoteAPIError> {
+) -> Result<(), RemoteAPIError> {
     while (target_angle - *join_angle).abs() > 0.1 * PI / 180.0 {
         let velocity = compute_target_velocity(target_angle, *join_angle);
         sim.set_joint_target_velocity(joint_handle.clone(), velocity, None, None)?;

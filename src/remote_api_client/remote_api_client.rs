@@ -2,10 +2,9 @@ use ciborium::value::Value as CborValue;
 use serde_json::Value as JsonValue;
 use uuid::Uuid;
 
-
 use crate::remote_api_client::RemoteApiClientInterface;
 use crate::zmq_requests::{RawRequest, ZmqRequest};
-use crate::{log_utils, RemoteApiClientParams, RemoteAPIError};
+use crate::{log_utils, RemoteAPIError, RemoteApiClientParams};
 
 const ZMQ_RECV_FLAG_NONE: i32 = 0;
 
@@ -51,11 +50,11 @@ impl RemoteApiClient {
             cnt_socket,
         })
     }
-    
-    fn convert_result<T>(result:Result<T,zmq::Error>)->Result<T, RemoteAPIError>{
+
+    fn convert_result<T>(result: Result<T, zmq::Error>) -> Result<T, RemoteAPIError> {
         match result {
             Ok(t) => Ok(t),
-            Err(e) => Err(RemoteAPIError::from(e)) 
+            Err(e) => Err(RemoteAPIError::from(e)),
         }
     }
 
@@ -91,7 +90,7 @@ impl RemoteApiClient {
     //     Ok(json)
     // }
 
-    pub fn get_object(&self, name: String) -> Result<JsonValue,RemoteAPIError> {
+    pub fn get_object(&self, name: String) -> Result<JsonValue, RemoteAPIError> {
         let request = ZmqRequest::remote_api_info(name);
 
         self.send_raw_request(request.to_raw_request())
