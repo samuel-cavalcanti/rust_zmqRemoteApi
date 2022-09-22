@@ -1,4 +1,6 @@
-# Rust zmqRemoteApi
+# Unofficial Rust zmqRemoteApi
+
+This client support the coppeliasim **4.3.0** version
 
 A Rust ZeroMQ remote API for coppeliasim
 
