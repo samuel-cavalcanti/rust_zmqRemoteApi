@@ -1,9 +1,5 @@
 use serde_json::json;
-use zmq_remote_api::{
-    sim,
-    sim::Sim, RemoteApiClient,
-    RemoteApiClientParams,
-};
+use zmq_remote_api::{sim, sim::Sim, RemoteApiClient, RemoteApiClientParams};
 
 /*
     Example based on sendIkMovementSequence-mov.py
@@ -46,11 +42,7 @@ fn main() -> Result<(), zmq::Error> {
     let signal_name = format!("{}_executedMovId", target_arm);
 
     let arm_handle = sim.get_object(target_arm, None)?;
-    let script_handle = sim.get_script(
-        sim::SCRIPTTYPE_CHILDSCRIPT,
-        Some(arm_handle),
-        None,
-    )?;
+    let script_handle = sim.get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
 
     sim.start_simulation()?;
 

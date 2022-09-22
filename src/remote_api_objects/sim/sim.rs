@@ -4,9 +4,6 @@ use crate::remote_api_objects::cbor_arg_convert::CborArgConvert;
 use crate::zmq_requests;
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
-pub struct Sim<'a, R: RemoteApiClientInterface> {
-    client: &'a R,
-}
 
 macro_rules! requests {
 
@@ -97,6 +94,10 @@ macro_rules! requests {
         )*
     };
 
+}
+
+pub struct Sim<'a, R: RemoteApiClientInterface> {
+    client: &'a R,
 }
 
 impl<'a, R: RemoteApiClientInterface + 'a> Sim<'a, R> {
@@ -484,54 +485,4 @@ impl<'a, R: RemoteApiClientInterface + 'a> Sim<'a, R> {
             "unknown error".to_string()
         }
     }
-
-    // pub fn start_simulation(&self) -> Result<i64, zmq::Error> {
-    //     let request = zmq_requests::ZmqRequest {
-    //         function_name: format!("sim.startSimulation"),
-    //         args: vec![],
-    //     };
-
-    //     let result = self.client.send_request(request)?;
-
-    //     if let Err(error) = Self::is_success(&result) {
-    //         panic!("error: {}", error)
-    //     }
-
-    //     let value = result["ret"].as_array().unwrap().to_owned().remove(0);
-
-    //     Ok(serde_json::from_value(value).unwrap())
-    // }
-
-    // pub fn stop_simulation(&self) -> Result<i64, zmq::Error> {
-    //     let request = zmq_requests::ZmqRequest {
-    //         function_name: format!("sim.stopSimulation"),
-    //         args: vec![],
-    //     };
-
-    //     let result = self.client.send_request(request)?;
-
-    //     if let Err(error) = Self::is_success(&result) {
-    //         panic!("error: {}", error)
-    //     }
-
-    //     let value = result["ret"].as_array().unwrap().to_owned().remove(0);
-
-    //     Ok(serde_json::from_value(value).unwrap())
-    // }
-
-    // pub fn get_simulation_time(&self) -> Result<f64, zmq::Error> {
-    //     let request = zmq_requests::ZmqRequest {
-    //         function_name: format!("sim.getSimulationTime"),
-    //         args: vec![],
-    //     };
-
-    //     let result = self.client.send_request(request)?;
-
-    //     if let Err(error) = Self::is_success(&result) {
-    //         panic!("error: {}", error)
-    //     }
-    //     let value = result["ret"].as_array().unwrap().to_owned().remove(0);
-
-    //     Ok(serde_json::from_value(value).unwrap())
-    // }
 }

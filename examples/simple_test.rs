@@ -1,5 +1,4 @@
-
-use zmq_remote_api::{sim,sim::Sim, RemoteApiClientParams};
+use zmq_remote_api::{sim, sim::Sim, RemoteApiClientParams};
 
 /*
     Example based on SimpleTest.py
@@ -79,10 +78,7 @@ fn main() -> Result<(), zmq::Error> {
     }
 
     //Restore the original idle loop frequency:
-    sim.set_int32_param(
-        sim::INTPARAM_IDLE_FPS,
-        default_idle_fps,
-    )?;
+    sim.set_int32_param(sim::INTPARAM_IDLE_FPS, default_idle_fps)?;
     println!("Program ended");
 
     Ok(())
