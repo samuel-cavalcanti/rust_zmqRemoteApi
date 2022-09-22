@@ -41,3 +41,7 @@ std::vector<uint8_t> getStringSignal(std::string signalName);
 
 in rust the function returns a std::String. I haven't observed any
 examples where the function returns a block of bytes.
+
+## running the opencv example
+
+[![Watch the video](https://img.youtube.com/vi/fo8G43WZQ6c/maxresdefault.jpg)](https://youtu.be/fo8G43WZQ6c)
