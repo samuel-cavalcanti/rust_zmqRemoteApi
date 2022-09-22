@@ -1,5 +1,5 @@
 use serde_json::json;
-use zmq_remote_api::{sim, sim::Sim, RemoteApiClient, RemoteApiClientParams,RemoteAPIError};
+use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 
 /*
     Example based on sendIkMovementSequence-pts.py
