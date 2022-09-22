@@ -1,4 +1,4 @@
-# UnOficial Rust zmqRemoteApi
+# Unofficial Rust zmqRemoteApi
 
 This client support the coppeliasim **4.4.0** version
 
