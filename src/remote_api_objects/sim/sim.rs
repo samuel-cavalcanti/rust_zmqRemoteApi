@@ -4,6 +4,7 @@ use crate::remote_api_objects::cbor_arg_convert::CborArgConvert;
 use crate::zmq_requests;
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
+use crate::remote_api_objects::connection_error::RemoteAPIError;
 
 macro_rules! requests {
 
@@ -12,7 +13,7 @@ macro_rules! requests {
         ($rust_fn:ident,$function_name:literal $(, ( $($arg_id:ident : $arg_type:ty),+ )  )? $(, opt( $($opt_arg_id:ident : $opt_arg_type:ty),+   ) )?  $(->$return_type:ty)? )
     ),+ $(,)? ) => {
         $(
-            pub fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, zmq::Error>  {//
+            pub fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, RemoteAPIError>  {//
 
                 let mut _brk = false;
                 /*
@@ -44,10 +45,19 @@ macro_rules! requests {
                     args: _args,
                 };
 
-                let result = self.client.send_raw_request(request.to_raw_request())?;
+                
+
+                let result = self.client.send_raw_request(request.to_raw_request());
+                
+
+                if let Err(error) = result {
+                    return Err(RemoteAPIError::new(format!("{:?}",error)));
+                }
+
+                let result = result.unwrap();
 
                 if let Err(error) = Self::is_success(&result) {
-                    panic!("error: {}", error)
+                    return Err(RemoteAPIError::new(error));
                 }
 
                 let mut ret  =result["ret"].to_owned();

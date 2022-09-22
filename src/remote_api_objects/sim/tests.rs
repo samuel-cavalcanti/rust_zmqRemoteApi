@@ -4,7 +4,8 @@ use crate::log_utils;
 use crate::remote_api_client::RemoteApiClientInterface;
 use serde_json::{json, Value as JsonValue};
 use std::cell::RefCell;
-use zmq::Error;
+
+use crate::remote_api_objects::connection_error::RemoteAPIError;
 
 struct MockRemoteAPIClient {
     payload: RefCell<Vec<u8>>,
@@ -18,7 +19,7 @@ impl MockRemoteAPIClient {
 }
 
 impl RemoteApiClientInterface for MockRemoteAPIClient {
-    fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, Error> {
+    fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, RemoteAPIError> {
         *self.payload.borrow_mut() = request;
         let result = self.result.clone().into_inner();
         Ok(result)
@@ -35,7 +36,7 @@ macro_rules! assert_payload {
 }
 
 #[test]
-fn test_get_simulation_time_functions() -> Result<(), zmq::Error> {
+fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
     let client = MockRemoteAPIClient {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
@@ -60,7 +61,7 @@ fn test_get_simulation_time_functions() -> Result<(), zmq::Error> {
 }
 
 #[test]
-fn test_simple_test_functions() -> Result<(), zmq::Error> {
+fn test_simple_test_functions() -> Result<(), RemoteAPIError> {
     let client = MockRemoteAPIClient {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
@@ -98,7 +99,7 @@ fn test_simple_test_functions() -> Result<(), zmq::Error> {
 }
 
 #[test]
-fn test_p_controller_functions() -> Result<(), zmq::Error> {
+fn test_p_controller_functions() -> Result<(), RemoteAPIError> {
     let client = MockRemoteAPIClient {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
@@ -128,7 +129,7 @@ fn test_p_controller_functions() -> Result<(), zmq::Error> {
 }
 
 #[test]
-fn test_synchronous_image_transmission_functions() -> Result<(), zmq::Error> {
+fn test_synchronous_image_transmission_functions() -> Result<(), RemoteAPIError> {
     let image = include_bytes!("../../../assets/image.bin").to_vec();
     assert_eq!(image.len(), 196608);
 
@@ -148,7 +149,7 @@ fn test_synchronous_image_transmission_functions() -> Result<(), zmq::Error> {
 }
 
 #[test]
-fn test_send_ik_movement_sequence_mov_functions() -> Result<(), zmq::Error> {
+fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> {
     env_logger::init();
 
     let client = MockRemoteAPIClient {

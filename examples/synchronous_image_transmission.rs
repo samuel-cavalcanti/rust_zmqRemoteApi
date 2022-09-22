@@ -1,4 +1,4 @@
-use zmq_remote_api::{sim::Sim, RemoteApiClient, RemoteApiClientParams};
+use zmq_remote_api::{sim::Sim, RemoteApiClient, RemoteApiClientParams, RemoteAPIError};
 
 /* Based on synchronousImageTransmission.cpp example
  *
@@ -10,7 +10,7 @@ use zmq_remote_api::{sim::Sim, RemoteApiClient, RemoteApiClientParams};
  * Do not launch simulation, but run this script
  */
 
-fn main() -> Result<(), zmq::Error> {
+fn main() -> Result<(), RemoteAPIError> {
     println!("Program started");
     env_logger::init();
 
@@ -34,7 +34,6 @@ fn main() -> Result<(), zmq::Error> {
     while sim.get_simulation_time()? - start_time < 5.0 {
         let (img, _res) = sim.get_vision_sensor_img(vison_sensor_handle, None, None, None, None)?;
 
-        println!("size: {}", img.len());
         sim.set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
         client.step(true)?;
     }

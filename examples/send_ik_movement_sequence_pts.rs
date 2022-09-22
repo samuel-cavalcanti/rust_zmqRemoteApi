@@ -1,5 +1,5 @@
 use serde_json::json;
-use zmq_remote_api::{sim, sim::Sim, RemoteApiClient, RemoteApiClientParams};
+use zmq_remote_api::{sim, sim::Sim, RemoteApiClient, RemoteApiClientParams,RemoteAPIError};
 
 /*
     Example based on sendIkMovementSequence-pts.py
@@ -11,7 +11,7 @@ use zmq_remote_api::{sim, sim::Sim, RemoteApiClient, RemoteApiClientParams};
     Do not launch simulation, then run this script
 */
 
-fn main() -> Result<(), zmq::Error> {
+fn main() -> Result<(), RemoteAPIError> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
@@ -462,7 +462,7 @@ fn wait_for_movement_executed(
     id: String,
     sim: &Sim<RemoteApiClient>,
     signal_name: String,
-) -> Result<(), zmq::Error> {
+) -> Result<(), RemoteAPIError> {
     let mut string = sim.get_string_signal(signal_name.clone())?;
     while string != id {
         string = sim.get_string_signal(signal_name.clone())?;

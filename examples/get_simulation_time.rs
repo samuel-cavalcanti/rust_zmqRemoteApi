@@ -1,10 +1,10 @@
-use zmq_remote_api::{sim::Sim, RemoteApiClientParams};
+use zmq_remote_api::{sim::Sim, RemoteApiClientParams, RemoteAPIError};
 
 /*
     Example based on Example.cpp
 */
 
-fn main() -> Result<(), zmq::Error> {
+fn main() -> Result<(), RemoteAPIError> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
