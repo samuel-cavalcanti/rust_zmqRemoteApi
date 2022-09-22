@@ -1,10 +1,10 @@
 use crate::remote_api_client::RemoteApiClientInterface;
 
 use crate::remote_api_objects::cbor_arg_convert::CborArgConvert;
+use crate::remote_api_objects::connection_error::RemoteAPIError;
 use crate::zmq_requests;
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
-use crate::remote_api_objects::connection_error::RemoteAPIError;
 
 macro_rules! requests {
 
@@ -45,10 +45,10 @@ macro_rules! requests {
                     args: _args,
                 };
 
-                
+
 
                 let result = self.client.send_raw_request(request.to_raw_request());
-                
+
 
                 if let Err(error) = result {
                     return Err(RemoteAPIError::new(format!("{:?}",error)));
