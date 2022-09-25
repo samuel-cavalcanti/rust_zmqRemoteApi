@@ -51,7 +51,10 @@ fn opencv_show_image(image: Vec<u8>, resolution: Vec<i64>) {
     let image_size = opencv::core::Size::new(resolution[0] as i32, resolution[1] as i32);
 
     let image = unsafe {
-        // zerocopy, is unsafe in rust.
+        /*
+           zerocopy, is unsafe in rust.
+           the rust compiler can't know if the img.as_mut_ptr() (img pointer)  is NULL at compilation time.
+        */
         let mut img = image;
         opencv::core::Mat::new_size_with_data(
             image_size,
