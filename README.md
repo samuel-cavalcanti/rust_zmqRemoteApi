@@ -3,6 +3,7 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Unofficial Rust zmqRemoteApi](#unofficial-rust-zmqremoteapi)
+- [This client support the coppeliasim **4.4.0** version](#this-client-support-the-coppeliasim-440-version)
   - [Porting C++ client to Rust client](#porting-c-client-to-rust-client)
   - [diferences between C++ client and Rust client](#diferences-between-c-client-and-rust-client)
   - [running the opencv example](#running-the-opencv-example)
@@ -76,11 +77,7 @@ add this crate at your cargo.toml :
 
 ```toml
 # the branch is the coppelia version
-<<<<<<< HEAD
 zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.4.0"}
-=======
-zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.3.0"}
->>>>>>> CoppeliaSim_4.3.0
 
 ```
 
