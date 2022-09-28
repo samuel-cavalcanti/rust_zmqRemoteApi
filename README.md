@@ -72,7 +72,7 @@ add this crate at your cargo.toml :
 
 ```toml
 # the branch is the coppelia version
-zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.4.0"}
+zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.3.0"}
 
 ```
 
