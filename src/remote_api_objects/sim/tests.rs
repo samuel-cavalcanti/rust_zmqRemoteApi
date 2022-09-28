@@ -1,12 +1,13 @@
 use super::Sim;
 use super::*;
-use crate::{log_utils, remote_api_objects::mocks::{MockRemoteAPIClient,assert_payload}};
-use crate::remote_api_client::RemoteApiClientInterface;
-use serde_json::{json};
+use crate::{
+    log_utils,
+    remote_api_objects::mocks::{assert_payload, MockRemoteAPIClient},
+};
+use serde_json::json;
 use std::cell::RefCell;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
-
 
 #[test]
 fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {

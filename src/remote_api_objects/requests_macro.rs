@@ -8,7 +8,7 @@ macro_rules! requests {
 
 
 
-            #[allow(dead_code)]
+            #[allow(dead_code,clippy::too_many_arguments)]
             pub fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, crate::remote_api_objects::connection_error::RemoteAPIError>  {//
 
                 let mut _brk = false;
@@ -17,7 +17,7 @@ macro_rules! requests {
                     converting the arg type properly.
                     ciborium::cbor!(value) is transforming Vec<u8> in an array of integers,
                  */
-                let mut _args = vec![$($(crate::remote_api_objects::cbor_arg_convert::CborArgConvert::from($arg_id).to_cbor()),*)* ]; //
+                let mut _args = vec![$($(crate::remote_api_objects::cbor_arg_convert::CborArgConvert::from($arg_id).into_cbor()),*)* ]; //
 
 
                 $(

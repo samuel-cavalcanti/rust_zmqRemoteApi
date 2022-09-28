@@ -7,10 +7,7 @@ mod requests_macro;
 #[macro_use]
 mod mocks;
 
-
 pub mod sim;
 pub mod sim_ik;
 
 pub mod connection_error;
-
-
