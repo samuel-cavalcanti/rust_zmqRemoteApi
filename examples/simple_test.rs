@@ -39,7 +39,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     for (i, h) in handles.iter().enumerate() {
         let i = i as f64;
-        sim.set_object_position(*h, -1, vec![0.01 * i, 0.01 * i, 0.01 * i])?;
+        sim.set_object_position(*h, sim::HANDLE_WORLD, vec![0.01 * i, 0.01 * i, 0.01 * i])?;
     }
 
     sim.start_simulation()?;
