@@ -21,7 +21,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     let sim = Sim::new(&client);
 
-    let vison_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
+    let vision_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
 
     let passive_vision_sensor_handle = sim.get_object("/PassiveVisionSensor".to_string(), None)?;
 
@@ -32,7 +32,8 @@ fn main() -> Result<(), RemoteAPIError> {
     let start_time = sim.get_simulation_time()?;
 
     while sim.get_simulation_time()? - start_time < 5.0 {
-        let (img, _res) = sim.get_vision_sensor_img(vison_sensor_handle, None, None, None, None)?;
+        let (img, _res) =
+            sim.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
         sim.set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
         client.step(true)?;

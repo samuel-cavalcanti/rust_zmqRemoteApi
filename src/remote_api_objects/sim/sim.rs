@@ -3,13 +3,15 @@ use crate::remote_api_client::RemoteApiClientInterface;
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
 
-pub struct Sim<'a, R: RemoteApiClientInterface> {
-    client: &'a R,
+pub struct Sim<'a> {
+    client: Box<&'a dyn RemoteApiClientInterface>,
 }
 
-impl<'a, R: RemoteApiClientInterface + 'a> Sim<'a, R> {
-    pub fn new(client: &'a R) -> Sim<'a, R> {
-        Sim { client }
+impl<'a> Sim<'a> {
+    pub fn new(client: &'a impl RemoteApiClientInterface) -> Sim<'a> {
+        Sim {
+            client: Box::new(client),
+        }
     }
     requests! {
     "sim",

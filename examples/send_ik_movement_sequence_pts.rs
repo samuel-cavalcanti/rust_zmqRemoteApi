@@ -460,7 +460,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
 fn wait_for_movement_executed(
     id: String,
-    sim: &Sim<RemoteApiClient>,
+    sim: &Sim,
     signal_name: String,
 ) -> Result<(), RemoteAPIError> {
     let mut string = sim.get_string_signal(signal_name.clone())?;

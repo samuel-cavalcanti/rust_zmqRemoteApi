@@ -83,7 +83,7 @@ const MAX_FORCE: f64 = 100.0;
 fn move_to_angle(
     target_angle: f64,
     join_angle: &mut f64,
-    sim: &Sim<RemoteApiClient>,
+    sim: &Sim,
     client: &RemoteApiClient,
     joint_handle: &i64,
 ) -> Result<(), RemoteAPIError> {
