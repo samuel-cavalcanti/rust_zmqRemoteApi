@@ -9,6 +9,7 @@
   - [Get started](#get-started)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+![example workflow](https://github.com/samuel-cavalcanti/rust_zmqRemoteApi/actions/workflows/rust.yml/badge.svg?branch=CoppeliaSim_4.3.0)
 
 # Unofficial Rust zmqRemoteApi
 
