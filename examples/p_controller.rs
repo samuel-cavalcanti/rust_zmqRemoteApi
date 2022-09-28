@@ -1,4 +1,5 @@
 use std::f64::consts::PI;
+use std::rc::Rc;
 
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 
@@ -6,7 +7,7 @@ use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientP
 
 based on pController.py
 
-# Make sure to have CoppeliaSim running, with followig scene loaded:
+# Make sure to have CoppeliaSim running, with following scene loaded:
 #
 # scenes/messaging/pControllerViaRemoteApi.ttt
 #
@@ -25,7 +26,9 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = Sim::new(&client);
+    // Rc means Reference counter, is a smart pointer that counter the number of references
+    let client = Rc::new(client);
+    let sim = Sim::new(client.clone());
 
     let joint_handle = sim.get_object("/Cuboid[0]/joint".to_string(), None)?;
     let mut join_angle = sim.get_joint_position(joint_handle)?;

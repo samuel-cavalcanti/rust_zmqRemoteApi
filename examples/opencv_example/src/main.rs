@@ -1,5 +1,6 @@
 use opencv;
 use std::ffi::c_void;
+use std::rc::Rc;
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 /* Based on opencv.py example
  *
@@ -19,9 +20,11 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = Sim::new(&client);
+    // Rc means Reference counter, is a smart pointer that counter the number of references
+    let client = Rc::new(client);
+    let sim = Sim::new(client.clone());
 
-    let vison_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
+    let vision_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
 
     client.set_stepping(true)?;
 
@@ -30,7 +33,7 @@ fn main() -> Result<(), RemoteAPIError> {
     let start_time = sim.get_simulation_time()?;
     let mut time = start_time;
     while time - start_time < 5.0 {
-        let (img, res) = sim.get_vision_sensor_img(vison_sensor_handle, None, None, None, None)?;
+        let (img, res) = sim.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
         opencv_show_image(img, res);
 

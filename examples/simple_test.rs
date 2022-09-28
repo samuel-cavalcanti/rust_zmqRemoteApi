@@ -1,3 +1,4 @@
+use std::rc::Rc;
 use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
 
 /*
@@ -22,7 +23,9 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = Sim::new(&client);
+    // Rc means Reference counter, is a smart pointer that counter the number of references
+    let client = Rc::new(client);
+    let sim = Sim::new(client.clone());
 
     // When simulation is not running, ZMQ message handling could be a bit
     // slow, since the idle loop runs at 8 Hz by default. So let's make

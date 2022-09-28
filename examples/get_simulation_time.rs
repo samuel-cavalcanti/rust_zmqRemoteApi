@@ -1,3 +1,4 @@
+use std::rc::Rc;
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClientParams};
 
 /*
@@ -13,7 +14,9 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let sim = Sim::new(&client);
+    // Rc means Reference counter, is a smart pointer that counter the number of references
+    let client = Rc::new(client);
+    let sim = Sim::new(client.clone());
 
     client.set_stepping(true)?;
 
