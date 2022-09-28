@@ -1,4 +1,3 @@
-#[macro_export]
 macro_rules! requests {
 
     ( $(
@@ -7,7 +6,7 @@ macro_rules! requests {
         $(
 
 
-            
+
 
             #[allow(dead_code)]
             pub fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, crate::remote_api_objects::connection_error::RemoteAPIError>  {//
