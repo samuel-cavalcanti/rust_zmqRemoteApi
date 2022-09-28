@@ -4,7 +4,7 @@ pub enum CborArgConvert<T: serde::ser::Serialize> {
 }
 
 impl<T: serde::ser::Serialize> CborArgConvert<T> {
-    pub fn to_cbor(self) -> ciborium::value::Value {
+    pub fn into_cbor(self) -> ciborium::value::Value {
         match self {
             CborArgConvert::VecU8(vec) => ciborium::value::Value::Bytes(vec),
             CborArgConvert::Other(value) => ciborium::cbor!(value).unwrap(),

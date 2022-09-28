@@ -3,7 +3,6 @@ use crate::remote_api_client::RemoteApiClientInterface;
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
 
-
 pub struct SimIK<'a, R: RemoteApiClientInterface> {
     client: &'a R,
 }
