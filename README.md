@@ -12,7 +12,11 @@
 
 # Unofficial Rust zmqRemoteApi
 
+<<<<<<< HEAD
 This client support the coppeliasim **4.4.0** version
+=======
+This client support the coppeliasim **4.3.0** version
+>>>>>>> CoppeliaSim_4.3.0
 
 A Rust ZeroMQ remote API for coppeliasim
 
@@ -72,7 +76,11 @@ add this crate at your cargo.toml :
 
 ```toml
 # the branch is the coppelia version
+<<<<<<< HEAD
 zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.4.0"}
+=======
+zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.3.0"}
+>>>>>>> CoppeliaSim_4.3.0
 
 ```
 

@@ -1,7 +1,8 @@
+use crate::remote_api_client::RemoteApiClientInterface;
+
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
 
-use crate::remote_api_client::RemoteApiClientInterface;
 
 pub struct SimIK<'a, R: RemoteApiClientInterface> {
     client: &'a R,
@@ -12,6 +13,7 @@ impl<'a, R: RemoteApiClientInterface + 'a> SimIK<'a, R> {
         SimIK { client }
     }
     requests! {
+    "simIK",
     (add_ik_element,"addIkElement",(environment_handle:i64,ik_group_handle:i64,tip_dummy_handle:i64)->i64),
     (add_ik_element_from_scene,"addIkElementFromScene",(environment_handle:i64,ik_group:i64,base_handle:i64,tip_handle:i64,target_handle:i64,constraints:i64)->(i64,serde_json::Value)),
     (apply_ik_environment_to_scene,"applyIkEnvironmentToScene",(environment_handle:i64,ik_group:i64),opt(apply_only_when_successful:bool)->i64),

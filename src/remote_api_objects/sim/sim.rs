@@ -1,7 +1,11 @@
 use crate::remote_api_client::RemoteApiClientInterface;
 
+
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
+
+
+
 pub struct Sim<'a, R: RemoteApiClientInterface> {
     client: &'a R,
 }
@@ -11,6 +15,7 @@ impl<'a, R: RemoteApiClientInterface + 'a> Sim<'a, R> {
         Sim { client }
     }
     requests! {
+    "sim",
     // DEPRECATED START
     (get_joint_max_force,"getJointMaxForce",(joint_handle:i64)->f64),
     (set_joint_max_force,"setJointMaxForce",(object_handle:i64,force_or_torque:f64)->()),

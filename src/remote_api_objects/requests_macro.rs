@@ -1,6 +1,6 @@
 macro_rules! requests {
 
-    ( $(
+    ( $sim_type:literal, $(
         ($rust_fn:ident,$function_name:literal $(, ( $($arg_id:ident : $arg_type:ty),+ )  )? $(, opt( $($opt_arg_id:ident : $opt_arg_type:ty),+   ) )?  $(->$return_type:ty)? )
     ),+ $(,)? ) => {
         $(
@@ -37,7 +37,7 @@ macro_rules! requests {
                 )*
 
                 let request = crate::zmq_requests::ZmqRequest {
-                    function_name: format!("sim.{}",$function_name),
+                    function_name: format!("{}.{}",$sim_type,$function_name),
                     args: _args,
                 };
 

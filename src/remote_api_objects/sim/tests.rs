@@ -1,39 +1,12 @@
 use super::Sim;
 use super::*;
-use crate::log_utils;
-use crate::remote_api_client::RemoteApiClientInterface;
-use serde_json::{json, Value as JsonValue};
+use crate::{log_utils, remote_api_objects::mocks::{MockRemoteAPIClient,assert_payload}};
+
+use serde_json::{json};
 use std::cell::RefCell;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
 
-struct MockRemoteAPIClient {
-    payload: RefCell<Vec<u8>>,
-    result: RefCell<JsonValue>,
-}
-
-impl MockRemoteAPIClient {
-    fn get_payload(&self) -> Vec<u8> {
-        self.payload.borrow_mut().clone()
-    }
-}
-
-impl RemoteApiClientInterface for MockRemoteAPIClient {
-    fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, RemoteAPIError> {
-        *self.payload.borrow_mut() = request;
-        let result = self.result.clone().into_inner();
-        Ok(result)
-    }
-}
-
-fn assert_payload(client: &MockRemoteAPIClient, payload: Vec<u8>) {
-    assert_eq!(client.get_payload(), payload)
-}
-macro_rules! assert_payload {
-    ($client:ident,$payload:literal) => {
-        assert_eq!($client.get_payload(), $payload.to_vec());
-    };
-}
 
 #[test]
 fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
