@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 use zmq_remote_api::serde_json::json;
 use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 /*
@@ -33,8 +33,8 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    /// Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
+    // Arc means Atomic reference counter, is a smart pointer that counter the number of references
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     println!("Program started");

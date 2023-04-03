@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::sync::Arc;
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 
 /* Based on synchronousImageTransmission.cpp example
@@ -20,8 +20,8 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    // Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
+    // Arc means Atomic reference counter, is a smart pointer that counter the number of references
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     let vision_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;

@@ -1,15 +1,15 @@
 use crate::remote_api_client::RemoteApiClientInterface;
-use std::rc::Rc;
 
 use crate::zmq_requests::RawRequest;
 use serde_json::Value;
+use std::sync::Arc;
 
 pub struct Sim {
-    client: Rc<dyn RemoteApiClientInterface>,
+    client: Arc<dyn RemoteApiClientInterface>,
 }
 
 impl Sim {
-    pub fn new(client: Rc<dyn RemoteApiClientInterface>) -> Sim {
+    pub fn new(client: Arc<dyn RemoteApiClientInterface>) -> Sim {
         Sim { client }
     }
     requests! {

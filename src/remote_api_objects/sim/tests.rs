@@ -7,7 +7,7 @@ use crate::{
 use serde_json::json;
 
 use std::cell::RefCell;
-use std::rc::Rc;
+use std::sync::Arc;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
 
@@ -18,7 +18,7 @@ fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
 
-    let client = Rc::new(client);
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     sim.start_simulation()?;
@@ -44,7 +44,7 @@ fn test_simple_test_functions() -> Result<(), RemoteAPIError> {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let client = Rc::new(client);
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     sim.get_int32_param(26)?;
@@ -83,7 +83,7 @@ fn test_p_controller_functions() -> Result<(), RemoteAPIError> {
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let client = Rc::new(client);
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     let id = sim.get_object("/Cuboid[0]/joint".to_string(), None)?;
@@ -120,7 +120,7 @@ fn test_synchronous_image_transmission_functions() -> Result<(), RemoteAPIError>
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let client = Rc::new(client);
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     sim.set_vision_sensor_img(22, image, None, None, None)?;
@@ -137,7 +137,7 @@ fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> 
         payload: RefCell::new(vec![]),
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
-    let client = Rc::new(client);
+    let client = Arc::new(client);
     let sim = Sim::new(client.clone());
 
     let handle_id = sim.get_object(String::from("/LBR4p"), None)?;

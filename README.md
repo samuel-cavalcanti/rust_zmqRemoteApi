@@ -87,7 +87,7 @@ host: "localhost".to_string(),
 ..RemoteApiClientParams::default()
 })?;
 
-// Rc means Reference counter, is a smart pointer that counter the number of references
+// Arc means Atomic reference counter, is a smart pointer that counter the number of references
 let client = Rc::new(client);
 let sim = Sim::new(client.clone());
 ```
