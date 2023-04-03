@@ -5,11 +5,11 @@ use serde_json::Value;
 use std::sync::Arc;
 
 pub struct Sim {
-    client: Arc<dyn RemoteApiClientInterface>,
+    client: Arc<dyn RemoteApiClientInterface + Sync + Send>,
 }
 
 impl Sim {
-    pub fn new(client: Arc<dyn RemoteApiClientInterface>) -> Sim {
+    pub fn new(client: Arc<dyn RemoteApiClientInterface + Sync + Send>) -> Sim {
         Sim { client }
     }
     requests! {

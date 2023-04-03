@@ -5,11 +5,11 @@ use crate::zmq_requests::RawRequest;
 use serde_json::Value;
 
 pub struct SimIK {
-    client: Arc<dyn RemoteApiClientInterface>,
+    client: Arc<dyn RemoteApiClientInterface + Sync + Send>,
 }
 
 impl SimIK {
-    pub fn new(client: Arc<dyn RemoteApiClientInterface>) -> SimIK {
+    pub fn new(client: Arc<dyn RemoteApiClientInterface + Sync + Send>) -> SimIK {
         SimIK { client }
     }
     requests! {
