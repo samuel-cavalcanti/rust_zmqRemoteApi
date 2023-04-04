@@ -1,10 +1,9 @@
 from pathlib import Path
-from typing import Optional
 import unittest
 
 
 from ir_transpiler import FunctionAssign, Arg, TypeNode
-from ir_transpiler import ir_to_cpp, ir_to_string, ir_to_macro_request_rust,ir_to_py
+from ir_transpiler import ir_to_cpp, ir_to_string, ir_to_macro_request_rust, ir_to_py
 from cpp_token import TokenType
 from scanner import Scanner
 from stream import StringStream
@@ -56,25 +55,23 @@ class IrTestCase(unittest.TestCase):
                   unpack_table_ir,
                   wait_ir,
                   get_vision_sensor_depth_buffer_if]
-        
-        expected_strings = [ 
-"""def switchThread(self)->None:
+
+        expected_strings = [
+            """def switchThread(self)->None:
         ...
 """,
-"""def unpackTable(self,buffer:list[int])->dict:
+            """def unpackTable(self,buffer:list[int])->dict:
         ...
 """,
-"""def wait(self,dt:float, simulationTime:Optional[bool] = None)->float:
+            """def wait(self,dt:float, simulationTime:Optional[bool] = None)->float:
         ...
 """,
-"""def getVisionSensorDepthBuffer(self,sensorHandle:int, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
+            """def getVisionSensorDepthBuffer(self,sensorHandle:int, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
         ...
-"""
-,
+""",
         ]
         result = [ir_to_py(ir) for ir in inputs]
         self.assertEqualStrings(result, expected_strings)
-
 
     def test_ir_to_cpp(self):
 

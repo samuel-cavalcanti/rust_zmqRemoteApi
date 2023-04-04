@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-from re import I
 import unittest
 
-from scanner.scanner import Scanner, ScannerProtocol
+from scanner.scanner import Scanner
 from parser import parser, Arg, TypeNode, FunctionAssign
-from stream import Stream, StringStream
+from stream import StringStream
 from cpp_token import TokenType, Token
 
 
@@ -78,8 +77,6 @@ class ParserAndScannerTestCase(unittest.TestCase):
             """
         )
 
-        
-
         scanner = Scanner(stream)
 
         expected_functions = [
@@ -108,9 +105,5 @@ class ParserAndScannerTestCase(unittest.TestCase):
         functions = parser(scanner, stream)
         self.assertEqual(len(functions), len(expected_functions))
 
-        for expected_function,function in zip(expected_functions,functions):
-             self.assertEqual(expected_function,function)
-
-
-
-    
+        for expected_function, function in zip(expected_functions, functions):
+            self.assertEqual(expected_function, function)

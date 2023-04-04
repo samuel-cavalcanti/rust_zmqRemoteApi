@@ -12,7 +12,6 @@ class StateLettersWithDigits(Enum):
 def cpp_types_scan(stream: Stream) -> Optional[Token]:
 
     lexema = ''
-    old_pos = stream.pos()
     state = StateLettersWithDigits.initial_state
 
     while True:

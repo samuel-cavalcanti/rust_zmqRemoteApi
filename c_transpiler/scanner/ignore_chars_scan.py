@@ -1,6 +1,6 @@
 from enum import Enum, auto
 from typing import Optional
-from cpp_token import Token, TokenType
+from cpp_token import Token
 from stream import Stream
 
 
@@ -14,12 +14,11 @@ def ignore_chars(stream: Stream) -> Optional[Token]:
 
     state = State.Ignore_chars
 
-
     while True:
         char = stream.current_char()
         if char is None:
             return None
-        
+
         match state:
             case State.Ignore_chars:
                 if ignore(char):
@@ -35,7 +34,7 @@ def ignore_chars(stream: Stream) -> Optional[Token]:
                     state = State.Ignore_chars
                 else:
                     pass
-       
+
         stream.next()
 
 

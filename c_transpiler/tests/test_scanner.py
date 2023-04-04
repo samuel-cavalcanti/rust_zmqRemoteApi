@@ -234,7 +234,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.LESS, '<'),
             *vec_i64,
             Token(TokenType.BIGGER, '>'),
-           
+
         ]
 
         expected_tokens = [
@@ -245,7 +245,7 @@ class ScannerTestCase(unittest.TestCase):
             *vec_i64,
             Token(TokenType.BIGGER, '>'),
             Token(TokenType.ID, 'getVisionSensorDepthBuffer'),
-           
+
             Token(TokenType.OPEN_PARENTHESES, '('),
             *sensor_handle,
             Token(TokenType.COMMA, ','),
