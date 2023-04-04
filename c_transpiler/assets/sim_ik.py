@@ -3,40 +3,43 @@ from typing import Optional, Protocol
 
 class SimIk(Protocol):
 
-    def addIkElement(self,environmentHandle:int, ikGroupHandle:int, tipDummyHandle:int)->int:
+    def addElement(self,environmentHandle:int, ikGroupHandle:int, tipDummyHandle:int)->int:
         ...
     
-    def addIkElementFromScene(self,environmentHandle:int, ikGroup:int, baseHandle:int, tipHandle:int, targetHandle:int, constraints:int)->tuple[int, dict]:
+    def addElementFromScene(self,environmentHandle:int, ikGroup:int, baseHandle:int, tipHandle:int, targetHandle:int, constraints:int)->tuple[int, dict, dict]:
         ...
     
-    def applyIkEnvironmentToScene(self,environmentHandle:int, ikGroup:int, applyOnlyWhenSuccessful:Optional[bool] = None)->int:
+    def computeGroupJacobian(self,environmentHandle:int, ikGroupHandle:int)->tuple[list[float], list[float]]:
         ...
     
-    def applySceneToIkEnvironment(self,environmentHandle:int, ikGroup:int)->None:
+    def computeJacobian(self,environmentHandle:int, baseObject:int, lastJoint:int, constraints:int, tipMatrix:list[float], targetMatrix:Optional[list[float]] = None, constrBaseMatrix:Optional[list[float]] = None)->tuple[list[float], list[float]]:
         ...
     
-    def computeJacobian(self,environmentHandle:int, ikGroupHandle:int, options:int)->bool:
+    def createDebugOverlay(self,environmentHandle:int, tipHandle:int, baseHandle:Optional[int] = None)->int:
         ...
     
     def createDummy(self,environmentHandle:int, dummyName:Optional[str] = None)->int:
         ...
     
-    def createEnvironment(self)->int:
+    def createEnvironment(self,flags:Optional[int] = None)->int:
         ...
     
-    def createIkGroup(self,environmentHandle:int, ikGroupName:Optional[str] = None)->int:
+    def createGroup(self,environmentHandle:int, ikGroupName:Optional[str] = None)->int:
         ...
     
     def createJoint(self,environmentHandle:int, jointType:int, jointName:Optional[str] = None)->int:
         ...
     
-    def doesIkGroupExist(self,environmentHandle:int, ikGroupName:str)->bool:
+    def doesGroupExist(self,environmentHandle:int, ikGroupName:str)->bool:
         ...
     
     def doesObjectExist(self,environmentHandle:int, objectName:str)->bool:
         ...
     
     def duplicateEnvironment(self,environmentHandle:int)->int:
+        ...
+    
+    def eraseDebugOverlay(self,debugObject:int)->None:
         ...
     
     def eraseEnvironment(self,environmentHandle:int)->None:
@@ -54,40 +57,46 @@ class SimIk(Protocol):
     def getAlternateConfigs(self,environmentHandle:int, jointHandles:list[int], lowLimits:Optional[list[float]] = None, ranges:Optional[list[float]] = None)->list[float]:
         ...
     
-    def getIkElementBase(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->tuple[int, int]:
+    def getElementBase(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->tuple[int, int]:
         ...
     
-    def getIkElementConstraints(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->int:
+    def getElementConstraints(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->int:
         ...
     
-    def getIkElementFlags(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->int:
+    def getElementFlags(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->int:
         ...
     
-    def getIkElementPrecision(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->list[float]:
+    def getElementPrecision(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->list[float]:
         ...
     
-    def getIkElementWeights(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->list[float]:
+    def getElementWeights(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int)->list[float]:
         ...
     
-    def getIkGroupCalculation(self,environmentHandle:int, ikGroupHandle:int)->tuple[int, float, int]:
+    def getFailureDescription(self,reason:int)->str:
         ...
     
-    def getIkGroupFlags(self,environmentHandle:int, ikGroupHandle:int)->int:
+    def getGroupCalculation(self,environmentHandle:int, ikGroupHandle:int)->tuple[int, float, int]:
         ...
     
-    def getIkGroupHandle(self,environmentHandle:int, ikGroupName:str)->int:
+    def getGroupFlags(self,environmentHandle:int, ikGroupHandle:int)->int:
         ...
     
-    def getJacobian(self,environmentHandle:int, ikGroupHandle:int)->tuple[list[float], list[int]]:
+    def getGroupHandle(self,environmentHandle:int, ikGroupName:str)->int:
+        ...
+    
+    def getGroupJointLimitHits(self,environmentHandle:int, ikGroupHandle:int)->tuple[list[int], list[float]]:
+        ...
+    
+    def getGroupJoints(self,environmentHandle:int, ikGroupHandle:int)->list[int]:
         ...
     
     def getJointDependency(self,environmentHandle:int, jointHandle:int)->tuple[int, float, float]:
         ...
     
-    def getJointIkWeight(self,environmentHandle:int, jointHandle:int)->float:
+    def getJointInterval(self,environmentHandle:int, jointHandle:int)->tuple[bool, list[float]]:
         ...
     
-    def getJointInterval(self,environmentHandle:int, jointHandle:int)->tuple[bool, list[float]]:
+    def getJointLimitMargin(self,environmentHandle:int, jointHandle:int)->float:
         ...
     
     def getJointMatrix(self,environmentHandle:int, jointHandle:int)->list[float]:
@@ -102,7 +111,7 @@ class SimIk(Protocol):
     def getJointPosition(self,environmentHandle:int, jointHandle:int)->float:
         ...
     
-    def getJointScrewPitch(self,environmentHandle:int, jointHandle:int)->float:
+    def getJointScrewLead(self,environmentHandle:int, jointHandle:int)->float:
         ...
     
     def getJointTransformation(self,environmentHandle:int, jointHandle:int)->tuple[list[float], list[float], list[float]]:
@@ -111,10 +120,7 @@ class SimIk(Protocol):
     def getJointType(self,environmentHandle:int, jointHandle:int)->int:
         ...
     
-    def getLinkedDummy(self,environmentHandle:int, dummyHandle:int)->int:
-        ...
-    
-    def getManipulability(self,environmentHandle:int, ikGroupHandle:int)->float:
+    def getJointWeight(self,environmentHandle:int, jointHandle:int)->float:
         ...
     
     def getObjectHandle(self,environmentHandle:int, objectName:str)->int:
@@ -132,10 +138,19 @@ class SimIk(Protocol):
     def getObjectTransformation(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int)->tuple[list[float], list[float], list[float]]:
         ...
     
+    def getObjectType(self,environmentHandle:int, objectHandle:int)->int:
+        ...
+    
     def getObjects(self,environmentHandle:int, index:int)->tuple[int, str, bool, int]:
         ...
     
-    def handleIkGroup(self,environmentHandle:int, ikGroupHandle:Optional[int] = None)->int:
+    def getTargetDummy(self,environmentHandle:int, dummyHandle:int)->int:
+        ...
+    
+    def handleGroup(self,environmentHandle:int, ikGroup:int, options:Optional[dict] = None)->tuple[int, int, list[float]]:
+        ...
+    
+    def handleGroups(self,environmentHandle:int, ikGroups:list[int], options:Optional[dict] = None)->tuple[int, int, list[float]]:
         ...
     
     def load(self,environmentHandle:int, data:str)->None:
@@ -144,34 +159,34 @@ class SimIk(Protocol):
     def save(self,environmentHandle:int)->str:
         ...
     
-    def setIkElementBase(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, baseHandle:int, constraintsBaseHandle:Optional[int] = None)->None:
+    def setElementBase(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, baseHandle:int, constraintsBaseHandle:Optional[int] = None)->None:
         ...
     
-    def setIkElementConstraints(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, constraints:int)->None:
+    def setElementConstraints(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, constraints:int)->None:
         ...
     
-    def setIkElementFlags(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, flags:int)->None:
+    def setElementFlags(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, flags:int)->None:
         ...
     
-    def setIkElementPrecision(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, precision:list[float])->None:
+    def setElementPrecision(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, precision:list[float])->None:
         ...
     
-    def setIkElementWeights(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, weights:list[float])->None:
+    def setElementWeights(self,environmentHandle:int, ikGroupHandle:int, elementHandle:int, weights:list[float])->None:
         ...
     
-    def setIkGroupCalculation(self,environmentHandle:int, ikGroupHandle:int, method:int, damping:float, maxIterations:int)->None:
+    def setGroupCalculation(self,environmentHandle:int, ikGroupHandle:int, method:int, damping:float, maxIterations:int)->None:
         ...
     
-    def setIkGroupFlags(self,environmentHandle:int, ikGroupHandle:int, flags:int)->None:
+    def setGroupFlags(self,environmentHandle:int, ikGroupHandle:int, flags:int)->None:
         ...
     
-    def setJointDependency(self,environmentHandle:int, jointHandle:int, depJointHandle:int, offset:Optional[float] = None, mult:Optional[float] = None)->None:
-        ...
-    
-    def setJointIkWeight(self,environmentHandle:int, jointHandle:int, weight:float)->None:
+    def setJointDependency(self,environmentHandle:int, jointHandle:int, masterJointHandle:int, offset:Optional[float] = None, mult:Optional[float] = None, callback:Optional[str] = None)->None:
         ...
     
     def setJointInterval(self,environmentHandle:int, jointHandle:int, cyclic:bool, interval:Optional[list[float]] = None)->None:
+        ...
+    
+    def setJointLimitMargin(self,environmentHandle:int, jointHandle:int, margin:float)->None:
         ...
     
     def setJointMaxStepSize(self,environmentHandle:int, jointHandle:int, stepSize:float)->None:
@@ -183,10 +198,10 @@ class SimIk(Protocol):
     def setJointPosition(self,environmentHandle:int, jointHandle:int, position:float)->None:
         ...
     
-    def setJointScrewPitch(self,environmentHandle:int, jointHandle:int, pitch:float)->None:
+    def setJointScrewLead(self,environmentHandle:int, jointHandle:int, lead:float)->None:
         ...
     
-    def setLinkedDummy(self,environmentHandle:int, dummyHandle:int, linkedDummyHandle:int)->None:
+    def setJointWeight(self,environmentHandle:int, jointHandle:int, weight:float)->None:
         ...
     
     def setObjectMatrix(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int, matrix:list[float])->None:
@@ -205,5 +220,14 @@ class SimIk(Protocol):
         ...
     
     def setSphericalJointRotation(self,environmentHandle:int, jointHandle:int, eulerOrQuaternion:list[float])->None:
+        ...
+    
+    def setTargetDummy(self,environmentHandle:int, dummyHandle:int, targetDummyHandle:int)->None:
+        ...
+    
+    def syncFromSim(self,environmentHandle:int, ikGroups:list[int])->None:
+        ...
+    
+    def syncToSim(self,environmentHandle:int, ikGroups:list[int])->None:
         ...
 

@@ -6,7 +6,15 @@
         std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepthBuffer(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});
         std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorCharImage(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});
         void setVisionSensorCharImage(int64_t sensorHandle, std::vector<uint8_t> image);
+        std::vector<int64_t> getObjectSelection();
+        void setObjectSelection(std::vector<double> objectHandles);
         // DEPRECATED END
+        
+        // SPECIAL START
+        std::optional<std::vector<uint8_t>> getStringSignal(std::string signalName);
+        std::optional<int64_t> getInt32Signal(std::string signalName);
+        std::optional<double> getFloatSignal(std::string signalName);
+        // SPECIAL END
         
         int64_t addDrawingObject(int64_t objectType, double size, double duplicateTolerance, int64_t parentObjectHandle, int64_t maxItemCount, std::optional<std::vector<double>> color = {});
         int64_t addDrawingObjectItem(int64_t drawingObjectHandle, std::vector<double> itemData);
@@ -18,8 +26,10 @@
         void addLog(int64_t verbosityLevel, std::string logMessage);
         int64_t addParticleObject(int64_t objectType, double size, double density, std::vector<double> params, double lifeTime, int64_t maxItemCount, std::optional<std::vector<double>> color = {});
         void addParticleObjectItem(int64_t objectHandle, std::vector<double> itemData);
+        void addReferencedHandle(int64_t objectHandle, int64_t referencedHandle);
         int64_t addScript(int64_t scriptType);
         int64_t adjustView(int64_t viewHandleOrIndex, int64_t associatedViewableObjectHandle, int64_t options, std::optional<std::string> viewLabel = {});
+        int64_t alignShapeBB(int64_t shapeHandle, std::vector<double> pose);
         std::tuple<double, double, double> alphaBetaGammaToYawPitchRoll(double alphaAngle, double betaAngle, double gammaAngle);
         int64_t announceSceneContentChange();
         void associateScriptWithObject(int64_t scriptHandle, int64_t objectHandle);
@@ -44,7 +54,6 @@
         std::tuple<int64_t, double, std::vector<double>, std::vector<double>> checkProximitySensorEx2(int64_t sensorHandle, std::vector<double> vertices, int64_t itemType, int64_t itemCount, int64_t mode, double threshold, double maxAngle);
         std::tuple<int64_t, std::vector<double>, std::vector<double>> checkVisionSensor(int64_t sensorHandle, int64_t entityHandle);
         std::vector<double> checkVisionSensorEx(int64_t sensorHandle, int64_t entityHandle, bool returnImage);
-        void clearDoubleSignal(std::string signalName);
         void clearFloatSignal(std::string signalName);
         void clearInt32Signal(std::string signalName);
         void clearStringSignal(std::string signalName);
@@ -59,12 +68,12 @@
         int64_t createForceSensor(int64_t options, std::vector<int64_t> intParams, std::vector<double> floatParams);
         int64_t createHeightfieldShape(int64_t options, double shadingAngle, int64_t xPointCount, int64_t yPointCount, double xSize, std::vector<double> heights);
         int64_t createJoint(int64_t jointType, int64_t jointMode, int64_t options, std::optional<std::vector<double>> sizes = {});
-        int64_t createMeshShape(int64_t options, double shadingAngle, std::vector<double> vertices, std::vector<int64_t> indices);
         int64_t createOctree(double voxelSize, int64_t options, double pointSize);
         int64_t createPath(std::vector<double> ctrlPts, std::optional<int64_t> options = {}, std::optional<int64_t> subdiv = {}, std::optional<double> smoothness = {}, std::optional<int64_t> orientationMode = {}, std::optional<std::vector<double>> upVector = {});
         int64_t createPointCloud(double maxVoxelSize, int64_t maxPtCntPerVoxel, int64_t options, double pointSize);
         int64_t createPrimitiveShape(int64_t primitiveType, std::vector<double> sizes, std::optional<int64_t> options = {});
         int64_t createProximitySensor(int64_t sensorType, int64_t subType, int64_t options, std::vector<int64_t> intParams, std::vector<double> floatParams);
+        int64_t createShape(int64_t options, double shadingAngle, std::vector<double> vertices, std::vector<int64_t> indices, std::vector<double> normals, std::vector<double> textureCoordinates, std::vector<uint8_t> texture, std::vector<int64_t> textureResolution);
         std::tuple<int64_t, int64_t, std::vector<int64_t>> createTexture(std::string fileName, int64_t options, std::optional<std::vector<double>> planeSizes = {}, std::optional<std::vector<double>> scalingUV = {}, std::optional<std::vector<double>> xy_g = {}, std::optional<int64_t> fixedResolution = {}, std::optional<std::vector<int64_t>> resolution = {});
         int64_t createVisionSensor(int64_t options, std::vector<int64_t> intParams, std::vector<double> floatParams);
         void destroyCollection(int64_t collectionHandle);
@@ -87,7 +96,6 @@
         double getConfigDistance(std::vector<double> configA, std::vector<double> configB, std::optional<std::vector<double>> metric = {}, std::optional<std::vector<int64_t>> types = {});
         std::tuple<std::vector<int64_t>, std::vector<double>, std::vector<double>, std::vector<double>> getContactInfo(int64_t dynamicPass, int64_t objectHandle, int64_t index);
         std::tuple<std::vector<double>, std::vector<int64_t>> getDecimatedMesh(std::vector<double> verticesIn, std::vector<int64_t> indicesIn, double decimationPercentage);
-        double getDoubleSignal(std::string signalName);
         bool getEngineBoolParam(int64_t paramId, int64_t objectHandle);
         double getEngineFloatParam(int64_t paramId, int64_t objectHandle);
         int64_t getEngineInt32Param(int64_t paramId, int64_t objectHandle);
@@ -95,12 +103,10 @@
         int64_t getExplicitHandling(int64_t objectHandle);
         std::string getExtensionString(int64_t objectHandle, int64_t index, std::optional<std::string> key = {});
         double getFloatParam(int64_t parameter);
-        double getFloatSignal(std::string signalName);
         std::vector<json> getGenesisEvents();
         std::tuple<std::string, int64_t, std::vector<double>, std::vector<double>, std::vector<double>, std::vector<double>, int64_t, int64_t> getGraphCurve(int64_t graphHandle, int64_t graphType, int64_t curveIndex);
         std::tuple<int64_t, std::vector<double>, std::vector<double>, int64_t> getGraphInfo(int64_t graphHandle);
         int64_t getInt32Param(int64_t parameter);
-        int64_t getInt32Signal(std::string signalName);
         int64_t getIsRealTimeSimulation();
         std::tuple<int64_t, double, double> getJointDependency(int64_t jointHandle);
         double getJointForce(int64_t jointHandle);
@@ -115,6 +121,7 @@
         std::tuple<int64_t, std::vector<double>, std::vector<double>, std::vector<double>> getLightParameters(int64_t lightHandle);
         int64_t getLinkDummy(int64_t dummyHandle);
         std::vector<std::string> getMatchingPersistentDataTags(std::string pattern);
+        std::vector<double> getMatrixInverse(std::vector<double> matrix);
         int64_t getModelProperty(int64_t objectHandle);
         std::string getModuleInfo(std::string moduleName, int64_t infoType);
         std::tuple<std::string, int64_t> getModuleName(int64_t index);
@@ -125,9 +132,11 @@
         int64_t getNavigationMode();
         int64_t getObject(std::string path, std::optional<json> options = {});
         std::string getObjectAlias(int64_t objectHandle, std::optional<int64_t> options = {});
+        std::string getObjectAliasRelative(int64_t handle, int64_t baseHandle, std::optional<int64_t> options = {});
         int64_t getObjectChild(int64_t objectHandle, int64_t index);
         std::vector<double> getObjectChildPose(int64_t objectHandle);
         std::vector<double> getObjectColor(int64_t objectHandle, int64_t index, int64_t colorComponent);
+        std::vector<double> getObjectFloatArrayParam(int64_t objectHandle, int64_t parameterID);
         double getObjectFloatParam(int64_t objectHandle, int64_t parameterID);
         void getObjectFromUid(int64_t uid, std::optional<json> options = {});
         int64_t getObjectInt32Param(int64_t objectHandle, int64_t parameterID);
@@ -138,7 +147,7 @@
         std::vector<double> getObjectPosition(int64_t objectHandle, int64_t relativeToObjectHandle);
         int64_t getObjectProperty(int64_t objectHandle);
         std::vector<double> getObjectQuaternion(int64_t objectHandle, int64_t relativeToObjectHandle);
-        std::vector<int64_t> getObjectSelection();
+        std::vector<int64_t> getObjectSel();
         double getObjectSizeFactor(int64_t ObjectHandle);
         int64_t getObjectSpecialProperty(int64_t objectHandle);
         std::vector<uint8_t> getObjectStringParam(int64_t objectHandle, int64_t parameterID);
@@ -154,6 +163,7 @@
         std::vector<std::string> getPersistentDataTags();
         std::tuple<double, int64_t, int64_t, double> getPointCloudOptions(int64_t pointCloudHandle);
         std::vector<double> getPointCloudPoints(int64_t pointCloudHandle);
+        std::vector<double> getPoseInverse(std::vector<double> pose);
         std::tuple<std::vector<double>, std::vector<int64_t>> getQHull(std::vector<double> verticesIn);
         std::vector<double> getQuaternionFromMatrix(std::vector<double> matrix);
         double getRandom(std::optional<int64_t> seed = {});
@@ -161,6 +171,7 @@
         std::tuple<std::vector<double>, double> getRotationAxis(std::vector<double> matrixStart, std::vector<double> matrixGoal);
         std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getScaledImage(std::vector<uint8_t> imageIn, std::vector<int64_t> resolutionIn, std::vector<int64_t> desiredResolutionOut, int64_t options);
         int64_t getScript(int64_t scriptType, std::optional<int64_t> objectHandle = {}, std::optional<std::string> scriptName = {});
+        json getScriptFunctions(int64_t scriptHandle);
         int64_t getScriptInt32Param(int64_t scriptHandle, int64_t parameterID);
         std::vector<uint8_t> getScriptStringParam(int64_t scriptHandle, int64_t parameterID);
         bool getSettingBool(std::string key);
@@ -182,7 +193,6 @@
         std::tuple<int64_t, std::vector<int64_t>, std::vector<int64_t>> getSimulatorMessage();
         std::string getStackTraceback(std::optional<int64_t> scriptHandle = {});
         std::string getStringParam(int64_t parameter);
-        std::vector<uint8_t> getStringSignal(std::string signalName);
         double getSystemTime();
         std::tuple<int64_t, std::vector<int64_t>> getTextureId(std::string textureName);
         bool getThreadAutomaticSwitch();
@@ -194,6 +204,7 @@
         std::tuple<std::vector<double>, std::vector<double>> getVelocity(int64_t shapeHandle);
         std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepth(int64_t sensorHandle, std::optional<int64_t> options = {}, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});
         std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorImg(int64_t sensorHandle, std::optional<int64_t> options = {}, std::optional<double> rgbaCutOff = {}, std::optional<std::vector<int64_t>> pos = {}, std::optional<std::vector<int64_t>> size = {});
+        void getVisionSensorRes(int64_t sensorHandle);
         int64_t groupShapes(std::vector<int64_t> shapeHandles, std::optional<bool> merge = {});
         int64_t handleAddOnScripts(int64_t callType);
         int64_t handleChildScripts(int64_t callType);
@@ -216,8 +227,6 @@
         std::vector<double> interpolateMatrices(std::vector<double> matrixIn1, std::vector<double> matrixIn2, double interpolFactor);
         std::vector<double> interpolatePoses(std::vector<double> poseIn1, std::vector<double> poseIn2, double interpolFactor);
         int64_t intersectPointsWithPointCloud(int64_t pointCloudHandle, int64_t options, std::vector<double> points, double tolerance);
-        void invertMatrix(std::vector<double> matrix);
-        void invertPose(std::vector<double> pose);
         int64_t isDeprecated(std::string funcOrConst);
         bool isDynamicallyEnabled(int64_t objectHandle);
         bool isHandle(int64_t objectHandle);
@@ -249,7 +258,7 @@
         std::vector<uint8_t> readCustomDataBlock(int64_t objectHandle, std::string tagName);
         void readCustomDataBlockEx(int64_t handle, std::string tagName, std::optional<json> options = {});
         std::vector<std::string> readCustomDataBlockTags(int64_t objectHandle);
-        void readCustomTableData(int64_t handle, std::string tagName, std::string data, std::optional<json> options = {});
+        void readCustomTableData(int64_t handle, std::string tagName, std::optional<json> options = {});
         std::tuple<int64_t, std::vector<double>, std::vector<double>> readForceSensor(int64_t objectHandle);
         std::tuple<int64_t, double, std::vector<double>, int64_t, std::vector<double>> readProximitySensor(int64_t sensorHandle);
         std::vector<uint8_t> readTexture(int64_t textureId, int64_t options, std::optional<int64_t> posX = {}, std::optional<int64_t> posY = {}, std::optional<int64_t> sizeX = {}, std::optional<int64_t> sizeY = {});
@@ -258,14 +267,15 @@
         int64_t registerScriptFuncHook(std::string funcToHook, std::string userFunc, bool execBefore);
         int64_t registerScriptFunction(std::string funcNameAtPluginName, std::string callTips);
         int64_t registerScriptVariable(std::string varNameAtPluginName);
+        int64_t relocateShapeFrame(int64_t shapeHandle, std::vector<double> pose);
         void removeDrawingObject(int64_t drawingObjectHandle);
         int64_t removeModel(int64_t objectHandle);
         void removeObjects(std::vector<int64_t> objectHandles);
         void removeParticleObject(int64_t particleObjectHandle);
         int64_t removePointsFromPointCloud(int64_t pointCloudHandle, int64_t options, std::vector<double> points, double tolerance);
+        void removeReferencedObjects(int64_t objectHandle);
         void removeScript(int64_t scriptHandle);
         int64_t removeVoxelsFromOctree(int64_t octreeHandle, int64_t options, std::vector<double> points);
-        int64_t reorientShapeBoundingBox(int64_t shapeHandle, int64_t relativeToHandle);
         std::vector<double> resamplePath(std::vector<double> path, std::vector<double> pathLengths, int64_t finalConfigCnt, std::optional<json> method = {}, std::optional<std::vector<int64_t>> types = {});
         void resetDynamicObject(int64_t objectHandle);
         void resetGraph(int64_t objectHandle);
@@ -289,7 +299,6 @@
         int64_t serialSend(int64_t portHandle, std::vector<uint8_t> data);
         void setArrayParam(int64_t parameter, std::vector<double> arrayOfValues);
         void setBoolParam(int64_t parameter, bool boolState);
-        void setDoubleSignal(std::string signalName, double signalValue);
         void setEngineBoolParam(int64_t paramId, int64_t objectHandle, bool boolParam);
         void setEngineFloatParam(int64_t paramId, int64_t objectHandle, double floatParam);
         void setEngineInt32Param(int64_t paramId, int64_t objectHandle, int64_t int32Param);
@@ -319,6 +328,7 @@
         void setObjectAlias(int64_t objectHandle, std::string objectAlias);
         void setObjectChildPose(int64_t objectHandle, std::vector<double> pose);
         bool setObjectColor(int64_t objectHandle, int64_t index, int64_t colorComponent, std::vector<double> rgbData);
+        void setObjectFloatArrayParam(int64_t objectHandle, int64_t parameterID, std::vector<double> params);
         void setObjectFloatParam(int64_t objectHandle, int64_t parameterID, double parameter);
         void setObjectInt32Param(int64_t objectHandle, int64_t parameterID, int64_t parameter);
         void setObjectMatrix(int64_t objectHandle, int64_t relativeToObjectHandle, std::vector<double> matrix);
@@ -328,7 +338,7 @@
         void setObjectPosition(int64_t objectHandle, int64_t relativeToObjectHandle, std::vector<double> position);
         void setObjectProperty(int64_t objectHandle, int64_t property);
         void setObjectQuaternion(int64_t objectHandle, int64_t relativeToObjectHandle, std::vector<double> quaternion);
-        void setObjectSelection(std::vector<double> objectHandles);
+        void setObjectSel(std::vector<int64_t> objectHandles);
         void setObjectSpecialProperty(int64_t objectHandle, int64_t property);
         void setObjectStringParam(int64_t objectHandle, int64_t parameterID, std::vector<uint8_t> parameter);
         void setPage(int64_t pageIndex);
@@ -368,6 +378,7 @@
         std::vector<int64_t> unpackUInt16Table(std::vector<uint8_t> data, std::optional<int64_t> startUint16Index = {}, std::optional<int64_t> uint16Count = {}, std::optional<int64_t> additionalByteOffset = {});
         std::vector<int64_t> unpackUInt32Table(std::vector<uint8_t> data, std::optional<int64_t> startUint32Index = {}, std::optional<int64_t> uint32Count = {}, std::optional<int64_t> additionalByteOffset = {});
         std::vector<int64_t> unpackUInt8Table(std::vector<uint8_t> data, std::optional<int64_t> startUint8Index = {}, std::optional<int64_t> uint8count = {});
+        void visitTree(int64_t rootHandle, std::string visitorFunc, std::optional<json> options = {});
         double wait(double dt, std::optional<bool> simulationTime = {});
         json waitForSignal(std::string sigName);
         void writeCustomDataBlock(int64_t objectHandle, std::string tagName, std::vector<uint8_t> data);

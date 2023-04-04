@@ -24,6 +24,21 @@ class Sim(Protocol):
     def setVisionSensorCharImage(self,sensorHandle:int, image:list[int])->None:
         ...
     
+    def getObjectSelection(self)->list[int]:
+        ...
+    
+    def setObjectSelection(self,objectHandles:list[float])->None:
+        ...
+    
+    def getStringSignal(self,signalName:str)->Optional[list[int]]:
+        ...
+    
+    def getInt32Signal(self,signalName:str)->Optional[int]:
+        ...
+    
+    def getFloatSignal(self,signalName:str)->Optional[float]:
+        ...
+    
     def addDrawingObject(self,objectType:int, size:float, duplicateTolerance:float, parentObjectHandle:int, maxItemCount:int, color:Optional[list[float]] = None)->int:
         ...
     
@@ -54,10 +69,16 @@ class Sim(Protocol):
     def addParticleObjectItem(self,objectHandle:int, itemData:list[float])->None:
         ...
     
+    def addReferencedHandle(self,objectHandle:int, referencedHandle:int)->None:
+        ...
+    
     def addScript(self,scriptType:int)->int:
         ...
     
     def adjustView(self,viewHandleOrIndex:int, associatedViewableObjectHandle:int, options:int, viewLabel:Optional[str] = None)->int:
+        ...
+    
+    def alignShapeBB(self,shapeHandle:int, pose:list[float])->int:
         ...
     
     def alphaBetaGammaToYawPitchRoll(self,alphaAngle:float, betaAngle:float, gammaAngle:float)->tuple[float, float, float]:
@@ -132,9 +153,6 @@ class Sim(Protocol):
     def checkVisionSensorEx(self,sensorHandle:int, entityHandle:int, returnImage:bool)->list[float]:
         ...
     
-    def clearDoubleSignal(self,signalName:str)->None:
-        ...
-    
     def clearFloatSignal(self,signalName:str)->None:
         ...
     
@@ -177,9 +195,6 @@ class Sim(Protocol):
     def createJoint(self,jointType:int, jointMode:int, options:int, sizes:Optional[list[float]] = None)->int:
         ...
     
-    def createMeshShape(self,options:int, shadingAngle:float, vertices:list[float], indices:list[int])->int:
-        ...
-    
     def createOctree(self,voxelSize:float, options:int, pointSize:float)->int:
         ...
     
@@ -193,6 +208,9 @@ class Sim(Protocol):
         ...
     
     def createProximitySensor(self,sensorType:int, subType:int, options:int, intParams:list[int], floatParams:list[float])->int:
+        ...
+    
+    def createShape(self,options:int, shadingAngle:float, vertices:list[float], indices:list[int], normals:list[float], textureCoordinates:list[float], texture:list[int], textureResolution:list[int])->int:
         ...
     
     def createTexture(self,fileName:str, options:int, planeSizes:Optional[list[float]] = None, scalingUV:Optional[list[float]] = None, xy_g:Optional[list[float]] = None, fixedResolution:Optional[int] = None, resolution:Optional[list[int]] = None)->tuple[int, int, list[int]]:
@@ -261,9 +279,6 @@ class Sim(Protocol):
     def getDecimatedMesh(self,verticesIn:list[float], indicesIn:list[int], decimationPercentage:float)->tuple[list[float], list[int]]:
         ...
     
-    def getDoubleSignal(self,signalName:str)->float:
-        ...
-    
     def getEngineBoolParam(self,paramId:int, objectHandle:int)->bool:
         ...
     
@@ -285,9 +300,6 @@ class Sim(Protocol):
     def getFloatParam(self,parameter:int)->float:
         ...
     
-    def getFloatSignal(self,signalName:str)->float:
-        ...
-    
     def getGenesisEvents(self)->list[dict]:
         ...
     
@@ -298,9 +310,6 @@ class Sim(Protocol):
         ...
     
     def getInt32Param(self,parameter:int)->int:
-        ...
-    
-    def getInt32Signal(self,signalName:str)->int:
         ...
     
     def getIsRealTimeSimulation(self)->int:
@@ -345,6 +354,9 @@ class Sim(Protocol):
     def getMatchingPersistentDataTags(self,pattern:str)->list[str]:
         ...
     
+    def getMatrixInverse(self,matrix:list[float])->list[float]:
+        ...
+    
     def getModelProperty(self,objectHandle:int)->int:
         ...
     
@@ -375,6 +387,9 @@ class Sim(Protocol):
     def getObjectAlias(self,objectHandle:int, options:Optional[int] = None)->str:
         ...
     
+    def getObjectAliasRelative(self,handle:int, baseHandle:int, options:Optional[int] = None)->str:
+        ...
+    
     def getObjectChild(self,objectHandle:int, index:int)->int:
         ...
     
@@ -382,6 +397,9 @@ class Sim(Protocol):
         ...
     
     def getObjectColor(self,objectHandle:int, index:int, colorComponent:int)->list[float]:
+        ...
+    
+    def getObjectFloatArrayParam(self,objectHandle:int, parameterID:int)->list[float]:
         ...
     
     def getObjectFloatParam(self,objectHandle:int, parameterID:int)->float:
@@ -414,7 +432,7 @@ class Sim(Protocol):
     def getObjectQuaternion(self,objectHandle:int, relativeToObjectHandle:int)->list[float]:
         ...
     
-    def getObjectSelection(self)->list[int]:
+    def getObjectSel(self)->list[int]:
         ...
     
     def getObjectSizeFactor(self,ObjectHandle:int)->float:
@@ -462,6 +480,9 @@ class Sim(Protocol):
     def getPointCloudPoints(self,pointCloudHandle:int)->list[float]:
         ...
     
+    def getPoseInverse(self,pose:list[float])->list[float]:
+        ...
+    
     def getQHull(self,verticesIn:list[float])->tuple[list[float], list[int]]:
         ...
     
@@ -481,6 +502,9 @@ class Sim(Protocol):
         ...
     
     def getScript(self,scriptType:int, objectHandle:Optional[int] = None, scriptName:Optional[str] = None)->int:
+        ...
+    
+    def getScriptFunctions(self,scriptHandle:int)->dict:
         ...
     
     def getScriptInt32Param(self,scriptHandle:int, parameterID:int)->int:
@@ -546,9 +570,6 @@ class Sim(Protocol):
     def getStringParam(self,parameter:int)->str:
         ...
     
-    def getStringSignal(self,signalName:str)->list[int]:
-        ...
-    
     def getSystemTime(self)->float:
         ...
     
@@ -580,6 +601,9 @@ class Sim(Protocol):
         ...
     
     def getVisionSensorImg(self,sensorHandle:int, options:Optional[int] = None, rgbaCutOff:Optional[float] = None, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
+        ...
+    
+    def getVisionSensorRes(self,sensorHandle:int)->None:
         ...
     
     def groupShapes(self,shapeHandles:list[int], merge:Optional[bool] = None)->int:
@@ -646,12 +670,6 @@ class Sim(Protocol):
         ...
     
     def intersectPointsWithPointCloud(self,pointCloudHandle:int, options:int, points:list[float], tolerance:float)->int:
-        ...
-    
-    def invertMatrix(self,matrix:list[float])->None:
-        ...
-    
-    def invertPose(self,pose:list[float])->None:
         ...
     
     def isDeprecated(self,funcOrConst:str)->int:
@@ -747,7 +765,7 @@ class Sim(Protocol):
     def readCustomDataBlockTags(self,objectHandle:int)->list[str]:
         ...
     
-    def readCustomTableData(self,handle:int, tagName:str, data:str, options:Optional[dict] = None)->None:
+    def readCustomTableData(self,handle:int, tagName:str, options:Optional[dict] = None)->None:
         ...
     
     def readForceSensor(self,objectHandle:int)->tuple[int, list[float], list[float]]:
@@ -774,6 +792,9 @@ class Sim(Protocol):
     def registerScriptVariable(self,varNameAtPluginName:str)->int:
         ...
     
+    def relocateShapeFrame(self,shapeHandle:int, pose:list[float])->int:
+        ...
+    
     def removeDrawingObject(self,drawingObjectHandle:int)->None:
         ...
     
@@ -789,13 +810,13 @@ class Sim(Protocol):
     def removePointsFromPointCloud(self,pointCloudHandle:int, options:int, points:list[float], tolerance:float)->int:
         ...
     
+    def removeReferencedObjects(self,objectHandle:int)->None:
+        ...
+    
     def removeScript(self,scriptHandle:int)->None:
         ...
     
     def removeVoxelsFromOctree(self,octreeHandle:int, options:int, points:list[float])->int:
-        ...
-    
-    def reorientShapeBoundingBox(self,shapeHandle:int, relativeToHandle:int)->int:
         ...
     
     def resamplePath(self,path:list[float], pathLengths:list[float], finalConfigCnt:int, method:Optional[dict] = None, types:Optional[list[int]] = None)->list[float]:
@@ -865,9 +886,6 @@ class Sim(Protocol):
         ...
     
     def setBoolParam(self,parameter:int, boolState:bool)->None:
-        ...
-    
-    def setDoubleSignal(self,signalName:str, signalValue:float)->None:
         ...
     
     def setEngineBoolParam(self,paramId:int, objectHandle:int, boolParam:bool)->None:
@@ -957,6 +975,9 @@ class Sim(Protocol):
     def setObjectColor(self,objectHandle:int, index:int, colorComponent:int, rgbData:list[float])->bool:
         ...
     
+    def setObjectFloatArrayParam(self,objectHandle:int, parameterID:int, params:list[float])->None:
+        ...
+    
     def setObjectFloatParam(self,objectHandle:int, parameterID:int, parameter:float)->None:
         ...
     
@@ -984,7 +1005,7 @@ class Sim(Protocol):
     def setObjectQuaternion(self,objectHandle:int, relativeToObjectHandle:int, quaternion:list[float])->None:
         ...
     
-    def setObjectSelection(self,objectHandles:list[float])->None:
+    def setObjectSel(self,objectHandles:list[int])->None:
         ...
     
     def setObjectSpecialProperty(self,objectHandle:int, property:int)->None:
@@ -1102,6 +1123,9 @@ class Sim(Protocol):
         ...
     
     def unpackUInt8Table(self,data:list[int], startUint8Index:Optional[int] = None, uint8count:Optional[int] = None)->list[int]:
+        ...
+    
+    def visitTree(self,rootHandle:int, visitorFunc:str, options:Optional[dict] = None)->None:
         ...
     
     def wait(self,dt:float, simulationTime:Optional[bool] = None)->float:
