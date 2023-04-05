@@ -11,7 +11,7 @@
 //         })
 // }
 
-pub fn to_byte_array_string(bytes: &Vec<u8>) -> String {
+pub fn to_byte_array_string(bytes: &[u8]) -> String {
     let ascii_format: String = bytes
         .iter()
         .map(|b| std::ascii::escape_default(*b).to_string())
