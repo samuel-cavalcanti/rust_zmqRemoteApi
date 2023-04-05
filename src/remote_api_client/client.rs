@@ -58,7 +58,7 @@ impl RemoteApiClient {
         }
     }
 
-    fn call(&self, payload: Vec<u8>) -> Result<Vec<u8>, RemoteAPIError> {
+    pub fn call(&self, payload: Vec<u8>) -> Result<Vec<u8>, RemoteAPIError> {
         log::trace!("Raw request: {}", log_utils::to_byte_array_string(&payload));
 
         self.rpc_socket.send(payload, zmq::DONTWAIT)?;
