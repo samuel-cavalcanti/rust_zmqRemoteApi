@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Unofficial Rust zmqRemoteApi](#unofficial-rust-zmqremoteapi)
+- [Rust zmqRemoteApi](#unofficial-rust-zmqremoteapi)
   - [Porting C++ client to Rust client](#porting-c-client-to-rust-client)
   - [diferences between C++ client and Rust client](#diferences-between-c-client-and-rust-client)
   - [running the opencv example](#running-the-opencv-example)
@@ -10,7 +10,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ![example workflow](https://github.com/samuel-cavalcanti/rust_zmqRemoteApi/actions/workflows/rust.yml/badge.svg?branch=main)
-# Unofficial Rust zmqRemoteApi
+# Rust zmqRemoteApi
 
 This client support the coppeliasim **4.5.1** version
 
@@ -63,7 +63,8 @@ get_string_signal(signal_name:String)->String
 
 ## running the opencv example
 
-[![Watch the video](https://img.youtube.com/vi/fo8G43WZQ6c/maxresdefault.jpg)](https://youtu.be/fo8G43WZQ6c)
+https://user-images.githubusercontent.com/24573157/230082972-3c782df5-dadd-4669-b36d-4d5e864a0b17.mp4
+
 
 ## Get started
 
@@ -77,7 +78,7 @@ add this crate at your cargo.toml :
 
 ```toml
 # the branch is the coppelia version
-zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.4.0"}
+zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.5.1"}
 ```
 
 See this simple [example](examples/get_simulation_time.rs) to understand how to use this create.
