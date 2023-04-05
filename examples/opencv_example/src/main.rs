@@ -1,4 +1,3 @@
-use opencv;
 use std::ffi::c_void;
 use std::rc::Rc;
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
