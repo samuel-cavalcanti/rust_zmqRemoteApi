@@ -14,8 +14,9 @@ def cpp_to_rust(assigns: list[FunctionAssign], rust_file: Path) -> None:
 
     rust_assigns = [ir_to_macro_request_rust(assign) for assign in assigns]
     rust_string = ",\n".join(rust_assigns)
-
-    content = f'requests!{{\n{rust_string}\n}}'
+    file_name = rust_file.name.split(".")[0]
+    struct_name = inflection.camelize(file_name)
+    content = f' impl {struct_name} {{\n requests!{{\n"{file_name}",\n{rust_string}\n}}\n}}'
 
     rust_file.write_text(content)
 

@@ -1,4 +1,6 @@
-requests!{
+ impl SimIk {
+ requests!{
+"sim_ik",
 (add_element,"addElement",(environment_handle:i64,ik_group_handle:i64,tip_dummy_handle:i64)->i64),
 (add_element_from_scene,"addElementFromScene",(environment_handle:i64,ik_group:i64,base_handle:i64,tip_handle:i64,target_handle:i64,constraints:i64)->(i64,serde_json::Value,serde_json::Value)),
 (compute_group_jacobian,"computeGroupJacobian",(environment_handle:i64,ik_group_handle:i64)->(Vec<f64>,Vec<f64>)),
@@ -75,4 +77,5 @@ requests!{
 (set_target_dummy,"setTargetDummy",(environment_handle:i64,dummy_handle:i64,target_dummy_handle:i64)->()),
 (sync_from_sim,"syncFromSim",(environment_handle:i64,ik_groups:Vec<i64>)->()),
 (sync_to_sim,"syncToSim",(environment_handle:i64,ik_groups:Vec<i64>)->())
+}
 }
