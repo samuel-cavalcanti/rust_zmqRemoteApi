@@ -12,7 +12,7 @@
 ![example workflow](https://github.com/samuel-cavalcanti/rust_zmqRemoteApi/actions/workflows/rust.yml/badge.svg?branch=main)
 # Unofficial Rust zmqRemoteApi
 
-This client support the coppeliasim **4.4.0** version
+This client support the coppeliasim **4.5.1** version
 
 A Rust ZeroMQ remote API for coppeliasim
 
@@ -37,7 +37,7 @@ There is two logs levels:
 - level 2: trace, trace level you will see the request in json and bytes format
 
 ```bash
-RUST_LOG="trace" cargo run --example=simple_test
+export RUST_LOG="trace"; cargo run --example=simple_test
 ```
 
 ## Porting C++ client to Rust client
@@ -55,6 +55,11 @@ std::vector<uint8_t> getStringSignal(std::string signalName);
 
 in rust the function returns a std::String. I haven't observed any
 examples where the function returns a block of bytes.
+
+```rust
+// Rust function assing 
+get_string_signal(signal_name:String)->String
+```
 
 ## running the opencv example
 
@@ -77,29 +82,3 @@ zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi
 
 See this simple [example](examples/get_simulation_time.rs) to understand how to use this create.
 
-### Main Branch
-
-the main branch use the smart pointers
-```rust
-// main branch
-let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
-host: "localhost".to_string(),
-..RemoteApiClientParams::default()
-})?;
-
-// Rc means Reference counter, is a smart pointer that counter the number of references
-let client = Rc::new(client);
-let sim = Sim::new(client.clone());
-```
-Using smart pointer is easier than dealing with borrowing and life cycle.
-
-```rust
-// CoppeliaSim_4.4.0, CoppeliaSim_4.3.0
-
- let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
-        host: "localhost".to_string(),
-        ..RemoteApiClientParams::default()
-    })?;
-
-    let sim = Sim::new(&client);
-```
