@@ -35,10 +35,7 @@ fn main() -> Result<(), RemoteAPIError> {
     sim.set_int32_param(sim::INTPARAM_IDLE_FPS, 0)?;
 
     // Create a few dummies and set their positions:
-    let handles: Vec<i64> = (0..50)
-        .into_iter()
-        .map(|_| sim.create_dummy(0.01).unwrap())
-        .collect();
+    let handles: Vec<i64> = (0..50).map(|_| sim.create_dummy(0.01).unwrap()).collect();
 
     for (i, h) in handles.iter().enumerate() {
         let i = i as f64;
