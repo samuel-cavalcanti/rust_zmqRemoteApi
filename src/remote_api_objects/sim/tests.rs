@@ -156,24 +156,23 @@ fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> 
         client,
         b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
     );
-    assert!(signal.is_none());
+    assert!(signal.is_empty());
 
-    *client.result.borrow_mut() = json!({"ret":[b"ready"],"success":true});
+    *client.result.borrow_mut() = json!({"ret":["ready"],"success":true});
     let signal = sim.get_string_signal(String::from("/LBR4p_executedMovId"))?;
     assert_payload!(
         client,
         b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
     );
-    let signal = signal.unwrap();
-    assert_eq!(signal, b"ready");
+    assert_eq!(signal, "ready");
 
-    *client.result.borrow_mut() = json!({"success": true,"ret": [[0.0051022060215473175, -7.424468640238047e-05, 1.072655200958252, 3.102603295701556e-05, 3.6248049582354724e-05, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]});
+    *client.result.borrow_mut() = json!({"success": true,"ret": [[0.0051022060215473175, -7.424_468_640_238_047e-5, 1.072655200958252, 3.102_603_295_701_556e-5, 3.624_804_958_235_472_4e-5, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]});
     let json =
         sim.call_script_function(String::from("remoteApi_getPoseAndConfig"), 2050006, None)?;
     assert_payload!(client,b"\xa2dfuncvsim.callScriptFunctiondargs\x82x\x1aremoteApi_getPoseAndConfig\x1a\x00\x1fG\xd6");
     assert_eq!(
         json,
-        json! {[[0.0051022060215473175, -7.424468640238047e-05, 1.072655200958252, 3.102603295701556e-05, 3.6248049582354724e-05, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]}
+        json! {[[0.0051022060215473175, -7.424_468_640_238_047e-5, 1.072655200958252, 3.102_603_295_701_556e-5, 3.624_804_958_235_472_4e-5, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]}
     );
 
     *client.result.borrow_mut() = json! {{"ret":[{}],"success":true}};
