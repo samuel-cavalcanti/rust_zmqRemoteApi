@@ -22,6 +22,8 @@ fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
     let sim = Sim::new(client.clone());
 
     sim.start_simulation()?;
+    let payload = log_utils::to_byte_array_string(&client.get_payload());
+    println!("{payload}");
     assert_payload! {client,b"\xa2dfuncssim.startSimulationdargs\x80"};
 
     sim.stop_simulation()?;
@@ -37,7 +39,6 @@ fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
 
     Ok(())
 }
-
 #[test]
 fn test_simple_test_functions() -> Result<(), RemoteAPIError> {
     let client = MockRemoteAPIClient {
@@ -96,7 +97,7 @@ fn test_p_controller_functions() -> Result<(), RemoteAPIError> {
     assert_payload!(client, b"\xa2dfunctsim.getJointPositiondargs\x81\t");
 
     *client.result.borrow_mut() = json!({"ret":[1],"success":true});
-    sim.set_joint_target_velocity(9, 6.283185307179586, None, None)?;
+    sim.set_joint_target_velocity(9, std::f64::consts::TAU, None)?;
     assert_payload!(
         client,
         b"\xa2dfuncx\x1asim.setJointTargetVelocitydargs\x82\t\xfb@\x19!\xfbTD-\x18"
@@ -155,15 +156,16 @@ fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> 
         client,
         b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
     );
-    assert_eq!(signal.is_empty(), true);
+    assert!(signal.is_none());
 
-    *client.result.borrow_mut() = json!({"ret":["ready"],"success":true});
+    *client.result.borrow_mut() = json!({"ret":[b"ready"],"success":true});
     let signal = sim.get_string_signal(String::from("/LBR4p_executedMovId"))?;
     assert_payload!(
         client,
         b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
     );
-    assert_eq!(signal, "ready");
+    let signal = signal.unwrap();
+    assert_eq!(signal, b"ready");
 
     *client.result.borrow_mut() = json!({"success": true,"ret": [[0.0051022060215473175, -7.424468640238047e-05, 1.072655200958252, 3.102603295701556e-05, 3.6248049582354724e-05, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]});
     let json =

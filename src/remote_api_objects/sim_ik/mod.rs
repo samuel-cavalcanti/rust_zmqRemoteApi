@@ -1,6 +1,6 @@
-mod sim_ik;
+mod sim_ik_api;
 
-pub use sim_ik::SimIK;
+pub use sim_ik_api::SimIk;
 
 #[cfg(test)]
 mod tests;

@@ -1,7 +1,7 @@
-mod sim;
+mod sim_api;
 mod sim_const;
 
-pub use sim::Sim;
+pub use sim_api::Sim;
 pub use sim_const::*;
 
 /*
