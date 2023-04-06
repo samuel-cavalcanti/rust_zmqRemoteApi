@@ -14,6 +14,9 @@ pub struct RemoteApiClient {
     id: Uuid,
 }
 
+unsafe impl Sync for RemoteApiClient {}
+unsafe impl Send for RemoteApiClient {}
+
 impl RemoteApiClient {
     pub fn new(params: RemoteApiClientParams) -> Result<RemoteApiClient, RemoteAPIError> {
         let rpc_address = format!(
