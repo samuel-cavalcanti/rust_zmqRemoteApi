@@ -81,5 +81,5 @@ add this crate at your cargo.toml :
 zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.5.1"}
 ```
 
-See this simple [example](examples/get_simulation_time.rs) to understand how to use this create.
+See this simple [example](examples/get_simulation_time.rs) to understand how to use this crate.
 
