@@ -31,7 +31,7 @@ cargo run --example=simple_test
 ```
 
 Perhaps you want to see the zmq communication logs.
-There is two logs levels:
+There are two logs levels:
 
 - level 1: debug, debug level you will see the request in json format
 - level 2: trace, trace level you will see the request in json and bytes format
