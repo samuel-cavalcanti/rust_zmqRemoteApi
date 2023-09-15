@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Unofficial Rust zmqRemoteApi](#unofficial-rust-zmqremoteapi)
+- [Rust zmqRemoteApi](#unofficial-rust-zmqremoteapi)
   - [Porting C++ client to Rust client](#porting-c-client-to-rust-client)
   - [diferences between C++ client and Rust client](#diferences-between-c-client-and-rust-client)
   - [running the opencv example](#running-the-opencv-example)
@@ -10,7 +10,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ![example workflow](https://github.com/samuel-cavalcanti/rust_zmqRemoteApi/actions/workflows/rust.yml/badge.svg?branch=main)
-# Unofficial Rust zmqRemoteApi
+# Rust zmqRemoteApi
 
 This client support the coppeliasim **4.5.1** version
 
@@ -31,7 +31,7 @@ cargo run --example=simple_test
 ```
 
 Perhaps you want to see the zmq communication logs.
-There is two logs levels:
+There are two logs levels:
 
 - level 1: debug, debug level you will see the request in json format
 - level 2: trace, trace level you will see the request in json and bytes format
@@ -63,7 +63,8 @@ get_string_signal(signal_name:String)->String
 
 ## running the opencv example
 
-[![Watch the video](https://img.youtube.com/vi/fo8G43WZQ6c/maxresdefault.jpg)](https://youtu.be/fo8G43WZQ6c)
+https://user-images.githubusercontent.com/24573157/230082972-3c782df5-dadd-4669-b36d-4d5e864a0b17.mp4
+
 
 ## Get started
 
@@ -80,8 +81,4 @@ add this crate at your cargo.toml :
 zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.5.1"}
 ```
 
-See this simple [example](examples/get_simulation_time.rs) to understand how to use this create.
-<<<<<<< HEAD
-
-=======
->>>>>>> CoppeliaSim_4.5.1
+See this simple [example](examples/get_simulation_time.rs) to understand how to use this crate.
