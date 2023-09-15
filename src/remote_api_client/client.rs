@@ -182,9 +182,8 @@ impl RemoteApiClientInterface for &RemoteApiClient {
     }
 }
 
-impl Sim for RemoteApiClient{}
-impl Sim for &RemoteApiClient{}
+impl Sim for RemoteApiClient {}
+impl Sim for &RemoteApiClient {}
 
-impl SimIk for RemoteApiClient{}
-impl SimIk for &RemoteApiClient{}
-
+impl SimIk for RemoteApiClient {}
+impl SimIk for &RemoteApiClient {}

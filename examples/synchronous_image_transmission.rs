@@ -19,10 +19,10 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-
     let vision_sensor_handle = client.get_object("/VisionSensor".to_string(), None)?;
 
-    let passive_vision_sensor_handle = client.get_object("/PassiveVisionSensor".to_string(), None)?;
+    let passive_vision_sensor_handle =
+        client.get_object("/PassiveVisionSensor".to_string(), None)?;
 
     client.set_stepping(true)?;
 
