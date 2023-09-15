@@ -19,7 +19,6 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-
     let vision_sensor_handle = client.get_object("/VisionSensor".to_string(), None)?;
 
     client.set_stepping(true)?;
@@ -29,7 +28,8 @@ fn main() -> Result<(), RemoteAPIError> {
     let start_time = client.get_simulation_time()?;
     let mut time = start_time;
     while time - start_time < 5.0 {
-        let (img, res) = client.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
+        let (img, res) =
+            client.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
         opencv_show_image(img, res);
 

@@ -13,7 +13,6 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-
     sim.set_stepping(true)?;
 
     sim.start_simulation()?;

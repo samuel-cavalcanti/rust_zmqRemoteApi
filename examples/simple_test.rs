@@ -22,7 +22,6 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-
     // When simulation is not running, ZMQ message handling could be a bit
     // slow, since the idle loop runs at 8 Hz by default. So let's make
     // sure that the idle loop runs at full speed for this program:
@@ -31,7 +30,9 @@ fn main() -> Result<(), RemoteAPIError> {
     client.set_int32_param(sim::INTPARAM_IDLE_FPS, 0)?;
 
     // Create a few dummies and set their positions:
-    let handles: Vec<i64> = (0..50).map(|_| client.create_dummy(0.01).unwrap()).collect();
+    let handles: Vec<i64> = (0..50)
+        .map(|_| client.create_dummy(0.01).unwrap())
+        .collect();
 
     for (i, h) in handles.iter().enumerate() {
         let i = i as f64;

@@ -17,7 +17,6 @@ fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
         result: RefCell::new(json!({"ret":[1],"success":true})),
     };
 
-
     sim.start_simulation()?;
     let payload = log_utils::to_byte_array_string(&sim.get_payload());
     println!("{payload}");
