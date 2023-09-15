@@ -2,13 +2,11 @@ use super::Sim;
 use super::*;
 use crate::{
     log_utils,
-    remote_api_client::RemoteApiClientInterface,
     remote_api_objects::mocks::{assert_payload, MockRemoteAPIClient},
 };
 use serde_json::json;
 
 use std::cell::RefCell;
-use std::rc::Rc;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
 

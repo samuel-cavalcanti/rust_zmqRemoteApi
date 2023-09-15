@@ -1,4 +1,3 @@
-use std::rc::Rc;
 use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
 
 /*
