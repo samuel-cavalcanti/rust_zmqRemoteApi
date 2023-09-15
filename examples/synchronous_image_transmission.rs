@@ -1,4 +1,3 @@
-use std::rc::Rc;
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 
 /* Based on synchronousImageTransmission.cpp example
@@ -20,29 +19,26 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    // Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
-    let sim = Sim::new(client.clone());
 
-    let vision_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
+    let vision_sensor_handle = client.get_object("/VisionSensor".to_string(), None)?;
 
-    let passive_vision_sensor_handle = sim.get_object("/PassiveVisionSensor".to_string(), None)?;
+    let passive_vision_sensor_handle = client.get_object("/PassiveVisionSensor".to_string(), None)?;
 
     client.set_stepping(true)?;
 
-    sim.start_simulation()?;
+    client.start_simulation()?;
 
-    let start_time = sim.get_simulation_time()?;
+    let start_time = client.get_simulation_time()?;
 
-    while sim.get_simulation_time()? - start_time < 5.0 {
+    while client.get_simulation_time()? - start_time < 5.0 {
         let (img, _res) =
-            sim.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
+            client.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
-        sim.set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
+        client.set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
         client.step(true)?;
     }
 
-    sim.stop_simulation()?;
+    client.stop_simulation()?;
 
     println!("Program ended");
 

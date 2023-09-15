@@ -1,5 +1,4 @@
 use std::f64::consts::PI;
-use std::rc::Rc;
 
 use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
 
@@ -26,13 +25,9 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    // Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
-    let sim = Sim::new(client.clone());
-
-    let joint_handle = sim.get_object("/Cuboid[0]/joint".to_string(), None)?;
-    let mut join_angle = sim.get_joint_position(joint_handle)?;
-    sim.set_joint_target_velocity(joint_handle, 360.0 * PI, None)?;
+    let joint_handle = client.get_object("/Cuboid[0]/joint".to_string(), None)?;
+    let mut join_angle = client.get_joint_position(joint_handle)?;
+    client.set_joint_target_velocity(joint_handle, 360.0 * PI, None)?;
     /*
        enable the stepping mode on the client, that means
        the simulation waits the trigger: client.step()
@@ -41,12 +36,12 @@ fn main() -> Result<(), RemoteAPIError> {
     */
     client.set_stepping(true)?;
 
-    sim.start_simulation()?;
+    client.start_simulation()?;
 
     move_to_angle(
         45.0 * PI / 180.0,
         &mut join_angle,
-        &sim,
+        &client,
         &client,
         &joint_handle,
     )?;
@@ -54,7 +49,7 @@ fn main() -> Result<(), RemoteAPIError> {
     move_to_angle(
         90.0 * PI / 180.0,
         &mut join_angle,
-        &sim,
+        &client,
         &client,
         &joint_handle,
     )?;
@@ -62,7 +57,7 @@ fn main() -> Result<(), RemoteAPIError> {
     move_to_angle(
         -89.0 * PI / 180.0,
         &mut join_angle,
-        &sim,
+        &client,
         &client,
         &joint_handle,
     )?;
@@ -70,12 +65,12 @@ fn main() -> Result<(), RemoteAPIError> {
     move_to_angle(
         0.0 * PI / 180.0,
         &mut join_angle,
-        &sim,
+        &client,
         &client,
         &joint_handle,
     )?;
 
-    sim.stop_simulation()?;
+    client.stop_simulation()?;
 
     println!("Program ended");
     Ok(())
@@ -83,10 +78,10 @@ fn main() -> Result<(), RemoteAPIError> {
 
 const MAX_FORCE: f64 = 100.0;
 
-fn move_to_angle(
+fn move_to_angle<S: Sim>(
     target_angle: f64,
     join_angle: &mut f64,
-    sim: &Sim,
+    sim: &S,
     client: &RemoteApiClient,
     joint_handle: &i64,
 ) -> Result<(), RemoteAPIError> {

@@ -9,7 +9,7 @@ macro_rules! requests {
 
 
             #[allow(dead_code,clippy::too_many_arguments)]
-            pub fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, crate::remote_api_objects::connection_error::RemoteAPIError>  {//
+             fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, crate::remote_api_objects::connection_error::RemoteAPIError>  {//
 
                 let mut _brk = false;
                 /*
@@ -43,7 +43,7 @@ macro_rules! requests {
 
 
 
-                let result = self.client.send_raw_request(request.to_raw_request());
+                let result = self.send_raw_request(request.to_raw_request());
 
 
                 if let Err(error) = result {
@@ -52,7 +52,27 @@ macro_rules! requests {
 
                 let result = result.unwrap();
 
-                if let Err(error) = Self::is_success(&result) {
+                let get_error = |json: &serde_json::Value| -> String{
+                    if let Some(serde_json::Value::String(error)) = json.get("error") {
+                        error.clone()
+                    } else {
+                        "unknown error".to_string()
+                    }
+                };
+
+                let is_success = |json: &serde_json::Value| -> Result<(), String>{
+
+                    if let Some(serde_json::Value::Bool(success)) = json.get("success") { if *success {
+                            Ok(())
+                        } else {
+                            Err(get_error(json))
+                        }
+                    } else {
+                        Err(get_error(json))
+                    }
+                };
+
+                if let Err(error) = is_success(&result) {
                     return Err(crate::remote_api_objects::connection_error::RemoteAPIError::new(error));
                 }
 

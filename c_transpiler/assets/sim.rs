@@ -1,4 +1,4 @@
-impl Sim {
+pub trait Sim: RemoteApiClientInterface {
     requests! {
     "sim",
     (get_joint_max_force,"getJointMaxForce",(joint_handle:i64)->f64),
@@ -10,7 +10,7 @@ impl Sim {
     (set_vision_sensor_char_image,"setVisionSensorCharImage",(sensor_handle:i64,image:Vec<u8>)->()),
     (get_object_selection,"getObjectSelection"->Vec<i64>),
     (set_object_selection,"setObjectSelection",(object_handles:Vec<f64>)->()),
-    (get_string_signal,"getStringSignal",(signal_name:String)->String),// changed),
+    (get_string_signal,"getStringSignal",(signal_name:String)->String),
     (get_int32_signal,"getInt32Signal",(signal_name:String)->Option<i64>),
     (get_float_signal,"getFloatSignal",(signal_name:String)->Option<f64>),
     (add_drawing_object,"addDrawingObject",(object_type:i64,size:f64,duplicate_tolerance:f64,parent_object_handle:i64,max_item_count:i64),opt(color:Vec<f64>)->i64),
