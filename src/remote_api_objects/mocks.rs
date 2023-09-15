@@ -1,6 +1,6 @@
 use std::cell::RefCell;
 
-use crate::{remote_api_client::RemoteApiClientInterface, RemoteAPIError};
+use crate::{remote_api_client::RemoteApiClientInterface, sim::Sim, RemoteAPIError};
 use serde_json::Value as JsonValue;
 
 pub struct MockRemoteAPIClient {
@@ -21,6 +21,8 @@ impl RemoteApiClientInterface for MockRemoteAPIClient {
         Ok(result)
     }
 }
+
+impl Sim for MockRemoteAPIClient {}
 
 pub fn assert_payload(client: &MockRemoteAPIClient, payload: Vec<u8>) {
     assert_eq!(client.get_payload(), payload)

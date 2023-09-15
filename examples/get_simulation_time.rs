@@ -9,16 +9,13 @@ fn main() -> Result<(), RemoteAPIError> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
-    let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
+    let sim = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
 
-    // Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
-    let sim = Sim::new(client.clone());
 
-    client.set_stepping(true)?;
+    sim.set_stepping(true)?;
 
     sim.start_simulation()?;
 
@@ -26,7 +23,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     while time < 3.0 {
         println!("Simulation time: {:.3} [s]", time);
-        client.step(true)?;
+        sim.step(true)?;
         time = sim.get_simulation_time()?;
     }
 

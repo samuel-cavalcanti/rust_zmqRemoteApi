@@ -21,18 +21,14 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    // Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
-    let sim = Sim::new(client.clone());
-
     println!("Program started");
 
     let target_arm = "/LBR4p".to_string();
 
     let signal_name = format!("{}_executedMovId", target_arm);
 
-    let arm_handle = sim.get_object(target_arm, None)?;
-    let script_handle = sim.get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
+    let arm_handle = client.get_object(target_arm, None)?;
+    let script_handle = client.get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
 
     // Set-up some movement variables:
     let times = vec![
@@ -426,10 +422,10 @@ fn main() -> Result<(), RemoteAPIError> {
         1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000,
     ];
 
-    sim.start_simulation()?;
+    client.start_simulation()?;
 
     println!("Wait until ready");
-    wait_for_movement_executed("ready".to_string(), &sim, signal_name.clone())?;
+    wait_for_movement_executed("ready".to_string(), &client, signal_name.clone())?;
 
     let movement_data = json!(
     {"id": "movSeq1",
@@ -440,30 +436,30 @@ fn main() -> Result<(), RemoteAPIError> {
     });
 
     println!("Execute first movement sequence");
-    sim.call_script_function(
+    client.call_script_function(
         String::from("remoteApi_movementDataFunction"),
         script_handle,
         Some(movement_data),
     )?;
 
-    sim.call_script_function(
+    client.call_script_function(
         String::from("remoteApi_executeMovement"),
         script_handle,
         Some(json! {"movSeq1"}),
     )?;
 
     println!("Wait until above movement sequence finished executing");
-    wait_for_movement_executed("movSeq1".to_string(), &sim, signal_name.clone())?;
+    wait_for_movement_executed("movSeq1".to_string(), &client, signal_name.clone())?;
 
-    sim.stop_simulation()?;
+    client.stop_simulation()?;
 
     println!("Program ended");
     Ok(())
 }
 
-fn wait_for_movement_executed(
+fn wait_for_movement_executed<S: Sim>(
     id: String,
-    sim: &Sim,
+    sim: &S,
     signal_name: String,
 ) -> Result<(), RemoteAPIError> {
     let mut string = sim.get_string_signal(signal_name.clone())?;

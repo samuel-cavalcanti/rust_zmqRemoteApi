@@ -19,30 +19,27 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    // Rc means Reference counter, is a smart pointer that counter the number of references
-    let client = Rc::new(client);
-    let sim = Sim::new(client.clone());
 
-    let vision_sensor_handle = sim.get_object("/VisionSensor".to_string(), None)?;
+    let vision_sensor_handle = client.get_object("/VisionSensor".to_string(), None)?;
 
     client.set_stepping(true)?;
 
-    sim.start_simulation()?;
+    client.start_simulation()?;
 
-    let start_time = sim.get_simulation_time()?;
+    let start_time = client.get_simulation_time()?;
     let mut time = start_time;
     while time - start_time < 5.0 {
-        let (img, res) = sim.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
+        let (img, res) = client.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
         opencv_show_image(img, res);
 
         println!("time: {:.2}", time);
 
         client.step(true)?;
-        time = sim.get_simulation_time()?;
+        time = client.get_simulation_time()?;
     }
 
-    sim.stop_simulation()?;
+    client.stop_simulation()?;
 
     println!("Program ended");
 

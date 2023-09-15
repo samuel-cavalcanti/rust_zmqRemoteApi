@@ -3,6 +3,8 @@ use serde_json::Value as JsonValue;
 use uuid::Uuid;
 
 use crate::remote_api_client::RemoteApiClientInterface;
+use crate::sim::Sim;
+use crate::sim_ik::SimIk;
 use crate::zmq_requests::{RawRequest, ZmqRequest};
 use crate::{log_utils, RemoteAPIError, RemoteApiClientParams};
 
@@ -90,7 +92,7 @@ impl RemoteApiClient {
     //     Ok(json)
     // }
 
-    pub fn get_object(&self, name: String) -> Result<JsonValue, RemoteAPIError> {
+    pub fn get_object_client(&self, name: String) -> Result<JsonValue, RemoteAPIError> {
         let request = ZmqRequest::remote_api_info(name);
 
         self.send_raw_request(request.to_raw_request())
@@ -179,3 +181,10 @@ impl RemoteApiClientInterface for &RemoteApiClient {
         Ok(json)
     }
 }
+
+impl Sim for RemoteApiClient{}
+impl Sim for &RemoteApiClient{}
+
+impl SimIk for RemoteApiClient{}
+impl SimIk for &RemoteApiClient{}
+
