@@ -25,9 +25,10 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let joint_handle = client.get_object("/Cuboid[0]/joint".to_string(), None)?;
-    let mut join_angle = client.get_joint_position(joint_handle)?;
-    client.set_joint_target_velocity(joint_handle, 360.0 * PI, None)?;
+    let joint_handle = client.sim_get_object("/Cuboid[0]/joint".to_string(), None)?;
+    let mut join_angle = client.sim_get_joint_position(joint_handle)?;
+    client.sim_set_joint_target_velocity(joint_handle, 360.0 * PI, None)?;
+
     /*
        enable the stepping mode on the client, that means
        the simulation waits the trigger: client.step()
@@ -36,7 +37,7 @@ fn main() -> Result<(), RemoteAPIError> {
     */
     client.set_stepping(true)?;
 
-    client.start_simulation()?;
+    client.sim_start_simulation()?;
 
     move_to_angle(
         45.0 * PI / 180.0,
@@ -70,7 +71,7 @@ fn main() -> Result<(), RemoteAPIError> {
         &joint_handle,
     )?;
 
-    client.stop_simulation()?;
+    client.sim_stop_simulation()?;
 
     println!("Program ended");
     Ok(())
@@ -87,10 +88,10 @@ fn move_to_angle<S: Sim>(
 ) -> Result<(), RemoteAPIError> {
     while (target_angle - *join_angle).abs() > 0.1 * PI / 180.0 {
         let velocity = compute_target_velocity(target_angle, *join_angle);
-        sim.set_joint_target_velocity(*joint_handle, velocity, None)?;
-        sim.set_joint_max_force(*joint_handle, MAX_FORCE)?;
+        sim.sim_set_joint_target_velocity(*joint_handle, velocity, None)?;
+        sim.sim_set_joint_max_force(*joint_handle, MAX_FORCE)?;
         client.step(true)?;
-        *join_angle = sim.get_joint_position(*joint_handle)?;
+        *join_angle = sim.sim_get_joint_position(*joint_handle)?;
     }
 
     Ok(())

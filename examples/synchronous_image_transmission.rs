@@ -19,26 +19,26 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    let vision_sensor_handle = client.get_object("/VisionSensor".to_string(), None)?;
+    let vision_sensor_handle = client.sim_get_object("/VisionSensor".to_string(), None)?;
 
     let passive_vision_sensor_handle =
-        client.get_object("/PassiveVisionSensor".to_string(), None)?;
+        client.sim_get_object("/PassiveVisionSensor".to_string(), None)?;
 
     client.set_stepping(true)?;
 
-    client.start_simulation()?;
+    client.sim_start_simulation()?;
 
-    let start_time = client.get_simulation_time()?;
+    let start_time = client.sim_get_simulation_time()?;
 
-    while client.get_simulation_time()? - start_time < 5.0 {
+    while client.sim_get_simulation_time()? - start_time < 5.0 {
         let (img, _res) =
-            client.get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
+            client.sim_get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
-        client.set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
+        client.sim_set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
         client.step(true)?;
     }
 
-    client.stop_simulation()?;
+    client.sim_stop_simulation()?;
 
     println!("Program ended");
 
