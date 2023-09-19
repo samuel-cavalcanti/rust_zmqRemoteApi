@@ -3,10 +3,10 @@ from .ir import FunctionAssign, Arg, TypeNode
 import inflection
 
 
-def ir_to_macro_request_rust(assign: FunctionAssign) -> str:
+def ir_to_macro_request_rust(assign: FunctionAssign, file_name: str) -> str:
     return_type = type_node_to_rust(assign.return_type)
 
-    rust_func_name = inflection.underscore(assign.function_name)
+    rust_func_name = f'{file_name}_{inflection.underscore(assign.function_name)}'
 
     required_args = []
     option_args = []

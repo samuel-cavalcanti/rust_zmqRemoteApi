@@ -30,7 +30,7 @@ class Sim(Protocol):
     def setObjectSelection(self,objectHandles:list[float])->None:
         ...
     
-    def getStringSignal(self,signalName:str)->Optional[list[int]]:
+    def getStringSignal(self,signalName:str)->str:
         ...
     
     def getInt32Signal(self,signalName:str)->Optional[int]:

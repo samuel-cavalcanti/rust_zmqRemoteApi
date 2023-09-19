@@ -12,11 +12,13 @@ import inflection
 
 def cpp_to_rust(assigns: list[FunctionAssign], rust_file: Path) -> None:
 
-    rust_assigns = [ir_to_macro_request_rust(assign) for assign in assigns]
-    rust_string = ",\n".join(rust_assigns)
     file_name = rust_file.name.split(".")[0]
     trait_name = inflection.camelize(file_name)
     space = ' '*4
+
+    rust_assigns = [ir_to_macro_request_rust(
+        assign, file_name) for assign in assigns]
+    rust_string = ",\n".join(rust_assigns)
     content = f'pub trait {trait_name} : RemoteApiClientInterface {{\n{space}requests!{{\n"{file_name}",\n{rust_string}\n}}\n}}'
 
     rust_file.write_text(content)
