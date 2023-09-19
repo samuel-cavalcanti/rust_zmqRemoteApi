@@ -26,8 +26,9 @@ fn main() -> Result<(), RemoteAPIError> {
 
     let signal_name = format!("{}_executedMovId", target_arm);
 
-    let arm_handle = client.get_object(target_arm, None)?;
-    let script_handle = client.get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
+    let arm_handle = client.sim_get_object(target_arm, None)?;
+    let script_handle =
+        client.sim_get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
 
     // Set-up some movement variables:
     let times = vec![
@@ -420,8 +421,7 @@ fn main() -> Result<(), RemoteAPIError> {
         1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000,
         1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000,
     ];
-
-    client.start_simulation()?;
+    client.sim_start_simulation()?;
 
     println!("Wait until ready");
     wait_for_movement_executed("ready".to_string(), &client, signal_name.clone())?;
@@ -435,13 +435,13 @@ fn main() -> Result<(), RemoteAPIError> {
     });
 
     println!("Execute first movement sequence");
-    client.call_script_function(
+    client.sim_call_script_function(
         String::from("remoteApi_movementDataFunction"),
         script_handle,
         Some(movement_data),
     )?;
 
-    client.call_script_function(
+    client.sim_call_script_function(
         String::from("remoteApi_executeMovement"),
         script_handle,
         Some(json! {"movSeq1"}),
@@ -450,7 +450,7 @@ fn main() -> Result<(), RemoteAPIError> {
     println!("Wait until above movement sequence finished executing");
     wait_for_movement_executed("movSeq1".to_string(), &client, signal_name.clone())?;
 
-    client.stop_simulation()?;
+    client.sim_stop_simulation()?;
 
     println!("Program ended");
     Ok(())
@@ -461,9 +461,9 @@ fn wait_for_movement_executed<S: Sim>(
     sim: &S,
     signal_name: String,
 ) -> Result<(), RemoteAPIError> {
-    let mut string = sim.get_string_signal(signal_name.clone())?;
+    let mut string = sim.sim_get_string_signal(signal_name.clone())?;
     while string != id {
-        string = sim.get_string_signal(signal_name.clone())?;
+        string = sim.sim_get_string_signal(signal_name.clone())?;
     }
 
     Ok(())

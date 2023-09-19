@@ -15,9 +15,9 @@ fn wait_for_movement_executed<S: Sim>(
     sim: &S,
     signal_name: String,
 ) -> Result<(), RemoteAPIError> {
-    let mut string = sim.get_string_signal(signal_name.clone())?;
+    let mut string = sim.sim_get_string_signal(signal_name.clone())?;
     while string != id {
-        string = sim.get_string_signal(signal_name.clone())?;
+        string = sim.sim_get_string_signal(signal_name.clone())?;
     }
 
     Ok(())
@@ -38,16 +38,17 @@ fn main() -> Result<(), RemoteAPIError> {
 
     let signal_name = format!("{}_executedMovId", target_arm);
 
-    let arm_handle = client.get_object(target_arm, None)?;
-    let script_handle = client.get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
+    let arm_handle = client.sim_get_object(target_arm, None)?;
+    let script_handle =
+        client.sim_get_script(sim::SCRIPTTYPE_CHILDSCRIPT, Some(arm_handle), None)?;
 
-    client.start_simulation()?;
+    client.sim_start_simulation()?;
 
     println!("Wait until ready");
     wait_for_movement_executed("ready".to_string(), &client, signal_name.clone())?;
 
     println!("Get initial pose");
-    let json = client.call_script_function(
+    let json = client.sim_call_script_function(
         String::from("remoteApi_getPoseAndConfig"),
         script_handle,
         None,
@@ -62,14 +63,14 @@ fn main() -> Result<(), RemoteAPIError> {
 
     let movement_data = json!({"id": "movSeq1", "type": "mov", "targetPose": [0, 0, 0.85, 0, 0, 0, 1], "maxVel": MAX_VEL, "maxAccel":MAX_ACCEL});
 
-    let _json = client.call_script_function(
+    let _json = client.sim_call_script_function(
         String::from("remoteApi_movementDataFunction"),
         script_handle,
         Some(movement_data),
     )?;
 
     println!("Execute first movement sequence");
-    let _json = client.call_script_function(
+    let _json = client.sim_call_script_function(
         String::from("remoteApi_executeMovement"),
         script_handle,
         Some(json!("movSeq1")),
@@ -91,7 +92,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     let movement_data = json!({"id": "movSeq2", "type": "mov", "targetPose": target_pose, "maxVel": MAX_VEL, "maxAccel": MAX_ACCEL});
 
-    let _json = client.call_script_function(
+    let _json = client.sim_call_script_function(
         String::from("remoteApi_movementDataFunction"),
         script_handle,
         Some(movement_data),
@@ -99,7 +100,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     let movement_data = json!({"id": "movSeq3", "type": "mov", "targetPose": initial_pose, "maxVel": MAX_VEL, "maxAccel": MAX_ACCEL});
 
-    let _json = client.call_script_function(
+    let _json = client.sim_call_script_function(
         String::from("remoteApi_movementDataFunction"),
         script_handle,
         Some(movement_data),
@@ -107,12 +108,12 @@ fn main() -> Result<(), RemoteAPIError> {
 
     println!("Execute second and third movement sequence");
 
-    client.call_script_function(
+    client.sim_call_script_function(
         String::from("remoteApi_executeMovement"),
         script_handle,
         Some(json!("movSeq2")),
     )?;
-    client.call_script_function(
+    client.sim_call_script_function(
         String::from("remoteApi_executeMovement"),
         script_handle,
         Some(json!("movSeq3")),
@@ -122,7 +123,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     wait_for_movement_executed("movSeq3".to_string(), &client, signal_name.clone())?;
 
-    client.stop_simulation()?;
+    client.sim_stop_simulation()?;
 
     println!("Program ended");
     Ok(())

@@ -79,20 +79,7 @@ impl RemoteApiClient {
         Ok(message)
     }
 
-    // pub fn send_request<R: RawRequest>(&self, request: R) -> Result<JsonValue, Error> {
-    //     let payload = request.to_raw_request();
-    //
-    //     let result = self.call(payload)?;
-    //
-    //     let decoded: CborValue = ciborium::de::from_reader(result.as_slice()).unwrap();
-    //
-    //     let json = serde_json::json!(decoded);
-    //     log::trace!("Json response: {}", json);
-    //
-    //     Ok(json)
-    // }
-
-    pub fn get_object_client(&self, name: String) -> Result<JsonValue, RemoteAPIError> {
+    pub fn get_object(&self, name: String) -> Result<JsonValue, RemoteAPIError> {
         let request = ZmqRequest::remote_api_info(name);
 
         self.send_raw_request(request.to_raw_request())

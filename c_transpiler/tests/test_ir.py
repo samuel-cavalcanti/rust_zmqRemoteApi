@@ -140,7 +140,7 @@ class IrTestCase(unittest.TestCase):
         ir = [ir_to_cpp(assign) for assign in assigns]
         result_content = "\n".join(ir)
 
-        self.assertEqual(result_content, expected_h.read_text())
+        self.assertEqual(result_content + '\n', expected_h.read_text())
 
     def test_ir_to_string(self):
         vec_u8_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.U8, [])])
@@ -236,12 +236,13 @@ class IrTestCase(unittest.TestCase):
                   wait_ir, get_vision_sensor_depth_buffer_if]
 
         expected_strings = [
-            '(switch_thread,"switchThread"->())',
-            '(unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
-            '(wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
-            '(get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'
+            '(test_switch_thread,"switchThread"->())',
+            '(test_unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
+            '(test_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
+            '(test_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'
         ]
-        result = [ir_to_macro_request_rust(ir) for ir in inputs]
+        result = [ir_to_macro_request_rust(
+            ir, file_name='test') for ir in inputs]
         self.assertEqualStrings(result, expected_strings)
 
     def assertEqualStrings(self, result: list[str], expected: list[str]):

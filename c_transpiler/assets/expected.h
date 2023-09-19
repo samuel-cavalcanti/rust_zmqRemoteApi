@@ -7,7 +7,7 @@ std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorCharImage(
 void setVisionSensorCharImage(int64_t sensorHandle, std::vector<uint8_t> image);
 std::vector<int64_t> getObjectSelection();
 void setObjectSelection(std::vector<double> objectHandles);
-std::optional<std::vector<uint8_t>> getStringSignal(std::string signalName);
+std::string getStringSignal(std::string signalName);
 std::optional<int64_t> getInt32Signal(std::string signalName);
 std::optional<double> getFloatSignal(std::string signalName);
 int64_t addDrawingObject(int64_t objectType, double size, double duplicateTolerance, int64_t parentObjectHandle, int64_t maxItemCount, std::optional<std::vector<double>> color = {});
