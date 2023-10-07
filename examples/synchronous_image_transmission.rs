@@ -24,7 +24,7 @@ fn main() -> Result<(), RemoteAPIError> {
     let passive_vision_sensor_handle =
         client.sim_get_object("/PassiveVisionSensor".to_string(), None)?;
 
-    client.set_stepping(true)?;
+    client.sim_set_stepping(true)?;
 
     client.sim_start_simulation()?;
 
@@ -35,7 +35,7 @@ fn main() -> Result<(), RemoteAPIError> {
             client.sim_get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
 
         client.sim_set_vision_sensor_img(passive_vision_sensor_handle, img, None, None, None)?;
-        client.step(true)?;
+        client.sim_step()?;
     }
 
     client.sim_stop_simulation()?;

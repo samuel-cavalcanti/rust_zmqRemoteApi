@@ -3,33 +3,6 @@ from typing import Optional, Protocol
 
 class Sim(Protocol):
 
-    def getJointMaxForce(self,jointHandle:int)->float:
-        ...
-    
-    def setJointMaxForce(self,objectHandle:int, forceOrTorque:float)->None:
-        ...
-    
-    def createPureShape(self,primitiveType:int, options:int, sizes:list[float], mass:float, precision:Optional[list[int]] = None)->int:
-        ...
-    
-    def removeObject(self,objectHandle:int)->None:
-        ...
-    
-    def getVisionSensorDepthBuffer(self,sensorHandle:int, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
-        ...
-    
-    def getVisionSensorCharImage(self,sensorHandle:int, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
-        ...
-    
-    def setVisionSensorCharImage(self,sensorHandle:int, image:list[int])->None:
-        ...
-    
-    def getObjectSelection(self)->list[int]:
-        ...
-    
-    def setObjectSelection(self,objectHandles:list[float])->None:
-        ...
-    
     def getStringSignal(self,signalName:str)->str:
         ...
     
@@ -37,6 +10,9 @@ class Sim(Protocol):
         ...
     
     def getFloatSignal(self,signalName:str)->Optional[float]:
+        ...
+    
+    def acquireLock(self)->None:
         ...
     
     def addDrawingObject(self,objectType:int, size:float, duplicateTolerance:float, parentObjectHandle:int, maxItemCount:int, color:Optional[list[float]] = None)->int:
@@ -228,7 +204,7 @@ class Sim(Protocol):
     def duplicateGraphCurveToStatic(self,graphHandle:int, curveId:int, curveName:Optional[str] = None)->int:
         ...
     
-    def executeScriptString(self,stringAtScriptName:str, scriptHandleOrType:int)->tuple[int, dict]:
+    def executeScriptString(self,stringToExecute:str, scriptHandle:int)->tuple[int, dict]:
         ...
     
     def exportMesh(self,fileformat:int, pathAndFilename:str, options:int, scalingFactor:float, vertices:list[float], indices:list[int])->None:
@@ -252,13 +228,16 @@ class Sim(Protocol):
     def getAlternateConfigs(self,jointHandles:list[int], inputConfig:list[float], tipHandle:Optional[int] = None, lowLimits:Optional[list[float]] = None, ranges:Optional[list[float]] = None)->list[float]:
         ...
     
-    def getApiFunc(self,scriptHandleOrType:int, apiWord:str)->list[str]:
+    def getApiFunc(self,scriptHandle:int, apiWord:str)->list[str]:
         ...
     
-    def getApiInfo(self,scriptHandleOrType:int, apiWord:str)->str:
+    def getApiInfo(self,scriptHandle:int, apiWord:str)->str:
         ...
     
     def getArrayParam(self,parameter:int)->list[float]:
+        ...
+    
+    def getAutoYieldDelay(self)->float:
         ...
     
     def getBoolParam(self,parameter:int)->bool:
@@ -345,6 +324,9 @@ class Sim(Protocol):
     def getJointVelocity(self,jointHandle:int)->float:
         ...
     
+    def getLastInfo(self)->str:
+        ...
+    
     def getLightParameters(self,lightHandle:int)->tuple[int, list[float], list[float], list[float]]:
         ...
     
@@ -358,12 +340,6 @@ class Sim(Protocol):
         ...
     
     def getModelProperty(self,objectHandle:int)->int:
-        ...
-    
-    def getModuleInfo(self,moduleName:str, infoType:int)->str:
-        ...
-    
-    def getModuleName(self,index:int)->tuple[str, int]:
         ...
     
     def getNamedBoolParam(self,name:str)->bool:
@@ -411,25 +387,25 @@ class Sim(Protocol):
     def getObjectInt32Param(self,objectHandle:int, parameterID:int)->int:
         ...
     
-    def getObjectMatrix(self,objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectMatrix(self,objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
-    def getObjectOrientation(self,objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectOrientation(self,objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
     def getObjectParent(self,objectHandle:int)->int:
         ...
     
-    def getObjectPose(self,objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectPose(self,objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
-    def getObjectPosition(self,objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectPosition(self,objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
     def getObjectProperty(self,objectHandle:int)->int:
         ...
     
-    def getObjectQuaternion(self,objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectQuaternion(self,objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
     def getObjectSel(self)->list[int]:
@@ -472,6 +448,12 @@ class Sim(Protocol):
         ...
     
     def getPersistentDataTags(self)->list[str]:
+        ...
+    
+    def getPluginInfo(self,pluginName:str, infoType:int)->str:
+        ...
+    
+    def getPluginName(self,index:int)->str:
         ...
     
     def getPointCloudOptions(self,pointCloudHandle:int)->tuple[float, int, int, float]:
@@ -537,7 +519,7 @@ class Sim(Protocol):
     def getShapeInertia(self,shapeHandle:int)->tuple[list[float], list[float]]:
         ...
     
-    def getShapeMass(self,shapeHandle:int)->float:
+    def getShapeMassAndInertia(self,shapeHandle:int)->float:
         ...
     
     def getShapeMesh(self,shapeHandle:int)->tuple[list[float], list[int], list[float]]:
@@ -553,6 +535,9 @@ class Sim(Protocol):
         ...
     
     def getSimulationState(self)->int:
+        ...
+    
+    def getSimulationStopping(self)->bool:
         ...
     
     def getSimulationTime(self)->float:
@@ -576,19 +561,7 @@ class Sim(Protocol):
     def getTextureId(self,textureName:str)->tuple[int, list[int]]:
         ...
     
-    def getThreadAutomaticSwitch(self)->bool:
-        ...
-    
-    def getThreadExistRequest(self)->bool:
-        ...
-    
     def getThreadId(self)->int:
-        ...
-    
-    def getThreadSwitchAllowed(self)->bool:
-        ...
-    
-    def getThreadSwitchTiming(self)->int:
         ...
     
     def getUserVariables(self)->list[str]:
@@ -690,9 +663,6 @@ class Sim(Protocol):
     def loadModel(self,filename:str)->int:
         ...
     
-    def loadModule(self,filenameAndPath:str, pluginName:str)->int:
-        ...
-    
     def loadScene(self,filename:str)->None:
         ...
     
@@ -783,13 +753,7 @@ class Sim(Protocol):
     def refreshDialogs(self,refreshDegree:int)->int:
         ...
     
-    def registerScriptFuncHook(self,funcToHook:str, userFunc:str, execBefore:bool)->int:
-        ...
-    
-    def registerScriptFunction(self,funcNameAtPluginName:str, callTips:str)->int:
-        ...
-    
-    def registerScriptVariable(self,varNameAtPluginName:str)->int:
+    def releaseLock(self)->None:
         ...
     
     def relocateShapeFrame(self,shapeHandle:int, pose:list[float])->int:
@@ -885,6 +849,9 @@ class Sim(Protocol):
     def setArrayParam(self,parameter:int, arrayOfValues:list[float])->None:
         ...
     
+    def setAutoYieldDelay(self,dt:float)->None:
+        ...
+    
     def setBoolParam(self,parameter:int, boolState:bool)->None:
         ...
     
@@ -948,9 +915,6 @@ class Sim(Protocol):
     def setModelProperty(self,objectHandle:int, property:int)->None:
         ...
     
-    def setModuleInfo(self,moduleName:str, infoType:int, info:str)->None:
-        ...
-    
     def setNamedBoolParam(self,name:str, value:bool)->None:
         ...
     
@@ -984,25 +948,25 @@ class Sim(Protocol):
     def setObjectInt32Param(self,objectHandle:int, parameterID:int, parameter:int)->None:
         ...
     
-    def setObjectMatrix(self,objectHandle:int, relativeToObjectHandle:int, matrix:list[float])->None:
+    def setObjectMatrix(self,objectHandle:int, matrix:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
-    def setObjectOrientation(self,objectHandle:int, relativeToObjectHandle:int, eulerAngles:list[float])->None:
+    def setObjectOrientation(self,objectHandle:int, eulerAngles:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
     def setObjectParent(self,objectHandle:int, parentObjectHandle:int, keepInPlace:Optional[bool] = None)->None:
         ...
     
-    def setObjectPose(self,objectHandle:int, relativeToObjectHandle:int, pose:list[float])->None:
+    def setObjectPose(self,objectHandle:int, pose:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
-    def setObjectPosition(self,objectHandle:int, relativeToObjectHandle:int, position:list[float])->None:
+    def setObjectPosition(self,objectHandle:int, position:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
     def setObjectProperty(self,objectHandle:int, property:int)->None:
         ...
     
-    def setObjectQuaternion(self,objectHandle:int, relativeToObjectHandle:int, quaternion:list[float])->None:
+    def setObjectQuaternion(self,objectHandle:int, quaternion:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
     def setObjectSel(self,objectHandles:list[int])->None:
@@ -1015,6 +979,9 @@ class Sim(Protocol):
         ...
     
     def setPage(self,pageIndex:int)->None:
+        ...
+    
+    def setPluginInfo(self,pluginName:str, infoType:int, info:str)->None:
         ...
     
     def setPointCloudOptions(self,pointCloudHandle:int, maxVoxelSize:float, maxPtCntPerVoxel:int, options:int, pointSize:float)->None:
@@ -1047,25 +1014,22 @@ class Sim(Protocol):
     def setShapeTexture(self,shapeHandle:int, textureId:int, mappingMode:int, options:int, uvScaling:list[float], position:Optional[list[float]] = None, orientation:Optional[list[float]] = None)->None:
         ...
     
+    def setStepping(self,enabled:bool)->int:
+        ...
+    
     def setStringParam(self,parameter:int, stringState:str)->None:
         ...
     
     def setStringSignal(self,signalName:str, signalValue:list[int])->None:
         ...
     
-    def setThreadAutomaticSwitch(self,automaticSwitch:bool)->int:
-        ...
-    
-    def setThreadSwitchAllowed(self,allowed:bool)->int:
-        ...
-    
-    def setThreadSwitchTiming(self,dtInMs:int)->None:
-        ...
-    
     def setVisionSensorImg(self,sensorHandle:int, image:list[int], options:Optional[int] = None, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->None:
         ...
     
     def startSimulation(self)->int:
+        ...
+    
+    def step(self)->None:
         ...
     
     def stopSimulation(self)->int:
@@ -1075,9 +1039,6 @@ class Sim(Protocol):
         ...
     
     def subtractObjectFromPointCloud(self,pointCloudHandle:int, objectHandle:int, options:int, tolerance:float)->int:
-        ...
-    
-    def switchThread(self)->None:
         ...
     
     def textEditorClose(self,handle:int)->tuple[str, list[int], list[int]]:
@@ -1099,9 +1060,6 @@ class Sim(Protocol):
         ...
     
     def ungroupShape(self,shapeHandle:int)->list[int]:
-        ...
-    
-    def unloadModule(self,pluginHandle:int)->int:
         ...
     
     def unpackDoubleTable(self,data:list[int], startDoubleIndex:Optional[int] = None, doubleCount:Optional[int] = None, additionalByteOffset:Optional[int] = None)->list[float]:
@@ -1147,5 +1105,8 @@ class Sim(Protocol):
         ...
     
     def yawPitchRollToAlphaBetaGamma(self,yawAngle:float, pitchAngle:float, rollAngle:float)->tuple[float, float, float]:
+        ...
+    
+    def yield(self)->None:
         ...
 

@@ -1,14 +1,22 @@
 use std::cell::RefCell;
 
 use crate::{remote_api_client::RemoteApiClientInterface, sim::Sim, RemoteAPIError};
-use serde_json::Value as JsonValue;
+use serde_json::{json, Value as JsonValue};
 
 pub struct MockRemoteAPIClient {
     pub payload: RefCell<Vec<u8>>,
     pub result: RefCell<JsonValue>,
+    pub uuid: String,
 }
 
 impl MockRemoteAPIClient {
+    pub fn new_sucess() -> MockRemoteAPIClient {
+        MockRemoteAPIClient {
+            payload: RefCell::new(vec![]),
+            result: RefCell::new(json!({"ret":[1]})),
+            uuid: "8a7e3cf4-ae84-4b29-9af3-1e87930b7971".into(),
+        }
+    }
     pub fn get_payload(&self) -> Vec<u8> {
         self.payload.borrow_mut().clone()
     }
@@ -19,6 +27,10 @@ impl RemoteApiClientInterface for MockRemoteAPIClient {
         *self.payload.borrow_mut() = request;
         let result = self.result.clone().into_inner();
         Ok(result)
+    }
+
+    fn get_uuid(&self) -> String {
+        self.uuid.clone()
     }
 }
 

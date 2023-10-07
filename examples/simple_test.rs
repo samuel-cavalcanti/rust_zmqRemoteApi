@@ -1,5 +1,4 @@
 use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
-
 /*
     Example based on SimpleTest.py
 
@@ -36,11 +35,8 @@ fn main() -> Result<(), RemoteAPIError> {
 
     for (i, h) in handles.iter().enumerate() {
         let i = i as f64;
-        client.sim_set_object_position(
-            *h,
-            sim::HANDLE_WORLD,
-            vec![0.01 * i, 0.01 * i, 0.01 * i],
-        )?;
+        let pos = vec![0.01 * i, 0.01 * i, 0.01 * i];
+        client.sim_set_object_position(*h, pos, Some(sim::HANDLE_WORLD))?;
     }
 
     client.sim_start_simulation()?;
@@ -58,7 +54,7 @@ fn main() -> Result<(), RemoteAPIError> {
         std::thread::sleep(std::time::Duration::from_secs_f64(0.1))
     }
 
-    client.set_stepping(true)?;
+    client.sim_set_stepping(true)?;
     client.sim_start_simulation()?;
 
     // Run a simulation in stepping mode:
@@ -69,14 +65,12 @@ fn main() -> Result<(), RemoteAPIError> {
         let message = format!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. stepped)", time = time);
         println!("{}", message);
         client.sim_add_log(sim::VERBOSITY_SCRIPTINFOS, message)?;
-        client.step(true)?; //triggers next simulation step
+        client.sim_step()?; //triggers next simulation step
     }
     client.sim_stop_simulation()?;
 
     //Remove the dummies created earlier:
-    for h in handles {
-        client.sim_remove_object(h)?;
-    }
+    client.sim_remove_objects(handles)?;
 
     //Restore the original idle loop frequency:
     client.sim_set_int32_param(sim::INTPARAM_IDLE_FPS, default_idle_fps)?;

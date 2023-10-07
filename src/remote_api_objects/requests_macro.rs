@@ -37,46 +37,15 @@ macro_rules! requests {
                 )*
 
                 let request = crate::zmq_requests::ZmqRequest {
-                    function_name: format!("{}.{}",$sim_type,$function_name),
+                    func: format!("{}.{}",$sim_type,$function_name),
                     args: _args,
+                    ver:crate::zmq_requests::VERSION,
+                    lang:crate::zmq_requests::LANG.into(),
+                    uuid:self.get_uuid(),
+
                 };
 
-
-
-                let result = self.send_raw_request(request.to_raw_request());
-
-
-                if let Err(error) = result {
-                    return Err(crate::remote_api_objects::connection_error::RemoteAPIError::new(format!("{:?}",error)));
-                }
-
-                let result = result.unwrap();
-
-                let get_error = |json: &serde_json::Value| -> String{
-                    if let Some(serde_json::Value::String(error)) = json.get("error") {
-                        error.clone()
-                    } else {
-                        "unknown error".to_string()
-                    }
-                };
-
-                let is_success = |json: &serde_json::Value| -> Result<(), String>{
-
-                    if let Some(serde_json::Value::Bool(success)) = json.get("success") { if *success {
-                            Ok(())
-                        } else {
-                            Err(get_error(json))
-                        }
-                    } else {
-                        Err(get_error(json))
-                    }
-                };
-
-                if let Err(error) = is_success(&result) {
-                    return Err(crate::remote_api_objects::connection_error::RemoteAPIError::new(error));
-                }
-
-                let mut ret  =result["ret"].to_owned();
+                let mut ret  = self.send_request(request)?;
                $(
 
                 if let Some(vec) = ret.as_array_mut() {
@@ -92,7 +61,7 @@ macro_rules! requests {
                                     return Ok(value);
                             },
                             Err(e) => {
-                                log::trace!("Err {}",e);
+                                log::trace!(" {}, but expected to be ()",e);
 
                                 // Expected return ()
                                 return Ok(Default::default());

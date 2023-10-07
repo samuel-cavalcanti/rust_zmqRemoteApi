@@ -35,7 +35,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
        triggers next simulation step
     */
-    client.set_stepping(true)?;
+    client.sim_set_stepping(true)?;
 
     client.sim_start_simulation()?;
 
@@ -89,8 +89,8 @@ fn move_to_angle<S: Sim>(
     while (target_angle - *join_angle).abs() > 0.1 * PI / 180.0 {
         let velocity = compute_target_velocity(target_angle, *join_angle);
         sim.sim_set_joint_target_velocity(*joint_handle, velocity, None)?;
-        sim.sim_set_joint_max_force(*joint_handle, MAX_FORCE)?;
-        client.step(true)?;
+        sim.sim_set_joint_target_force(*joint_handle, MAX_FORCE, None)?;
+        client.sim_step()?;
         *join_angle = sim.sim_get_joint_position(*joint_handle)?;
     }
 

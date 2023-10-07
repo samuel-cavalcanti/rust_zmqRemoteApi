@@ -13,7 +13,7 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
-    client.set_stepping(true)?;
+    client.sim_set_stepping(true)?;
 
     client.sim_start_simulation()?;
 
@@ -21,7 +21,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     while time < 3.0 {
         println!("Simulation time: {:.3} [s]", time);
-        client.step(true)?;
+        client.sim_step()?;
         time = client.sim_get_simulation_time()?;
     }
 

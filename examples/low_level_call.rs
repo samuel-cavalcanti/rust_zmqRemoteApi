@@ -14,8 +14,11 @@ fn main() -> Result<(), RemoteAPIError> {
     })?;
 
     let request = ZmqRequest {
-        function_name: "sim.getStringSignal".to_string(),
+        uuid: client.get_uuid(),
+        func: "sim.getStringSignal".to_string(),
         args: vec![cbor!("testSignal").unwrap()],
+        ver: zmq_remote_api::VERSION,
+        lang: zmq_remote_api::LANG.into(),
     };
 
     let json = client.send_raw_request(request.to_raw_request())?;

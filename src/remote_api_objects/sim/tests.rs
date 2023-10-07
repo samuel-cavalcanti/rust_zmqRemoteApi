@@ -6,30 +6,23 @@ use crate::{
 };
 use serde_json::json;
 
-use std::cell::RefCell;
-
 use crate::remote_api_objects::connection_error::RemoteAPIError;
 
 #[test]
 fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
-    let sim = MockRemoteAPIClient {
-        payload: RefCell::new(vec![]),
-        result: RefCell::new(json!({"ret":[1],"success":true})),
-    };
+    let sim = MockRemoteAPIClient::new_sucess();
 
     sim.sim_start_simulation()?;
-    let payload = log_utils::to_byte_array_string(&sim.get_payload());
-    println!("{payload}");
-    assert_payload! {sim,b"\xa2dfuncssim.startSimulationdargs\x80"};
+    assert_payload! {sim,b"\xa5dfuncssim.startSimulationdargs\x80duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust"};
 
     sim.sim_stop_simulation()?;
-    assert_payload! {sim,b"\xa2dfuncrsim.stopSimulationdargs\x80"};
+    assert_payload! {sim,b"\xa5dfuncrsim.stopSimulationdargs\x80duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust"};
 
     *sim.result.borrow_mut() = json!({"ret":[1.23],"success":true});
 
     let time = sim.sim_get_simulation_time()?;
 
-    assert_payload! {sim,b"\xa2dfuncusim.getSimulationTimedargs\x80"};
+    assert_payload! {sim,b"\xa5dfuncusim.getSimulationTimedargs\x80duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust"};
 
     assert_eq!(time, 1.23);
 
@@ -37,47 +30,42 @@ fn test_get_simulation_time_functions() -> Result<(), RemoteAPIError> {
 }
 #[test]
 fn test_simple_test_functions() -> Result<(), RemoteAPIError> {
-    let sim = MockRemoteAPIClient {
-        payload: RefCell::new(vec![]),
-        result: RefCell::new(json!({"ret":[1],"success":true})),
-    };
+    let sim = MockRemoteAPIClient::new_sucess();
 
     sim.sim_get_int32_param(26)?;
-    assert_payload!(sim, b"\xa2dfuncqsim.getInt32Paramdargs\x81\x18\x1a");
+    assert_payload!(sim, b"\xa5dfuncqsim.getInt32Paramdargs\x81\x18\x1aduuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust");
 
     sim.sim_set_int32_param(26, 0)?;
-    assert_payload!(sim, b"\xa2dfuncqsim.setInt32Paramdargs\x82\x18\x1a\x00");
+    assert_payload!(sim, b"\xa5dfuncqsim.setInt32Paramdargs\x82\x18\x1a\x00duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust");
 
     sim.sim_create_dummy(0.01)?;
     assert_payload!(
         sim,
-        b"\xa2dfuncosim.createDummydargs\x81\xfb?\x84z\xe1G\xae\x14{"
+       b"\xa5dfuncosim.createDummydargs\x81\xfb?\x84z\xe1G\xae\x14{duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust" 
     );
 
     let state = sim.sim_get_simulation_state()?;
     assert_eq!(state, 1);
-    assert_payload!(sim, b"\xa2dfuncvsim.getSimulationStatedargs\x80");
+    assert_payload!(sim, b"\xa5dfuncvsim.getSimulationStatedargs\x80duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust");
 
     sim.sim_add_log(
         VERBOSITY_SCRIPTINFOS,
         String::from(
-            "Simulation time: 0.00 [s] (simulation running synchronously to client, i.e. stepped)",
+            "Simulation time: 0.00 [s] (simulation running asynchronously  to client, i.e. stepped)",
         ),
     )?;
-    assert_payload!(sim,b"\xa2dfuncjsim.addLogdargs\x82\x19\x01\xc2xTSimulation time: 0.00 [s] (simulation running synchronously to client, i.e. stepped)");
+    assert_payload!(sim,b"\xa5dfuncjsim.addLogdargs\x82\x19\x01\xc2xVSimulation time: 0.00 [s] (simulation running asynchronously  to client, i.e. stepped)duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust");
 
-    sim.sim_remove_object(222)?;
-    assert_payload!(sim, b"\xa2dfuncpsim.removeObjectdargs\x81\x18\xde");
+    let objects = (465..515).collect::<Vec<i64>>();
+    sim.sim_remove_objects(objects)?;
+    assert_payload!(sim, b"\xa5dfuncqsim.removeObjectsdargs\x81\x982\x19\x01\xd1\x19\x01\xd2\x19\x01\xd3\x19\x01\xd4\x19\x01\xd5\x19\x01\xd6\x19\x01\xd7\x19\x01\xd8\x19\x01\xd9\x19\x01\xda\x19\x01\xdb\x19\x01\xdc\x19\x01\xdd\x19\x01\xde\x19\x01\xdf\x19\x01\xe0\x19\x01\xe1\x19\x01\xe2\x19\x01\xe3\x19\x01\xe4\x19\x01\xe5\x19\x01\xe6\x19\x01\xe7\x19\x01\xe8\x19\x01\xe9\x19\x01\xea\x19\x01\xeb\x19\x01\xec\x19\x01\xed\x19\x01\xee\x19\x01\xef\x19\x01\xf0\x19\x01\xf1\x19\x01\xf2\x19\x01\xf3\x19\x01\xf4\x19\x01\xf5\x19\x01\xf6\x19\x01\xf7\x19\x01\xf8\x19\x01\xf9\x19\x01\xfa\x19\x01\xfb\x19\x01\xfc\x19\x01\xfd\x19\x01\xfe\x19\x01\xff\x19\x02\x00\x19\x02\x01\x19\x02\x02duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust");
 
     Ok(())
 }
 
 #[test]
 fn test_p_controller_functions() -> Result<(), RemoteAPIError> {
-    let sim = MockRemoteAPIClient {
-        payload: RefCell::new(vec![]),
-        result: RefCell::new(json!({"ret":[1],"success":true})),
-    };
+    let sim = MockRemoteAPIClient::new_sucess();
 
     let id = sim.sim_get_object("/Cuboid[0]/joint".to_string(), None)?;
     assert_eq!(id, 1);
@@ -95,7 +83,7 @@ fn test_p_controller_functions() -> Result<(), RemoteAPIError> {
         b"\xa2dfuncx\x1asim.setJointTargetVelocitydargs\x82\t\xfb@\x19!\xfbTD-\x18"
     );
 
-    sim.sim_set_joint_max_force(9, 100.0)?;
+    sim.sim_set_joint_target_force(9, 100.0, None)?;
     assert_payload!(sim, b"\xa2dfunctsim.setJointMaxForcedargs\x82\t\xf9V@");
 
     Ok(())
@@ -109,10 +97,7 @@ fn test_synchronous_image_transmission_functions() -> Result<(), RemoteAPIError>
     let expected_payload = include_bytes!("../../../assets/cbor_image.bin").to_vec();
     assert_eq!(expected_payload.len(), 196649);
 
-    let sim = MockRemoteAPIClient {
-        payload: RefCell::new(vec![]),
-        result: RefCell::new(json!({"ret":[1],"success":true})),
-    };
+    let sim = MockRemoteAPIClient::new_sucess();
 
     sim.sim_set_vision_sensor_img(22, image, None, None, None)?;
     assert_payload(&sim, expected_payload);
@@ -124,10 +109,7 @@ fn test_synchronous_image_transmission_functions() -> Result<(), RemoteAPIError>
 fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> {
     env_logger::init();
 
-    let sim = MockRemoteAPIClient {
-        payload: RefCell::new(vec![]),
-        result: RefCell::new(json!({"ret":[1],"success":true})),
-    };
+    let sim = MockRemoteAPIClient::new_sucess();
     let handle_id = sim.sim_get_object(String::from("/LBR4p"), None)?;
     assert_eq!(handle_id, 1);
 
@@ -180,4 +162,23 @@ fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> 
     assert_eq!(json_out, json!({}));
 
     Ok(())
+}
+
+#[test]
+fn test_get_step() {
+    let sim = MockRemoteAPIClient::new_sucess();
+
+    sim.sim_step().unwrap();
+    assert_payload! {sim,b"\xa5dfunchsim.stepdargs\x80duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust"};
+}
+
+#[test]
+fn test_set_stepping() {
+    let sim = MockRemoteAPIClient::new_sucess();
+
+    sim.sim_set_stepping(true).unwrap();
+    assert_payload!(sim,b"\xa5dfuncosim.setSteppingdargs\x81\xf5duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust");
+
+    sim.sim_set_stepping(false).unwrap();
+    assert_payload! {sim,b"\xa5dfuncosim.setSteppingdargs\x81\xf4duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust"};
 }

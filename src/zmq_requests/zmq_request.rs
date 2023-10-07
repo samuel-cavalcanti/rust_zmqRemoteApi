@@ -1,47 +1,60 @@
-use ciborium::cbor;
-use ciborium::value::Value;
+use ciborium::{cbor, value::Value};
+use serde::Serialize;
 
 pub trait RawRequest {
     fn to_raw_request(&self) -> Vec<u8>;
 }
 
-#[derive(Debug)]
+pub const VERSION: i32 = 2;
+pub const LANG: &str = "rust";
+
+#[derive(Debug, Serialize)]
 pub struct ZmqRequest {
-    pub function_name: String,
+    pub func: String,
     pub args: Vec<Value>,
+    pub uuid: String,
+    pub ver: i32,
+    pub lang: String,
 }
 
 impl ZmqRequest {
-    pub fn remote_api_info(object: String) -> ZmqRequest {
+    pub fn remote_api_info(object: String, uuid: String) -> ZmqRequest {
         ZmqRequest {
-            function_name: String::from("zmqRemoteApi.info"),
+            uuid,
+            func: "zmqRemoteApi.info".into(),
             args: vec![cbor!(object).unwrap()],
+            ver: VERSION,
+            lang: LANG.into(),
         }
     }
+    pub fn wait_request(uuid: String)->ZmqRequest{
 
-    pub fn step(uuid: String) -> ZmqRequest {
         ZmqRequest {
-            function_name: "step".to_string(),
-            args: vec![cbor!(uuid).unwrap()],
+            uuid,
+            func: "_*executed*_".into(),
+            args: vec![],
+            ver: VERSION,
+            lang: LANG.into(),
         }
+
     }
 
-    pub fn set_stepping(enable: bool, uuid: String) -> ZmqRequest {
+    pub fn end_request(uuid: String) -> ZmqRequest {
         ZmqRequest {
-            function_name: "setStepping".to_string(),
-            args: vec![cbor!(enable).unwrap(), cbor!(uuid).unwrap()],
+            uuid,
+            func: "_*end*_".into(),
+            args: vec![],
+            ver: VERSION,
+            lang: LANG.into(),
         }
     }
 }
 
 impl RawRequest for ZmqRequest {
     fn to_raw_request(&self) -> Vec<u8> {
-        let enconded = cbor!({"func"=> self.function_name, "args"=>self.args}).unwrap();
-
-        log::trace!("sending: {:?}", enconded);
-
         let mut bytes = Vec::new();
-        ciborium::ser::into_writer(&enconded, &mut bytes).unwrap();
+
+        ciborium::ser::into_writer(self, &mut bytes).unwrap();
 
         bytes
     }
