@@ -10,7 +10,7 @@ pub trait Sim : RemoteApiClientInterface {
 (sim_set_vision_sensor_char_image,"setVisionSensorCharImage",(sensor_handle:i64,image:Vec<u8>)->()),
 (sim_get_object_selection,"getObjectSelection"->Vec<i64>),
 (sim_set_object_selection,"setObjectSelection",(object_handles:Vec<f64>)->()),
-(sim_get_string_signal,"getStringSignal",(signal_name:String)->String),
+(sim_get_string_signal,"getStringSignal",(signal_name:String)->Option<Vec<u8>>),
 (sim_get_int32_signal,"getInt32Signal",(signal_name:String)->Option<i64>),
 (sim_get_float_signal,"getFloatSignal",(signal_name:String)->Option<f64>),
 (sim_acquire_lock,"acquireLock"->()),

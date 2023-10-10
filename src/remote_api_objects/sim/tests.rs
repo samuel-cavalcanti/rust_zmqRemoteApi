@@ -1,9 +1,6 @@
 use super::Sim;
 use super::*;
-use crate::{
-    log_utils,
-    remote_api_objects::mocks::{assert_payload, MockRemoteAPIClient},
-};
+use crate::remote_api_objects::mocks::{assert_payload, MockRemoteAPIClient};
 use serde_json::json;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
@@ -111,57 +108,47 @@ fn test_synchronous_image_transmission_functions() -> Result<(), RemoteAPIError>
 fn test_send_ik_movement_sequence_mov_functions() -> Result<(), RemoteAPIError> {
     env_logger::init();
 
-    let sim = MockRemoteAPIClient::new_sucess();
+    let mut sim = MockRemoteAPIClient::new_sucess();
+    sim.uuid = "782cad7d-4493-42f2-a715-69f740f26ea9".to_string();
+
     let handle_id = sim.sim_get_object(String::from("/LBR4p"), None)?;
     assert_eq!(handle_id, 1);
 
-    assert_payload!(sim, b"\xa2dfuncmsim.getObjectdargs\x81f/LBR4p");
+    assert_payload!(sim, b"\xa5dfuncmsim.getObjectdargs\x81f/LBR4pduuidx$782cad7d-4493-42f2-a715-69f740f26ea9cver\x02dlangdrust");
 
     let script_handle = sim.sim_get_script(1, Some(13), None)?;
     assert_eq!(script_handle, 1);
-    assert_payload!(sim, b"\xa2dfuncmsim.getScriptdargs\x82\x01\r");
+    assert_payload!(sim, b"\xa5dfuncmsim.getScriptdargs\x82\x01\rduuidx$782cad7d-4493-42f2-a715-69f740f26ea9cver\x02dlangdrust");
 
-    *sim.result.borrow_mut() = serde_json::json!(json!({"ret":{},"success":true}));
+    *sim.result.borrow_mut() = serde_json::json!(json!({"ret":[[114,101,97,100,121]]}));
     let signal = sim.sim_get_string_signal(String::from("/LBR4p_executedMovId"))?;
     assert_payload!(
         sim,
-        b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
-    );
-    assert!(signal.is_empty());
-
-    *sim.result.borrow_mut() = json!({"ret":["ready"],"success":true});
-    let signal = sim.sim_get_string_signal(String::from("/LBR4p_executedMovId"))?;
-    assert_payload!(
-        sim,
-        b"\xa2dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovId"
-    );
-    assert_eq!(signal, "ready");
-
-    *sim.result.borrow_mut() = json!({"success": true,"ret": [[0.0051022060215473175, -7.424_468_640_238_047e-5, 1.072655200958252, 3.102_603_295_701_556e-5, 3.624_804_958_235_472_4e-5, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]});
-    let json =
-        sim.sim_call_script_function(String::from("remoteApi_getPoseAndConfig"), 2050006, None)?;
-    assert_payload!(sim,b"\xa2dfuncvsim.callScriptFunctiondargs\x82x\x1aremoteApi_getPoseAndConfig\x1a\x00\x1fG\xd6");
-    assert_eq!(
-        json,
-        json! {[[0.0051022060215473175, -7.424_468_640_238_047e-5, 1.072655200958252, 3.102_603_295_701_556e-5, 3.624_804_958_235_472_4e-5, -0.0001559544907649979, 1], [-0.0008084774017333984, -0.5228924751281738, -0.0008318424224853516, 1.0469286441802979, 0.0001537799835205078, -0.5236260890960693, -6.67572021484375e-06]]}
+        b"\xa5dfuncssim.getStringSignaldargs\x81t/LBR4p_executedMovIdduuidx$782cad7d-4493-42f2-a715-69f740f26ea9cver\x02dlangdrust"
     );
 
-    *sim.result.borrow_mut() = json! {{"ret":[{}],"success":true}};
+    let signal = String::from_utf8(signal.unwrap()).unwrap();
+    assert_eq!(signal, "ready".to_string());
+
+    let script_handle = 1010073;
+
+    *sim.result.borrow_mut() = json!({"ret":[[0.005610920649735013,-0.00021765310913694194,1.0726233629223674,0.00015426587889780238,0.00035320923886966716,0.0002262267625328107,0.999999900133357],[-0.00016239643955495708,-0.523748620585974,6.142930608632469e-10,1.047150871028287,0.00003561749575364814,-0.523602489795632,-3.7685468967652014e-8]]});
+    let _json = sim.sim_call_script_function(
+        String::from("remoteApi_getPoseAndConfig"),
+        script_handle,
+        None,
+    )?;
+
+    assert_payload!(sim,b"\xa5dfuncvsim.callScriptFunctiondargs\x82x\x1aremoteApi_getPoseAndConfig\x1a\x00\x0fi\x99duuidx$782cad7d-4493-42f2-a715-69f740f26ea9cver\x02dlangdrust");
+
     let json_arg = json!( {"id": "movSeq1", "type": "mov", "targetPose": [0, 0, 0.85, 0, 0, 0, 1], "maxVel": 0.1, "maxAccel": 0.01});
-    let json_out = sim.sim_call_script_function(
+    let _json_out = sim.sim_call_script_function(
         String::from("remoteApi_movementDataFunction"),
-        2050006,
+        script_handle,
         Some(json_arg),
     )?;
-    let payload = sim.get_payload();
-    let decoded: ciborium::value::Value = ciborium::de::from_reader(payload.as_slice()).unwrap();
 
-    let json = serde_json::json!(decoded);
-    println!("Json response: {}", json);
-    println!("{}", log_utils::to_byte_array_string(&payload));
-
-    assert_payload!(sim,b"\xa2dfuncvsim.callScriptFunctiondargs\x83x\x1eremoteApi_movementDataFunction\x1a\x00\x1fG\xd6\xa5bidgmovSeq1hmaxAccel\xfb?\x84z\xe1G\xae\x14{fmaxVel\xfb?\xb9\x99\x99\x99\x99\x99\x9ajtargetPose\x87\x00\x00\xfb?\xeb333333\x00\x00\x00\x01dtypecmov");
-    assert_eq!(json_out, json!({}));
+    assert_payload!(sim,b"\xa5dfuncvsim.callScriptFunctiondargs\x83x\x1eremoteApi_movementDataFunction\x1a\x00\x0fi\x99\xa5bidgmovSeq1hmaxAccel\xfb?\x84z\xe1G\xae\x14{fmaxVel\xfb?\xb9\x99\x99\x99\x99\x99\x9ajtargetPose\x87\x00\x00\xfb?\xeb333333\x00\x00\x00\x01dtypecmovduuidx$782cad7d-4493-42f2-a715-69f740f26ea9cver\x02dlangdrust");
 
     Ok(())
 }

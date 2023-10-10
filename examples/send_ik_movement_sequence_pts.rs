@@ -461,9 +461,14 @@ fn wait_for_movement_executed<S: Sim>(
     sim: &S,
     signal_name: String,
 ) -> Result<(), RemoteAPIError> {
-    let mut string = sim.sim_get_string_signal(signal_name.clone())?;
-    while string != id {
-        string = sim.sim_get_string_signal(signal_name.clone())?;
+    loop {
+        let bytes = sim.sim_get_string_signal(signal_name.clone())?;
+        if let Some(bytes) = bytes {
+            let utf8_string = String::from_utf8(bytes).unwrap();
+            if utf8_string == id {
+                break;
+            }
+        }
     }
 
     Ok(())
