@@ -6,10 +6,18 @@ use super::{LANG, VERSION};
 fn test_get_sim() {
     let uuid = "a9bb7126-0d1f-4474-8801-078c094dcee9".to_string();
     let request = ZmqRequest::remote_api_info("sim".to_string(), uuid);
-    let bytes = b"\xa2dfuncqzmqRemoteApi.infodargs\x81csim".to_vec();
-    assert_eq!(bytes, request.to_raw_request());
+    let bytes =
+        b"\xa5dfuncqzmqRemoteApi.infodargs\x81csimduuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrust"
+            .to_vec();
+    let zmq_bytes = request.to_raw_request();
+    assert_eq!(
+        bytes,
+        zmq_bytes,
+        "\nzmq request:{}\n      bytes:{}",
+        crate::log_utils::to_byte_array_string(&zmq_bytes),
+        crate::log_utils::to_byte_array_string(&bytes)
+    );
 }
-
 
 #[test]
 fn test_requests_macros() {
@@ -33,11 +41,18 @@ fn test_requests_macros() {
     ];
 
     let expected_bytes = vec![
-        b"\xa2dfuncssim.startSimulationdargs\x80".to_vec(),
-        b"\xa2dfuncrsim.stopSimulationdargs\x80".to_vec(),
+        b"\xa5dfuncssim.startSimulationdargs\x80duuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrust".to_vec(),
+        b"\xa5dfuncrsim.stopSimulationdargs\x80duuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrust".to_vec(),
     ];
 
     for (request, bytes) in requests.iter().zip(expected_bytes) {
-        assert_eq!(bytes, request.to_raw_request());
+        let zmq_bytes = request.to_raw_request();
+        assert_eq!(
+            zmq_bytes,
+            bytes,
+            "\nzmq request:{}\n      bytes:{}",
+            crate::log_utils::to_byte_array_string(&zmq_bytes),
+            crate::log_utils::to_byte_array_string(&bytes)
+        );
     }
 }
