@@ -27,8 +27,7 @@ impl ZmqRequest {
             lang: LANG.into(),
         }
     }
-    pub fn wait_request(uuid: String)->ZmqRequest{
-
+    pub fn wait_request(uuid: String) -> ZmqRequest {
         ZmqRequest {
             uuid,
             func: "_*executed*_".into(),
@@ -36,7 +35,6 @@ impl ZmqRequest {
             ver: VERSION,
             lang: LANG.into(),
         }
-
     }
 
     pub fn end_request(uuid: String) -> ZmqRequest {
