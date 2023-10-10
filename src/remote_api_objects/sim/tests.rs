@@ -65,26 +65,28 @@ fn test_simple_test_functions() -> Result<(), RemoteAPIError> {
 
 #[test]
 fn test_p_controller_functions() -> Result<(), RemoteAPIError> {
-    let sim = MockRemoteAPIClient::new_sucess();
+    let mut sim = MockRemoteAPIClient::new_sucess();
+    sim.uuid = "92e1fde9-2d2c-4258-aafc-06d89efb8a7a".to_string();
 
     let id = sim.sim_get_object("/Cuboid[0]/joint".to_string(), None)?;
     assert_eq!(id, 1);
-    assert_payload!(sim, b"\xa2dfuncmsim.getObjectdargs\x81p/Cuboid[0]/joint");
+    assert_payload!(sim,b"\xa5dfuncmsim.getObjectdargs\x81p/Cuboid[0]/jointduuidx$92e1fde9-2d2c-4258-aafc-06d89efb8a7acver\x02dlangdrust");
 
     *sim.result.borrow_mut() = json!({"ret":[1.2],"success":true});
     let pos = sim.sim_get_joint_position(9)?;
     assert_eq!(pos, 1.2);
-    assert_payload!(sim, b"\xa2dfunctsim.getJointPositiondargs\x81\t");
+    assert_payload!(sim, b"\xa5dfunctsim.getJointPositiondargs\x81\tduuidx$92e1fde9-2d2c-4258-aafc-06d89efb8a7acver\x02dlangdrust"
+);
 
     *sim.result.borrow_mut() = json!({"ret":[1],"success":true});
     sim.sim_set_joint_target_velocity(9, std::f64::consts::TAU, None)?;
     assert_payload!(
         sim,
-        b"\xa2dfuncx\x1asim.setJointTargetVelocitydargs\x82\t\xfb@\x19!\xfbTD-\x18"
+b"\xa5dfuncx\x1asim.setJointTargetVelocitydargs\x82\t\xfb@\x19!\xfbTD-\x18duuidx$92e1fde9-2d2c-4258-aafc-06d89efb8a7acver\x02dlangdrust"
     );
 
-    sim.sim_set_joint_target_force(9, 100.0, None)?;
-    assert_payload!(sim, b"\xa2dfunctsim.setJointMaxForcedargs\x82\t\xf9V@");
+    sim.sim_set_joint_max_force(9, 100.0)?;
+    assert_payload!(sim, b"\xa5dfunctsim.setJointMaxForcedargs\x82\t\xf9V@duuidx$92e1fde9-2d2c-4258-aafc-06d89efb8a7acver\x02dlangdrust");
 
     Ok(())
 }

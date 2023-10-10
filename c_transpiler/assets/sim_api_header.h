@@ -1,3 +1,24 @@
+// DEPRECATED/BACKCOMPATIBILITY START
+void setJointMaxForce(int64_t objectHandle, double forceOrTorque);
+double getJointMaxForce(int64_t jointHandle);
+int64_t createPureShape(int64_t primitiveType, int64_t options,
+                        std::vector<double> sizes, double mass,
+                        std::optional<std::vector<int64_t>> precision = {});
+void removeObject(int64_t objectHandle);
+std::tuple<std::vector<uint8_t>, std::vector<int64_t>>
+getVisionSensorDepthBuffer(int64_t sensorHandle,
+                           std::optional<std::vector<int64_t>> pos = {},
+                           std::optional<std::vector<int64_t>> size = {});
+std::tuple<std::vector<uint8_t>, std::vector<int64_t>>
+getVisionSensorCharImage(int64_t sensorHandle,
+                         std::optional<std::vector<int64_t>> pos = {},
+                         std::optional<std::vector<int64_t>> size = {});
+void setVisionSensorCharImage(int64_t sensorHandle, std::vector<uint8_t> image);
+
+std::vector<int64_t> getObjectSelection();
+void setObjectSelection(std::vector<double> objectHandles);
+// DEPRECATED/BACKCOMPATIBILITY START
+
 // SPECIAL START
 std::string getStringSignal(std::string signalName);
 std::optional<int64_t> getInt32Signal(std::string signalName);

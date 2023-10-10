@@ -3,6 +3,33 @@ from typing import Optional, Protocol
 
 class Sim(Protocol):
 
+    def setJointMaxForce(self,objectHandle:int, forceOrTorque:float)->None:
+        ...
+    
+    def getJointMaxForce(self,jointHandle:int)->float:
+        ...
+    
+    def createPureShape(self,primitiveType:int, options:int, sizes:list[float], mass:float, precision:Optional[list[int]] = None)->int:
+        ...
+    
+    def removeObject(self,objectHandle:int)->None:
+        ...
+    
+    def getVisionSensorDepthBuffer(self,sensorHandle:int, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
+        ...
+    
+    def getVisionSensorCharImage(self,sensorHandle:int, pos:Optional[list[int]] = None, size:Optional[list[int]] = None)->tuple[list[int], list[int]]:
+        ...
+    
+    def setVisionSensorCharImage(self,sensorHandle:int, image:list[int])->None:
+        ...
+    
+    def getObjectSelection(self)->list[int]:
+        ...
+    
+    def setObjectSelection(self,objectHandles:list[float])->None:
+        ...
+    
     def getStringSignal(self,signalName:str)->str:
         ...
     

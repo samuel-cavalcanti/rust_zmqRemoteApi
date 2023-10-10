@@ -1,6 +1,15 @@
 pub trait Sim : RemoteApiClientInterface {
     requests!{
 "sim",
+(sim_set_joint_max_force,"setJointMaxForce",(object_handle:i64,force_or_torque:f64)->()),
+(sim_get_joint_max_force,"getJointMaxForce",(joint_handle:i64)->f64),
+(sim_create_pure_shape,"createPureShape",(primitive_type:i64,options:i64,sizes:Vec<f64>,mass:f64),opt(precision:Vec<i64>)->i64),
+(sim_remove_object,"removeObject",(object_handle:i64)->()),
+(sim_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>)),
+(sim_get_vision_sensor_char_image,"getVisionSensorCharImage",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>)),
+(sim_set_vision_sensor_char_image,"setVisionSensorCharImage",(sensor_handle:i64,image:Vec<u8>)->()),
+(sim_get_object_selection,"getObjectSelection"->Vec<i64>),
+(sim_set_object_selection,"setObjectSelection",(object_handles:Vec<f64>)->()),
 (sim_get_string_signal,"getStringSignal",(signal_name:String)->String),
 (sim_get_int32_signal,"getInt32Signal",(signal_name:String)->Option<i64>),
 (sim_get_float_signal,"getFloatSignal",(signal_name:String)->Option<f64>),
