@@ -36,9 +36,6 @@ impl RemoteApiClientInterface for MockRemoteAPIClient {
 
 impl Sim for MockRemoteAPIClient {}
 
-pub fn assert_payload(client: &MockRemoteAPIClient, payload: Vec<u8>) {
-    assert_eq!(client.get_payload(), payload)
-}
 macro_rules! assert_payload {
     ($client:ident,$payload:literal) => {
         assert_eq!($client.get_payload(), $payload.to_vec());

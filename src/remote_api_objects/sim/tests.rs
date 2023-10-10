@@ -1,6 +1,6 @@
 use super::Sim;
 use super::*;
-use crate::remote_api_objects::mocks::{assert_payload, MockRemoteAPIClient};
+use crate::remote_api_objects::mocks::MockRemoteAPIClient;
 use serde_json::json;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
@@ -90,17 +90,18 @@ b"\xa5dfuncx\x1asim.setJointTargetVelocitydargs\x82\t\xfb@\x19!\xfbTD-\x18duuidx
 
 #[test]
 fn test_synchronous_image_transmission_functions() -> Result<(), RemoteAPIError> {
-    let image = include_bytes!("../../../assets/image.bin").to_vec();
-    assert_eq!(image.len(), 196608);
+    let mut sim = MockRemoteAPIClient::new_sucess();
+    sim.uuid = "330c0929-05e6-4749-8212-18d0dec5b1e2".to_string();
 
-    let expected_payload = include_bytes!("../../../assets/cbor_image.bin").to_vec();
-    assert_eq!(expected_payload.len(), 196649);
+    let vision_sensor_handle = 11;
+    sim.sim_get_vision_sensor_img(vision_sensor_handle, None, None, None, None)?;
+    assert_payload!(sim,b"\xa5dfuncvsim.getVisionSensorImgdargs\x81\x0bduuidx$330c0929-05e6-4749-8212-18d0dec5b1e2cver\x02dlangdrust");
 
-    let sim = MockRemoteAPIClient::new_sucess();
+    let img = [0, 0, 0, 0, 0, 0, 0, 0, 0].to_vec();
 
-    sim.sim_set_vision_sensor_img(22, image, None, None, None)?;
-    assert_payload(&sim, expected_payload);
+    sim.sim_set_vision_sensor_img(vision_sensor_handle, img.clone(), None, None, None)?;
 
+    assert_payload!(sim, b"\xa5dfuncvsim.setVisionSensorImgdargs\x82\x0bI\x00\x00\x00\x00\x00\x00\x00\x00\x00duuidx$330c0929-05e6-4749-8212-18d0dec5b1e2cver\x02dlangdrust");
     Ok(())
 }
 
