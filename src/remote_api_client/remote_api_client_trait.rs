@@ -26,6 +26,7 @@ pub trait RemoteApiClientInterface {
 
         if let Some(err) = json.get("err") {
             let error_msg = err.as_str().unwrap().to_string();
+            log::error!("Error:{error_msg}");
             return Err(
                 crate::remote_api_objects::connection_error::RemoteAPIError::new(error_msg),
             );

@@ -12,6 +12,7 @@ const ZMQ_RECV_FLAG_NONE: i32 = 0;
 
 pub struct RemoteApiClient {
     rpc_socket: zmq::Socket,
+    end_point: String,
     id: Uuid,
 }
 
@@ -34,6 +35,7 @@ impl RemoteApiClient {
         Ok(RemoteApiClient {
             id: Uuid::new_v4(),
             rpc_socket,
+            end_point: rpc_address,
         })
     }
 
@@ -106,10 +108,11 @@ impl RemoteApiClientInterface for &RemoteApiClient {
 impl Drop for RemoteApiClient {
     fn drop(&mut self) {
         let end_request = ZmqRequest::end_request(self.get_uuid());
-        let result = self.send_raw_request(end_request.to_raw_request());
-        if let Err(e) = result {
-            log::error!("{e:?}");
-        }
+
+        self.rpc_socket
+            .send(end_request.to_raw_request(), zmq::DONTWAIT)
+            .unwrap();
+        self.rpc_socket.disconnect(&self.end_point).unwrap();
     }
 }
 
