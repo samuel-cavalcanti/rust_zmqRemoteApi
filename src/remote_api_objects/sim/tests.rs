@@ -1,6 +1,9 @@
 use super::Sim;
+use super::SimIK;
 use super::*;
 use crate::remote_api_objects::mocks::MockRemoteAPIClient;
+use crate::sim;
+use crate::RemoteApiClientInterface;
 use serde_json::json;
 
 use crate::remote_api_objects::connection_error::RemoteAPIError;
@@ -171,4 +174,42 @@ fn test_set_stepping() {
 
     sim.sim_set_stepping(false).unwrap();
     assert_payload! {sim,b"\xa5dfuncosim.setSteppingdargs\x81\xf4duuidx$8a7e3cf4-ae84-4b29-9af3-1e87930b7971cver\x02dlangdrust"};
+}
+
+#[test]
+fn test_sim_ik_example() {
+    let mut sim = MockRemoteAPIClient::new_sucess();
+    sim.uuid = "8c42bec7-4c20-4ac3-b388-af05ecd81e84".into();
+
+    sim.require(Module::SimIK).unwrap();
+    assert_payload!(sim,b"\xa5dfunctzmqRemoteApi.requiredargs\x81esimIKduuidx$8c42bec7-4c20-4ac3-b388-af05ecd81e84cver\x02dlangdrust");
+
+    sim.sim_ik_create_environment(None).unwrap();
+    assert_payload!(sim,b"\xa5dfuncwsimIK.createEnvironmentdargs\x80duuidx$8c42bec7-4c20-4ac3-b388-af05ecd81e84cver\x02dlangdrust");
+
+    let env = 15;
+    sim.sim_ik_create_group(env, None).unwrap();
+    assert_payload!(sim,b"\xa5dfuncqsimIK.createGroupdargs\x81\x0fduuidx$8c42bec7-4c20-4ac3-b388-af05ecd81e84cver\x02dlangdrust");
+
+    let ik_group = 2030003;
+
+    sim.sim_ik_set_group_calculation(env, ik_group, sim::IK_PSEUDO_INVERSE_METHOD, 0.0, 6)
+        .unwrap();
+    assert_payload!(sim,b"\xa5dfuncx\x19simIK.setGroupCalculationdargs\x85\x0f\x1a\x00\x1e\xf9\xb3\x00\xf9\x00\x00\x06duuidx$8c42bec7-4c20-4ac3-b388-af05ecd81e84cver\x02dlangdrust");
+    let tip = 12;
+    let target = 3;
+    let base = 1;
+
+    let constraint_pos = sim::IK_X_CONSTRAINT | sim::IK_Y_CONSTRAINT | sim::IK_Z_CONSTRAINT;
+    let constraint_ori = sim::IK_ALPHA_BETA_CONSTRAINT | sim::IK_GAMMA_CONSTRAINT;
+    let constraint_pose = constraint_pos | constraint_ori;
+
+    sim.sim_ik_add_element_from_scene(env, ik_group, base, tip, target, constraint_pose)
+        .unwrap();
+
+    assert_payload!(sim, b"\xa5dfuncx\x19simIK.addElementFromScenedargs\x86\x0f\x1a\x00\x1e\xf9\xb3\x01\x0c\x03\x18\x1fduuidx$8c42bec7-4c20-4ac3-b388-af05ecd81e84cver\x02dlangdrust");
+
+    sim.sim_ik_handle_group(env, ik_group, Some(json!({"syncWorlds" : true})))
+        .unwrap();
+    assert_payload!(sim, b"\xa5dfuncqsimIK.handleGroupdargs\x83\x0f\x1a\x00\x1e\xf9\xb3\xa1jsyncWorlds\xf5duuidx$8c42bec7-4c20-4ac3-b388-af05ecd81e84cver\x02dlangdrust");
 }

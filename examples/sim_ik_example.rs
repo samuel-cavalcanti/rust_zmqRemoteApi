@@ -26,6 +26,7 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
+    // Must call require before usint sim_ik functions
     client.require(sim::Module::SimIK)?;
 
     // When simulation is not running, ZMQ message handling could be a bit

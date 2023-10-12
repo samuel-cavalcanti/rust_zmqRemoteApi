@@ -1,6 +1,10 @@
 use std::cell::RefCell;
 
-use crate::{remote_api_client::RemoteApiClientInterface, sim::Sim, RemoteAPIError};
+use crate::{
+    remote_api_client::RemoteApiClientInterface,
+    sim::{Sim, SimIK},
+    RemoteAPIError,
+};
 use serde_json::{json, Value as JsonValue};
 
 pub struct MockRemoteAPIClient {
@@ -35,6 +39,7 @@ impl RemoteApiClientInterface for MockRemoteAPIClient {
 }
 
 impl Sim for MockRemoteAPIClient {}
+impl SimIK for MockRemoteAPIClient {}
 
 macro_rules! assert_payload {
     ($client:ident,$payload:literal) => {
