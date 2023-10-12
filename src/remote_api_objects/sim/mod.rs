@@ -1,5 +1,10 @@
+#[rustfmt::skip]
 mod sim_api;
+
+#[rustfmt::skip]
 mod sim_const;
+
+#[rustfmt::skip]
 mod sim_ik_api;
 
 pub use sim_api::Sim;
