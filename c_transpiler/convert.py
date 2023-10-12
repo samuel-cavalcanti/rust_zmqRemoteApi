@@ -60,7 +60,7 @@ def main():
     sim_h = assets / Path('sim_api_header.h')
 
     apis = [
-        API(sim_ik_h, 'sim_ik', 'sim_ik_api'),
+        API(sim_ik_h, 'simIK', 'sim_ik_api'),
         API(sim_h, 'sim', 'sim_api'),
     ]
 

@@ -381,4 +381,4 @@ pub trait Sim: RemoteApiClientInterface {
     (sim_yaw_pitch_roll_to_alpha_beta_gamma,"yawPitchRollToAlphaBetaGamma",(yaw_angle:f64,pitch_angle:f64,roll_angle:f64)->(f64,f64,f64)),
     (sim_yield,"yield"->())
     }
-} // test
+}

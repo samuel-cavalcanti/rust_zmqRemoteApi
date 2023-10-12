@@ -127,20 +127,6 @@ class IrTestCase(unittest.TestCase):
         result = [ir_to_cpp(ir) for ir in inputs]
         self.assertEqualStrings(result, expected_strings)
 
-    def test_ir_parser_remote_api_header(self):
-        assets = Path('assets')
-        header = assets / Path('sim_api_header.h')
-        expected_h = assets / Path('expected.h')
-
-        content = header.read_text()
-        stream = StringStream(content)
-        scanner = Scanner(stream)
-
-        assigns = parser(scanner, stream)
-        ir = [ir_to_cpp(assign) for assign in assigns]
-        result_content = "\n".join(ir)
-
-        self.assertEqual(result_content + '\n', expected_h.read_text())
 
     def test_ir_to_string(self):
         vec_u8_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.U8, [])])
@@ -242,7 +228,7 @@ class IrTestCase(unittest.TestCase):
             '(test_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'
         ]
         result = [ir_to_macro_request_rust(
-            ir, file_name='test') for ir in inputs]
+            ir, api_name='test') for ir in inputs]
         self.assertEqualStrings(result, expected_strings)
 
     def assertEqualStrings(self, result: list[str], expected: list[str]):

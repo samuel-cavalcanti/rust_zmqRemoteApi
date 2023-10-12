@@ -1,7 +1,7 @@
 
 from typing import Optional, Protocol
 
-class SimIk(Protocol):
+class SimIK(Protocol):
 
     def addElement(self,environmentHandle:int, ikGroupHandle:int, tipDummyHandle:int)->int:
         ...

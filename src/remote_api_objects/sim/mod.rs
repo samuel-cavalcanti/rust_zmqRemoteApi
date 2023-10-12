@@ -4,7 +4,11 @@ mod sim_ik_api;
 
 pub use sim_api::Sim;
 pub use sim_const::*;
-pub use sim_ik_api::SimIk;
+pub use sim_ik_api::SimIK;
+
+pub enum Module {
+    SimIK,
+}
 
 /*
    this suite test mocks the zmqClient, so it's possible

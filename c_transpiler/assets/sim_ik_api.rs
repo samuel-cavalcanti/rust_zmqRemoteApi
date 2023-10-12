@@ -1,7 +1,7 @@
 use crate::RemoteApiClientInterface;
-pub trait SimIk : RemoteApiClientInterface {
+pub trait SimIK : RemoteApiClientInterface {
     requests!{
-"sim_ik",
+"simIK",
 (sim_ik_add_element,"addElement",(environment_handle:i64,ik_group_handle:i64,tip_dummy_handle:i64)->i64),
 (sim_ik_add_element_from_scene,"addElementFromScene",(environment_handle:i64,ik_group:i64,base_handle:i64,tip_handle:i64,target_handle:i64,constraints:i64)->(i64,serde_json::Value,serde_json::Value)),
 (sim_ik_compute_group_jacobian,"computeGroupJacobian",(environment_handle:i64,ik_group_handle:i64)->(Vec<f64>,Vec<f64>)),

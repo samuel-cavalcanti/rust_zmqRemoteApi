@@ -1,10 +1,21 @@
 use serde_json::Value as JsonValue;
 
-use crate::{RawRequest, RemoteAPIError, ZmqRequest};
+use crate::{sim::Module, RawRequest, RemoteAPIError, ZmqRequest};
 
 pub trait RemoteApiClientInterface {
     fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, RemoteAPIError>;
     fn get_uuid(&self) -> String;
+
+    fn require(&self, module: Module) -> Result<(), RemoteAPIError> {
+        let name = match module {
+            Module::SimIK => "simIK".into(),
+        };
+
+        let require_req = ZmqRequest::require_request(name, self.get_uuid());
+        self.send_request(require_req)?;
+
+        Ok(())
+    }
 
     fn send_request(
         &self,

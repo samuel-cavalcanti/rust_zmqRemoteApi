@@ -46,6 +46,16 @@ impl ZmqRequest {
             lang: LANG.into(),
         }
     }
+
+    pub fn require_request(name: String, uuid: String) -> ZmqRequest {
+        ZmqRequest {
+            uuid,
+            func: "zmqRemoteApi.require".into(),
+            args: vec![cbor!(name).unwrap()],
+            ver: VERSION,
+            lang: LANG.into(),
+        }
+    }
 }
 
 impl RawRequest for ZmqRequest {
