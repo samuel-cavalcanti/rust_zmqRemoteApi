@@ -22,6 +22,8 @@ fn main() {
         let origin = assets.join(file);
         let dest = sim_dir.join(file);
 
+        println!("cargo:rerun-if-changed={}", origin.to_string_lossy());
+
         let content =
             fs::read_to_string(origin.clone()).unwrap_or_else(|_| panic!("read: {origin:?}"));
 
