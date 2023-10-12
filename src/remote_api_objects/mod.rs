@@ -8,6 +8,5 @@ mod requests_macro;
 mod mocks;
 
 pub mod sim;
-pub mod sim_ik;
 
 pub mod connection_error;

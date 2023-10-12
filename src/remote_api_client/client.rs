@@ -4,7 +4,7 @@ use uuid::Uuid;
 
 use crate::remote_api_client::RemoteApiClientInterface;
 use crate::sim::Sim;
-use crate::sim_ik::SimIk;
+use crate::sim::SimIk;
 use crate::zmq_requests::{RawRequest, ZmqRequest};
 use crate::{log_utils, RemoteAPIError, RemoteApiClientParams};
 

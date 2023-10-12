@@ -1,3 +1,4 @@
+use crate::RemoteApiClientInterface;
 pub trait SimIk : RemoteApiClientInterface {
     requests!{
 "sim_ik",
