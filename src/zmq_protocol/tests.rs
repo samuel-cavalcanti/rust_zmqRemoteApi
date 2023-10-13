@@ -1,4 +1,4 @@
-use crate::zmq_requests::{RawRequest, ZmqRequest};
+use super::{RawRequest, ZmqRequest};
 
 use super::{LANG, VERSION};
 

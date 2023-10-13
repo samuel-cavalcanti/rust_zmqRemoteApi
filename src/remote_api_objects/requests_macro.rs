@@ -36,11 +36,11 @@ macro_rules! requests {
                     )*
                 )*
 
-                let request = crate::zmq_requests::ZmqRequest {
+                let request = crate::zmq_protocol::ZmqRequest {
                     func: format!("{}.{}",$sim_type,$function_name),
                     args: _args,
-                    ver:crate::zmq_requests::VERSION,
-                    lang:crate::zmq_requests::LANG.into(),
+                    ver:crate::zmq_protocol::VERSION,
+                    lang:crate::zmq_protocol::LANG.into(),
                     uuid:self.get_uuid(),
 
                 };

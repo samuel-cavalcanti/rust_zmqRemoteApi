@@ -1,6 +1,6 @@
 use serde_json::Value as JsonValue;
 
-use crate::{sim::Module, RawRequest, RemoteAPIError, ZmqRequest};
+use crate::{sim::Module, RawRequest, RemoteAPIError, ZmqRequest, ZmqResponse};
 
 pub trait RemoteApiClientInterface {
     fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, RemoteAPIError>;
@@ -17,31 +17,29 @@ pub trait RemoteApiClientInterface {
         Ok(())
     }
 
-    fn send_request(
-        &self,
-        request: ZmqRequest,
-    ) -> Result<serde_json::Value, crate::RemoteAPIError> {
+    fn send_request(&self, request: ZmqRequest) -> Result<JsonValue, crate::RemoteAPIError> {
         log::trace!("request: {request:?}");
-        let mut json = self.send_raw_request(request.to_raw_request())?;
+        let json = self.send_raw_request(request.to_raw_request())?;
 
-        if let Some(err) = json.get("err") {
-            let error_msg = err.as_str().unwrap().to_string();
-            log::error!("Error:{error_msg}");
-            return Err(
-                crate::remote_api_objects::connection_error::RemoteAPIError::new(error_msg),
-            );
-        }
+        log::trace!("json response: {json:?}");
 
-        while let Some(func) = json.get("func") {
-            let function_name = func.as_str().unwrap().to_string();
+        let response: ZmqResponse = serde_json::from_value(json).unwrap();
 
-            if function_name == "_*wait*_" {
-                let wait_request = crate::zmq_requests::ZmqRequest::wait_request(self.get_uuid());
 
-                json = self.send_raw_request(wait_request.to_raw_request())?
+        match response {
+            ZmqResponse::Error(e) => {
+                log::error!("Error: {}", e.message);
+                Err(RemoteAPIError::new(e.message))
+            }
+            ZmqResponse::Object(obj) => Ok(obj.ret),
+            ZmqResponse::Function(fun) => {
+                if fun.function_name == "_*wait*_" {
+                    let wait_request = ZmqRequest::wait_request(self.get_uuid());
+                    self.send_request(wait_request)
+                } else {
+                    Ok(serde_json::json!([]))
+                }
             }
         }
-
-        Ok(json["ret"].to_owned())
     }
 }
