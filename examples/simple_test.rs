@@ -53,11 +53,14 @@ fn main() -> Result<(), RemoteAPIError> {
         client.sim_set_object_position(*h, pos, Some(sim::HANDLE_WORLD))?;
     }
 
+    client.sim_set_stepping(true)?;
+
     client.sim_start_simulation()?;
     // Run a simulation in asynchronous mode:
     let mut time = client.sim_get_simulation_time()?;
     while time < 3.0 {
         time = client.sim_get_simulation_time()?;
+        client.sim_step()?;
 
         println!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. non-stepped)", time = time);
     }
