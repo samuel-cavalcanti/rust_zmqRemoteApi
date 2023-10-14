@@ -71,7 +71,6 @@ fn main() -> Result<(), RemoteAPIError> {
         std::thread::sleep(std::time::Duration::from_secs_f64(0.1))
     }
 
-    client.sim_set_stepping(true)?;
     client.sim_start_simulation()?;
 
     // Run a simulation in stepping mode:
@@ -82,7 +81,6 @@ fn main() -> Result<(), RemoteAPIError> {
         let message = format!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. stepped)", time = time);
         println!("{}", message);
         client.sim_add_log(sim::VERBOSITY_SCRIPTINFOS, message)?;
-        client.sim_step()?; //triggers next simulation step
     }
     client.sim_stop_simulation()?;
 
