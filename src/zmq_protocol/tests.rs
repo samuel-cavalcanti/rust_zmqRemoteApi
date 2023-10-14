@@ -7,7 +7,7 @@ fn test_get_sim() {
     let uuid = "a9bb7126-0d1f-4474-8801-078c094dcee9".to_string();
     let request = ZmqRequest::remote_api_info("sim".to_string(), uuid);
     let bytes =
-        b"\xa5dfuncqzmqRemoteApi.infodargs\x81csimduuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrust"
+        b"\xa6dfuncqzmqRemoteApi.infodargs\x81csimduuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrusteargsL\x01"
             .to_vec();
     let zmq_bytes = request.to_raw_request();
     assert_eq!(
@@ -30,6 +30,7 @@ fn test_requests_macros() {
             uuid: uuid.clone(),
             ver: VERSION,
             lang: LANG.into(),
+            args_l: 0,
         },
         ZmqRequest {
             func: "sim.stopSimulation".to_string(),
@@ -37,12 +38,14 @@ fn test_requests_macros() {
             ver: VERSION,
             lang: LANG.into(),
             uuid: uuid.clone(),
+
+            args_l: 0,
         },
     ];
 
     let expected_bytes = vec![
-        b"\xa5dfuncssim.startSimulationdargs\x80duuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrust".to_vec(),
-        b"\xa5dfuncrsim.stopSimulationdargs\x80duuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrust".to_vec(),
+        b"\xa6dfuncssim.startSimulationdargs\x80duuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrusteargsL\x00".to_vec(),
+        b"\xa6dfuncrsim.stopSimulationdargs\x80duuidx$a9bb7126-0d1f-4474-8801-078c094dcee9cver\x02dlangdrusteargsL\x00".to_vec(),
     ];
 
     for (request, bytes) in requests.iter().zip(expected_bytes) {

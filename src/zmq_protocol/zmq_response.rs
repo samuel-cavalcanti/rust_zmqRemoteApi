@@ -27,4 +27,5 @@ pub struct ObjectResponse {
 pub struct FunctionResponse {
     #[serde(rename = "func")]
     pub function_name: String,
+    pub args: Value,
 }

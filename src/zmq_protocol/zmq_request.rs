@@ -15,6 +15,9 @@ pub struct ZmqRequest {
     pub uuid: String,
     pub ver: i32,
     pub lang: String,
+
+    #[serde(rename = "argsL")]
+    pub args_l: usize,
 }
 
 impl ZmqRequest {
@@ -25,13 +28,15 @@ impl ZmqRequest {
             args: vec![cbor!(object).unwrap()],
             ver: VERSION,
             lang: LANG.into(),
+            args_l: 1,
         }
     }
-    pub fn wait_request(uuid: String) -> ZmqRequest {
+    pub fn executed_request(uuid: String, args: Vec<Value>) -> ZmqRequest {
         ZmqRequest {
             uuid,
             func: "_*executed*_".into(),
-            args: vec![],
+            args_l: args.len(),
+            args,
             ver: VERSION,
             lang: LANG.into(),
         }
@@ -44,6 +49,7 @@ impl ZmqRequest {
             args: vec![],
             ver: VERSION,
             lang: LANG.into(),
+            args_l: 0,
         }
     }
 
@@ -54,6 +60,7 @@ impl ZmqRequest {
             args: vec![cbor!(name).unwrap()],
             ver: VERSION,
             lang: LANG.into(),
+            args_l: 1,
         }
     }
 }

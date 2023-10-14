@@ -5,6 +5,7 @@ use crate::{sim::Module, RawRequest, RemoteAPIError, ZmqRequest, ZmqResponse};
 pub trait RemoteApiClientInterface {
     fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, RemoteAPIError>;
     fn get_uuid(&self) -> String;
+    fn get_callback(&self, function_name: &str) -> Option<&Box<dyn Fn(JsonValue) -> JsonValue>>;
 
     fn require(&self, module: Module) -> Result<(), RemoteAPIError> {
         let name = match module {
@@ -25,7 +26,6 @@ pub trait RemoteApiClientInterface {
 
         let response: ZmqResponse = serde_json::from_value(json).unwrap();
 
-
         match response {
             ZmqResponse::Error(e) => {
                 log::error!("Error: {}", e.message);
@@ -33,12 +33,26 @@ pub trait RemoteApiClientInterface {
             }
             ZmqResponse::Object(obj) => Ok(obj.ret),
             ZmqResponse::Function(fun) => {
-                if fun.function_name == "_*wait*_" {
-                    let wait_request = ZmqRequest::wait_request(self.get_uuid());
-                    self.send_request(wait_request)
+                let empty_req = ZmqRequest::executed_request(self.get_uuid(), vec![]);
+                let req = if fun.function_name == "_*wait*_" {
+                    empty_req
                 } else {
-                    Ok(serde_json::json!([]))
-                }
+                    let function = self.get_callback(&fun.function_name);
+                    match function {
+                        Some(function) => {
+                            let output = function(fun.args);
+                            let encoded = ciborium::cbor!(output).unwrap();
+                            if let ciborium::Value::Array(vec) = encoded {
+                                ZmqRequest::executed_request(self.get_uuid(), vec)
+                            } else {
+                                ZmqRequest::executed_request(self.get_uuid(), vec![encoded])
+                            }
+                        }
+                        None => empty_req,
+                    }
+                };
+
+                self.send_request(req)
             }
         }
     }

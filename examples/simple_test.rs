@@ -10,16 +10,23 @@ use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
 
 */
 
+fn callback(_json: serde_json::Value) -> serde_json::Value {
+    println!("from fn callback !!");
+    serde_json::json!({})
+}
+
 fn main() -> Result<(), RemoteAPIError> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
     println!("Program started");
 
-    let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
+    let mut client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
+    let fn_cb = "fn CB";
+    client.register_callback(fn_cb.into(), Box::new(callback));
 
     // When simulation is not running, ZMQ message handling could be a bit
     // slow, since the idle loop runs at 8 Hz by default. So let's make
@@ -32,6 +39,13 @@ fn main() -> Result<(), RemoteAPIError> {
     let handles: Vec<i64> = (0..50)
         .map(|_| client.sim_create_dummy(0.01).unwrap())
         .collect();
+    let closure_callback = move |_json: serde_json::Value| -> serde_json::Value {
+        println!("from fn closure callback !!");
+        serde_json::json!({})
+    };
+
+    let closure_cb = "closure CB";
+    client.register_callback(closure_cb.into(), Box::new(closure_callback));
 
     for (i, h) in handles.iter().enumerate() {
         let i = i as f64;
@@ -47,6 +61,9 @@ fn main() -> Result<(), RemoteAPIError> {
 
         println!("Simulation time: {time:.2} [s] (simulation running asynchronously  to client, i.e. non-stepped)", time = time);
     }
+
+    client.sim_test_cb(10, format!("{fn_cb}@func"), 20)?;
+    client.sim_test_cb(10, format!("{closure_cb}@func"), 20)?;
 
     client.sim_stop_simulation()?;
     // if you need to make sure we really stopped:

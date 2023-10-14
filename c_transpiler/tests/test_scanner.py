@@ -20,6 +20,36 @@ class ScannerTestCase(unittest.TestCase):
         self.assertEqual(token, None)
         self.assertEqual(stream.pos(), stream.last_pos)
 
+    def test_callback(self):
+        """int64_t testCB(int64_t a, std::string cb, int64_t b);"""
+
+        stream = StringStream(
+            "int64_t testCB(int64_t a, std::string cb, int64_t b);")
+        scanner = Scanner(stream)
+        expected_tokens = [
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'testCB'),
+
+            Token(TokenType.OPEN_PARENTHESES, '('),
+
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'a'),
+            Token(TokenType.COMMA, ','),
+
+            Token(TokenType.STRING, 'std::string'),
+            Token(TokenType.ID, 'cb'),
+            Token(TokenType.COMMA, ','),
+
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'b'),
+
+            Token(TokenType.CLOSE_PARENTHESES, ')'),
+
+            Token(TokenType.SEMICOLON, ';'),
+        ]
+
+        self.assert_scanner(scanner,  expected_tokens)
+
     def test_switch_thread(self):
         """Scanner: void switchThread();"""
         stream = StringStream('void switchThread();')
@@ -31,7 +61,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.CLOSE_PARENTHESES, ')'),
             Token(TokenType.SEMICOLON, ';'),
         ]
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner,  expected_tokens)
 
     def test_unload_module(self):
         """Scanner: int64_t unloadModule(int64_t pluginHandle);"""
@@ -46,7 +76,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.CLOSE_PARENTHESES, ')'),
             Token(TokenType.SEMICOLON, ';'),
         ]
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner,  expected_tokens)
 
     def test_unpack_table(self):
         """Scanner: json unpackTable(std::vector<uint8_t> buffer);"""
@@ -64,7 +94,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.CLOSE_PARENTHESES, ')'),
             Token(TokenType.SEMICOLON, ';'),
         ]
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner,  expected_tokens)
 
     def test_simple_type(self):
         """Scanner: int64_t addDrawingObject double void std::tuple std::vector json std::optional std::string"""
@@ -84,7 +114,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.STRING, 'std::string'),
         ]
 
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner,  expected_tokens)
 
     def test_comma(self):
         """Scanner: int64_t,addDrawingObject,double,void,std::tuple,std::vector,json;"""
@@ -109,7 +139,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.SEMICOLON, ';'),
         ]
 
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner,  expected_tokens)
 
     def test_complex_type(self):
         """Scanner: std::tuple<int64_t, double, std::vector<double>, int64_t, std::vector<double>>\n"""
@@ -137,7 +167,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.BIGGER, '>'),
             Token(TokenType.BIGGER, '>'),
         ]
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner,  expected_tokens)
 
     def test_adjust_view(self):
         """Scanner: int64_t adjustView(int64_t viewHandleOrIndex, int64_t associatedViewableObjectHandle, int64_t options, std::optional<std::string> viewLabel = {});"""
@@ -172,7 +202,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.SEMICOLON, ';'),
         ]
 
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner, expected_tokens)
 
     def test_wait(self):
         """ Scanner: double wait(double dt, std::optional<bool> simulationTime = {});"""
@@ -198,7 +228,7 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.SEMICOLON, ';'),
         ]
 
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner, expected_tokens)
 
     def test_get_vision_sensor_depth_buffer(self):
         """ Scanner: std::tuple<std::vector<uint8_t>, std::vector<int64_t>> getVisionSensorDepthBuffer(int64_t sensorHandle, std::optional<std::vector<int64_t>> pos = {},std::optional<std::vector<int64_t>> size = {});
@@ -257,9 +287,9 @@ class ScannerTestCase(unittest.TestCase):
             Token(TokenType.CLOSE_PARENTHESES, ')'),
             Token(TokenType.SEMICOLON, ';'),
         ]
-        self.assert_scanner(scanner, stream, expected_tokens)
+        self.assert_scanner(scanner, expected_tokens)
 
-    def assert_scanner(self, scanner: Scanner, stream: Stream, expected_tokens: list[Token]):
+    def assert_scanner(self, scanner: Scanner,  expected_tokens: list[Token]):
         for expected_token in expected_tokens:
             token = scanner.current_token()
             scanner.update()

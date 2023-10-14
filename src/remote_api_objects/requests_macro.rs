@@ -37,6 +37,8 @@ macro_rules! requests {
                 )*
 
                 let request = crate::zmq_protocol::ZmqRequest {
+
+                    args_l:_args.len(),
                     func: format!("{}.{}",$sim_type,$function_name),
                     args: _args,
                     ver:crate::zmq_protocol::VERSION,

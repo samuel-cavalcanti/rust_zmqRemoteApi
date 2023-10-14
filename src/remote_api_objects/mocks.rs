@@ -36,6 +36,10 @@ impl RemoteApiClientInterface for MockRemoteAPIClient {
     fn get_uuid(&self) -> String {
         self.uuid.clone()
     }
+
+    fn get_callback(&self, _function_name: &str) -> Option<&Box<dyn Fn(JsonValue) -> JsonValue>> {
+        None
+    }
 }
 
 impl Sim for MockRemoteAPIClient {}
@@ -43,6 +47,11 @@ impl SimIK for MockRemoteAPIClient {}
 
 macro_rules! assert_payload {
     ($client:ident,$payload:literal) => {
-        assert_eq!($client.get_payload(), $payload.to_vec());
+        assert_eq!(
+            $client.get_payload(),
+            $payload.to_vec(),
+            "payload: {}",
+            crate::log_utils::to_byte_array_string(&$client.get_payload())
+        );
     };
 }

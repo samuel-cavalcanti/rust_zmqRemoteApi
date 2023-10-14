@@ -19,6 +19,7 @@ fn main() -> Result<(), RemoteAPIError> {
         args: vec![cbor!("testSignal").unwrap()],
         ver: zmq_remote_api::VERSION,
         lang: zmq_remote_api::LANG.into(),
+        args_l: 1,
     };
 
     let json = client.send_raw_request(request.to_raw_request())?;

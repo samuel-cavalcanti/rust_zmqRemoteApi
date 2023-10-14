@@ -126,16 +126,16 @@ class SimIK(Protocol):
     def getObjectHandle(self,environmentHandle:int, objectName:str)->int:
         ...
     
-    def getObjectMatrix(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectMatrix(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
     def getObjectParent(self,environmentHandle:int, objectHandle:int)->int:
         ...
     
-    def getObjectPose(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int)->list[float]:
+    def getObjectPose(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:Optional[int] = None)->list[float]:
         ...
     
-    def getObjectTransformation(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int)->tuple[list[float], list[float], list[float]]:
+    def getObjectTransformation(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:Optional[int] = None)->tuple[list[float], list[float], list[float]]:
         ...
     
     def getObjectType(self,environmentHandle:int, objectHandle:int)->int:
@@ -204,16 +204,16 @@ class SimIK(Protocol):
     def setJointWeight(self,environmentHandle:int, jointHandle:int, weight:float)->None:
         ...
     
-    def setObjectMatrix(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int, matrix:list[float])->None:
+    def setObjectMatrix(self,environmentHandle:int, objectHandle:int, matrix:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
     def setObjectParent(self,environmentHandle:int, objectHandle:int, parentObjectHandle:int, keepInPlace:Optional[bool] = None)->None:
         ...
     
-    def setObjectPose(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int, pose:list[float])->None:
+    def setObjectPose(self,environmentHandle:int, objectHandle:int, pose:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
-    def setObjectTransformation(self,environmentHandle:int, objectHandle:int, relativeToObjectHandle:int, position:list[float], eulerOrQuaternion:list[float])->None:
+    def setObjectTransformation(self,environmentHandle:int, objectHandle:int, position:list[float], eulerOrQuaternion:list[float], relativeToObjectHandle:Optional[int] = None)->None:
         ...
     
     def setSphericalJointMatrix(self,environmentHandle:int, jointHandle:int, matrix:list[float])->None:

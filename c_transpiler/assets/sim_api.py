@@ -1068,6 +1068,9 @@ class Sim(Protocol):
     def subtractObjectFromPointCloud(self,pointCloudHandle:int, objectHandle:int, options:int, tolerance:float)->int:
         ...
     
+    def testCB(self,a:int, cb:str, b:int)->int:
+        ...
+    
     def textEditorClose(self,handle:int)->tuple[str, list[int], list[int]]:
         ...
     

@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use ciborium::value::Value as CborValue;
 use serde_json::Value as JsonValue;
 use uuid::Uuid;
@@ -14,6 +16,7 @@ pub struct RemoteApiClient {
     rpc_socket: zmq::Socket,
     end_point: String,
     id: Uuid,
+    callbacks: HashMap<String, Box<dyn Fn(JsonValue) -> JsonValue>>,
 }
 
 impl RemoteApiClient {
@@ -36,7 +39,12 @@ impl RemoteApiClient {
             id: Uuid::new_v4(),
             rpc_socket,
             end_point: rpc_address,
+            callbacks: HashMap::new(),
         })
+    }
+
+    pub fn register_callback(&mut self, name: String, func: Box<dyn Fn(JsonValue) -> JsonValue>) {
+        self.callbacks.insert(name, func);
     }
 
     fn convert_result<T>(result: Result<T, zmq::Error>) -> Result<T, RemoteAPIError> {
@@ -87,6 +95,10 @@ impl RemoteApiClientInterface for RemoteApiClient {
     fn get_uuid(&self) -> String {
         self.id.to_string()
     }
+
+    fn get_callback(&self, function_name: &str) -> Option<&Box<dyn Fn(JsonValue) -> JsonValue>> {
+        self.callbacks.get(function_name)
+    }
 }
 
 impl RemoteApiClientInterface for &RemoteApiClient {
@@ -104,11 +116,16 @@ impl RemoteApiClientInterface for &RemoteApiClient {
     fn get_uuid(&self) -> String {
         self.id.to_string()
     }
+
+    fn get_callback(&self, function_name: &str) -> Option<&Box<dyn Fn(JsonValue) -> JsonValue>> {
+        self.callbacks.get(function_name)
+    }
 }
 impl Drop for RemoteApiClient {
     fn drop(&mut self) {
         let end_request = ZmqRequest::end_request(self.get_uuid());
 
+        log::debug!("Remote Client dropped");
         self.rpc_socket
             .send(end_request.to_raw_request(), zmq::DONTWAIT)
             .unwrap();

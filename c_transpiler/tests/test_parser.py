@@ -32,7 +32,7 @@ class mockStream:
     __current_line: int
 
     def __init__(self, number_lines: int) -> None:
-        self.__number_lines = number_lines
+        self.__number_lines = number_lines 
         self.__current_line = 0
 
     def current_char(self) -> Optional[str]:
@@ -55,6 +55,46 @@ class mockStream:
 
 
 class ParserTestCase(unittest.TestCase):
+
+    def test_callback_(self):
+        """parse: int64_t testCB(int64_t a, std::string cb, int64_t b);"""
+
+        stream = mockStream(number_lines=1)
+        tokens = [
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'testCB'),
+
+            Token(TokenType.OPEN_PARENTHESES, '('),
+
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'a'),
+            Token(TokenType.COMMA, ','),
+
+            Token(TokenType.STRING, 'std::string'),
+            Token(TokenType.ID, 'cb'),
+            Token(TokenType.COMMA, ','),
+
+            Token(TokenType.I64, 'int64_t'),
+            Token(TokenType.ID, 'b'),
+
+            Token(TokenType.CLOSE_PARENTHESES, ')'),
+
+            Token(TokenType.SEMICOLON, ';'),
+        ]
+        scanner: ScannerProtocol = mockScanner(tokens)
+        functions = parser(scanner, stream)
+
+        expected = FunctionAssign(
+            return_type=TypeNode(TokenType.I64, [],),
+            function_name='testCB',
+            function_args=[
+                Arg(arg_type=TypeNode(TokenType.I64, []), arg_name='a'),
+                Arg(arg_type=TypeNode(TokenType.STRING, []), arg_name='cb'),
+                Arg(arg_type=TypeNode(TokenType.I64, []), arg_name='b')
+            ]
+        )
+
+        self.assertEqual(functions[0], expected)
 
     def test_switch_thread(self):
         """Parse: void switchThread();"""
@@ -196,15 +236,17 @@ class ParserTestCase(unittest.TestCase):
 
         vec_u8_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.U8, [])])
         vec_i64_ir = TypeNode(TokenType.VEC, [TypeNode(TokenType.I64, [])])
-        
+
         expected = FunctionAssign(
-            return_type=TypeNode(TokenType.TUPLE, [vec_u8_ir,vec_i64_ir],),
+            return_type=TypeNode(TokenType.TUPLE, [vec_u8_ir, vec_i64_ir],),
             function_name='getVisionSensorDepthBuffer',
             function_args=[
                 Arg(arg_type=TypeNode(TokenType.I64, []), arg_name='sensorHandle'),
 
-                Arg(arg_type=TypeNode(TokenType.OPTION, [vec_i64_ir]), arg_name='pos'),
-                Arg(arg_type=TypeNode(TokenType.OPTION, [vec_i64_ir]), arg_name='size'),
+                Arg(arg_type=TypeNode(TokenType.OPTION,
+                    [vec_i64_ir]), arg_name='pos'),
+                Arg(arg_type=TypeNode(TokenType.OPTION,
+                    [vec_i64_ir]), arg_name='size'),
             ])
 
         self.assertEqual(functions[0], expected)

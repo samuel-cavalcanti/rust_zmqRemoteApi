@@ -357,6 +357,7 @@ pub trait Sim : RemoteApiClientInterface {
 (sim_stop_simulation,"stopSimulation"->i64),
 (sim_subtract_object_from_octree,"subtractObjectFromOctree",(octree_handle:i64,object_handle:i64,options:i64)->i64),
 (sim_subtract_object_from_point_cloud,"subtractObjectFromPointCloud",(point_cloud_handle:i64,object_handle:i64,options:i64,tolerance:f64)->i64),
+(sim_test_cb,"testCB",(a:i64,cb:String,b:i64)->i64),
 (sim_text_editor_close,"textEditorClose",(handle:i64)->(String,Vec<i64>,Vec<i64>)),
 (sim_text_editor_get_info,"textEditorGetInfo",(handle:i64)->(String,Vec<i64>,Vec<i64>,bool)),
 (sim_text_editor_open,"textEditorOpen",(init_text:String,properties:String)->i64),

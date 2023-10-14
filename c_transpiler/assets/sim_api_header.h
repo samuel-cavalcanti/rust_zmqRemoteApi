@@ -683,6 +683,7 @@ int64_t subtractObjectFromOctree(int64_t octreeHandle, int64_t objectHandle,
 int64_t subtractObjectFromPointCloud(int64_t pointCloudHandle,
                                      int64_t objectHandle, int64_t options,
                                      double tolerance);
+int64_t testCB(int64_t a, std::string cb, int64_t b);
 std::tuple<std::string, std::vector<int64_t>, std::vector<int64_t>>
 textEditorClose(int64_t handle);
 std::tuple<std::string, std::vector<int64_t>, std::vector<int64_t>, bool>
