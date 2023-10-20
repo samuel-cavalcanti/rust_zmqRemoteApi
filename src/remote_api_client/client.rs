@@ -16,7 +16,7 @@ const ZMQ_RECV_FLAG_NONE: i32 = 0;
 /// BY default port:23000
 /// # Example:
 /// ```
-/// use zmq_remote_api::{RemoteApiClient,RemoteApiClientParams};
+/// use coppeliasim_zmq_remote_api::{RemoteApiClient,RemoteApiClientParams};
 /// let client = RemoteApiClient::new(RemoteApiClientParams::default()).unwrap();
 /// ```
 pub struct RemoteApiClient {
@@ -34,7 +34,7 @@ impl RemoteApiClient {
             port = params.rpc_port
         );
 
-        log::debug!("connecting on  rpc_address: {} ", rpc_address,);
+        log::debug!("connecting on  rpc_address: {rpc_address} ");
 
         let context = zmq::Context::new();
 

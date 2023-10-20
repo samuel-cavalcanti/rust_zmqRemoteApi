@@ -1,4 +1,6 @@
-use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClientParams};
+use coppeliasim_zmq_remote_api::{
+    sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
+};
 
 /*
     Example based on Example.cpp
@@ -8,7 +10,7 @@ fn main() -> Result<(), RemoteAPIError> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
-    let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
+    let client = RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;

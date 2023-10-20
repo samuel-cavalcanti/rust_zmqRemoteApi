@@ -1,4 +1,6 @@
-use zmq_remote_api::{sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams};
+use coppeliasim_zmq_remote_api::{
+    sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
+};
 
 /* Based on synchronousImageTransmission.cpp example
  *

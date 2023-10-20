@@ -1,5 +1,6 @@
-use zmq_remote_api::{
-    RawRequest, RemoteAPIError, RemoteApiClientInterface, RemoteApiClientParams, ZmqRequest,
+use coppeliasim_zmq_remote_api::{
+    RawRequest, RemoteAPIError, RemoteApiClient, RemoteApiClientInterface, RemoteApiClientParams,
+    ZmqRequest,
 };
 
 use ciborium::cbor;
@@ -8,7 +9,7 @@ fn main() -> Result<(), RemoteAPIError> {
     // use the env variable RUST_LOG="trace" or RUST_LOG="debug" to observe the zmq communication
     env_logger::init();
 
-    let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
+    let client = RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
@@ -17,8 +18,8 @@ fn main() -> Result<(), RemoteAPIError> {
         uuid: client.get_uuid(),
         func: "sim.getStringSignal".to_string(),
         args: vec![cbor!("testSignal").unwrap()],
-        ver: zmq_remote_api::VERSION,
-        lang: zmq_remote_api::LANG.into(),
+        ver: coppeliasim_zmq_remote_api::VERSION,
+        lang: coppeliasim_zmq_remote_api::LANG.into(),
         args_l: 1,
     };
 

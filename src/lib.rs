@@ -11,10 +11,10 @@
 //! ## Get started
 //!
 //! ```
-//! use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
+//! use coppeliasim_zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams,RemoteApiClient};
 //!
 //! fn main() -> Result<(), RemoteAPIError> {
-//!  let  client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams::default())?;
+//!  let  client = RemoteApiClient::new(RemoteApiClientParams::default())?;
 //!
 //!   Ok(())
 //! }

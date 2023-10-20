@@ -1,9 +1,9 @@
-use serde_json::json;
-use zmq_remote_api::{
+use coppeliasim_zmq_remote_api::{
     sim,
     sim::{Sim, SimIK},
-    RemoteAPIError, RemoteApiClientInterface, RemoteApiClientParams,
+    RemoteAPIError, RemoteApiClient, RemoteApiClientInterface, RemoteApiClientParams,
 };
+use serde_json::json;
 
 /*
 #
@@ -21,7 +21,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     println!("Program started");
 
-    let client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
+    let client = RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;

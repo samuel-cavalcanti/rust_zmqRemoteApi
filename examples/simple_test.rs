@@ -1,4 +1,6 @@
-use zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams};
+use coppeliasim_zmq_remote_api::{
+    sim, sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
+};
 /*
     Example based on SimpleTest.py
 
@@ -21,7 +23,7 @@ fn main() -> Result<(), RemoteAPIError> {
 
     println!("Program started");
 
-    let mut client = zmq_remote_api::RemoteApiClient::new(RemoteApiClientParams {
+    let mut client = RemoteApiClient::new(RemoteApiClientParams {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
