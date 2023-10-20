@@ -15,7 +15,7 @@ const ZMQ_RECV_FLAG_NONE: i32 = 0;
 /// BY default host:"localhost"
 /// BY default port:23000
 /// # Example:
-/// ```
+/// ```no_run
 /// use coppeliasim_zmq_remote_api::{RemoteApiClient,RemoteApiClientParams};
 /// let client = RemoteApiClient::new(RemoteApiClientParams::default()).unwrap();
 /// ```

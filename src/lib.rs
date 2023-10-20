@@ -10,7 +10,7 @@
 //!
 //! ## Get started
 //!
-//! ```
+//! ```no_run
 //! use coppeliasim_zmq_remote_api::{sim, sim::Sim, RemoteAPIError, RemoteApiClientParams,RemoteApiClient};
 //!
 //! fn main() -> Result<(), RemoteAPIError> {
