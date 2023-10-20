@@ -3,6 +3,9 @@ use std::fs;
 use std::path::Path;
 
 fn main() {
+    if std::env::var("DOCS_RS").is_ok() {
+        return;
+    }
     let project_dir = env::var_os("CARGO_MANIFEST_DIR").unwrap();
 
     let sim_const_file_name = "sim_const.rs";
