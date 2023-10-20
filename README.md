@@ -1,18 +1,12 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Rust zmqRemoteApi](#unofficial-rust-zmqremoteapi)
+<!--toc:start-->
+- [Rust zmqRemoteApi](#rust-zmqremoteapi)
   - [Porting C++ client to Rust client](#porting-c-client-to-rust-client)
   - [diferences between C++ client and Rust client](#diferences-between-c-client-and-rust-client)
-  - [running the opencv example](#running-the-opencv-example)
   - [Get started](#get-started)
+<!--toc:end-->
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ![example workflow](https://github.com/samuel-cavalcanti/rust_zmqRemoteApi/actions/workflows/rust.yml/badge.svg?branch=main)
 # Rust zmqRemoteApi
-
-This client support the coppeliasim **4.5.1** version
 
 A Rust ZeroMQ remote API for coppeliasim
 
@@ -60,12 +54,6 @@ examples where the function returns a block of bytes.
 // Rust function assing 
 get_string_signal(signal_name:String)->String
 ```
-
-## running the opencv example
-
-https://user-images.githubusercontent.com/24573157/230082972-3c782df5-dadd-4669-b36d-4d5e864a0b17.mp4
-
-
 ## Get started
 
 create a new rust project:
@@ -74,11 +62,11 @@ create a new rust project:
 cargo new new_project
 ```
 
-add this crate at your cargo.toml :
+you can add this crate at your cargo.toml using git:
 
 ```toml
 # the branch is the coppelia version
 zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.5.1"}
 ```
 
-See this simple [example](examples/get_simulation_time.rs) to understand how to use this crate.
+See a simple [example](examples/get_simulation_time.rs) to understand how to use this crate.
