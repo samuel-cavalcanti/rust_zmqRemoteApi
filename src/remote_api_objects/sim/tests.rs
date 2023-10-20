@@ -184,7 +184,7 @@ fn test_sim_ik_example() {
     let mut sim = MockRemoteAPIClient::new_sucess();
     sim.uuid = "fdea473e-ef12-43e0-bd41-8248ea153e17".into();
 
-    sim.require(Module::SimIK).unwrap();
+    sim.require(Plugin::SimIK).unwrap();
     assert_payload!(sim,b"\xa6dfunctzmqRemoteApi.requiredargs\x81esimIKduuidx$fdea473e-ef12-43e0-bd41-8248ea153e17cver\x02dlangdrusteargsL\x01");
 
     sim.sim_ik_create_environment(None).unwrap();

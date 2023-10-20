@@ -1,15 +1,18 @@
 use serde_json::Value as JsonValue;
 
-use crate::{sim::Module, RawRequest, RemoteAPIError, ZmqRequest, ZmqResponse};
+use crate::{sim::Plugin, RawRequest, RemoteAPIError, ZmqRequest, ZmqResponse};
 
+/// THe implementation of the [PROTOCOL](https://github.com/CoppeliaRobotics/zmqRemoteApi/blob/master/PROTOCOL.md)
+/// This trait forces a socket connection to implement the PROTOCOL
+/// The Sim, SimIK, rely on this trait
 pub trait RemoteApiClientInterface {
     fn send_raw_request(&self, request: Vec<u8>) -> Result<JsonValue, RemoteAPIError>;
     fn get_uuid(&self) -> String;
     fn get_callback(&self, function_name: &str) -> Option<&Box<dyn Fn(JsonValue) -> JsonValue>>;
 
-    fn require(&self, module: Module) -> Result<(), RemoteAPIError> {
+    fn require(&self, module: Plugin) -> Result<(), RemoteAPIError> {
         let name = match module {
-            Module::SimIK => "simIK".into(),
+            Plugin::SimIK => "simIK".into(),
         };
 
         let require_req = ZmqRequest::require_request(name, self.get_uuid());

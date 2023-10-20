@@ -1,4 +1,5 @@
 #[derive(Debug)]
+/// RemoteAPIError will be retured if the client was unable to send our receive messages
 pub struct RemoteAPIError {
     message: String,
 }

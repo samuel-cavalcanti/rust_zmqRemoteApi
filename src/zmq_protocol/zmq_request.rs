@@ -1,14 +1,19 @@
 use ciborium::{cbor, value::Value};
 use serde::Serialize;
 
+/// should return the request in by bytes
+/// The bytes is cbor encoted data
 pub trait RawRequest {
     fn to_raw_request(&self) -> Vec<u8>;
 }
-
+// the PROTOCOL version
 pub const VERSION: i32 = 2;
+// The LANG should always be "rust"
 pub const LANG: &str = "rust";
 
 #[derive(Debug, Serialize)]
+/// The Request Prototol is defined here:
+/// [PROTOCOL](https://github.com/CoppeliaRobotics/zmqRemoteApi/blob/master/PROTOCOL.md)
 pub struct ZmqRequest {
     pub func: String,
     pub args: Vec<Value>,

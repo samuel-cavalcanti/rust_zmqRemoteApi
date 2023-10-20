@@ -11,7 +11,14 @@ use crate::zmq_protocol::{RawRequest, ZmqRequest};
 use crate::{log_utils, RemoteAPIError, RemoteApiClientParams};
 
 const ZMQ_RECV_FLAG_NONE: i32 = 0;
-
+/// The ZEROMQ Socket Connection
+/// BY default host:"localhost"
+/// BY default port:23000
+/// # Example:
+/// ```
+/// use zmq_remote_api::{RemoteApiClient,RemoteApiClientParams};
+/// let client = RemoteApiClient::new(RemoteApiClientParams::default()).unwrap();
+/// ```
 pub struct RemoteApiClient {
     rpc_socket: zmq::Socket,
     end_point: String,

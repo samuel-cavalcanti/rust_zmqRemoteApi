@@ -1,3 +1,6 @@
+//! All the Supported Plugins is insite this module
+//! Current only the Remote API and SimIK is Supported
+
 #[rustfmt::skip]
 mod sim_api;
 #[rustfmt::skip]
@@ -9,7 +12,8 @@ pub use sim_api::Sim;
 pub use sim_const::*;
 pub use sim_ik_api::SimIK;
 
-pub enum Module {
+/// The Supported extra plugins
+pub enum Plugin {
     SimIK,
 }
 

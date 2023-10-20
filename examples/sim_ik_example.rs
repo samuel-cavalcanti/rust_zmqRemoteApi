@@ -27,7 +27,7 @@ fn main() -> Result<(), RemoteAPIError> {
     })?;
 
     // Must call require before usint sim_ik functions
-    client.require(sim::Module::SimIK)?;
+    client.require(sim::Plugin::SimIK)?;
 
     // When simulation is not running, ZMQ message handling could be a bit
     // slow, since the idle loop runs at 8 Hz by default. So let's make

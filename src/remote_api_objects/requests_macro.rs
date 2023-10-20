@@ -1,13 +1,13 @@
 macro_rules! requests {
 
     ( $sim_type:literal, $(
-        ($rust_fn:ident,$function_name:literal $(, ( $($arg_id:ident : $arg_type:ty),+ )  )? $(, opt( $($opt_arg_id:ident : $opt_arg_type:ty),+   ) )?  $(->$return_type:ty)? )
+        ($rust_doc:literal, $rust_fn:ident,$function_name:literal $(, ( $($arg_id:ident : $arg_type:ty),+ )  )? $(, opt( $($opt_arg_id:ident : $opt_arg_type:ty),+   ) )?  $(->$return_type:ty)? )
     ),+ $(,)? ) => {
         $(
 
 
 
-
+            #[doc=$rust_doc]
             #[allow(dead_code,clippy::too_many_arguments)]
              fn $rust_fn(&self, $( $($arg_id:$arg_type,)*  )* $( $($opt_arg_id:Option<$opt_arg_type>,)*  )*   ) -> Result<$($return_type)*, crate::remote_api_objects::connection_error::RemoteAPIError>  {//
 
