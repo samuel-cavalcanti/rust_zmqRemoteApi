@@ -2,7 +2,7 @@ import unittest
 
 from scanner.scanner import Scanner
 
-from stream import Stream, StringStream
+from stream import StringStream
 from cpp_token import TokenType, Token
 
 

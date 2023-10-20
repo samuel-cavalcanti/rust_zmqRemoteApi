@@ -5,9 +5,6 @@ import unittest
 from ir_transpiler import FunctionAssign, Arg, TypeNode
 from ir_transpiler import ir_to_cpp, ir_to_string, ir_to_macro_request_rust, ir_to_py
 from cpp_token import TokenType
-from scanner import Scanner
-from stream import StringStream
-from parser import parser
 
 
 class IrTestCase(unittest.TestCase):
@@ -222,10 +219,10 @@ class IrTestCase(unittest.TestCase):
                   wait_ir, get_vision_sensor_depth_buffer_if]
 
         expected_strings = [
-            '(test_switch_thread,"switchThread"->())',
-            '(test_unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
-            '(test_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
-            '(test_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'
+            '(r#""#,test_switch_thread,"switchThread"->())',
+            '(r#""#,test_unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
+            '(r#""#,test_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
+            '(r#""#,test_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))'
         ]
         result = [ir_to_macro_request_rust(
             ir, api_name='test') for ir in inputs]

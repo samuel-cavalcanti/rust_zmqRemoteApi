@@ -24,7 +24,8 @@ def ir_to_macro_request_rust(assign: FunctionAssign, api_name: str) -> str:
         option_args) != 0 else ""
 
     return_type_string = f'->{return_type}' if return_type else ""
-    return f'({rust_func_name},"{assign.function_name}"{required_args_string}{opt_string}{return_type_string})'
+    docstring = assign.description
+    return f'(r#"{docstring}"#,{rust_func_name},"{assign.function_name}"{required_args_string}{opt_string}{return_type_string})'
 
 
 def arg_to_rust(arg: Arg) -> str:
