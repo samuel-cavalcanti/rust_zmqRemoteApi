@@ -37,7 +37,7 @@ export RUST_LOG="trace"; cargo run --example=simple_test
 ## Porting C++ client to Rust client
 
 The **RemoteAPIObjects.h** has 3750 lines of code, so to port all the
-functions, I create a kind of [c_transpiler](c_transpiler/).
+functions, I created a kind of [c_transpiler](c_transpiler/).
 
 ## diferences between C++ client and Rust client
 
