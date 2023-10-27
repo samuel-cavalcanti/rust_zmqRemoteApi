@@ -66,7 +66,7 @@ you can add this crate at your cargo.toml using git:
 
 ```toml
 # the branch is the coppelia version
-zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.5.1"}
+zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.6.0"}
 ```
 
 See a simple [example](examples/get_simulation_time.rs) to understand how to use this crate.
