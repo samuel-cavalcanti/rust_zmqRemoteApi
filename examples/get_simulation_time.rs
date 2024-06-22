@@ -27,7 +27,7 @@ fn main() -> Result<(), RemoteAPIError> {
         time = client.sim_get_simulation_time()?;
     }
 
-    client.sim_stop_simulation()?;
+    client.sim_stop_simulation(None)?;
 
     Ok(())
 }

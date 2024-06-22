@@ -1,15 +1,14 @@
 use std::f64::consts::PI;
 
 use coppeliasim_zmq_remote_api::{
-    sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
+    sim::{Sim, self}, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
 };
 
 /*
 
 based on pController.py
 
-# Make sure to have CoppeliaSim running, with following scene loaded:
-#
+# Make sure to have CoppeliaSim running, 
 # scenes/messaging/pControllerViaRemoteApi.ttt
 #
 # Do not launch simulation, but run this script
@@ -26,6 +25,10 @@ fn main() -> Result<(), RemoteAPIError> {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
+    let path = client.sim_get_string_param(sim::STRINGPARAM_SCENEDEFAULTDIR)?;
+
+    client.sim_load_scene(format!("{path}/messaging/pControllerViaRemoteApi.ttt"))?;
+
 
     let joint_handle = client.sim_get_object("/Cuboid[0]/joint".to_string(), None)?;
     let mut join_angle = client.sim_get_joint_position(joint_handle)?;
@@ -73,7 +76,7 @@ fn main() -> Result<(), RemoteAPIError> {
         &joint_handle,
     )?;
 
-    client.sim_stop_simulation()?;
+    client.sim_stop_simulation(Some(true))?;
 
     println!("Program ended");
     Ok(())

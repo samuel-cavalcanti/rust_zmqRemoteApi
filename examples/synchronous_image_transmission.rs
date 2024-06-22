@@ -1,5 +1,5 @@
 use coppeliasim_zmq_remote_api::{
-    sim::Sim, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
+    sim::{self, Sim}, RemoteAPIError, RemoteApiClient, RemoteApiClientParams,
 };
 
 /* Based on synchronousImageTransmission.cpp example
@@ -21,6 +21,10 @@ fn main() -> Result<(), RemoteAPIError> {
         ..RemoteApiClientParams::default()
     })?;
 
+    let path = client.sim_get_string_param(sim::STRINGPARAM_SCENEDEFAULTDIR)?;
+
+    client.sim_load_scene(format!("{path}/messaging/synchronousImageTransmissionViaRemoteApi.ttt"))?;
+
     let vision_sensor_handle = client.sim_get_object("/VisionSensor".to_string(), None)?;
 
     let passive_vision_sensor_handle =
@@ -40,7 +44,7 @@ fn main() -> Result<(), RemoteAPIError> {
         client.sim_step()?;
     }
 
-    client.sim_stop_simulation()?;
+    client.sim_stop_simulation(Some(false))?;
 
     println!("Program ended");
 

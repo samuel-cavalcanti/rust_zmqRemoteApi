@@ -25,6 +25,9 @@ fn main() -> Result<(), RemoteAPIError> {
         host: "localhost".to_string(),
         ..RemoteApiClientParams::default()
     })?;
+    let path = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+
+    client.sim_load_scene(format!("{path}/scenes/redundantRobot.ttt"))?;
 
     // Must call require before usint sim_ik functions
     client.require(sim::Plugin::SimIK)?;

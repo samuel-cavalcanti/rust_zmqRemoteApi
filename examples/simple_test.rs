@@ -70,7 +70,7 @@ fn main() -> Result<(), RemoteAPIError> {
     client.sim_test_cb(10, format!("{fn_cb}@func"), 20)?;
     client.sim_test_cb(10, format!("{closure_cb}@func"), 20)?;
 
-    client.sim_stop_simulation()?;
+    client.sim_stop_simulation(Some(false))?;
     // if you need to make sure we really stopped:
     while client.sim_get_simulation_state()? != sim::SIMULATION_STOPPED {
         std::thread::sleep(std::time::Duration::from_secs_f64(0.1))
@@ -87,10 +87,10 @@ fn main() -> Result<(), RemoteAPIError> {
         println!("{}", message);
         client.sim_add_log(sim::VERBOSITY_SCRIPTINFOS, message)?;
     }
-    client.sim_stop_simulation()?;
+    client.sim_stop_simulation(Some(true))?;
 
     //Remove the dummies created earlier:
-    client.sim_remove_objects(handles)?;
+    client.sim_remove_objects(handles, None)?;
 
     //Restore the original idle loop frequency:
     client.sim_set_int32_param(sim::INTPARAM_IDLE_FPS, default_idle_fps)?;
