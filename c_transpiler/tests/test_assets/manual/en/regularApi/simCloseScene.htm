@@ -1,82 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>sim.closeScene</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
 <div align="center">
-    <table class="allEncompassingTable">
-        <tbody>
-            <tr>
-                <td>
-                    <p><a href="../../index.html" target="_top"><img src="../images/homeImg.png"></a></p>
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
 
-                    <h1>Regular API function</h1>
-                    <p class="subsectionBar"><a name="simCloseScene" id="simCloseScene"></a>simCloseScene /
-                        sim.closeScene</p>
-                    <table class="apiTable">
-                        <tbody>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftDescr">
-                                    Description
-                                </td>
-                                <td class="apiTableRightDescr">Closes current scene, and switches to another open scene.
-                                    If there is no other open scene, a new scene is then created. Can only be called
-                                    from an <a href="../addOns.htm">add-on</a>, or from the sanbox script, when called
-                                    from Lua. See also <a href="simLoadScene.htm">sim.loadScene</a> and <a
-                                        href="simSaveScene.htm">sim.saveScene</a>.</td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftCSyn">
-                                    C/C++<br>synopsis
-                                </td>
-                                <td class="apiTableRightCSyn">int simCloseScene()</td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftCParam">C/C++<br>parameters</td>
-                                <td class="apiTableRightCParam">
-                                    <div></div>
-                                    <div></div>
-                                </td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftCRet">
-                                    C/C++<br>return value
-                                </td>
-                                <td class="apiTableRightCRet">
-                                    <div>-1 if operation was not successful, otherwise the current scene index.<br>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftLSyn">
-                                    Lua<br>synopsis
-                                </td>
-                                <td class="apiTableRightLSyn">int result=sim.closeScene()</td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftLParam">Lua<br>parameters</td>
-                                <td class="apiTableRightLParam">
-                                    <div></div>
-                                    <div></div>
-                                </td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftLRet">
-                                    Lua<br>return values
-                                </td>
-                                <td class="apiTableRightLRet">
-                                    <div>Similar to the C-function counterpart</div>
-                                    <div></div>
-                                </td>
-                            </tr>
-
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftPSyn">Python<br>synopsis</td>
-                                <td class="apiTableRightPSyn">int result=sim.closeScene()</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <br>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
+<div class="regApiSection">
+    <h2>sim.closeScene</h2>
+    <p>Closes current scene, and switches to another open scene. If there is no other open scene,
+a new scene is then created. Can only be called from an <a href="../addOns.htm">add-on</a>,
+or from the sanbox script, when called from within CoppeliaSim</p>
 </div>
+
+<div class="regApiSection">
+    <h3>Synopsis</h3>
+    <div class="multi-language-switcher">
+    	<code class="hljs language-python coppelia-coppeliasim-script">int result = sim.closeScene()</code>
+        
+        <code class="hljs language-lua coppelia-coppeliasim-script">int result = sim.closeScene()</code>
+    </div>
+</div>
+
+<div style="display: none;" class="regApiSection">
+    <h3>Arguments</h3>
+    
+</div>
+
+<div  class="regApiSection">
+    <h3>Return values</h3>
+    
+            <ul>
+                <li><strong>result</strong>: the current scene index.</li>
+            </ul>
+        
+</div>
+
+<div class="regApiSection">
+
+</div>
+
+<p><br>See also:
+<ul>
+<li><a href="simLoadScene.htm">sim.loadScene</a></li>
+<li><a href="simSaveScene.htm">sim.saveScene</a></li>
+</ul>
+</p>
+
+</td>
+</tr>
+</table>
+</div>
+<link rel="stylesheet" href="../../js/hljs/11.8.0/styles/default.min.css" />
+<script src="../../js/hljs/11.8.0/highlight.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/cmake.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/cpp.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/java.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/javascript.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/lua.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/matlab.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/python.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/rust.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/xml.min.js"></script>
+<script src="../../js/multi-language-switcher.js"></script>
+<script>document.querySelectorAll('code.hljs').forEach(el => {hljs.highlightElement(el);})</script>
+</body>
+</html>

@@ -1,90 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>sim.loadScene</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
 <div align="center">
-    <table class="allEncompassingTable">
-        <tbody>
-            <tr>
-                <td>
-                    <p><a href="../../index.html" target="_top"><img src="../images/homeImg.png"></a></p>
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
 
-                    <h1>Regular API function</h1>
-                    <p class="subsectionBar"><a name="simLoadScene" id="simLoadScene"></a>simLoadScene / sim.loadScene
-                    </p>
-                    <table class="apiTable">
-                        <tbody>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftDescr">
-                                    Description
-                                </td>
-                                <td class="apiTableRightDescr">Loads a previously saved scene.See also <a
-                                        href="simSaveScene.htm">sim.saveScene</a>, <a
-                                        href="simLoadModel.htm">sim.loadModel</a>, <a
-                                        href="simCloseScene.htm">simCloseScene</a> and <a
-                                        href="simSetBoolParam.htm">sim.setBoolParam</a> with <a
-                                        href="../apiConstants.htm#booleanParameters">sim.boolparam_scene_and_model_load_messages</a>.
-                                    <br></td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftCSyn">
-                                    C/C++<br>synopsis
-                                </td>
-                                <td class="apiTableRightCSyn">int simLoadScene(const char* filename)</td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftCParam">C/C++<br>parameters</td>
-                                <td class="apiTableRightCParam">
-                                    <div><strong>filename</strong>: scene filename. The filename extension is required
-                                        (<em>ttt</em>, or <em>simscene.xml</em> ). By default, the current scene will be
-                                        removed. Append "@keepCurrent" to the filename if the current scene should be
-                                        preserved.</div>
-                                    <div></div>
-                                </td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftCRet">
-                                    C/C++<br>return value
-                                </td>
-                                <td class="apiTableRightCRet">
-                                    <div>-1 if operation was not successful<br>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftLSyn">
-                                    Lua<br>synopsis
-                                </td>
-                                <td class="apiTableRightLSyn">sim.loadScene(string/buffer filenameOrBuffer)</td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftLParam">Lua<br>parameters</td>
-                                <td class="apiTableRightLParam">
-                                    <div>Similar to the C-function counterpart. Additionally, can also load from a
-                                        buffer</div>
-                                </td>
-                            </tr>
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftLRet">
-                                    Lua<br>return values
-                                </td>
-                                <td class="apiTableRightLRet">
-                                    <div></div>
-                                </td>
-                            </tr>
-
-
-
-
-
-                            <tr class="apiTableTr">
-                                <td class="apiTableLeftPSyn">Python<br>synopsis</td>
-                                <td class="apiTableRightPSyn">sim.loadScene(string/bytes filename)</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <br>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
+<div class="regApiSection">
+    <h2>sim.loadScene</h2>
+    <p>Loads a previously saved scene</p>
 </div>
+
+<div class="regApiSection">
+    <h3>Synopsis</h3>
+    <div class="multi-language-switcher">
+    	<code class="hljs language-python coppelia-coppeliasim-script">sim.loadScene(string/bytes filenameOrBuffer)</code>
+        
+        <code class="hljs language-lua coppelia-coppeliasim-script">sim.loadScene(string/buffer filenameOrBuffer)</code>
+    </div>
+</div>
+
+<div  class="regApiSection">
+    <h3>Arguments</h3>
+    
+            <ul>
+                <li><strong>filename</strong>: scene buffer or scene filename, including extension. An empty string loads the default scene. By default, the current scene is overwritten (append "@keepCurrent" to the filename to preserve current scene). An empty string loads the default scene</li>
+            </ul>
+        
+</div>
+
+<div style="display: none;" class="regApiSection">
+    <h3>Return values</h3>
+    
+</div>
+
+<div class="regApiSection">
+
+</div>
+
+<p><br>See also:
+<ul>
+<li><a href="simSaveScene.htm">sim.saveScene</a></li>
+<li><a href="simLoadModel.htm">sim.loadModel</a></li>
+<li><a href="simCloseScene.htm">sim.closeScene</a></li>
+</ul>
+</p>
+
+</td>
+</tr>
+</table>
+</div>
+<link rel="stylesheet" href="../../js/hljs/11.8.0/styles/default.min.css" />
+<script src="../../js/hljs/11.8.0/highlight.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/cmake.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/cpp.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/java.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/javascript.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/lua.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/matlab.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/python.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/rust.min.js"></script>
+<script src="../../js/hljs/11.8.0/languages/xml.min.js"></script>
+<script src="../../js/multi-language-switcher.js"></script>
+<script>document.querySelectorAll('code.hljs').forEach(el => {hljs.highlightElement(el);})</script>
+</body>
+</html>
