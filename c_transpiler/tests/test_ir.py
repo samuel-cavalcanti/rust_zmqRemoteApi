@@ -271,10 +271,10 @@ class IrTestCase(unittest.TestCase):
         ]
 
         expected_strings = [
-            '(r#""#,test_switch_thread,"switchThread"->())',
-            '(r#""#,test_unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
-            '(r#""#,test_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
-            '(r#""#,test_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))',
+            '(r#######""#######,test_switch_thread,"switchThread"->())',
+            '(r#######""#######,test_unpack_table,"unpackTable",(buffer:Vec<u8>)->serde_json::Value)',
+            '(r#######""#######,test_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64)',
+            '(r#######""#######,test_get_vision_sensor_depth_buffer,"getVisionSensorDepthBuffer",(sensor_handle:i64),opt(pos:Vec<i64>,size:Vec<i64>)->(Vec<u8>,Vec<i64>))',
         ]
         result = [
             ir_to_macro_request_rust.ir_to_macro_request_rust(ir, api_name="test")

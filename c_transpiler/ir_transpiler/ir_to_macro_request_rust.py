@@ -3,9 +3,13 @@ from .ir import FunctionAssign, Arg, TypeNode
 import inflection
 
 
+def rust_function_name_style(api_name: str, function_name: str) -> str:
+    return f"{inflection.underscore(api_name)}_{inflection.underscore(function_name)}"
+
+
 def ir_to_macro_request_rust(assign: FunctionAssign, api_name: str) -> str:
     return_type = type_node_to_rust(assign.return_type)
-    rust_func_name = f'{inflection.underscore(api_name)}_{inflection.underscore(assign.function_name)}'
+    rust_func_name = rust_function_name_style(api_name,assign.function_name)
 
     required_args = []
     option_args = []
@@ -17,19 +21,18 @@ def ir_to_macro_request_rust(assign: FunctionAssign, api_name: str) -> str:
         else:
             required_args.append(string_arg)
 
-    required_args_string = f',({",".join(required_args)})'if len(
-        required_args) != 0 else ""
+    required_args_string = (
+        f',({",".join(required_args)})' if len(required_args) != 0 else ""
+    )
 
-    opt_string = f',opt({",".join(option_args)})' if len(
-        option_args) != 0 else ""
+    opt_string = f',opt({",".join(option_args)})' if len(option_args) != 0 else ""
 
-    return_type_string = f'->{return_type}' if return_type else ""
+    return_type_string = f"->{return_type}" if return_type else ""
     docstring = assign.description
-    return f'(r#"{docstring}"#,{rust_func_name},"{assign.function_name}"{required_args_string}{opt_string}{return_type_string})'
+    return f'(r#######"{docstring}"#######,{rust_func_name},"{assign.function_name}"{required_args_string}{opt_string}{return_type_string})'
 
 
 def arg_to_rust(arg: Arg) -> str:
-
     if arg.arg_type.cpp_type == TokenType.OPTION:
         sub_type = arg.arg_type.sub_type[0]
         type_string = type_node_to_rust(sub_type)
@@ -38,7 +41,7 @@ def arg_to_rust(arg: Arg) -> str:
 
     snake_case = inflection.underscore(arg.arg_name)
 
-    return f'{snake_case}:{type_string}'
+    return f"{snake_case}:{type_string}"
 
 
 def type_node_to_rust(node: TypeNode) -> str:
@@ -47,12 +50,12 @@ def type_node_to_rust(node: TypeNode) -> str:
         TokenType.I64: "i64",
         TokenType.F64: "f64",
         TokenType.BOOL: "bool",
-        TokenType.VOID:  "()",
+        TokenType.VOID: "()",
         TokenType.TUPLE: "",
         TokenType.VEC: "Vec",
         TokenType.OPTION: "Option",
         TokenType.STRING: "String",
-        TokenType.JSON: "serde_json::Value"
+        TokenType.JSON: "serde_json::Value",
     }
 
     cpp_type = cpp_tokens_eq.get(node.cpp_type)
@@ -66,6 +69,6 @@ def type_node_to_rust(node: TypeNode) -> str:
         sub_types_string = ",".join(sub_types)
 
         if node.cpp_type == TokenType.TUPLE:
-            return f'({sub_types_string})'
+            return f"({sub_types_string})"
 
-        return f'{cpp_type}<{sub_types_string}>'
+        return f"{cpp_type}<{sub_types_string}>"
