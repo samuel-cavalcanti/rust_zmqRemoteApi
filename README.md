@@ -37,7 +37,7 @@ export RUST_LOG="trace"; cargo run --example=simple_test
 ## Porting C++ client to Rust client
 
 The **RemoteAPIObjects.h** has 3750 lines of code, so to port all the
-functions, I create a kind of [c_transpiler](c_transpiler/).
+functions, I created a kind of [c_transpiler](c_transpiler/).
 
 ## diferences between C++ client and Rust client
 
@@ -66,7 +66,7 @@ you can add this crate at your cargo.toml using git:
 
 ```toml
 # the branch is the coppelia version
-zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.5.1"}
+zmq_remote_api = { git = "https://github.com/samuel-cavalcanti/rust_zmqRemoteApi", branch = "CoppeliaSim_4.6.0"}
 ```
 
 See a simple [example](examples/get_simulation_time.rs) to understand how to use this crate.
