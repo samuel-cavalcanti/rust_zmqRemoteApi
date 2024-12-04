@@ -1,5 +1,5 @@
 use crate::RemoteApiClientInterface;
-#[doc=r#####"API functions for creating kinematics tasks. All units, unless otherwise indicated, are specified in meters and radians."#####]
+#[doc=r#"API functions for creating kinematics tasks. All units, unless otherwise indicated, are specified in meters and radians."#]
 pub trait SimIK : RemoteApiClientInterface {
     requests!{
 "simIK",

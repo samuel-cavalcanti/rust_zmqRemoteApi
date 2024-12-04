@@ -16,6 +16,7 @@ getVisionSensorCharImage(int64_t sensorHandle,
 void setVisionSensorCharImage(int64_t sensorHandle, std::vector<uint8_t> image);
 std::vector<int64_t> getObjectSelection();
 void setObjectSelection(std::vector<double> objectHandles);
+
 // DEPRECATED/BACKCOMPATIBILITY END
 
 // SPECIAL START
