@@ -11,6 +11,7 @@ from parser import parser
 from ir_transpiler import ir_to_macro_request_rust, ir_to_py
 import inflection
 import sys
+import logging
 
 
 @dataclass
@@ -65,7 +66,7 @@ def main():
     sim_ik_h = assets / Path("sim_ik_api_header.h")
     sim_h = assets / Path("sim_api_header.h")
 
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print("you shoud pass the coppeliasim dir as argument")
         exit(1)
     coppeliasim_dir = Path(sys.argv[1])
@@ -90,10 +91,10 @@ def main():
             descrip = reference_scraping.scraping_regular_api_function(
                 assign.function_name, regular_api_dir
             )
-        except Exception as e:
+            logging.info(f"reference found {assign.function_name}")
+        except Exception:
             descrip = reference_scraping.Description(note="", args=[], return_values=[])
-            print(f"Unable to find reference for sim.{assign.function_name}")
-            print(e)
+            logging.warning(f"Unable to find reference for sim.{assign.function_name}")
         return descrip
 
     def sim_ik_function_description(
