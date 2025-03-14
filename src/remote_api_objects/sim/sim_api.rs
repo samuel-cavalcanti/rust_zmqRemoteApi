@@ -13,6 +13,7 @@ pub trait Sim : RemoteApiClientInterface {
 (r#######"Deprecated. Use [sim_set_vision_sensor_img](#method.sim_set_vision_sensor_img) instead"#######,sim_set_vision_sensor_char_image,"setVisionSensorCharImage",(sensor_handle:i64,image:Vec<u8>)->()),
 (r#######"Deprecated. Use [sim_get_object_sel](#method.sim_get_object_sel) instead"#######,sim_get_object_selection,"getObjectSelection"->Vec<i64>),
 (r#######"Deprecated. Use [sim_set_object_sel](#method.sim_set_object_sel) instead"#######,sim_set_object_selection,"setObjectSelection",(object_handles:Vec<f64>)->()),
+(r#######"Deprecated. See properties instead"#######,sim_wait_for_signal,"waitForSignal",(sig_name:String)->serde_json::Value),
 (r#######"Deprecated. See properties instead"#######,sim_get_string_signal,"getStringSignal",(signal_name:String)->Option<Vec<u8>>),
 (r#######"Deprecated. See properties instead"#######,sim_get_int32_signal,"getInt32Signal",(signal_name:String)->Option<i64>),
 (r#######"Deprecated. See properties instead"#######,sim_get_float_signal,"getFloatSignal",(signal_name:String)->Option<f64>),
@@ -76,6 +77,7 @@ Euler angles
 axes"#######,sim_build_pose,"buildPose",(position:Vec<f64>,euler_angles_or_axis:Vec<f64>),opt(mode:i64,axis2:Vec<f64>)->Vec<f64>),
 (r#######"Shifts and adjusts a camera associated with a view to fill the view entirely with
 the specified objects or models"#######,sim_camera_fit_to_view,"cameraFitToView",(view_handle_or_index:i64),opt(object_handles:Vec<i64>,options:i64,scaling:f64)->i64),
+(r#######"Cancels a scheduled execution of a function"#######,sim_cancel_scheduled_execution,"cancelScheduledExecution",(id:i64)->bool),
 (r#######"Changes the color of an entity, and returns its original
 color. Currently only takes into account collections
 and shapes
@@ -168,10 +170,13 @@ Useful for script code auto-completion functionality"#######,sim_get_api_func,"g
 (r#######"Deprecated. See properties instead"#######,sim_get_array_param,"getArrayParam",(parameter:i64)->Vec<f64>),
 (r#######""#######,sim_get_auto_yield_delay,"getAutoYieldDelay"->f64),
 (r#######"Deprecated. See properties instead"#######,sim_get_bool_param,"getBoolParam",(parameter:i64)->bool),
+(r#######"Fetches a boolean property"#######,sim_get_bool_property,"getBoolProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->bool),
+(r#######"Fetches a buffer property"#######,sim_get_buffer_property,"getBufferProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<u8>),
 (r#######"Deprecated. See properties instead"#######,sim_get_buffer_signal,"getBufferSignal",(signal_name:String)->Vec<u8>),
 (r#######"Returns the position or distance along a path that is closest to a specified point in space"#######,sim_get_closest_pos_on_path,"getClosestPosOnPath",(path:Vec<f64>,path_lengths:Vec<f64>,abs_pt:Vec<f64>)->f64),
 (r#######"Retrieves the object handles that compose a collection
 "#######,sim_get_collection_objects,"getCollectionObjects",(collection_handle:i64)->Vec<i64>),
+(r#######"Fetches a color property (float[3])"#######,sim_get_color_property,"getColorProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
 (r#######"Returns the distance between two configurations points"#######,sim_get_config_distance,"getConfigDistance",(config_a:Vec<f64>,config_b:Vec<f64>),opt(metric:Vec<f64>,types:Vec<i64>)->f64),
 (r#######"Retrieves contact point information of a dynamic simulation pass."#######,sim_get_contact_info,"getContactInfo",(dynamic_pass:i64,object_handle:i64,index:i64)->(Vec<i64>,Vec<f64>,Vec<f64>,Vec<f64>)),
 (r#######"Deprecated. See properties instead"#######,sim_get_engine_bool_param,"getEngineBoolParam",(param_id:i64,object_handle:i64)->bool),
@@ -180,11 +185,16 @@ Useful for script code auto-completion functionality"#######,sim_get_api_func,"g
 (r#######"Retrieves the Euler angles from a transformation matrix"#######,sim_get_euler_angles_from_matrix,"getEulerAnglesFromMatrix",(matrix:Vec<f64>)->Vec<f64>),
 (r#######"Retrieves the explicit handling flags for a scene object"#######,sim_get_explicit_handling,"getExplicitHandling",(object_handle:i64)->i64),
 (r#######"Retrieves a string that describes additional environment or object properties, mainly used by extension plugins."#######,sim_get_extension_string,"getExtensionString",(object_handle:i64,index:i64),opt(key:String)->String),
+(r#######"Fetches a float array property (double[])"#######,sim_get_float_array_property,"getFloatArrayProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
 (r#######"Deprecated. See properties instead"#######,sim_get_float_param,"getFloatParam",(parameter:i64)->f64),
+(r#######"Fetches a float property (double)"#######,sim_get_float_property,"getFloatProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->f64),
 (r#######"Retrieves all events that allow to reconstruct a scene's (mostly) visual content remotely"#######,sim_get_genesis_events,"getGenesisEvents"->Vec<serde_json::Value>),
 (r#######""#######,sim_get_graph_curve,"getGraphCurve",(graph_handle:i64,graph_type:i64,curve_index:i64)->(String,i64,Vec<f64>,Vec<f64>,Vec<f64>,Vec<f64>,i64,i64)),
 (r#######""#######,sim_get_graph_info,"getGraphInfo",(graph_handle:i64)->(i64,Vec<f64>,Vec<f64>)),
 (r#######"Deprecated. See properties instead"#######,sim_get_int32_param,"getInt32Param",(parameter:i64)->i64),
+(r#######"Fetches an int[2] property"#######,sim_get_int_array2_property,"getIntArray2Property",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<i64>),
+(r#######"Fetches an int array property (int[])"#######,sim_get_int_array_property,"getIntArrayProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<i64>),
+(r#######"Fetches an int32 property"#######,sim_get_int_property,"getIntProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->i64),
 (r#######""#######,sim_get_is_real_time_simulation,"getIsRealTimeSimulation"->i64),
 (r#######"Retrieves joint dependency information, when the joint is in dependent mode"#######,sim_get_joint_dependency,"getJointDependency",(joint_handle:i64)->(i64,f64,f64)),
 (r#######"Retrieves the force or torque applied to a joint along/about its active axis.
@@ -206,7 +216,7 @@ along/about its z-axis"#######,sim_get_joint_force,"getJointForce",(joint_handle
 (r#######"Retrieves and clears the information string generated by last API call"#######,sim_get_last_info,"getLastInfo"->String),
 (r#######"Deprecated. See properties instead"#######,sim_get_light_parameters,"getLightParameters",(light_handle:i64)->(i64,Vec<f64>,Vec<f64>,Vec<f64>)),
 (r#######"Retrieves the object handle of the dummy linked to this one"#######,sim_get_link_dummy,"getLinkDummy",(dummy_handle:i64)->i64),
-(r#######"Deprecated. See [sim_read_custom_data_tags](#method.sim_read_custom_data_tags) instead."#######,sim_get_matching_persistent_data_tags,"getMatchingPersistentDataTags",(pattern:String)->Vec<String>),
+(r#######"Fetches an int64 property"#######,sim_get_long_property,"getLongProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->i64),
 (r#######"Inverts a transformation matrix"#######,sim_get_matrix_inverse,"getMatrixInverse",(matrix:Vec<f64>)->Vec<f64>),
 (r#######"Deprecated. See properties instead"#######,sim_get_model_property,"getModelProperty",(object_handle:i64)->i64),
 (r#######"Deprecated. See properties instead"#######,sim_get_named_bool_param,"getNamedBoolParam",(name:String)->bool),
@@ -256,7 +266,6 @@ object handles in the scene"#######,sim_get_objects,"getObjects",(index:i64,obje
 (r#######"Returns the lengths of a path in 1, 2 or 3D Cartesian space, even if more coordinates are
 provided. Each path point will have a corresponding length value (taken as the distance from the
 path's first point, along the path)"#######,sim_get_path_lengths,"getPathLengths",(path:Vec<f64>,dof:i64),opt(dist_callback:String)->(Vec<f64>,f64)),
-(r#######"Deprecated. See [sim_read_custom_data_tags](#method.sim_read_custom_data_tags) instead."#######,sim_get_persistent_data_tags,"getPersistentDataTags"->Vec<String>),
 (r#######"Returns auxiliary information about a loaded plugin"#######,sim_get_plugin_info,"getPluginInfo",(plugin_name:String,info_type:i64)->String),
 (r#######"Retrieves a plugin name based on an index"#######,sim_get_plugin_name,"getPluginName",(index:i64)->String),
 (r#######"Gets various properties of a point cloud
@@ -264,8 +273,17 @@ path's first point, along the path)"#######,sim_get_path_lengths,"getPathLengths
 (r#######"Retrieves point positions from a point cloud
 "#######,sim_get_point_cloud_points,"getPointCloudPoints",(point_cloud_handle:i64)->Vec<f64>),
 (r#######"Inverts a pose"#######,sim_get_pose_inverse,"getPoseInverse",(pose:Vec<f64>)->Vec<f64>),
+(r#######"Fetches a pose property (double[7]: x, y, z, qx, qy, qz, qw)"#######,sim_get_pose_property,"getPoseProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
+(r#######"Convenience function to fetches all properties of a specific target item"#######,sim_get_properties,"getProperties",(target:i64),opt(opts:serde_json::Value)->serde_json::Value),
+(r#######"Convenience function to fetches all properties infos of a specific target item"#######,sim_get_properties_infos,"getPropertiesInfos",(target:i64),opt(opts:serde_json::Value)->serde_json::Value),
+(r#######"Convenience functon to fetch a property"#######,sim_get_property,"getProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->serde_json::Value),
+(r#######"Fetches information about a specific property"#######,sim_get_property_info,"getPropertyInfo",(target:i64,p_name:String),opt(options:serde_json::Value)->(i64,i64,String)),
+(r#######"Fetches the name of a property, based on an index"#######,sim_get_property_name,"getPropertyName",(target:i64,index:i64),opt(options:serde_json::Value)->(String,String)),
+(r#######""#######,sim_get_property_type_string,"getPropertyTypeString",(p_type:i64)->String),
+(r#######"Fetches a quaternion property (double[4]: qx, qy, qz, qw)"#######,sim_get_quaternion_property,"getQuaternionProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
 (r#######"Generates a random value in the range between 0.0 and 1.0. The value is generated from an individual generator attached to the calling script"#######,sim_get_random,"getRandom",opt(seed:i64)->f64),
 (r#######"Indicates whether the simulation is real-time"#######,sim_get_real_time_simulation,"getRealTimeSimulation"->bool),
+(r#######""#######,sim_get_referenced_handle,"getReferencedHandle",(object_handle:i64),opt(tag:String)->i64),
 (r#######"Retrieves a list of custom handles, linking a given scene object to other scene objects"#######,sim_get_referenced_handles,"getReferencedHandles",(object_handle:i64),opt(tag:String)->Vec<i64>),
 (r#######"Retrieves a list of all referenced handles tags"#######,sim_get_referenced_handles_tags,"getReferencedHandlesTags",(object_handle:i64)->Vec<String>),
 (r#######"Retrieves an axis and rotation angle that brings one pose or transformation matrix
@@ -301,10 +319,14 @@ has its own message queue. The C/C++ version of this function should only be cal
 client application. A given message queue cannot hold more than 64 messages, unread messages will be discarded."#######,sim_get_simulator_message,"getSimulatorMessage"->(i64,Vec<i64>,Vec<i64>)),
 (r#######"Lua only. Retrieves and clears the last generated stack traceback for a script"#######,sim_get_stack_traceback,"getStackTraceback",opt(script_handle:i64)->String),
 (r#######"Deprecated. See properties instead"#######,sim_get_string_param,"getStringParam",(parameter:i64)->String),
+(r#######"Fetches a string property (text)"#######,sim_get_string_property,"getStringProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->String),
 (r#######"Retrieves the system time."#######,sim_get_system_time,"getSystemTime"->f64),
+(r#######""#######,sim_get_table_property,"getTableProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->serde_json::Value),
 (r#######"Retrieves the texture ID of a specific texture"#######,sim_get_texture_id,"getTextureId",(texture_name:String)->(i64,Vec<i64>)),
 (r#######""#######,sim_get_thread_id,"getThreadId"->i64),
 (r#######"Lua only. Returns all variables, except those set by CoppeliaSim."#######,sim_get_user_variables,"getUserVariables"->Vec<String>),
+(r#######"Fetches a vector2 property (double[2])"#######,sim_get_vector2_property,"getVector2Property",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
+(r#######"Fetches a vector3 property (double[3])"#######,sim_get_vector3_property,"getVector3Property",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
 (r#######"Retrieves the linear and/or angular velocity of the center of mass of a non-static shape.
 Data is provided by the selected physics engine"#######,sim_get_velocity,"getVelocity",(shape_handle:i64)->(Vec<f64>,Vec<f64>)),
 (r#######"Reads the depth buffer of a vision sensor. The returned data doesn't make sense if
@@ -397,8 +419,6 @@ You can also use [sim_pack_table](#method.sim_pack_table) to quickly compare two
 (r#######"Packs an array of uint32 numbers into a string"#######,sim_pack_u_int32_table,"packUInt32Table",(uint32_numbers:Vec<i64>),opt(start_u_int32_index:i64,uint32_count:i64)->Vec<u8>),
 (r#######"Packs an array of uint8 numbers into a string"#######,sim_pack_u_int8_table,"packUInt8Table",(uint8_numbers:Vec<i64>),opt(start_uint8_index:i64,uint8count:i64)->Vec<u8>),
 (r#######"Requests a pause of a simulation"#######,sim_pause_simulation,"pauseSimulation"->()),
-(r#######"Deprecated. See [sim_read_custom_buffer_data](#method.sim_read_custom_buffer_data) instead."#######,sim_persistent_data_read,"persistentDataRead",(data_tag:String)->Vec<u8>),
-(r#######"Deprecated. See [sim_write_custom_buffer_data](#method.sim_write_custom_buffer_data) instead."#######,sim_persistent_data_write,"persistentDataWrite",(data_tag:String,data_value:Vec<u8>),opt(options:i64)->()),
 (r#######"Converts a pose to a transformation matrix"#######,sim_pose_to_matrix,"poseToMatrix",(pose:Vec<f64>)->Vec<f64>),
 (r#######"Pushes a user-triggered event. Messages are received asynchronously via the
 sysCall_event callback function and via the plugin
@@ -428,6 +448,7 @@ in place. The shape's inertia properties are unaffected."#######,sim_relocate_sh
 (r#######"Removes points from a point cloud. When a point cloud doesn't
 use an OC tree calculation structure, then individual points cannot be removed,
 only all points can be removed in that case"#######,sim_remove_points_from_point_cloud,"removePointsFromPointCloud",(point_cloud_handle:i64,options:i64,points:Vec<f64>,tolerance:f64)->i64),
+(r#######"Removes a removable property"#######,sim_remove_property,"removeProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->()),
 (r#######""#######,sim_remove_referenced_objects,"removeReferencedObjects",(object_handle:i64),opt(tag:String)->()),
 (r#######"Removes voxels from an OC tree
 "#######,sim_remove_voxels_from_octree,"removeVoxelsFromOctree",(octree_handle:i64,options:i64,points:Vec<f64>)->i64),
@@ -471,6 +492,7 @@ objects in its hierarchy tree). Any existing file with same name will be overwri
 can be non-isometrically scaled. Some primitive shapes can have some constraints between their axes"#######,sim_scale_object,"scaleObject",(object_handle:i64,x_scale:f64,y_scale:f64,z_scale:f64),opt(options:i64)->()),
 (r#######"Scales specified objects. All related values are automatically scaled appropriately
 (e.g. masses, forces, etc.)"#######,sim_scale_objects,"scaleObjects",(object_handles:Vec<i64>,scaling_factor:f64,scale_positions_too:bool)->()),
+(r#######"Schedules execution of a function"#######,sim_schedule_execution,"scheduleExecution",(f:String,args:Vec<serde_json::Value>,time_point:f64),opt(sim_time:bool)->i64),
 (r#######"Reads how many bytes are waiting to be read on a serial port (RS-232)"#######,sim_serial_check,"serialCheck",(port_handle:i64)->i64),
 (r#######"Closes a serial port (RS-232)"#######,sim_serial_close,"serialClose",(port_handle:i64)->()),
 (r#######"Opens a serial port (RS-232) for communication. When called from a script,
@@ -483,17 +505,26 @@ be blocking"#######,sim_serial_read,"serialRead",(port_handle:i64,data_length_to
 (r#######"Allows specifying a thread interruption or yield delay, that will be
 automatically enforced by the system (preemptive threading). By default this value is 2 ms"#######,sim_set_auto_yield_delay,"setAutoYieldDelay",(dt:f64)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_bool_param,"setBoolParam",(parameter:i64,bool_state:bool)->()),
+(r#######"Sets a boolean property"#######,sim_set_bool_property,"setBoolProperty",(target:i64,p_name:String,p_value:bool),opt(options:serde_json::Value)->()),
+(r#######"Sets a buffer property"#######,sim_set_buffer_property,"setBufferProperty",(target:i64,p_name:String,p_value:Vec<u8>),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_buffer_signal,"setBufferSignal",(signal_name:String,signal_value:Vec<u8>)->()),
+(r#######"Sets a color property (float[3])"#######,sim_set_color_property,"setColorProperty",(target:i64,p_name:String,p_value:Vec<f64>),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_engine_bool_param,"setEngineBoolParam",(param_id:i64,object_handle:i64,bool_param:bool)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_engine_float_param,"setEngineFloatParam",(param_id:i64,object_handle:i64,float_param:f64)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_engine_int32_param,"setEngineInt32Param",(param_id:i64,object_handle:i64,int32_param:i64)->()),
+(r#######"Specifies filters for the sysCall_event callback. Operates on a per script basis"#######,sim_set_event_filters,"setEventFilters",opt(filters:serde_json::Value)->()),
 (r#######"Sets the explicit handling flags for a scene object"#######,sim_set_explicit_handling,"setExplicitHandling",(object_handle:i64,explicit_handling_flags:i64)->()),
+(r#######"Sets a float array property (double[])"#######,sim_set_float_array_property,"setFloatArrayProperty",(target:i64,p_name:String,p_value:Vec<f64>),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_float_param,"setFloatParam",(parameter:i64,float_state:f64)->()),
+(r#######"Sets a float property (double)"#######,sim_set_float_property,"setFloatProperty",(target:i64,p_name:String,p_value:f64),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_float_signal,"setFloatSignal",(signal_name:String,signal_value:f64)->()),
 (r#######"Applies a transformation to a graph stream"#######,sim_set_graph_stream_transformation,"setGraphStreamTransformation",(graph_handle:i64,stream_id:i64,tr_type:i64),opt(mult:f64,off:f64,mov_avg_period:i64)->()),
 (r#######"Sets the next value to be recorded for a graph stream"#######,sim_set_graph_stream_value,"setGraphStreamValue",(graph_handle:i64,stream_id:i64,value:f64)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_int32_param,"setInt32Param",(parameter:i64,int_state:i64)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_int32_signal,"setInt32Signal",(signal_name:String,signal_value:i64)->()),
+(r#######"Sets an int[2] property"#######,sim_set_int_array2_property,"setIntArray2Property",(target:i64,p_name:String,p_value:Vec<i64>),opt(options:serde_json::Value)->()),
+(r#######"Sets an int array property (int[])"#######,sim_set_int_array_property,"setIntArrayProperty",(target:i64,p_name:String,p_value:Vec<i64>),opt(options:serde_json::Value)->()),
+(r#######"Sets an int32 property"#######,sim_set_int_property,"setIntProperty",(target:i64,p_name:String,p_value:i64),opt(options:serde_json::Value)->()),
 (r#######"Sets a joint dependent of another joint. The dependent joint should first be set
 into dependent mode via [sim_set_joint_mode](#method.sim_set_joint_mode)
 "#######,sim_set_joint_dependency,"setJointDependency",(joint_handle:i64,master_joint_handle:i64,offset:f64,mult_coeff:f64)->()),
@@ -513,6 +544,7 @@ desired velocity"#######,sim_set_joint_target_velocity,"setJointTargetVelocity",
 (r#######"Deprecated. See properties instead"#######,sim_set_light_parameters,"setLightParameters",(light_handle:i64,state:i64,reserved:Vec<f64>,diffuse_part:Vec<f64>,specular_part:Vec<f64>)->()),
 (r#######"Defines (or breaks) a dummy-dummy link pair. Useful to create dynamic loop closure
 constraints on the fly (among others)"#######,sim_set_link_dummy,"setLinkDummy",(dummy_handle:i64,link_dummy_handle:i64)->()),
+(r#######"Sets an int64 property"#######,sim_set_long_property,"setLongProperty",(target:i64,p_name:String,p_value:i64),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_model_property,"setModelProperty",(object_handle:i64,property:i64)->()),
 (r#######""#######,sim_set_named_bool_param,"setNamedBoolParam",(name:String,value:bool)->()),
 (r#######""#######,sim_set_named_float_param,"setNamedFloatParam",(name:String,value:f64)->()),
@@ -549,6 +581,10 @@ hierarchy tree, are dynamically reset (this however does not apply to static sha
 (r#######"Attaches additional information to a loaded plugin"#######,sim_set_plugin_info,"setPluginInfo",(plugin_name:String,info_type:i64,info:String)->()),
 (r#######"Sets various properties of a point cloud
 "#######,sim_set_point_cloud_options,"setPointCloudOptions",(point_cloud_handle:i64,max_voxel_size:f64,max_pt_cnt_per_voxel:i64,options:i64,point_size:f64)->()),
+(r#######"Sets a pose property (double[7]: x, y, z, qx, qy, qz, qw)"#######,sim_set_pose_property,"setPoseProperty",(target:i64,p_name:String,p_value:Vec<f64>),opt(options:serde_json::Value)->()),
+(r#######"Convenience function to set several properties at once"#######,sim_set_properties,"setProperties",(target:i64,props:serde_json::Value)->()),
+(r#######"Convenience function to set a property"#######,sim_set_property,"setProperty",(target:i64,p_name:String,p_value:serde_json::Value),opt(p_type:i64)->()),
+(r#######"Sets a quaternion property (double[4]: qx, qy, qz, qw)"#######,sim_set_quaternion_property,"setQuaternionProperty",(target:i64,p_name:String,p_value:Vec<f64>),opt(options:serde_json::Value)->()),
 (r#######"Attaches a list of custom handles to a given scene object. Those custom handles
 are handles of other scene objects, that are linked to the given scene object (for whatever purpose).
 The advantage of storing references to other objects with this function is that CoppeliaSim will take
@@ -577,7 +613,11 @@ to the initial state
 
 (Lua specific: in stepping operation mode, automatic thread interruptions, i.e. preemptive threading, is supressed)"#######,sim_set_stepping,"setStepping",(enabled:bool)->i64),
 (r#######"Deprecated. See properties instead"#######,sim_set_string_param,"setStringParam",(parameter:i64,string_state:String)->()),
+(r#######"Sets a string property (text)"#######,sim_set_string_property,"setStringProperty",(target:i64,p_name:String,p_value:String),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_set_string_signal,"setStringSignal",(signal_name:String,signal_value:String)->()),
+(r#######""#######,sim_set_table_property,"setTableProperty",(target:i64,p_name:String,p_value:serde_json::Value),opt(options:serde_json::Value)->()),
+(r#######"Sets a vector2 property (double[2])"#######,sim_set_vector2_property,"setVector2Property",(target:i64,p_name:String,p_value:Vec<f64>),opt(options:serde_json::Value)->()),
+(r#######"Sets a vector3 property (double[3])"#######,sim_set_vector3_property,"setVector3Property",(target:i64,p_name:String,p_value:Vec<f64>),opt(options:serde_json::Value)->()),
 (r#######"Writes the image of a vision sensor (and applies any image processing via the
 vision callback functions). Make sure the vision
 sensor is flagged as external input
@@ -588,6 +628,7 @@ only returns once the simulation time has changed"#######,sim_step,"step"->()),
 (r#######"Requests a stop of the running simulation"#######,sim_stop_simulation,"stopSimulation",opt(wait:bool)->()),
 (r#######"Removes an object from an OC tree, as voxel subtractions"#######,sim_subtract_object_from_octree,"subtractObjectFromOctree",(octree_handle:i64,object_handle:i64,options:i64)->i64),
 (r#######"Removes an object from a point cloud, as a subtraction"#######,sim_subtract_object_from_point_cloud,"subtractObjectFromPointCloud",(point_cloud_handle:i64,object_handle:i64,options:i64,tolerance:f64)->i64),
+(r#######"Acquires or releases a system-wide semaphore, i.e. across several CoppeliaSim instances"#######,sim_system_semaphore,"systemSemaphore",(key:String,acquire:bool)->()),
 (r#######""#######,sim_test_cb,"testCB",(a:i64,cb:String,b:i64)->i64),
 (r#######"Closes a text edition window previously opened with [sim_text_editor_open](#method.sim_text_editor_open)
 "#######,sim_text_editor_close,"textEditorClose",(handle:i64)->(String,Vec<i64>,Vec<i64>)),
@@ -609,7 +650,6 @@ only returns once the simulation time has changed"#######,sim_step,"step"->()),
 (r#######"Unpacks a string (or part of it) into an array of uint8 numbers"#######,sim_unpack_u_int8_table,"unpackUInt8Table",(data:Vec<u8>),opt(start_uint8_index:i64,uint8count:i64)->Vec<i64>),
 (r#######""#######,sim_visit_tree,"visitTree",(root_handle:i64,visitor_func:String),opt(options:serde_json::Value)->()),
 (r#######"Waits for a certain amount of time"#######,sim_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64),
-(r#######"Deprecated. See properties instead"#######,sim_wait_for_signal,"waitForSignal",(sig_name:String)->serde_json::Value),
 (r#######"Deprecated. See properties instead"#######,sim_write_custom_buffer_data,"writeCustomBufferData",(object_handle:i64,tag_name:String,data:Vec<u8>)->()),
 (r#######"Deprecated. See properties instead"#######,sim_write_custom_string_data,"writeCustomStringData",(object_handle:i64,tag_name:String,data:String)->()),
 (r#######"Deprecated. See properties instead"#######,sim_write_custom_table_data,"writeCustomTableData",(handle:i64,tag_name:String,the_table:serde_json::Value),opt(options:serde_json::Value)->()),

@@ -1,6 +1,6 @@
 [package]
 name = "coppeliasim_zmq_remote_api"
-version = "4.8.0"
+version = "4.9.0"
 edition = "2021"
 authors = ["Samuel Cavalcanti", "scavalcanti111@gmail.com"]
 license-file = "LICENSE.md"
