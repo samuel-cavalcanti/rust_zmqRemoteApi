@@ -18,7 +18,7 @@ Make sure that you are in this current directory and you have installed the [req
 to install the requests
 
 ```bash
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
 
 run the script
@@ -26,3 +26,21 @@ run the script
 ```bash
 python convert.py
 ```
+
+## Updating for new versions of CoppeliaSim
+
+### updating constants values
+
+First run the simulator, and set 2 variables:
+
+- `RUST_ZMQREMOTEAPI`: this repository directory
+- `COPPELIASIM_EDU_DIR`: the Coppeliasim directory
+
+Then run the script [`./get_consts.sh`](./get_consts.sh)
+
+### update the cpp headers
+
+Look into the headers and get the functions declarations from `RemoteAPIObjects.h`,`sim-deprecated.h` and `sim-special.h`, put all functions
+to [`assets/sim_api_header.h`](./assets/sim_api_header.h)
+
+run the tests.
