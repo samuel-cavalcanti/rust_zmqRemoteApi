@@ -43,4 +43,4 @@ Then run the script [`./get_consts.sh`](./get_consts.sh)
 Look into the headers and get the functions declarations from `RemoteAPIObjects.h`,`sim-deprecated.h` and `sim-special.h`, put all functions
 to [`assets/sim_api_header.h`](./assets/sim_api_header.h)
 
-run the tests.
+Run the tests.
