@@ -16,7 +16,6 @@ getVisionSensorCharImage(int64_t sensorHandle,
 void setVisionSensorCharImage(int64_t sensorHandle, std::vector<uint8_t> image);
 std::vector<int64_t> getObjectSelection();
 void setObjectSelection(std::vector<double> objectHandles);
-json waitForSignal(std::string sigName);
 
 // DEPRECATED/BACKCOMPATIBILITY END
 
@@ -27,6 +26,7 @@ std::optional<double> getFloatSignal(std::string signalName);
 json callScriptFunction(std::string functionName, int64_t scriptHandle,
                         json inArgs);
 // SPECIAL END
+json Object(int64_t handle);
 void acquireLock();
 int64_t addDrawingObject(int64_t objectType, double size,
                          double duplicateTolerance, int64_t parentObjectHandle,
@@ -66,8 +66,7 @@ int64_t alignShapeBB(int64_t shapeHandle, std::vector<double> pose);
 std::tuple<double, double, double>
 alphaBetaGammaToYawPitchRoll(double alphaAngle, double betaAngle,
                              double gammaAngle);
-int64_t announceSceneContentChange();
-int64_t auxiliaryConsoleClose(int64_t consoleHandle);
+int64_t announceSceneContentChange(); int64_t auxiliaryConsoleClose(int64_t consoleHandle);
 int64_t
 auxiliaryConsoleOpen(std::string title, int64_t maxLines, int64_t mode,
                      std::optional<std::vector<int64_t>> position = {},
@@ -126,6 +125,7 @@ std::vector<uint8_t> combineRgbImages(std::vector<uint8_t> img1,
                                       std::vector<int64_t> img2Res,
                                       int64_t operation);
 int64_t computeMassAndInertia(int64_t shapeHandle, double density);
+json convertPropertyValue(json value, int64_t fromType, int64_t toType);
 std::vector<int64_t> copyPasteObjects(std::vector<int64_t> objectHandles,
                                       std::optional<int64_t> options = {});
 std::vector<json> copyTable(std::vector<json> original);
@@ -174,11 +174,13 @@ void destroyCollection(int64_t collectionHandle);
 void destroyGraphCurve(int64_t graphHandle, int64_t curveId);
 int64_t duplicateGraphCurveToStatic(int64_t graphHandle, int64_t curveId,
                                     std::optional<std::string> curveName = {});
+std::tuple<bool, json> executeLuaCode(std::string theCode);
 std::tuple<int64_t, json> executeScriptString(std::string stringToExecute,
                                               int64_t scriptHandle);
 void exportMesh(int64_t fileformat, std::string pathAndFilename,
                 int64_t options, double scalingFactor,
                 std::vector<double> vertices, std::vector<int64_t> indices);
+void fastIdleLoop(bool enable);
 int64_t floatingViewAdd(double posX, double posY, double sizeX, double sizeY,
                         int64_t options);
 int64_t floatingViewRemove(int64_t floatingViewHandle);
@@ -269,9 +271,12 @@ std::tuple<int64_t, std::vector<double>, std::vector<double>,
            std::vector<double>>
 getLightParameters(int64_t lightHandle);
 int64_t getLinkDummy(int64_t dummyHandle);
+std::vector<std::string> getLoadedPlugins();
 int64_t getLongProperty(int64_t target, std::string pName,
                         std::optional<json> options = {});
+std::vector<std::string> getMatchingPersistentDataTags(std::string pattern);
 std::vector<double> getMatrixInverse(std::vector<double> matrix);
+std::vector<double> getModelBB(int64_t handle);
 int64_t getModelProperty(int64_t objectHandle);
 bool getNamedBoolParam(std::string name);
 double getNamedFloatParam(std::string name);
@@ -291,6 +296,7 @@ std::vector<double> getObjectFloatArrayParam(int64_t objectHandle,
                                              int64_t parameterID);
 double getObjectFloatParam(int64_t objectHandle, int64_t parameterID);
 void getObjectFromUid(int64_t uid, std::optional<json> options = {});
+int64_t getObjectHandle(std::string path, std::optional<json> options = {});
 std::tuple<int64_t, int64_t> getObjectHierarchyOrder(int64_t objectHandle);
 int64_t getObjectInt32Param(int64_t objectHandle, int64_t parameterID);
 std::vector<double>
@@ -323,6 +329,8 @@ int64_t getObjects(int64_t index, int64_t objectType);
 std::vector<int64_t> getObjectsInTree(int64_t treeBaseHandle,
                                       std::optional<int64_t> objectType = {},
                                       std::optional<int64_t> options = {});
+std::vector<int64_t> getObjectsWithTag(std::string tagName,
+                                       std::optional<bool> justModels = {});
 std::vector<double> getOctreeVoxels(int64_t octreeHandle);
 int64_t getPage();
 std::vector<double>
@@ -352,6 +360,7 @@ std::tuple<std::string, std::string>
 getPropertyName(int64_t target, int64_t index,
                 std::optional<json> options = {});
 std::string getPropertyTypeString(int64_t pType);
+std::vector<double> getQuaternionInverse(std::vector<double> quat);
 std::vector<double> getQuaternionProperty(int64_t target, std::string pName,
                                           std::optional<json> options = {});
 double getRandom(std::optional<int64_t> seed = {});
@@ -475,12 +484,14 @@ int64_t intersectPointsWithPointCloud(int64_t pointCloudHandle, int64_t options,
 int64_t isDeprecated(std::string funcOrConst);
 bool isDynamicallyEnabled(int64_t objectHandle);
 bool isHandle(int64_t objectHandle);
+bool isPluginLoaded(std::string name);
 void launchExecutable(std::string filename,
                       std::optional<std::string> parameters = {},
                       std::optional<int64_t> showStatus = {});
 std::tuple<std::vector<uint8_t>, std::vector<int64_t>>
 loadImage(int64_t options, std::string filename);
 int64_t loadModel(std::string filename);
+int64_t loadPlugin(std::string name);
 void loadScene(std::string filename);
 std::vector<double> matrixToPose(std::vector<double> matrix);
 int64_t moduleEntry(int64_t handle, std::optional<std::string> label = {},
@@ -529,6 +540,9 @@ void pushUserEvent(std::string event, int64_t handle, int64_t uid,
 void quitSimulator();
 std::vector<uint8_t> readCustomBufferData(int64_t objectHandle,
                                           std::string tagName);
+std::tuple<std::vector<uint8_t>, std::string>
+readCustomDataBlockEx(int64_t handle, std::string tag,
+                      std::optional<json> options = {});
 std::vector<std::string> readCustomDataTags(int64_t objectHandle);
 std::string readCustomStringData(int64_t objectHandle, std::string tagName);
 json readCustomTableData(int64_t handle, std::string tagName,
@@ -545,6 +559,8 @@ std::vector<uint8_t> readTexture(int64_t textureId, int64_t options,
 std::tuple<int64_t, std::vector<double>, std::vector<double>>
 readVisionSensor(int64_t sensorHandle);
 int64_t refreshDialogs(int64_t refreshDegree);
+int64_t registerScriptFuncHook(std::string funcToHook, std::string userFunc,
+                               bool execBefore);
 void releaseLock();
 int64_t relocateShapeFrame(int64_t shapeHandle, std::vector<double> pose);
 void removeDrawingObject(int64_t drawingObjectHandle);
@@ -652,7 +668,7 @@ void setJointDependency(int64_t jointHandle, int64_t masterJointHandle,
                         double offset, double multCoeff);
 void setJointInterval(int64_t objectHandle, bool cyclic,
                       std::vector<double> interval);
-void setJointMode(int64_t jointHandle, int64_t jointMode, int64_t options);
+void setJointMode(int64_t jointHandle, int64_t jointMode);
 void setJointPosition(int64_t objectHandle, double position);
 void setJointTargetForce(int64_t objectHandle, double forceOrTorque,
                          std::optional<bool> signedValue = {});
@@ -771,8 +787,9 @@ void textEditorShow(int64_t handle, bool showState);
 std::vector<uint8_t> transformBuffer(std::vector<uint8_t> inBuffer,
                                      int64_t inFormat, double multiplier,
                                      double offset, int64_t outFormat);
-void transformImage(std::vector<uint8_t> image, std::vector<int64_t> resolution,
-                    int64_t options);
+std::vector<uint8_t> transformImage(std::vector<uint8_t> image,
+                                    std::vector<int64_t> resolution,
+                                    int64_t options);
 std::vector<int64_t> ungroupShape(int64_t shapeHandle);
 std::vector<double>
 unpackDoubleTable(std::vector<uint8_t> data,
@@ -807,8 +824,12 @@ unpackUInt8Table(std::vector<uint8_t> data,
 void visitTree(int64_t rootHandle, std::string visitorFunc,
                std::optional<json> options = {});
 double wait(double dt, std::optional<bool> simulationTime = {});
+json waitForSignal(int64_t target, std::string sigName);
 void writeCustomBufferData(int64_t objectHandle, std::string tagName,
                            std::vector<uint8_t> data);
+void writeCustomDataBlockEx(int64_t handle, std::string tag,
+                            std::vector<uint8_t> data,
+                            std::optional<json> options = {});
 void writeCustomStringData(int64_t objectHandle, std::string tagName,
                            std::string data);
 void writeCustomTableData(int64_t handle, std::string tagName, json theTable,

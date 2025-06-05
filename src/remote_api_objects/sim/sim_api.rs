@@ -13,7 +13,6 @@ pub trait Sim : RemoteApiClientInterface {
 (r#######"Deprecated. Use [sim_set_vision_sensor_img](#method.sim_set_vision_sensor_img) instead"#######,sim_set_vision_sensor_char_image,"setVisionSensorCharImage",(sensor_handle:i64,image:Vec<u8>)->()),
 (r#######"Deprecated. Use [sim_get_object_sel](#method.sim_get_object_sel) instead"#######,sim_get_object_selection,"getObjectSelection"->Vec<i64>),
 (r#######"Deprecated. Use [sim_set_object_sel](#method.sim_set_object_sel) instead"#######,sim_set_object_selection,"setObjectSelection",(object_handles:Vec<f64>)->()),
-(r#######"Deprecated. See properties instead"#######,sim_wait_for_signal,"waitForSignal",(sig_name:String)->serde_json::Value),
 (r#######"Deprecated. See properties instead"#######,sim_get_string_signal,"getStringSignal",(signal_name:String)->Option<Vec<u8>>),
 (r#######"Deprecated. See properties instead"#######,sim_get_int32_signal,"getInt32Signal",(signal_name:String)->Option<i64>),
 (r#######"Deprecated. See properties instead"#######,sim_get_float_signal,"getFloatSignal",(signal_name:String)->Option<f64>),
@@ -21,6 +20,7 @@ pub trait Sim : RemoteApiClientInterface {
 or from another script). This represents a user callback inside of a script. The
 target script must be initialized for this call to succeed, e.g. when calling simulation scripts,
 then simulation must be running"#######,sim_call_script_function,"callScriptFunction",(function_name:String,script_handle:i64,in_args:serde_json::Value)->serde_json::Value),
+(r#######""#######,sim_object,"Object",(handle:i64)->serde_json::Value),
 (r#######"Allows to have CoppeliaSim wait for a threaded code section to be executed without
 interruption. Locking is cumulative"#######,sim_acquire_lock,"acquireLock"->()),
 (r#######"Adds a drawing object that will be displayed in the scene. Drawing objects are containers
@@ -119,6 +119,7 @@ or from the sanbox script, when called from within CoppeliaSim"#######,sim_close
 (r#######"Computes and applies the mass and inertia matrix for a shape, based on its convex representation.
 When calling this function while the simulation is running, one should then call
 [sim_reset_dynamic_object](#method.sim_reset_dynamic_object), for the changes to take effect"#######,sim_compute_mass_and_inertia,"computeMassAndInertia",(shape_handle:i64,density:f64)->i64),
+(r#######""#######,sim_convert_property_value,"convertPropertyValue",(value:serde_json::Value,from_type:i64,to_type:i64)->serde_json::Value),
 (r#######"Copies and pastes objects"#######,sim_copy_paste_objects,"copyPasteObjects",(object_handles:Vec<i64>),opt(options:i64)->Vec<i64>),
 (r#######"Lua only. Duplicates a table, i.e. makes a deep copy
         "#######,sim_copy_table,"copyTable",(original:Vec<serde_json::Value>)->Vec<serde_json::Value>),
@@ -147,6 +148,7 @@ the main script are automatically destroyed when the script ends"#######,sim_cre
 "#######,sim_destroy_collection,"destroyCollection",(collection_handle:i64)->()),
 (r#######"Destroys a graph stream or curve"#######,sim_destroy_graph_curve,"destroyGraphCurve",(graph_handle:i64,curve_id:i64)->()),
 (r#######"Duplicates a graph stream or curve, and freezes it"#######,sim_duplicate_graph_curve_to_static,"duplicateGraphCurveToStatic",(graph_handle:i64,curve_id:i64),opt(curve_name:String)->i64),
+(r#######""#######,sim_execute_lua_code,"executeLuaCode",(the_code:String)->(bool,serde_json::Value)),
 (r#######"Executes some code in a specific script (from a plugin,
 the main client application, or from another script).
 The target script must be initialized for this call to succeed, e.g. when calling
@@ -156,6 +158,7 @@ simulation scripts, then simulation must be running
 From C/C++, data exchange between a plugin and a script happens via a stack. Reading and writing arguments from/to the stack gives you a maximum of flexibility, and you wil be able to exchange also complex data structures. But it can also be tedious and error prone. Use instead the helper classes located in programming/include/simStack
 "#######,sim_execute_script_string,"executeScriptString",(string_to_execute:String,script_handle:i64)->(i64,serde_json::Value)),
 (r#######"Exports a mesh to a file"#######,sim_export_mesh,"exportMesh",(fileformat:i64,path_and_filename:String,options:i64,scaling_factor:f64,vertices:Vec<f64>,indices:Vec<i64>)->()),
+(r#######""#######,sim_fast_idle_loop,"fastIdleLoop",(enable:bool)->()),
 (r#######"Adds a floating view to current page"#######,sim_floating_view_add,"floatingViewAdd",(pos_x:f64,pos_y:f64,size_x:f64,size_y:f64,options:i64)->i64),
 (r#######"Removes a floating view previously added with [sim_floating_view_add](#method.sim_floating_view_add)."#######,sim_floating_view_remove,"floatingViewRemove",(floating_view_handle:i64)->i64),
 (r#######""#######,sim_generate_shape_from_path,"generateShapeFromPath",(path:Vec<f64>,section:Vec<f64>),opt(options:i64,up_vector:Vec<f64>)->i64),
@@ -216,8 +219,11 @@ along/about its z-axis"#######,sim_get_joint_force,"getJointForce",(joint_handle
 (r#######"Retrieves and clears the information string generated by last API call"#######,sim_get_last_info,"getLastInfo"->String),
 (r#######"Deprecated. See properties instead"#######,sim_get_light_parameters,"getLightParameters",(light_handle:i64)->(i64,Vec<f64>,Vec<f64>,Vec<f64>)),
 (r#######"Retrieves the object handle of the dummy linked to this one"#######,sim_get_link_dummy,"getLinkDummy",(dummy_handle:i64)->i64),
+(r#######""#######,sim_get_loaded_plugins,"getLoadedPlugins"->Vec<String>),
 (r#######"Fetches an int64 property"#######,sim_get_long_property,"getLongProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->i64),
+(r#######"Deprecated. See [sim_read_custom_data_tags](#method.sim_read_custom_data_tags) instead."#######,sim_get_matching_persistent_data_tags,"getMatchingPersistentDataTags",(pattern:String)->Vec<String>),
 (r#######"Inverts a transformation matrix"#######,sim_get_matrix_inverse,"getMatrixInverse",(matrix:Vec<f64>)->Vec<f64>),
+(r#######""#######,sim_get_model_bb,"getModelBB",(handle:i64)->Vec<f64>),
 (r#######"Deprecated. See properties instead"#######,sim_get_model_property,"getModelProperty",(object_handle:i64)->i64),
 (r#######"Deprecated. See properties instead"#######,sim_get_named_bool_param,"getNamedBoolParam",(name:String)->bool),
 (r#######"Deprecated. See properties instead"#######,sim_get_named_float_param,"getNamedFloatParam",(name:String)->f64),
@@ -236,6 +242,7 @@ when constraints can't be perfectly resolved)"#######,sim_get_object_child_pose,
 (r#######"Deprecated. See properties instead"#######,sim_get_object_float_array_param,"getObjectFloatArrayParam",(object_handle:i64,parameter_id:i64)->Vec<f64>),
 (r#######"Deprecated. See properties instead"#######,sim_get_object_float_param,"getObjectFloatParam",(object_handle:i64,parameter_id:i64)->f64),
 (r#######"Retrieves an object handle based on its unique identifier"#######,sim_get_object_from_uid,"getObjectFromUid",(uid:i64),opt(options:serde_json::Value)->()),
+(r#######"Deprecated. Use [sim_get_object](#method.sim_get_object) instead."#######,sim_get_object_handle,"getObjectHandle",(path:String),opt(options:serde_json::Value)->i64),
 (r#######"Retrieves the zero-based position of an object among its siblings in the scene hierarchy"#######,sim_get_object_hierarchy_order,"getObjectHierarchyOrder",(object_handle:i64)->(i64,i64)),
 (r#######"Deprecated. See properties instead"#######,sim_get_object_int32_param,"getObjectInt32Param",(object_handle:i64,parameter_id:i64)->i64),
 (r#######"Retrieves the transformation matrix of an object"#######,sim_get_object_matrix,"getObjectMatrix",(object_handle:i64),opt(relative_to_object_handle:i64)->Vec<f64>),
@@ -259,6 +266,7 @@ objects in the scene"#######,sim_get_object_velocity,"getObjectVelocity",(object
 (r#######"Retrieves object handles. Use this in a loop where index starts at 0 and is incremented to get all
 object handles in the scene"#######,sim_get_objects,"getObjects",(index:i64,object_type:i64)->i64),
 (r#######"Retrieves object handles in a given hierarchy tree"#######,sim_get_objects_in_tree,"getObjectsInTree",(tree_base_handle:i64),opt(object_type:i64,options:i64)->Vec<i64>),
+(r#######""#######,sim_get_objects_with_tag,"getObjectsWithTag",(tag_name:String),opt(just_models:bool)->Vec<i64>),
 (r#######"Retrieves voxel positions from an OC tree
 "#######,sim_get_octree_voxels,"getOctreeVoxels",(octree_handle:i64)->Vec<f64>),
 (r#######"Retrieves the current page index (view)"#######,sim_get_page,"getPage"->i64),
@@ -280,6 +288,7 @@ path's first point, along the path)"#######,sim_get_path_lengths,"getPathLengths
 (r#######"Fetches information about a specific property"#######,sim_get_property_info,"getPropertyInfo",(target:i64,p_name:String),opt(options:serde_json::Value)->(i64,i64,String)),
 (r#######"Fetches the name of a property, based on an index"#######,sim_get_property_name,"getPropertyName",(target:i64,index:i64),opt(options:serde_json::Value)->(String,String)),
 (r#######""#######,sim_get_property_type_string,"getPropertyTypeString",(p_type:i64)->String),
+(r#######"Inverts a quaternion"#######,sim_get_quaternion_inverse,"getQuaternionInverse",(quat:Vec<f64>)->Vec<f64>),
 (r#######"Fetches a quaternion property (double[4]: qx, qy, qz, qw)"#######,sim_get_quaternion_property,"getQuaternionProperty",(target:i64,p_name:String),opt(options:serde_json::Value)->Vec<f64>),
 (r#######"Generates a random value in the range between 0.0 and 1.0. The value is generated from an individual generator attached to the calling script"#######,sim_get_random,"getRandom",opt(seed:i64)->f64),
 (r#######"Indicates whether the simulation is real-time"#######,sim_get_real_time_simulation,"getRealTimeSimulation"->bool),
@@ -387,9 +396,11 @@ Note that until the physics engine has parsed the scene in the first simulation 
 (r#######"Checks whether a general object handle is still valid. When a general object is destroyed
 (e.g. programmatically or via the user interface), then its related handle is not valid anymore
 and will trigger an error when used. Use this function to avoid triggering an error"#######,sim_is_handle,"isHandle",(object_handle:i64)->bool),
+(r#######""#######,sim_is_plugin_loaded,"isPluginLoaded",(name:String)->bool),
 (r#######"Launches an executable. Similar to os.execute or io.popen, but is system independent."#######,sim_launch_executable,"launchExecutable",(filename:String),opt(parameters:String,show_status:i64)->()),
 (r#######"Loads an image from file or memory"#######,sim_load_image,"loadImage",(options:i64,filename:String)->(Vec<u8>,Vec<i64>)),
 (r#######"Loads a previously saved model, and selects it"#######,sim_load_model,"loadModel",(filename:String)->i64),
+(r#######""#######,sim_load_plugin,"loadPlugin",(name:String)->i64),
 (r#######"Loads a previously saved scene"#######,sim_load_scene,"loadScene",(filename:String)->()),
 (r#######"Converts a transformation matrix to a pose"#######,sim_matrix_to_pose,"matrixToPose",(matrix:Vec<f64>)->Vec<f64>),
 (r#######"Creates, modifies or destroys module menu entries. Those are user selectable items located in [Menu bar > Modules].
@@ -408,7 +419,7 @@ operation"#######,sim_move_to_pose,"moveToPose",(params:serde_json::Value)->serd
 (r#######""#######,sim_move_to_pose_step,"moveToPose_step",(motion_object:serde_json::Value)->(i64,serde_json::Value)),
 (r#######"Multiplies two transformation matrices"#######,sim_multiply_matrices,"multiplyMatrices",(matrix_in1:Vec<f64>,matrix_in2:Vec<f64>)->Vec<f64>),
 (r#######"Multiplies two poses"#######,sim_multiply_poses,"multiplyPoses",(pose_in1:Vec<f64>,pose_in2:Vec<f64>)->Vec<f64>),
-(r#######"Multiplies a vector with a pose or a matrix (e.g. v=m*v)"#######,sim_multiply_vector,"multiplyVector",(matrix:Vec<f64>,in_vectors:Vec<f64>)->Vec<f64>),
+(r#######"Multiplies a vector with a quaternion, a pose, or a matrix (e.g. v = m * v)"#######,sim_multiply_vector,"multiplyVector",(matrix:Vec<f64>,in_vectors:Vec<f64>)->Vec<f64>),
 (r#######"Packs ab array of double floating-point numbers into a string"#######,sim_pack_double_table,"packDoubleTable",(double_numbers:Vec<f64>),opt(start_double_index:i64,double_count:i64)->Vec<u8>),
 (r#######"Packs an array of floating-point numbers into a string"#######,sim_pack_float_table,"packFloatTable",(float_numbers:Vec<f64>),opt(start_float_index:i64,float_count:i64)->Vec<u8>),
 (r#######"Packs an array of int32 numbers into a string"#######,sim_pack_int32_table,"packInt32Table",(int32_numbers:Vec<i64>),opt(start_int32_index:i64,int32_count:i64)->Vec<u8>),
@@ -425,6 +436,7 @@ sysCall_event callback function and via the plugin
 sim_message_eventcallback_events message call"#######,sim_push_user_event,"pushUserEvent",(event:String,handle:i64,uid:i64,event_data:serde_json::Value),opt(options:i64)->()),
 (r#######"Triggers a quit signal after which the application eventually ends"#######,sim_quit_simulator,"quitSimulator"->()),
 (r#######"Deprecated. See properties instead"#######,sim_read_custom_buffer_data,"readCustomBufferData",(object_handle:i64,tag_name:String)->Vec<u8>),
+(r#######""#######,sim_read_custom_data_block_ex,"readCustomDataBlockEx",(handle:i64,tag:String),opt(options:serde_json::Value)->(Vec<u8>,String)),
 (r#######"Deprecated. See properties instead"#######,sim_read_custom_data_tags,"readCustomDataTags",(object_handle:i64)->Vec<String>),
 (r#######"Deprecated. See properties instead"#######,sim_read_custom_string_data,"readCustomStringData",(object_handle:i64,tag_name:String)->String),
 (r#######"Deprecated. See properties instead"#######,sim_read_custom_table_data,"readCustomTableData",(handle:i64,tag_name:String),opt(options:serde_json::Value)->serde_json::Value),
@@ -438,6 +450,9 @@ reads the result from a previous call to [sim_handle_vision_sensor](#method.sim_
 "#######,sim_read_vision_sensor,"readVisionSensor",(sensor_handle:i64)->(i64,Vec<f64>,Vec<f64>)),
 (r#######"Refreshes CoppeliaSim's internal dialogs. Calling [sim_refresh_dialogs](#method.sim_refresh_dialogs) will
 not trigger a sim.message_eventcallback_refreshdialogs message"#######,sim_refresh_dialogs,"refreshDialogs",(refresh_degree:i64)->i64),
+(r#######"Registers a script function hook for callback functions,
+that will be executed before or after the specified function. Calling this function a second
+time with the same arguments will unregister a previous hook"#######,sim_register_script_func_hook,"registerScriptFuncHook",(func_to_hook:String,user_func:String,exec_before:bool)->i64),
 (r#######"Counterpart function to [sim_acquire_lock](#method.sim_acquire_lock). Unlocking is cumulative"#######,sim_release_lock,"releaseLock"->()),
 (r#######"Repositions and reorients the reference frame of a shape, while keeping the mesh
 in place. The shape's inertia properties are unaffected."#######,sim_relocate_shape_frame,"relocateShapeFrame",(shape_handle:i64,pose:Vec<f64>)->i64),
@@ -530,7 +545,7 @@ into dependent mode via [sim_set_joint_mode](#method.sim_set_joint_mode)
 "#######,sim_set_joint_dependency,"setJointDependency",(joint_handle:i64,master_joint_handle:i64,offset:f64,mult_coeff:f64)->()),
 (r#######"Sets the interval parameters of a joint (i.e. range values). The attributes or
 interval parameters might have no effect, depending on the joint-type"#######,sim_set_joint_interval,"setJointInterval",(object_handle:i64,cyclic:bool,interval:Vec<f64>)->()),
-(r#######"Sets the operation mode of a joint"#######,sim_set_joint_mode,"setJointMode",(joint_handle:i64,joint_mode:i64,options:i64)->()),
+(r#######"Sets the operation mode of a joint"#######,sim_set_joint_mode,"setJointMode",(joint_handle:i64,joint_mode:i64)->()),
 (r#######"Sets the linear/angular position of a joint. Cannot be used with spherical joints
 (use [sim_set_object_child_pose](#method.sim_set_object_child_pose) instead)"#######,sim_set_joint_position,"setJointPosition",(object_handle:i64,position:f64)->()),
 (r#######"Sets the force or torque that a joint can exert"#######,sim_set_joint_target_force,"setJointTargetForce",(object_handle:i64,force_or_torque:f64),opt(signed_value:bool)->()),
@@ -638,7 +653,7 @@ only returns once the simulation time has changed"#######,sim_step,"step"->()),
 (r#######"Shows or hides a text edition window previously opened with [sim_text_editor_open](#method.sim_text_editor_open)
 "#######,sim_text_editor_show,"textEditorShow",(handle:i64,show_state:bool)->()),
 (r#######"Modifies a buffer than contains packed data"#######,sim_transform_buffer,"transformBuffer",(in_buffer:Vec<u8>,in_format:i64,multiplier:f64,offset:f64,out_format:i64)->Vec<u8>),
-(r#######"Transforms an image in various ways"#######,sim_transform_image,"transformImage",(image:Vec<u8>,resolution:Vec<i64>,options:i64)->()),
+(r#######"Transforms an image in various ways"#######,sim_transform_image,"transformImage",(image:Vec<u8>,resolution:Vec<i64>,options:i64)->Vec<u8>),
 (r#######"Ungroups a compound shape into several shapes
 "#######,sim_ungroup_shape,"ungroupShape",(shape_handle:i64)->Vec<i64>),
 (r#######"Unpacks a string (or part of it) into an array of double floating-point numbers"#######,sim_unpack_double_table,"unpackDoubleTable",(data:Vec<u8>),opt(start_double_index:i64,double_count:i64,additional_byte_offset:i64)->Vec<f64>),
@@ -650,7 +665,9 @@ only returns once the simulation time has changed"#######,sim_step,"step"->()),
 (r#######"Unpacks a string (or part of it) into an array of uint8 numbers"#######,sim_unpack_u_int8_table,"unpackUInt8Table",(data:Vec<u8>),opt(start_uint8_index:i64,uint8count:i64)->Vec<i64>),
 (r#######""#######,sim_visit_tree,"visitTree",(root_handle:i64,visitor_func:String),opt(options:serde_json::Value)->()),
 (r#######"Waits for a certain amount of time"#######,sim_wait,"wait",(dt:f64),opt(simulation_time:bool)->f64),
+(r#######"Deprecated. See properties instead"#######,sim_wait_for_signal,"waitForSignal",(target:i64,sig_name:String)->serde_json::Value),
 (r#######"Deprecated. See properties instead"#######,sim_write_custom_buffer_data,"writeCustomBufferData",(object_handle:i64,tag_name:String,data:Vec<u8>)->()),
+(r#######""#######,sim_write_custom_data_block_ex,"writeCustomDataBlockEx",(handle:i64,tag:String,data:Vec<u8>),opt(options:serde_json::Value)->()),
 (r#######"Deprecated. See properties instead"#######,sim_write_custom_string_data,"writeCustomStringData",(object_handle:i64,tag_name:String,data:String)->()),
 (r#######"Deprecated. See properties instead"#######,sim_write_custom_table_data,"writeCustomTableData",(handle:i64,tag_name:String,the_table:serde_json::Value),opt(options:serde_json::Value)->()),
 (r#######"Overwrites a specific texture (or a portion of it) with RGB data"#######,sim_write_texture,"writeTexture",(texture_id:i64,options:i64,texture_data:Vec<u8>),opt(pos_x:i64,pos_y:i64,size_x:i64,size_y:i64,interpol:f64)->()),
